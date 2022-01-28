@@ -1,7 +1,7 @@
-# DESPEC_S452
+# DESPEC_S450
 DESPEC On/Nearline code for S452 (March 2021)
 
-Developed by A.K.Mistry, N. Hubbard, M. Rudigier 
+Developed by A.K.Mistry
 
 Contact A.K.Mistry@gsi.de
 
