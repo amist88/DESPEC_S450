@@ -17,7 +17,7 @@ public:
   int      IsData(std::ifstream &f);
 
   ///Define correlations of interest
- Bool_t GSetup_corr_FRS_Ge, GSetup_corr_FRS_Gamma_Gamma, GSetup_corr_FRS_Ge_long, GSetup_corr_FRS_fat, GSetup_corr_FRS_Aida ;
+ Bool_t GSetup_corr_FRS_Ge, GSetup_corr_FRS_Gamma_Gamma, GSetup_corr_FRS_Ge_long, GSetup_corr_FRS_fat, GSetup_corr_FRS_Aida, GSetup_corr_FRS_bPlast ;
  Bool_t GSetup_corr_FRS_Fatima_LT;
  Bool_t GSetup_corr_Beta_Gamma_bPlastSpillOff;
  Bool_t GSetup_corr_Beta_Gamma, GSetup_corr_Beta_Gamma_Gamma, GSetup_corr_Beta_Gamma_Fatima, GSetup_corr_Beta_Gamma_Fatima_LT;

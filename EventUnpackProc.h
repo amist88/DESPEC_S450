@@ -188,9 +188,24 @@ using namespace std;
     UInt_t* increase_scaler_temp;
     UInt_t frs_scaler_value[64];
 
-    Double_t TRaw_vftx_21l, TRaw_vftx_21r,TRaw_vftx_22l, TRaw_vftx_22r;
-    Double_t TRaw_vftx_41l, TRaw_vftx_41r, TRaw_vftx_42l, TRaw_vftx_42r;
-    Double_t TRaw_vftx[32];
+   Double_t TRaw_vftx_21l[32], TRaw_vftx_21r[32],TRaw_vftx_22l[32], TRaw_vftx_22r[32];
+    Double_t TRaw_vftx_41l[32], TRaw_vftx_41r[32], TRaw_vftx_42l[32], TRaw_vftx_42r[32];
+    Float_t ToF_vftx_2141[32], ToF_vftx_2141_calib[32], ToF_vftx_2241[32], ToF_vftx_2241_calib[32];
+    //Double_t TRaw_vftx[32];
+    Float_t  FRS_vftx_beta_2141[32];
+    Float_t  FRS_vftx_gamma_2141[32];
+    Float_t  FRS_vftx_aoq_2141[32];
+    Float_t  FRS_vftx_aoq_2141_corr[32];
+    Float_t  FRS_vftx_2141_z[32];
+    Float_t  FRS_vftx_2141_z2[32];
+    Float_t  FRS_vftx_2141_v_cor[32];
+    Float_t  FRS_vftx_beta_2241[32];
+    Float_t  FRS_vftx_gamma_2241[32];
+    Float_t  FRS_vftx_aoq_2241[32];
+    Float_t  FRS_vftx_aoq_2241_corr[32];
+    Float_t  FRS_vftx_2241_z[32];
+    Float_t  FRS_vftx_2241_z2[32];
+    Float_t  FRS_vftx_2241_v_cor[32];
 			TH1* hID_x2;
 			TH1* hID_y2;
 			TH1* hID_a2;
@@ -329,12 +344,13 @@ using namespace std;
 
             TH1* hvftx_Sci41PosRaw;
             TH1* hvftx_Sci42PosRaw;
-            TH1* hvftx_ToFraw_2141;
-            TH1* hvftx_ToFraw_2141LL;
-            TH1* hvftx_ToFraw_2141RR;
-            TH1* hvftx_ToFraw_2142LL;
-            TH1* hvftx_ToFraw_2142RR;
-
+            TH1* h1_VFTX_TOF_41_21;
+            TH1* h1_VFTX_TOF_41_22;
+            TH1* h1_VFTX_TOF_42_21;
+            TH1* h1_VFTX_TOF_41_21_calib;
+            TH1* h1_VFTX_TOF_41_22_calib;
+            TH1* h1_VFTX_TOF_42_21_calib;
+            
 			TH1* htimestamp;
 			TH1* hts;
 			TH1* hts2;

@@ -60,12 +60,13 @@
 
 ///bPLASTIC 
 ///1:twin peaks,  0 for pQDC 
-#define bPLASTIC_TWINPEAKS 0
-#define bPLASTIC_TAMEX_MODULES 3
+#define bPLASTIC_TWINPEAKS 1
+///TAMEX: 3 for narrow, 9 for wide
+#define bPLASTIC_TAMEX_MODULES 9
 #define bPLASTIC_TAMEX_HITS 20
 #define bPLASTIC_TAMEX_CHANNELS 16
-///bPlastic number of channels per detector 
-#define bPLASTIC_CHAN_PER_DET 16
+///bPlastic number of channels per detector (16 for narrow, 64 for wide)
+#define bPLASTIC_CHAN_PER_DET 64
 ///bPlastic Upstream Detector
 #define bPLASTIC_UPSTREAM_DET 2
 ///bPlastic Downstream Detector
@@ -83,7 +84,7 @@
 ///bPlast Time Machine Channels
 #define bPlastTimeMachineCh1 7
 #define bPlastTimeMachineCh2 8
-///bPlastic refence channels
+///bPlastic reference channels
 #define bPlastRefCh_Det1 0
 #define bPlastRefCh_Det2 0
 #define bPlastRefCh_Det3 0
@@ -92,20 +93,20 @@
 #define FIBRE_BOARD 3
 
 ///Germanium (including additonal channel detectors (e.g.SC41 det)
-#define Germanium_MAX_DETS 4
+#define Germanium_MAX_DETS 5
 #define Germanium_CRYSTALS 7
 #define Germanium_MAX_HITS (Germanium_MAX_DETS * Germanium_CRYSTALS)
 ///Important for FEBEX
-#define Germanium_FEBEX_MODULES 2
-#define Germanium_MAX_CHANNELS 49
+#define Germanium_FEBEX_MODULES 3
+#define Germanium_MAX_CHANNELS 50
 ///Define here where SC41 is plugged into FEBEX ("Detector" and "crystal" for mapping purposes) Use the germanium allocation file for mapping of this
-#define Germanium_SC41_Det 2
+#define Germanium_SC41_Det 4
 #define Germanium_SC41L_Crystal 2
 #define Germanium_SC41R_Crystal 3
-#define Germanium_SC41_Det_Digi 3
+#define Germanium_SC41_Det_Digi 4
 #define Germanium_SC41L_Crystal_Digi 2
 #define Germanium_SC41R_Crystal_Digi 3
-#define Germanium_TimeMachine_Det 2
+#define Germanium_TimeMachine_Det 4
 #define Germanium_TimeMachineCh1 0
 #define Germanium_TimeMachineCh2 1
 

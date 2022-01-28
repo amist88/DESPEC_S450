@@ -6,6 +6,8 @@
 
 ## FRS_Aida
 1
+## FRS_bPlast
+1
 ## FRS Germanium 'prompt' gammas [1 0] only singles, [1 1] include gamma-gamma matrices 
 1 1
 
@@ -18,8 +20,8 @@
 ## Include Fatima Lifetime Analysis for 'prompt' gammas ##
 1
 
-## Beta-Delayed Gammas (bPlast Spill off Gammas) ##
-0
+## Spill-Off Gammas ##
+1
 
 ## Beta-Delayed Gammas (AIDA Implant-Decay) (FRS-AIDA-bPlast gammas) 1 1 1 = [On], [Include Ge Gam-Gam], [Include Fatima] ##
 1 1 1

@@ -524,6 +524,22 @@ FRS_Detector_System::FRS_Detector_System(){
     music1_y4 = 0;       /* parameters to calibrate  */
     music2_x  = 0;       /* MUSIC1,2 positions       */
 
+    for(int i=0; i<32; i++){
+  id_vftx_beta_2141[i] = -999;
+  id_vftx_gamma_2141[i] = -999;
+  
+  id_vftx_aoq_2141[i]   = -999;
+  id_vftx_aoq_2141_corr[i]   = -999;
+  id_vftx_2141_z[i]  = -999;
+  id_vftx_2141_v_cor[i] =0;
+  id_vftx_beta_2241[i] = -999;
+  id_vftx_gamma_2241[i] = -999;
+ 
+  id_vftx_aoq_2241[i]  = -999;
+  id_vftx_aoq_2241_corr[i]   = -999;
+  id_vftx_2241_z[i]  = -999;
+  id_vftx_2241_v_cor[i] =0;
+}
  for(int module=0; module<VFTX_N; module++){
     for(int channel=0; channel<VFTX_MAX_CHN; channel++) {
       for(int hit=0; hit<VFTX_MAX_HITS; hit++) {
@@ -2045,30 +2061,31 @@ void FRS_Detector_System::FRS_Sort(){
     de_31l = 0;
     de_31r = 0;
   //  if(psubevt->GetSubtype() ==1){
-    TRaw_vftx_21l=0;
-    TRaw_vftx_21r=0;
-    TRaw_vftx_22l=0;
-    TRaw_vftx_22r=0;
-    TRaw_vftx_41l=0;
-    TRaw_vftx_41r=0;
-    TRaw_vftx_42l=0;
-    TRaw_vftx_42r=0;
+    for(int i=0;i<32; i++){
+    TRaw_vftx_21l[i]=0;
+    TRaw_vftx_21r[i]=0;
+    TRaw_vftx_22l[i]=0;
+    TRaw_vftx_22r[i]=0;
+    TRaw_vftx_41l[i]=0;
+    TRaw_vftx_41r[i]=0;
+    TRaw_vftx_42l[i]=0;
+    TRaw_vftx_42r[i]=0;
 //     TRaw_vftx_sofia_l=0;
 //     TRaw_vftx_sofia_r=0;
    // }
-
+    
         }
-         if(psubevt->GetSubtype() !=1){
-    TRaw_vftx_21l=0;
-    TRaw_vftx_21r=0;
-    TRaw_vftx_41l=0;
-    TRaw_vftx_41r=0;
-//     TRaw_vftx_sofia_l=0;
-//     TRaw_vftx_sofia_r=0;
-    for(int i=0; i<32; i++){
-       TRaw_vftx[i]=0;
-
-    }
+//          if(psubevt->GetSubtype() !=1){
+//     TRaw_vftx_21l=0;
+//     TRaw_vftx_21r=0;
+//     TRaw_vftx_41l=0;
+//     TRaw_vftx_41r=0;
+// //     TRaw_vftx_sofia_l=0;
+// //     TRaw_vftx_sofia_r=0;
+//     for(int i=0; i<32; i++){
+//        TRaw_vftx[i]=0;
+// 
+//     }
     }
 
       if(psubevt->GetProcid()==20||psubevt->GetProcid()==25){
@@ -2413,28 +2430,143 @@ void FRS_Detector_System::FRS_Sort(){
   dt_22l_81l = vme_frs[12][14] & 0xfff;
   dt_22r_81r = vme_frs[12][15] & 0xfff;
 //cout<<"dt_41l_41r " << dt_41l_41r <<endl;
-
+for(int i=0;i<32; i++){
+    TRaw_vftx_21l[i]=0;
+    TRaw_vftx_21r[i]=0;
+    TRaw_vftx_22l[i]=0;
+    TRaw_vftx_22r[i]=0;
+    TRaw_vftx_41l[i]=0;
+    TRaw_vftx_41r[i]=0;
+    TRaw_vftx_42l[i]=0;
+    TRaw_vftx_42r[i]=0;
+//     TRaw_vftx_sofia_l=0;
+//     TRaw_vftx_sofia_r=0;
+   // }
+    
+        }
    // Time raw in ps from VFTX module
-      if(psubevt->GetSubtype() ==1){
+    //  if(psubevt->GetSubtype() ==1){
 
      float r=0.;
-   for(int i=0; i<32; i++){
-       if((vftx_cc[SCI_MOD][i][0]!=0) && (vftx_ft[SCI_MOD][i][0]!=0)){
-           r = (double)rand.Rndm() - 0.5 ;
-   TRaw_vftx[i] = VFTX_GetTraw_ps(SCI_MOD,i,vftx_cc[SCI_MOD][i][0],vftx_ft[SCI_MOD][i][0],r);
-       }
+     for(int i=0; i<vftx_mult[SCI_MOD][SCI21L_CH]; i++){
+ 
+ 
+  //printf("in Sort: ch  %02d, mult %02d, cc %02d, ft %02d \n",SCI21L_CH,vftx_mult[SCI_MOD][SCI21L_CH],vftx_cc[SCI_MOD][SCI21L_CH][0], vftx_ft[SCI_MOD][SCI21L_CH][0]);
+  if( (vftx_cc[SCI_MOD][SCI21L_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI21L_CH][i]!=0)){
+    r = (double)rand.Rndm() - 0.5 ;
+    TRaw_vftx_21l[i] = VFTX_GetTraw_ps(SCI_MOD,SCI21L_CH,vftx_cc[SCI_MOD][SCI21L_CH][i],vftx_ft[SCI_MOD][SCI21L_CH][i],r);
+  //  std::cout<<"TRaw_vftx_21l[i] " <<TRaw_vftx_21l[i]<<" i " << i  << std::endl;
+  }
+  
+  }
+  
+   for(int i=0; i<vftx_mult[SCI_MOD][SCI21R_CH]; i++){
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI21R_CH,vftx_mult[SCI_MOD][SCI21R_CH],vftx_cc[SCI_MOD][SCI21R_CH][0], vftx_ft[SCI_MOD][SCI21R_CH][0]);
+  if((vftx_cc[SCI_MOD][SCI21R_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI21R_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_21r[i] = VFTX_GetTraw_ps(SCI_MOD,SCI21R_CH,vftx_cc[SCI_MOD][SCI21R_CH][i],vftx_ft[SCI_MOD][SCI21R_CH][i],r);
+  ///  std::cout<<"TRaw_vftx_21r[i] " <<TRaw_vftx_21r[i]<<" i " << i  << std::endl;
+   
+  /// std::cout<<"TRaw_vftx_21l " <<TRaw_vftx_21l[i]<< "  TRaw_vftx_21r [i]" << TRaw_vftx_21r[i] <<" vftx_cc[SCI_MOD][SCI21R_CH][i] " <<vftx_cc[SCI_MOD][SCI21R_CH][i] <<  " i " << i << std::endl;
+  }
+  } 
+  
+ 
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI41L_CH,vftx_mult[SCI_MOD][SCI41L_CH],vftx_cc[SCI_MOD][SCI41L_CH][0], vftx_ft[SCI_MOD][SCI41L_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI41L_CH]; i++){
+  if( (vftx_cc[SCI_MOD][SCI41L_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI41L_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_41l[i] = VFTX_GetTraw_ps(SCI_MOD,SCI41L_CH,vftx_cc[SCI_MOD][SCI41L_CH][i],vftx_ft[SCI_MOD][SCI41L_CH][i],r);
+   // std::cout<<"TRaw_vftx_41l[i] " <<TRaw_vftx_41l[i]<<" i " << i  << std::endl;
+   //printf("TRaw_41l %02d\n",TRaw_vftx_41l);
+  }
+  }
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI41R_CH,vftx_mult[SCI_MOD][SCI41R_CH],vftx_cc[SCI_MOD][SCI41R_CH][i], vftx_ft[SCI_MOD][SCI41R_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI41R_CH]; i++){
+  if( (vftx_cc[SCI_MOD][SCI41R_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI41R_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_41r[i] = VFTX_GetTraw_ps(SCI_MOD,SCI41R_CH,vftx_cc[SCI_MOD][SCI41R_CH][i],vftx_ft[SCI_MOD][SCI41R_CH][i],r);
+   // std::cout<<"TRaw_vftx_41r[i] " <<TRaw_vftx_41r[i]<<" i " << i  << std::endl;
+   //printf("TRaw_41r %02d\n",TRaw_vftx_41r);
+  }
+  }
+
+ for(int i=0; i<vftx_mult[SCI_MOD][SCI22L_CH]; i++){
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI22L_CH,vftx_mult[SCI_MOD][SCI22L_CH],vftx_cc[SCI_MOD][SCI22L_CH][i], vftx_ft[SCI_MOD][SCI22L_CH][i]);
+  if((vftx_cc[SCI_MOD][SCI22L_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI22L_CH][i]!=0)){
+    r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_22l[i] = VFTX_GetTraw_ps(SCI_MOD,SCI22L_CH,vftx_cc[SCI_MOD][SCI22L_CH][i],vftx_ft[SCI_MOD][SCI22L_CH][i],r);
+   // std::cout<<"TRaw_vftx_22l[i] " <<TRaw_vftx_22l[i]<<" i " << i  << std::endl;
+   //printf("TRaw_22l %02d\n",TRaw_vftx_22l);
    }
-   TRaw_vftx_21l = TRaw_vftx[SCI21L_CH];
-   TRaw_vftx_21r = TRaw_vftx[SCI21R_CH];
-   TRaw_vftx_22l = TRaw_vftx[SCI22L_CH];
-   TRaw_vftx_22r = TRaw_vftx[SCI22R_CH];
-   TRaw_vftx_41l = TRaw_vftx[SCI41L_CH];
-   TRaw_vftx_41r = TRaw_vftx[SCI41R_CH];
-   TRaw_vftx_42l = TRaw_vftx[SCI42L_CH];
-   TRaw_vftx_42r = TRaw_vftx[SCI42R_CH];
-//    TRaw_vftx_sofia_l = TRaw_vftx[SCISOFIAL_CH];
-//    TRaw_vftx_sofia_r = TRaw_vftx[SCISOFIAR_CH];
-      }
+ }
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI22R_CH,vftx_mult[SCI_MOD][SCI22R_CH],vftx_cc[SCI_MOD][SCI22R_CH][i], vftx_ft[SCI_MOD][SCI22R_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI22R_CH]; i++){
+  if( (vftx_cc[SCI_MOD][SCI22R_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI22R_CH][i]!=0)){
+  r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_22r[i] = VFTX_GetTraw_ps(SCI_MOD,SCI22R_CH,vftx_cc[SCI_MOD][SCI22R_CH][i],vftx_ft[SCI_MOD][SCI22R_CH][i],r);
+  //  std::cout<<"TRaw_vftx_22r[i] " <<TRaw_vftx_22r[i]<<" i " << i  << std::endl;
+   //printf("TRaw_22r %02d\n",TRaw_vftx_22r);
+   }
+  }
+ 
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI42L_CH,vftx_mult[SCI_MOD][SCI42L_CH],vftx_cc[SCI_MOD][SCI42L_CH][i], vftx_ft[SCI_MOD][SCI42L_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI42L_CH]; i++){
+  if((vftx_cc[SCI_MOD][SCI42L_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI42L_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_42l[i] = VFTX_GetTraw_ps(SCI_MOD,SCI42L_CH,vftx_cc[SCI_MOD][SCI42L_CH][i],vftx_ft[SCI_MOD][SCI42L_CH][i],r);
+ //   std::cout<<"TRaw_vftx_41l[i] " <<TRaw_vftx_41l[i]<<" i " << i  << std::endl;
+   //printf("TRaw_42l %02d\n",TRaw_vftx_42l);
+  }
+  }
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI42R_CH,vftx_mult[SCI_MOD][SCI42R_CH],vftx_cc[SCI_MOD][SCI42R_CH][i], vftx_ft[SCI_MOD][SCI42R_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI42R_CH]; i++){
+  if((vftx_cc[SCI_MOD][SCI42R_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI42R_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_42r[i] = VFTX_GetTraw_ps(SCI_MOD,SCI42R_CH,vftx_cc[SCI_MOD][SCI42R_CH][i],vftx_ft[SCI_MOD][SCI42R_CH][i],r);
+    //std::cout<<"TRaw_vftx_41r[i] " <<TRaw_vftx_41r[i]<<" i " << i  << std::endl;
+   //printf("TRaw_42r %02d\n",TRaw_vftx_42r);
+  }
+  }
+ 
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI81L_CH,vftx_mult[SCI_MOD][SCI81L_CH],vftx_cc[SCI_MOD][SCI81L_CH][i], vftx_ft[SCI_MOD][SCI81L_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI81L_CH]; i++){
+  if((vftx_cc[SCI_MOD][SCI81L_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI81L_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_81l[i] = VFTX_GetTraw_ps(SCI_MOD,SCI81L_CH,vftx_cc[SCI_MOD][SCI81L_CH][i],vftx_ft[SCI_MOD][SCI81L_CH][i],r);
+   //printf("TRaw_81l %02d\n",TRaw_vftx_81l);
+  }
+  //printf("in Sort %02d, %02d,  %02d: %02d \n",SCI81R_CH,vftx_mult[SCI_MOD][SCI81R_CH],vftx_cc[SCI_MOD][SCI81R_CH][i], vftx_ft[SCI_MOD][SCI81R_CH][i]);
+  for(int i=0; i<vftx_mult[SCI_MOD][SCI81R_CH]; i++){
+  if((vftx_mult[SCI_MOD][SCI81R_CH]<3) && (vftx_cc[SCI_MOD][SCI81R_CH][i]!=0) && (vftx_ft[SCI_MOD][SCI81R_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_81r[i] = VFTX_GetTraw_ps(SCI_MOD,SCI81R_CH,vftx_cc[SCI_MOD][SCI81R_CH][i],vftx_ft[SCI_MOD][SCI81R_CH][i],r);
+   //printf("TRaw_81r %02d\n",TRaw_vftx_81r);
+  }
+  }
+  TRaw_vftx_tri = 0.;
+  if((vftx_mult[SCI_MOD][SCITRI_CH]==1) && (vftx_cc[SCI_MOD][SCITRI_CH][i]!=0) && (vftx_ft[SCI_MOD][SCITRI_CH][i]!=0)){
+   r = (double)rand.Rndm() - 0.5 ;
+   TRaw_vftx_tri = VFTX_GetTraw_ps(SCI_MOD,SCITRI_CH,vftx_cc[SCI_MOD][SCITRI_CH][i],vftx_ft[SCI_MOD][SCITRI_CH][i],r);
+  }
+  }
+//    for(int i=0; i<32; i++){
+//        if((vftx_cc[SCI_MOD][i][0]!=0) && (vftx_ft[SCI_MOD][i][0]!=0)){
+//            r = (double)rand.Rndm() - 0.5 ;
+//    TRaw_vftx[i] = VFTX_GetTraw_ps(SCI_MOD,i,vftx_cc[SCI_MOD][i][0],vftx_ft[SCI_MOD][i][0],r);
+//        }
+//    }
+//    TRaw_vftx_21l = TRaw_vftx[SCI21L_CH];
+//    TRaw_vftx_21r = TRaw_vftx[SCI21R_CH];
+//    TRaw_vftx_22l = TRaw_vftx[SCI22L_CH];
+//    TRaw_vftx_22r = TRaw_vftx[SCI22R_CH];
+//    TRaw_vftx_41l = TRaw_vftx[SCI41L_CH];
+//    TRaw_vftx_41r = TRaw_vftx[SCI41R_CH];
+//    TRaw_vftx_42l = TRaw_vftx[SCI42L_CH];
+//    TRaw_vftx_42r = TRaw_vftx[SCI42R_CH];
+// //    TRaw_vftx_sofia_l = TRaw_vftx[SCISOFIAL_CH];
+// //    TRaw_vftx_sofia_r = TRaw_vftx[SCISOFIAR_CH];
+//       }
 
    ///AKM 12.07.20 since we only take the first hit (for now...)
   /* ### SCI Multihit TDC time:  */
@@ -3433,7 +3565,192 @@ for (int i=0; i<10; i++){
   //  if(bDrawHist) hMultiHitTDC_TOF_81_21->Fill(mhtdc_tof8121);
   }
  
+for(int i=0; i<32; i++){
+    vftx_tof2141_calib[i]=0;
+    vftx_tof2241_calib[i]=0;
+   
+     }
+   // for(int i=0; i<32; i++) cout<<"1 FRS  vftx_tof2141_calib[i] " << vftx_tof2141_calib[i] << endl;
+ for(int i=0; i<32; i++){
+  if(0!=TRaw_vftx_21l[i] && 0!=TRaw_vftx_21r[i] && 0!=TRaw_vftx_41l[0] && 0!=TRaw_vftx_41r[0]){
+    vftx_tof2141[i] = (0.5*((Double_t)TRaw_vftx_41l[0]+(Double_t)TRaw_vftx_41r[0]) - 0.5*((Double_t)TRaw_vftx_21l[i]+(Double_t)TRaw_vftx_21r[i]));
+   // std::cout<<"TRaw_vftx_41l[i] " <<TRaw_vftx_41l[i] << " TRaw_vftx_41r[i] " << TRaw_vftx_41r[i]<<" TRaw_vftx_21l[i] " <<TRaw_vftx_21l[i] << " TRaw_vftx_21r[i] " <<TRaw_vftx_21r[i]<<" vftx_tof2141[i] " <<vftx_tof2141[i] <<  " i " << i << std::endl; 
+    
+ //   if(bDrawHist) h1_VFTX_TOF_41_21->Fill(vftx_tof2141[i]);
+    vftx_tof2141_calib[i] = vftx_tof2141[i]/1000. + sci->vftx_offset_2141;
+     // std::cout<<"vftx_tof21141_calib[i] " <<vftx_tof2141_calib[i] << " i " << i << std::endl;
+  }
+  if(0!=TRaw_vftx_22l[i] && 0!=TRaw_vftx_22r[i] && 0!=TRaw_vftx_41l[0] && 0!=TRaw_vftx_41r[0]){
+    vftx_tof2241[i] = (0.5*((Double_t)TRaw_vftx_41l[0]+(Double_t)TRaw_vftx_41r[0]) - 0.5*((Double_t)TRaw_vftx_22l[i]+(Double_t)TRaw_vftx_22r[i]));
+   // if(bDrawHist) h1_VFTX_TOF_41_22->Fill(vftx_tof2241[i]);
+    vftx_tof2241_calib[i] = vftx_tof2241[i]/1000. + sci->vftx_offset_2241;
+  
+  }
+    }
+    
+    // for(int i=0; i<32; i++) cout<<"2FRS  vftx_tof2141_calib[i] " << vftx_tof2141_calib[i] << endl;
+//   if(0!=TRaw_vftx_21l[i] && 0!=TRaw_vftx_21r[i] && 0!=TRaw_vftx_42l[0] && 0!=TRaw_vftx_42r[0]){
+//     //if(bDrawHist) h1_VFTX_TOF_42_21->Fill(0.5*(TRaw_vftx_42l[0]+TRaw_vftx_42r[0]) - 0.5*(TRaw_vftx_21l[i]+TRaw_vftx_21r[i]));}
+//   if(0!=TRaw_vftx_22l[i] && 0!=TRaw_vftx_22r[i] && 0!=TRaw_vftx_42l[0] && 0!=TRaw_vftx_42r[0]){
+    //if(bDrawHist) h1_VFTX_TOF_42_22->Fill(0.5*(TRaw_vftx_42l[0]+TRaw_vftx_42r[0]) - 0.5*(TRaw_vftx_22l[i]+TRaw_vftx_22r[i]));}
 
+//   if(0!=TRaw_vftx_21l[i] && 0!=TRaw_vftx_21r[i] && 0!=TRaw_vftx_81l[i] && 0!=TRaw_vftx_81r[i]){
+//     if(bDrawHist) h1_VFTX_TOF_81_21->Fill(0.5*(TRaw_vftx_81l[i]+TRaw_vftx_81r[i]) - 0.5*(TRaw_vftx_21l[i]+TRaw_vftx_21r[i]));}
+//   if(0!=TRaw_vftx_22l[i] && 0!=TRaw_vftx_22r[i] && 0!=TRaw_vftx_81l[i] && 0!=TRaw_vftx_81r[i]){
+//     if(bDrawHist) h1_VFTX_TOF_81_22->Fill(0.5*(TRaw_vftx_81l[i]+TRaw_vftx_81r[i]) - 0.5*(TRaw_vftx_22l[i]+TRaw_vftx_22r[i]));}
+//     }
+ 
+
+////=======================================
+  ////   VFTX S2S4 MultihitTDC ID analysis
+  float speed_light = 0.299792458; //m/ns
+  float temp_tm_to_MeV = 299.792458;
+  float temp_mu = 931.4940954; //MeV
+  float  mean_brho_s2s4 =0;
+  for(int i=0; i<32; i++){
+   id_vftx_beta_2141[i]=0;
+    id_vftx_gamma_2141[i]=0;
+    id_vftx_aoq_2141[i]=0;
+    id_vftx_aoq_2141_corr[i]=0;
+    id_vftx_2141_z[i]=0;
+    id_vftx_2141_z2[i]=0;
+    id_vftx_2141_v_cor[i]=0;
+    id_vftx_beta_2241[i]=0;
+    id_vftx_gamma_2241[i]=0;
+    id_vftx_aoq_2241[i]=0;
+    id_vftx_aoq_2241_corr[i]=0;
+    id_vftx_2241_z[i]=0;
+    id_vftx_2241_z2[i]=0;
+    id_vftx_2241_v_cor[i]=0;
+}
+
+  // Extraction of position to be used for momentum analysis
+  float temp_s4x = -999.;
+  if(b_tpc_xy[4] && b_tpc_xy[5]){
+    temp_s4x = tpc_x_s4 ;
+  }
+  float temp_sci21x = -999.; //fill in the next if part
+  if(1== id->vftx_s2pos_option){//SC21X from multihit tdc is used for S2X
+    //temp_sci21x = mhtdc_sc21lr_x; //no position implemented
+  }
+  if(2== id->vftx_s2pos_option){//TPCX is used
+    if(b_tpc_xy[0] && b_tpc_xy[1]){//tpc2122
+      temp_sci21x = tpc_x_s2_foc_21_22;
+    }else if(b_tpc_xy[2] && b_tpc_xy[3]){//tpc2324
+      temp_sci21x = tpc_x_s2_foc_23_24;
+    }else if(b_tpc_xy[1] && b_tpc_xy[3]){//tpc2224
+      temp_sci21x = tpc_x_s2_foc_22_24;
+    }
+  }
+    // focal plane informaiton
+  // 1: (tpc2324 -> tpc2224 -> tpc2122),  2:  sc21,  3: sc22
+  if(1 == id->x_s2_select){
+    if(b_tpc_xy[2] && b_tpc_xy[3]){//tpc2324
+      id_x2 = tpc_x_s2_foc_23_24;
+      id_y2 = tpc_y_s2_foc_23_24;
+      id_a2 = tpc_angle_x_s2_foc_23_24;
+      id_b2 = tpc_angle_y_s2_foc_23_24;
+    }else if (b_tpc_xy[1] && b_tpc_xy[3]){//tpc2224
+      id_x2 = tpc_x_s2_foc_22_24;
+      id_y2 = tpc_y_s2_foc_22_24;
+      id_a2 = tpc_angle_x_s2_foc_22_24;
+      id_b2 = tpc_angle_y_s2_foc_22_24;
+    }else if (b_tpc_xy[0] && b_tpc_xy[1]){//tpc2122
+      id_x2 = tpc_x_s2_foc_21_22;
+      id_y2 = tpc_y_s2_foc_21_22;
+    id_a2 = tpc_angle_x_s2_foc_21_22;
+    id_b2 = tpc_angle_y_s2_foc_21_22;
+    }
+  }else if (2 == id->x_s2_select){
+    if (sci_b_x[2]){//sc21
+      id_x2 = sci_x[2];
+      id_y2 = 0.0;
+      id_a2 = 0.0;
+      id_b2 = 0.0;
+    }
+  }else if(3 == id->x_s2_select){
+    if (sci_b_x[3]){//sc22
+      id_x2 = sci_x[3];
+      id_y2 = 0.0;
+      id_a2 = 0.0;
+      id_b2 = 0.0;
+    }
+  }  
+   // Calculation of velocity beta and gamma
+   Double_t power[32];
+   for(int i=0; i<32; i++){
+  id_vftx_beta_2141[i]   =  ( id->vftx_length_2141 / vftx_tof2141_calib[i]) / speed_light;
+//  if(id_vftx_beta_2141[i]>-500)std::cout<<"id_vftx_beta_2141[i] " <<id_vftx_beta_2141[i] <<" vftx_tof2141_calib[i] " <<vftx_tof2141_calib[i] << " i " << i << std::endl;
+  
+  id_vftx_beta_2241[i]   =  ( id->vftx_length_2241 / vftx_tof2241_calib[i]) / speed_light;
+  //printf("tof2141 %02f beta %02f\n",vftx_tof2141_calib,id_vftx_beta_2141);
+    id_vftx_gamma_2141[i]  = 1./sqrt(1. - id_vftx_beta_2141[i]*id_vftx_beta_2141[i]);
+    id_vftx_gamma_2241[i]  = 1./sqrt(1. - id_vftx_beta_2241[i]*id_vftx_beta_2241[i]);
+  
+  // calculation of delta(momentum_deviation) and AoQ
+   mean_brho_s2s4 = 0.5*( frs->bfield[2] + frs->bfield[3] );
+  //printf("s4x %02f aoq_sci21x %02f\n",temp_s4x,temp_sci21x);
+  if( -200<temp_s4x && temp_s4x<200. && -200.< temp_sci21x && temp_sci21x<200.){
+    id_vftx_delta_2141 = ( temp_s4x - (temp_sci21x * frs->magnification[1] ))/(-1.0 * frs->dispersion[1] *1000.0 ) ; 
+    if(0.0 < id_vftx_beta_2141[i] && id_vftx_beta_2141[i] < 1.0){
+      	id_vftx_aoq_2141[i] = mean_brho_s2s4 *( 1. + id_vftx_delta_2141   ) * temp_tm_to_MeV / (temp_mu * id_vftx_beta_2141[i] * id_vftx_gamma_2141[i]);
+    	id_vftx_aoq_2141_corr[i] = id_vftx_aoq_2141[i] - id->a2AoQCorr * id_a2;  
+       // cout<<"id_vftx_aoq_2141 " <<id_vftx_aoq_2141[i]<< " i " << i << endl;
+        //correction for id_a2, JK 16.9.11
+	//printf("aoq %02f aoq_corr %02f\n",id_vftx_aoq_2141,id_vftx_aoq_2141_corr);
+	//std::cout<<"id_vftx_aoq_2141[i] " << id_vftx_aoq_2141[i]<< " mean_brho_s2s4 " << mean_brho_s2s4 <<" 1. + id_vftx_delta_2141 " <<1. + id_vftx_delta_2141 << " id_vftx_beta_2141[i] " <<id_vftx_beta_2141[i] << " id_vftx_gamma_2141[i] " <<id_vftx_gamma_2141[i] << std::endl;
+	
+      }
+  }
+  if( -200<temp_s4x && temp_s4x<200. && -200.< temp_sci21x && temp_sci21x<200.){
+    id_vftx_delta_2241 = ( temp_s4x - (temp_sci21x * frs->magnification[1] ))/(-1.0 * frs->dispersion[1] *1000.0 ) ; 
+    if(0.0 < id_vftx_beta_2241[i] && id_vftx_beta_2241[i] < 1.0){
+      	id_vftx_aoq_2241[i] = mean_brho_s2s4 *( 1. + id_vftx_delta_2241   ) * temp_tm_to_MeV / (temp_mu * id_vftx_beta_2241[i] * id_vftx_gamma_2241[i]);
+    //    cout<<"id_vftx_beta_2241[i] " <<id_vftx_beta_2241[i] <<"    id_vftx_aoq_2241[i] " <<    id_vftx_aoq_2241[i] << " i " << i <<  endl;
+        
+    	id_vftx_aoq_2241_corr[i] = id_vftx_aoq_2241[i] - id->a2AoQCorr * id_a2;  
+       // cout<<"FRS 1 id_vftx_aoq_2241 " <<id_vftx_aoq_2241[i]<< " i " << i << endl;
+        //correction for id_a2, JK 16.9.11
+	//printf("aoq %02f aoq_corr %02f\n",id_vftx_aoq_2141,id_vftx_aoq_2141_corr);
+      }
+  }
+//if(id_vftx_aoq_2241[i]>0)  cout<<"FRS 2 id_vftx_aoq_2241 " <<id_vftx_aoq_2241[i] <<endl;
+
+  // calculation of dE and Z
+  // from MUSIC41
+  
+  if( (de[0] >0.0)  && (id_vftx_beta_2141[i]>0.0) && (id_vftx_beta_2141[i]<1.0)){
+     power[i] = 1.;
+    Double_t sum = 0.;
+    for (int j=0;j<4;j++){
+      sum += power[i] * id->vftx_vel_a_music41[j];
+      power[i] *= id_vftx_beta_2141[i];
+    }
+    id_vftx_2141_v_cor[i] = sum;
+
+    if (id_vftx_2141_v_cor[i] > 0.0){
+      id_vftx_2141_z[i] = frs->primary_z * sqrt(de[0]/id_vftx_2141_v_cor[i]);
+      id_vftx_2141_z2[i] = frs->primary_z * sqrt(de[1]/id_vftx_2141_v_cor[i]);
+      //printf("z %02f\n",id_vftx_2141_z);
+   }
+  }
+    if( (de[0] >0.0)  && (id_vftx_beta_2241[i]>0.0) && (id_vftx_beta_2241[i]<1.0)){
+     power[i] = 1.;
+     Double_t sum = 0.;
+    for (int j=0;j<4;j++){
+      sum += power[i] * id->vftx_vel_a_music41[j];
+      power[i] *= id_vftx_beta_2241[i];
+    }
+    id_vftx_2241_v_cor[i] = sum;
+
+    if (id_vftx_2241_v_cor[i] > 0.0){
+      id_vftx_2241_z[i] = frs->primary_z * sqrt(de[0]/id_vftx_2241_v_cor[i]);
+      id_vftx_2241_z2[i] = frs->primary_z * sqrt(de[1]/id_vftx_2241_v_cor[i]);
+      //printf("z %02f\n",id_vftx_2241_z);
+   }
+  }
+   }
+        
 
 
 
@@ -3641,19 +3958,19 @@ for (int i=0; i<10; i++){
  ///==================================================================================///
                                 /// Start of MHTDC ID analysis
 ///==================================================================================///
-  float speed_light = 0.299792458; //m/ns
-  float temp_tm_to_MeV = 299.792458;
-  float temp_mu = 931.4940954; //MeV
+//   float speed_light = 0.299792458; //m/ns
+//   float temp_tm_to_MeV = 299.792458;
+//   float temp_mu = 931.4940954; //MeV
 
   // Extraction of position to be used for momentum analysis
   float temp_s8x = mhtdc_sc81lr_x;
-  float temp_s4x = -999.;
+   temp_s4x = -999.;
   if(b_tpc_xy[4] && b_tpc_xy[5]){
     temp_s4x = tpc_x_s4 ;
   //  cout<<"!!!temp_s4x " <<temp_s4x << endl;
 
   }
-  float temp_s2x = -999.; //fill in the next if part
+ float  temp_s2x = -999.; //fill in the next if part
   float temp_s2x_mhtdc[10]={0};
   float temp_a2 = 0;
   for(int i=0; i<10; i++){
@@ -3692,7 +4009,7 @@ for(int i=0; i<10;i++){
   id_mhtdc_delta_s2s4[i]=0;
 }
 
-  float mean_brho_s2s4 =0;
+   mean_brho_s2s4 =0;
 ///ID Select SC21(1) TPC(2) SC22(3)
 if(1== id->mhtdc_s2pos_option){
   // Calculation of velocity beta and gamma
@@ -4215,7 +4532,7 @@ void FRS_Detector_System::get_Event_data(Raw_Event* RAW){
     RAW->set_DATA_ID_Z_AoQ(id_AoQ, id_AoQ_corr, id_z, id_z2, id_z3,id_dEdeg,id_dEdegoQ);
     RAW->set_DATA_ID_Timestamp(timestamp, ts, ts2);
     RAW->set_DATA_FRS_SCALERS(time_in_ms,spill_count,ibin_for_s,ibin_for_100ms,ibin_for_spill,ibin_clean_for_s,ibin_clean_for_100ms, ibin_clean_for_spill,increase_scaler_temp);
-    RAW->set_DATA_VFTX(TRaw_vftx_21l,TRaw_vftx_21r,TRaw_vftx_22l,TRaw_vftx_22r,TRaw_vftx_41l,TRaw_vftx_41r,TRaw_vftx_42l,TRaw_vftx_42r,TRaw_vftx);
+    RAW->set_DATA_VFTX(TRaw_vftx_21l,TRaw_vftx_21r,TRaw_vftx_22l,TRaw_vftx_22r,TRaw_vftx_41l,TRaw_vftx_41r,TRaw_vftx_42l,TRaw_vftx_42r,vftx_tof2141,vftx_tof2141_calib, vftx_tof2241, vftx_tof2241_calib);
 
     RAW->set_DATA_RAW_MHTDC(mhtdc_sc21lr_dt,mhtdc_sc21lr_x,mhtdc_sc22lr_dt,mhtdc_sc22lr_x,mhtdc_sc41lr_dt,mhtdc_sc41lr_x,mhtdc_sc42lr_dt,mhtdc_sc42lr_x);
 

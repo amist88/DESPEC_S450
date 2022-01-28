@@ -58,15 +58,34 @@ void  EventUnpackStore::Clear(Option_t *t)
 
 
 
-  fTRaw_vftx_21l=0;
-  fTRaw_vftx_21r=0;
-  fTRaw_vftx_22l=0;
-  fTRaw_vftx_22r=0;
-  fTRaw_vftx_41l=0;
-  fTRaw_vftx_41r=0;
-  fTRaw_vftx_41r=0;
-  fTRaw_vftx_42l=0;
-  fTRaw_vftx_42r=0;
+  ZERO_ARRAY(fTRaw_vftx_21l);
+    ZERO_ARRAY(fTRaw_vftx_21r);
+    ZERO_ARRAY(fTRaw_vftx_22l);
+    ZERO_ARRAY(fTRaw_vftx_22r);
+    ZERO_ARRAY(fTRaw_vftx_41l);
+    ZERO_ARRAY(fTRaw_vftx_41r);
+    ZERO_ARRAY(fTRaw_vftx_41r);
+    ZERO_ARRAY(fTRaw_vftx_42l);
+    ZERO_ARRAY(fTRaw_vftx_42r);
+    ZERO_ARRAY(fToF_vftx_2141);
+    ZERO_ARRAY(fToF_vftx_2141_calib);
+    ZERO_ARRAY(fToF_vftx_2241);
+    ZERO_ARRAY(fToF_vftx_2241_calib);
+
+    ZERO_ARRAY(fbeta_vftx_2141); 
+    ZERO_ARRAY(fgamma_vftx_2141); 
+    ZERO_ARRAY(faoq_vftx_2141); 
+    ZERO_ARRAY(faoq_corr_vftx_2141);
+    ZERO_ARRAY(fz1_vftx_2141); 
+    ZERO_ARRAY(fz2_vftx_2141); 
+    ZERO_ARRAY(fvcor_vftx_2141); 
+    ZERO_ARRAY(fbeta_vftx_2241); 
+    ZERO_ARRAY(fgamma_vftx_2241);
+    ZERO_ARRAY(faoq_vftx_2241); 
+    ZERO_ARRAY(faoq_corr_vftx_2241);
+    ZERO_ARRAY(fz1_vftx_2241); 
+    ZERO_ARRAY(fz2_vftx_2241); 
+    ZERO_ARRAY(fvcor_vftx_2241); 
 
    fFRS_sci_tof2=0;
    fFRS_ID_x2 = 0;

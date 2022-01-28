@@ -1,5 +1,5 @@
 // $Id: EventAnlProc.cxx 754 2011-05-18 11:04:52Z adamczew $
-// Adapted for DESPEC by A.K.Mistry 2020
+// Adapted for DESPEC by A.K.Mistry 2022
 //-----------------------------------------------------------------------
 //       The GSI Online Offline Object Oriented (Go4) Project
 //         Experiment Data Processing at EE department, GSI
@@ -71,29 +71,6 @@ TGo4EventProcessor(name)
 
    DESPECAnalysis* an = dynamic_cast<DESPECAnalysis*> (TGo4Analysis::Instance());
    frs_id = dynamic_cast<TIDParameter*> (an->GetParameter("IDPar"));
-
-//     for(int i=0;i<200;i++){
-//            FRS_WR_a[i]=0;
-//            FRS_WR_b[i]=0 ;
-//            Z1_shift_value[i]=0 ;
-//            Z2_shift_value[i] =0;
-//            /// AoQ_shift
-// 	   FRS_WR_i[i]=0;
-//            FRS_WR_j[i]=0 ;
-//            AoQ_shift_value[i]=0 ;
-//         }
-
-       
-//         for(int i=0;i<1500;i++){
-//             FAT_DET_GFF[i]=0;
-//
-//             for(int j=0;j<36;j++){
-//                 FAT_WR_GFF_High[i][j]=0;
-//                 FAT_WR_GFF_Low[i][j]=0;
-//                 FAT_FACTOR_GFF[i][j]=0;
-//
-//                 }
-//         }
      
 
    /// read_setup_parameters();
@@ -209,14 +186,16 @@ Bool_t EventAnlProc::BuildEvent(TGo4EventElement* dest)
 
         }
         ///VFTX
-        pOutput->pTRaw_vftx_21l = pInput->fTRaw_vftx_21l;
-        pOutput->pTRaw_vftx_21r = pInput->fTRaw_vftx_21r;
-        pOutput->pTRaw_vftx_22l = pInput->fTRaw_vftx_22l;
-        pOutput->pTRaw_vftx_22r = pInput->fTRaw_vftx_22r;
-        pOutput->pTRaw_vftx_41l = pInput->fTRaw_vftx_41l;
-        pOutput->pTRaw_vftx_41r = pInput->fTRaw_vftx_41r;
-        pOutput->pTRaw_vftx_42l = pInput->fTRaw_vftx_42l;
-        pOutput->pTRaw_vftx_42r = pInput->fTRaw_vftx_42r;
+        for(int i = 0; i < 32; i++){
+        pOutput->pTRaw_vftx_21l[i] = pInput->fTRaw_vftx_21l[i];
+        pOutput->pTRaw_vftx_21r[i] = pInput->fTRaw_vftx_21r[i];
+        pOutput->pTRaw_vftx_22l[i] = pInput->fTRaw_vftx_22l[i];
+        pOutput->pTRaw_vftx_22r[i] = pInput->fTRaw_vftx_22r[i];
+        pOutput->pTRaw_vftx_41l[i] = pInput->fTRaw_vftx_41l[i];
+        pOutput->pTRaw_vftx_41r[i] = pInput->fTRaw_vftx_41r[i];
+        pOutput->pTRaw_vftx_42l[i] = pInput->fTRaw_vftx_42l[i];
+        pOutput->pTRaw_vftx_42r[i] = pInput->fTRaw_vftx_42r[i];
+        }
         
         ///TPC
         for(int i = 0; i < 7; i++)
@@ -574,7 +553,7 @@ if(Fatmult > 0){
           Ge_Talign[g]=0;
        }
 
-       if ( PrcID_Conv[5]==5){
+       if ( PrcID_Conv[5]==5 && Used_Systems[5]==1){
         GeFired =  pInput->fGe_fired;
     //    GePileup = pInput->fGe_Pileup;
         Ge_WR = pInput->fGe_WR;
@@ -1557,26 +1536,30 @@ void EventAnlProc::Make_Aida_Histos(){
 #ifdef AIDA_PULSER_ALIGN
   aida_pulser_time = MakeTH2('I', "AIDA/Pulser_Time", "AIDA Pulser Time Comparison", 768, 0, 768, 2000, -4000, 4000);
 #endif
+   int xstrips = 128;
+  if (conf->Wide()) xstrips = 386;
+  double xmax = 37.8;
+  if (conf->Wide()) xmax = 113.4;
   for (int i = 0; i < conf->DSSDs(); ++i)
   {
-    implants_strip_xy[i] = MakeTH2('I', Form("AIDA/Implants/DSSD%d_implants_strip_XY", i+1), Form("DSSD %d implant hit pattern", i+1), 128, 0, 128, 128, 0, 128, "X strip", "Y strip");
-    implants_strip_xy_stopped[i]= MakeTH2('I', Form("AIDA/Implants_Stopped/DSSD%d_implants_stopped_strip_XY", i+1), Form("DSSD %d implant stopped hit pattern", i+1), 128, 0, 128, 128, 0, 128, "X strip", "Y strip");
-    implants_pos_xy[i] = MakeTH2('D', Form("AIDA/Implants/DSSD%d_implants_pos_XY", i+1), Form("DSSD %d implant position", i+1), 128, -37.8, 37.8, 128, -37.8, 37.8, "X position/mm", "Y position/mm");
-    implants_pos_xy_stopped[i]= MakeTH2('I', Form("AIDA/Implants_Stopped/DSSD%d_implants_stopped_pos_XY", i+1), Form("DSSD %d implant stopped position hit pattern", i+1), 128, -37.8, 37.8, 128, -37.8, 37.8, "X position/mm", "Y position/mm");
-    implants_e[i] = MakeTH1('F', Form("AIDA/Implants/DSSD%d_implants_energy", i+1), Form("DSSD %d implant energy", i+1), 1000, 0, 10000, "Implant Energy/MeV");
+      implants_strip_xy[i] = MakeTH2('I', Form("AIDA/Implants/DSSD%d_implants_strip_XY", i+1), Form("DSSD %d implant hit pattern", i+1), xstrips, 0, xstrips, 128, 0, 128, "X strip", "Y strip");
+    implants_strip_xy_stopped[i]= MakeTH2('I', Form("AIDA/Implants_Stopped/DSSD%d_implants_stopped_strip_XY", i+1), Form("DSSD %d implant stopped hit pattern", i+1), xstrips, 0, xstrips, 128, 0, 128, "X strip", "Y strip");
+    implants_pos_xy[i] = MakeTH2('D', Form("AIDA/Implants/DSSD%d_implants_pos_XY", i+1), Form("DSSD %d implant position", i+1), xstrips, -xmax, xmax, 128, -37.8, 37.8, "X position/mm", "Y position/mm");
+    implants_pos_xy_stopped[i]= MakeTH2('I', Form("AIDA/Implants_Stopped/DSSD%d_implants_stopped_pos_XY", i+1), Form("DSSD %d implant stopped position hit pattern", i+1), xstrips, -xmax, xmax, 128, -37.8, 37.8, "X position/mm", "Y position/mm");
+    implants_e[i] = MakeTH1('F', Form("AIDA/Implants/DSSD%d_implants_energy", i+1), Form("DSSD %d implant energy", i+1), 2000, 0, 20000, "Implant Energy/MeV");
     //implants_e_xy[i] = MakeTH2('F', Form("AIDA/Implants/DSSD%d_implants_energy_XY", i+1), Form("DSSD %d implant front energy vs back energy", i+1), 1000, 0, 10000, 1000, 0, 10000, "X Energy", "Y Energy");
     implants_time_delta[i] = MakeTH1('F', Form("AIDA/Implants/DSSD%d_implants_time_delta", i+1), Form("DSSD %d implant front vs back time", i+1), 1000, -10000, 10000, "Time Difference/ns");
-    implants_strip_1d[i] = MakeTH1('I', Form("AIDA/Implants/DSSD%d_implants_strip_1d", i+1), Form("DSSD %d implant 1D hit pattern", i+1), 256, 0, 256, "Strip number");
+    implants_strip_1d[i] = MakeTH1('I', Form("AIDA/Implants/DSSD%d_implants_strip_1d", i+1), Form("DSSD %d implant 1D hit pattern", i+1), 128 + xstrips, 0, 128 + xstrips, "Strip number");
     implants_per_event[i] = MakeTH1('I', Form("AIDA/Implants/DSSD%d_implants_per_event", i+1), Form("DSSD %d implants per event", i+1), 100, 0, 100, "Number of implants");
-    implants_x_ex[i] = MakeTH2('F', Form("AIDA/Implants/DSSD%d_implants_x_ex", i+1), Form("DSSD %d Ex vs X position", i+1), 128, 0, 128, 1000, 0, 10000, "X Strip", "X Energy");
-    implants_y_ey[i] = MakeTH2('F', Form("AIDA/Implants/DSSD%d_implants_y_ey", i+1), Form("DSSD %d Ey vs Y position", i+1), 128, 0, 128, 1000, 0, 10000, "Y Strip", "Y Energy");
+    implants_x_ex[i] = MakeTH2('F', Form("AIDA/Implants/DSSD%d_implants_x_ex", i+1), Form("DSSD %d Ex vs X position", i+1), 128, 0, 128, 2000, 0, 20000, "X Strip", "X Energy");
+    implants_y_ey[i] = MakeTH2('F', Form("AIDA/Implants/DSSD%d_implants_y_ey", i+1), Form("DSSD %d Ey vs Y position", i+1), 128, 0, 128, 2000, 0, 20000, "Y Strip", "Y Energy");
 
-    decays_strip_xy[i] = MakeTH2('I', Form("AIDA/Decays/DSSD%d_decays_strip_XY", i+1), Form("DSSD %d decay hit pattern", i+1), 128, 0, 128, 128, 0, 128, "X strip", "Y strip");
-    decays_pos_xy[i] = MakeTH2('D', Form("AIDA/Decays/DSSD%d_decays_pos_XY", i+1), Form("DSSD %d decay position", i+1), 128, -37.8, 37.8, 128, -37.8, 37.8, "X position/mm", "Y position/mm");
+    decays_strip_xy[i] = MakeTH2('I', Form("AIDA/Decays/DSSD%d_decays_strip_XY", i+1), Form("DSSD %d decay hit pattern", i+1), xstrips, 0, xstrips, 128, 0, 128, "X strip", "Y strip");
+    decays_pos_xy[i] = MakeTH2('D', Form("AIDA/Decays/DSSD%d_decays_pos_XY", i+1), Form("DSSD %d decay position", i+1), xstrips, -xmax, xmax, 128, -37.8, 37.8, "X position/mm", "Y position/mm");
     decays_e[i] = MakeTH1('F', Form("AIDA/Decays/DSSD%d_decays_energy", i+1), Form("DSSD %d decay energy", i+1), 1000, 0, 20000, "Decay Energy/keV");
     decays_e_xy[i] = MakeTH2('F', Form("AIDA/Decays/DSSD%d_decays_energy_XY", i+1), Form("DSSD %d decay front energy vs back energy", i+1), 1000, 0, 10000, 1000, 0, 20000, "X Energy", "Y Energy");
     decays_time_delta[i] = MakeTH1('F', Form("AIDA/Decays/DSSD%d_decays_time_delta", i+1), Form("DSSD %d decay front vs back time", i+1), 1000, -10000, 10000, "Time Difference/ns");
-    decays_strip_1d[i] = MakeTH1('I', Form("AIDA/Decays/DSSD%d_decays_strip_1d", i+1), Form("DSSD %d decay 1D hit pattern", i+1), 256, 0, 256, "Strip number");
+    decays_strip_1d[i] = MakeTH1('I', Form("AIDA/Decays/DSSD%d_decays_strip_1d", i+1), Form("DSSD %d decay 1D hit pattern", i+1), 128 + xstrips, 0, 128 + xstrips, "Strip number");
     decays_per_event[i] = MakeTH1('I', Form("AIDA/Decays/DSSD%d_decays_per_event", i+1), Form("DSSD %d decays per event", i+1), 100, 0, 100, "Number of decays");
 
 //     implants_channels[i] = MakeTH1('I', Form("AIDA/DSSD%d_implants_channels", i+1), Form("DSSD %d number of implant channels", i+1), 769, 0, 769);
@@ -1662,13 +1645,13 @@ void EventAnlProc::ProcessAida(EventUnpackStore* pInputMain, EventAnlStore* pOut
         }
       }
 
-      int channels[768] = {0};
+      std::vector<int> channels(conf->FEEs() * 64);
       for (auto& i : pInput->ImplantEvents)
       {
         channels[i.Module * 64 + i.Channel]++;
       }
       int channelM = 0;
-      for (int i = 0; i < 768; ++i){
+      for (int i = 0; i < 64 * conf->FEEs(); ++i){
         if (channels[i]) ++channelM;
       }
       //implants_channels[0]->Fill(channelM);
@@ -1695,7 +1678,10 @@ void EventAnlProc::ProcessAida(EventUnpackStore* pInputMain, EventAnlStore* pOut
       //  pOutput->pAida.Implants.push_back(hit);
         aida.Implants.push_back(hit);
         implants_strip_xy[hit.DSSD - 1]->Fill(hit.StripX, hit.StripY);
-	if (hit.Stopped)implants_strip_xy_stopped[hit.DSSD - 1]->Fill(hit.StripX, hit.StripY);
+	if (hit.Stopped){
+        implants_strip_xy_stopped[hit.DSSD - 1]->Fill(hit.StripX, hit.StripY);
+        implants_pos_xy_stopped[hit.DSSD - 1]->Fill(hit.PosX, hit.PosY);
+    }
 
 	// Helena
 	if(hit.Stopped){
@@ -1727,7 +1713,7 @@ void EventAnlProc::ProcessAida(EventUnpackStore* pInputMain, EventAnlStore* pOut
 
         int channel = i.first.Strip;
         implants_strip_1d[hit.DSSD - 1]->Fill(channel);
-        channel = i.second.Strip + 128;
+        channel = i.second.Strip + (conf->Wide() ? 386 : 128);
         implants_strip_1d[hit.DSSD - 1]->Fill(channel);
       }
       //
@@ -1741,7 +1727,7 @@ void EventAnlProc::ProcessAida(EventUnpackStore* pInputMain, EventAnlStore* pOut
     {
       decayEvents++;
 
-      int channels[768] = {0};
+      std::vector<int> channels(conf->FEEs() * 64);
 #ifdef AIDA_PULSER_ALIGN
       int64_t wr_base = 0;
 #endif
@@ -1872,7 +1858,7 @@ void EventAnlProc::ProcessAida(EventUnpackStore* pInputMain, EventAnlStore* pOut
 
         int channel = i.first.Strip;
         decays_strip_1d[hit.DSSD - 1]->Fill(channel);
-        channel = i.second.Strip + 128;
+        channel = i.second.Strip + (conf->Wide() ? 386 : 128);
         decays_strip_1d[hit.DSSD - 1]->Fill(channel);
       }
 
@@ -1974,7 +1960,12 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
 
   hit.StripX = i.first.Strip;
   hit.StripY = i.second.Strip;
-  hit.PosX = 75.6 * i.first.Strip / 128. - 37.75;
+  if (TAidaConfiguration::GetInstance()->Wide()) {
+    hit.PosX = 226.8 * i.first.Strip / 386. - 113.45;
+  }
+  else {
+    hit.PosX = 75.6 * i.first.Strip / 128. - 37.75;
+  }
   hit.PosY = 75.6 * i.second.Strip / 128. - 37.75;
 
   hit.StripXMin = i.first.StripMin;

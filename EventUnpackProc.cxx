@@ -104,8 +104,7 @@ EventUnpackProc::EventUnpackProc(const char* name) : TGo4EventProcessor(name)
   Detector_Systems[0] = !Used_Systems[0] ? nullptr : new FRS_Detector_System();
   Detector_Systems[1] = !Used_Systems[1] ? nullptr : new AIDA_Detector_System();
   if(bPLASTIC_TWINPEAKS==0) Detector_Systems[2] = !Used_Systems[2] ? nullptr : new PLASTIC_TAMEX_Detector_System();
-  if(bPLASTIC_TWINPEAKS==1)Detector_Systems[2] = !Used_Systems[2] ? nullptr : new PLASTIC_TWINPEAKS_Detector_System();
-  Detector_Systems[2] = !Used_Systems[2] ? nullptr : new PLASTIC_TAMEX_Detector_System();
+  if(bPLASTIC_TWINPEAKS==1) Detector_Systems[2] = !Used_Systems[2] ? nullptr : new PLASTIC_TWINPEAKS_Detector_System();
   Detector_Systems[3] = !Used_Systems[3] ? nullptr : new FATIMA_Detector_System();
   Detector_Systems[4] = !Used_Systems[4] ? nullptr : new FATIMA_TAMEX_Detector_System();
   Detector_Systems[5] = !Used_Systems[5] ? nullptr : new Germanium_Detector_System();
@@ -415,15 +414,21 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
 	    }
 	}
 
-             if(PrcID==35){
-    if(RAW->get_FRS_TRaw_vftx_21l()!=0)fOutput->fTRaw_vftx_21l = RAW->get_FRS_TRaw_vftx_21l();
-    if(RAW->get_FRS_TRaw_vftx_21r()!=0)fOutput->fTRaw_vftx_21r = RAW->get_FRS_TRaw_vftx_21r();
-    if(RAW->get_FRS_TRaw_vftx_22l()!=0)fOutput->fTRaw_vftx_22l = RAW->get_FRS_TRaw_vftx_22l();
-    if(RAW->get_FRS_TRaw_vftx_22r()!=0)fOutput->fTRaw_vftx_22r = RAW->get_FRS_TRaw_vftx_22r();
-    if(RAW->get_FRS_TRaw_vftx_41l()!=0)fOutput->fTRaw_vftx_41l = RAW->get_FRS_TRaw_vftx_41l();
-    if(RAW->get_FRS_TRaw_vftx_41r()!=0)fOutput->fTRaw_vftx_41r = RAW->get_FRS_TRaw_vftx_41r();
-    if(RAW->get_FRS_TRaw_vftx_42l()!=0)fOutput->fTRaw_vftx_42l = RAW->get_FRS_TRaw_vftx_42l();
-    if(RAW->get_FRS_TRaw_vftx_42r()!=0)fOutput->fTRaw_vftx_42r = RAW->get_FRS_TRaw_vftx_42r();
+             if(PrcID==20){
+    for(int i=0; i<32; i++){
+            if(RAW->get_FRS_TRaw_vftx_21l(i)!=0)fOutput->fTRaw_vftx_21l[i] = RAW->get_FRS_TRaw_vftx_21l(i);
+            if(RAW->get_FRS_TRaw_vftx_21r(i)!=0)fOutput->fTRaw_vftx_21r[i] = RAW->get_FRS_TRaw_vftx_21r(i);
+            if(RAW->get_FRS_TRaw_vftx_22l(i)!=0)fOutput->fTRaw_vftx_22l[i] = RAW->get_FRS_TRaw_vftx_22l(i);
+            if(RAW->get_FRS_TRaw_vftx_22r(i)!=0)fOutput->fTRaw_vftx_22r[i] = RAW->get_FRS_TRaw_vftx_22r(i);
+            if(RAW->get_FRS_TRaw_vftx_41l(i)!=0)fOutput->fTRaw_vftx_41l[i] = RAW->get_FRS_TRaw_vftx_41l(i);
+            if(RAW->get_FRS_TRaw_vftx_41r(i)!=0)fOutput->fTRaw_vftx_41r[i] = RAW->get_FRS_TRaw_vftx_41r(i);
+            if(RAW->get_FRS_TRaw_vftx_42l(i)!=0)fOutput->fTRaw_vftx_42l[i] = RAW->get_FRS_TRaw_vftx_42l(i);
+            if(RAW->get_FRS_TRaw_vftx_42r(i)!=0)fOutput->fTRaw_vftx_42r[i] = RAW->get_FRS_TRaw_vftx_42r(i);
+            if(RAW->get_FRS_ToF_vftx_2141(i)!=0)fOutput->fToF_vftx_2141[i] = RAW->get_FRS_ToF_vftx_2141(i);
+            if(RAW->get_FRS_ToF_vftx_2141_calib(i)!=0)fOutput->fToF_vftx_2141_calib[i] = RAW->get_FRS_ToF_vftx_2141_calib(i);
+            if(RAW->get_FRS_ToF_vftx_2241(i)!=0)fOutput->fToF_vftx_2241[i] = RAW->get_FRS_ToF_vftx_2241(i);
+            if(RAW->get_FRS_ToF_vftx_2241_calib(i)!=0)fOutput->fToF_vftx_2241_calib[i] = RAW->get_FRS_ToF_vftx_2241_calib(i);
+             }
              }
             ///SCI TOF
 //         fOutput->fFRS_sci_tofll2 = RAW->get_FRS_tofll2();
@@ -1956,15 +1961,13 @@ for(int i=0;i<7;i++)
    hvftx_Sci41PosRaw = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/PosRaw41","Sci41_PosRaw",1000,-20000.,20000,"PosRaw = Left - Right [10ps/bin]");
    hvftx_Sci42PosRaw = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/PosRaw42","Sci42_PosRaw",1000,-20000.,20000,"PosRaw = Left - Right [10ps/bin]");
 
-   hvftx_ToFraw_2141 = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ToFraw_2141","ToFraw_41-21_mult1",20000,-20000.,230000,"ToFraw [10ps] ");
-
-   hvftx_ToFraw_2141LL = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ToFraw_2141LL","ToFraw_41-21_mult1_LL",20000,-20000.,230000,"ToFraw [10ps] ");
-
-   hvftx_ToFraw_2141RR = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ToFraw_2141RR","ToFraw_41-21_mult1_RR",20000,-20000.,230000,"ToFraw [10ps] ");
-
-   hvftx_ToFraw_2142LL = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ToFraw_2142LL","ToFraw_42-21_mult1_LL",20000,-20000.,230000,"ToFraw [10ps] ");
-
-   hvftx_ToFraw_2142RR = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ToFraw_2142RR","ToFraw_42-21_mult1_RR",20000,-20000.,230000,"ToFraw [10ps] ");
+   h1_VFTX_TOF_41_21 = (TH1D*)MakeTH1('D',"FRS/VFTX/TOF/Sci2141","TOF_Sci21_Sci41",8000,100000.,400000.,"TOF = Sci41 - Sci21 [1ps/bin]");
+    h1_VFTX_TOF_41_22 = (TH1D*)MakeTH1('D',"FRS/VFTX/TOF/Sci2241","TOF_Sci22_Sci41",8000,100000.,400000.,"TOF = Sci41 - Sci22 [1ps/bin]");
+    h1_VFTX_TOF_42_21 = (TH1D*)MakeTH1('D',"FRS/VFTX/TOF/Sci2142","TOF_Sci22_Sci41",8000,100000.,400000.,"TOF = Sci42 - Sci21 [1ps/bin]");
+    
+    h1_VFTX_TOF_41_21_calib = (TH1D*)MakeTH1('D',"FRS/VFTX/TOF/Sci2141_calib","TOF_Sci21_Sci41 calib",8000,100000.,400000.,"TOF = Sci41 - Sci21 [1ps/bin]");
+    
+    h1_VFTX_TOF_41_22_calib = (TH1D*)MakeTH1('D',"FRS/VFTX/TOF/Sci2142_calib","TOF_Sci21_Sci42 calib",8000,100000.,400000.,"TOF = Sci41 - Sci21 [1ps/bin]");
 
 
 //     htimestamp = MakeTH1('D',"FRS/timestamp","timestamp",30,0.,300.);
@@ -1991,14 +1994,35 @@ for(int i=0;i<7;i++)
         Music_T2[i] = 0;
     }
 
-    TRaw_vftx_21l =0;
-    TRaw_vftx_21r =0;
-    TRaw_vftx_22l =0;
-    TRaw_vftx_22r =0;
-    TRaw_vftx_41l =0;
-    TRaw_vftx_41r =0;
-    TRaw_vftx_42l =0;
-    TRaw_vftx_42r =0;
+  for(int i =0; i<32; i++){
+    TRaw_vftx_21l[i] =0;
+    TRaw_vftx_21r[i] =0;
+    TRaw_vftx_22l[i] =0;
+    TRaw_vftx_22r[i] =0;
+    TRaw_vftx_41l[i] =0;
+    TRaw_vftx_41r[i] =0;
+    TRaw_vftx_42l[i] =0;
+    TRaw_vftx_42r[i] =0;
+    ToF_vftx_2141[i] =0;
+    ToF_vftx_2141_calib[i] =0;
+    ToF_vftx_2241[i] =0;
+    ToF_vftx_2241_calib[i] =0;
+    FRS_vftx_beta_2141[i] = 0;
+    FRS_vftx_gamma_2141[i] = 0;
+    FRS_vftx_aoq_2141[i] = 0;
+    FRS_vftx_aoq_2141_corr[i] = 0;
+    FRS_vftx_2141_z[i] = 0;
+    FRS_vftx_2141_v_cor[i] = 0;
+    FRS_vftx_beta_2241[i] = 0;
+    FRS_vftx_gamma_2241[i] = 0;
+    FRS_vftx_aoq_2241[i] =0;
+    FRS_vftx_aoq_2241_corr[i] = 0;
+    FRS_vftx_2241_z[i] = 0;
+    FRS_vftx_2241_v_cor[i] = 0;
+//     ToF_vftx_2142[i] =0;
+//     ToF_vftx_2142_calib[i] =0;
+    
+     }
 
 
     for(int i =0; i<3; i++){
@@ -2140,19 +2164,28 @@ TPC_Y_angle_s4 = RAW-> get_FRS_tpc_y_angle_s4();
   
    }
    // ID_z3 = RAW->get_FRS_z3();
+for(int i=0; i<32; i++){
+    TRaw_vftx_21l[i] = RAW->get_FRS_TRaw_vftx_21l(i);
+    TRaw_vftx_21r[i] = RAW->get_FRS_TRaw_vftx_21r(i);
+    TRaw_vftx_22l[i] = RAW->get_FRS_TRaw_vftx_22l(i);
+    TRaw_vftx_22r[i] = RAW->get_FRS_TRaw_vftx_22r(i);
+    TRaw_vftx_41l[i] = RAW->get_FRS_TRaw_vftx_41l(i);
+    TRaw_vftx_41r[i] = RAW->get_FRS_TRaw_vftx_41r(i);
+    TRaw_vftx_42l[i] = RAW->get_FRS_TRaw_vftx_42l(i);
+    TRaw_vftx_42r[i] = RAW->get_FRS_TRaw_vftx_42r(i);
+    ToF_vftx_2141[i] = RAW->get_FRS_ToF_vftx_2141(i);
+    ToF_vftx_2141_calib[i] = RAW->get_FRS_ToF_vftx_2141_calib(i);
+    ToF_vftx_2241[i] = RAW->get_FRS_ToF_vftx_2241(i);
+    ToF_vftx_2241_calib[i] = RAW->get_FRS_ToF_vftx_2241_calib(i);
+//     ToF_vftx_2142[i] = RAW->get_FRS_ToF_vftx_2142(i);
+//     ToF_vftx_2142_calib[i] = RAW->get_FRS_ToF_vftx_2142_calib(i);
+    
+    
+ }  
 
-    TRaw_vftx_21l = RAW->get_FRS_TRaw_vftx_21l();
-    TRaw_vftx_21r = RAW->get_FRS_TRaw_vftx_21r();
-    TRaw_vftx_22l = RAW->get_FRS_TRaw_vftx_22l();
-    TRaw_vftx_22r = RAW->get_FRS_TRaw_vftx_22r();
-    TRaw_vftx_41l = RAW->get_FRS_TRaw_vftx_41l();
-    TRaw_vftx_41r = RAW->get_FRS_TRaw_vftx_41r();
-    TRaw_vftx_42l = RAW->get_FRS_TRaw_vftx_42l();
-    TRaw_vftx_42r = RAW->get_FRS_TRaw_vftx_42r();
-
-    for(int i=0; i<32; i++){
-   TRaw_vftx[i] = RAW->get_FRS_TRaw_vftx(i);
-    }
+//     for(int i=0; i<32; i++){
+//    TRaw_vftx[i] = RAW->get_FRS_TRaw_vftx(i);
+//     }
     timestamp = RAW->get_FRS_timestamp();
     ts = RAW->get_FRS_ts(); //Spill time structrue
     ts2 = RAW->get_FRS_ts2();
@@ -2493,66 +2526,82 @@ if (PrcID == 35 && !scalers_done)
     scalers_done = true;
     }
 
-  if(PrcID==35){
-      ///T_RAW TESTING
-      for(int i=0; i<32; i++){
-      if(TRaw_vftx[i]!=0){
-      hvftx_TRaw[i]->Fill(TRaw_vftx[i]);
-     //cout<<"TRaw_vftx[i] " <<TRaw_vftx[i] << " i " << i << endl;
-      hvftx_Hit_Pattern->Fill(i);
-      }
-    }
-
-
-  ///  SCI21 Position
-  //cout<<"TRaw_vftx_21l " <<TRaw_vftx_21l << " TRaw_vftx_21r " <<TRaw_vftx_21r <<" dT " <<TRaw_vftx_21l-TRaw_vftx_21r<< endl;
-   if(TRaw_vftx_21l!=0. && TRaw_vftx_21r!=0.){
-   hvftx_Sci21PosRaw->Fill((TRaw_vftx_21l-TRaw_vftx_21r)); ///1ps
+  if(PrcID==20){
+     ///  SCI21 Position
+for(int i=0; i<32; i++){
+   if(TRaw_vftx_21l[i]!=0. && TRaw_vftx_21r[i]!=0.){
+   hvftx_Sci21PosRaw->Fill((TRaw_vftx_21l[i]-TRaw_vftx_21r[i])); ///1ps
 //cout<<"TRaw_vftx_21l " <<TRaw_vftx_21l << " TRaw_vftx_21r " <<TRaw_vftx_21r << endl;
    }
     /// SCI22 Position
-     if(TRaw_vftx_22l!=0. && TRaw_vftx_22r!=0.){
-   hvftx_Sci22PosRaw->Fill((TRaw_vftx_22l-TRaw_vftx_22r)); ///1ps
+     if(TRaw_vftx_22l[i]!=0. && TRaw_vftx_22r[i]!=0.){
+   hvftx_Sci22PosRaw->Fill((TRaw_vftx_22l[i]-TRaw_vftx_22r[i])); ///1ps
     }
     /// SCI41 Position
-      if(TRaw_vftx_41l!=0. && TRaw_vftx_41r!=0.){
-   hvftx_Sci41PosRaw->Fill((TRaw_vftx_41l-TRaw_vftx_41r)); ///1ps
-//  cout<<"event " << event_number << " TRaw_vftx_41l " << TRaw_vftx_41l << " TRaw_vftx_41r " << TRaw_vftx_41r<<" TRaw_vftx_41l-TRaw_vftx_41r " <<TRaw_vftx_41l-TRaw_vftx_41r << endl;
+      if(TRaw_vftx_41l[i]!=0. && TRaw_vftx_41r[i]!=0.){
+   hvftx_Sci41PosRaw->Fill((TRaw_vftx_41l[i]-TRaw_vftx_41r[i])); ///1ps
+//  cout<<"event " << event_number << " TRaw_vftx_41l " << TRaw_vftx_41l << " TRaw_vftx_41r " << TRaw_vftx_41r<<" TRaw_vftx_41l-TRaw_vftx_41r " <<TRaw_vftx_41l-TRaw_vftx_41r << endl; 
     }
     /// SCI42 Position
-     if(TRaw_vftx_42l!=0. && TRaw_vftx_42r!=0.){
-   hvftx_Sci42PosRaw->Fill((TRaw_vftx_42l-TRaw_vftx_42r)); ///1ps
+     if(TRaw_vftx_42l[i]!=0. && TRaw_vftx_42r[i]!=0.){
+   hvftx_Sci42PosRaw->Fill((TRaw_vftx_42l[i]-TRaw_vftx_42r[i])); ///1ps
 
     }
+    
+    ///ToF's
+   if(ToF_vftx_2141[i]!=0) h1_VFTX_TOF_41_21->Fill(ToF_vftx_2141[i]);
+    if(ToF_vftx_2241[i]!=0) h1_VFTX_TOF_41_22->Fill(ToF_vftx_2241[i]);
+    //h1_VFTX_TOF_42_21->Fill(ToF_vftx_2142[i]);
+    
+    if(ToF_vftx_2141_calib[i]!=0) h1_VFTX_TOF_41_21_calib->Fill(ToF_vftx_2141_calib[i]);
+    if(ToF_vftx_2241_calib[i]!=0) h1_VFTX_TOF_41_22_calib->Fill(ToF_vftx_2241_calib[i]);
+   // h1_VFTX_TOF_42_21->Fill(ToF_vftx_2142_calib[i]);
+    
+    
+    
    // cout<<" TRaw_vftx_41l "<<TRaw_vftx_41l << " TRaw_vftx_41r "<<TRaw_vftx_41r <<" TRaw_vftx_21l "<<TRaw_vftx_21l <<" TRaw_vftx_21r " <<TRaw_vftx_21r  << "TOF " <<(0.5*((TRaw_vftx_41l+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r)))<< endl;
-   ///SCI41 -SCI21 ToF
-  if(TRaw_vftx_41l!=0.&&TRaw_vftx_41r!=0.&&TRaw_vftx_21l!=0.&&TRaw_vftx_21r!=0.){
-   hvftx_ToFraw_2141->Fill((0.5*((TRaw_vftx_41l+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r))));//ps
-
-    }
-    ///SCI41 -SCI21 LL
-  if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
-   hvftx_ToFraw_2141LL->Fill((TRaw_vftx_41l-TRaw_vftx_21l));//ps
-
-    }
-
-    ///SCI41 -SCI21 RR
-  if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
-   hvftx_ToFraw_2141RR->Fill((TRaw_vftx_41r-TRaw_vftx_21r));//ps
-
-    }
-
-     ///SCI42 -SCI21 LL
-  if(TRaw_vftx_42l!= 0 &&TRaw_vftx_21l!= 0){
-   hvftx_ToFraw_2142LL->Fill((TRaw_vftx_42l-TRaw_vftx_21l));//ps
-
-    }
-
-    ///SCI42 -SCI21 RR
-  if(TRaw_vftx_42r!=0 && TRaw_vftx_21r!=0){
-   hvftx_ToFraw_2141RR->Fill((TRaw_vftx_42r-TRaw_vftx_21r));//ps
-
-        }
+//    ///SCI41 -SCI21 ToF
+//   if(TRaw_vftx_41l[i]!=0.&&TRaw_vftx_41r[i]!=0.&&TRaw_vftx_21l[i]!=0.&&TRaw_vftx_21r[i]!=0.){
+//    hvftx_ToFraw_2141->Fill((0.5*((TRaw_vftx_41l[i]+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r))));//ps
+// 
+//     }
+//     ///SCI41 -SCI21 LL
+//   if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
+//    hvftx_ToFraw_2141LL->Fill((TRaw_vftx_41l-TRaw_vftx_21l));//ps
+// 
+//     }
+//     
+//     ///SCI41 -SCI22 LL
+//   if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
+//    hvftx_ToFraw_2241LL->Fill((TRaw_vftx_41l-TRaw_vftx_22l));//ps
+// 
+//     }
+//     
+//     ///SCI41 -SCI21 RR
+//   if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
+//    hvftx_ToFraw_2241RR->Fill((TRaw_vftx_41r-TRaw_vftx_22r));//ps
+// 
+//     }
+//     
+//     ///SCI41 -SCI22 RR
+//   if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
+//    hvftx_ToFraw_2141RR->Fill((TRaw_vftx_41r-TRaw_vftx_21r));//ps
+// 
+//     }
+//     
+//      ///SCI42 -SCI21 LL
+//   if(TRaw_vftx_42l!= 0 &&TRaw_vftx_21l!= 0){
+//    hvftx_ToFraw_2142LL->Fill((TRaw_vftx_42l-TRaw_vftx_21l));//ps
+// 
+//     }
+//     
+//     ///SCI42 -SCI21 RR
+//   if(TRaw_vftx_42r!=0 && TRaw_vftx_21r!=0){
+//    hvftx_ToFraw_2141RR->Fill((TRaw_vftx_42r-TRaw_vftx_21r));//ps
+// 
+//         }
+        
+}
     }
   }
 

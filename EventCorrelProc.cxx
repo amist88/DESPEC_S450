@@ -40,14 +40,7 @@
 
 //-----------------------------------------------------------
 EventCorrelProc::EventCorrelProc() :
-  TGo4EventProcessor()/*,
-  fParam1(0),
-  fTimeDiff(0),
-  fGatedHist(0),
-  fCoincQ1A1(0),
-  fCoincQ1T1(0),
-  fconHis1(0)*/
-
+  TGo4EventProcessor()
 {
 
 }
@@ -102,6 +95,10 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
     Make_Timemachine_Histos();
 
     if(fCorrel->GSetup_corr_FRS_Aida==true)   Make_FRS_AIDA_Histos();
+    
+  //  if(fCorrel->GSetup_corr_FRS_Aida_Gamma==true) Make_FRS_AIDA_Gamma_Histos();
+    
+  //  if(fCorrel->GSetup_corr_FRS_bPlast==true)  Make_FRS_bPlast_Histos();
 
     if(fCorrel->GSetup_corr_FRS_Ge==true)  Make_FRS_Prompt_Ge_Histos();
 
@@ -112,10 +109,9 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
     if(fCorrel->GSetup_corr_FRS_fat==true) Make_FRS_Prompt_Fat_Histos();
 
-    if(fCorrel->GSetup_corr_Beta_Gamma_bPlastSpillOff==true) Make_Beta_Gamma_bPlast_SpillOff_Histos();
+    if(fCorrel->GSetup_corr_Beta_Gamma_bPlastSpillOff==true) Make_SpillOff_Gamma_Histos();
 
     if(fCorrel->GSetup_corr_Beta_Gamma==true) Make_Beta_Gamma_Histos();
-
 
      create=true;
 
@@ -139,6 +135,10 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 ///Demand at least FRS to be activated to do correlations
          // Fat_TimeCorrection(cInput);
           if(fCorrel->GSetup_corr_FRS_Aida==true)Process_FRS_AIDA(cInput, cOutput);
+          
+        //  if(fCorrel->GSetup_corr_FRS_Aida_Gamma==true) Process_FRS_AIDA_Gamma_Histos();
+          
+          //if(fCorrel->GSetup_corr_FRS_bPlast==true && bPLASTIC_TWINPEAKS==1) Process_FRS_bPlast(cInput, cOutput);
 
           if(fCorrel->GSetup_corr_FRS_Ge==true) Process_FRS_Prompt_Ge(cInput, cOutput);
 
@@ -150,7 +150,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
           if(fCorrel->GSetup_corr_FRS_fat==true)Process_FRS_Prompt_Fat(cInput, cOutput);
 
         ///BDG with bPlastic/Spill Off
-           if(fCorrel->GSetup_corr_Beta_Gamma_bPlastSpillOff==true) Process_Beta_Gamma_bPlast_SpillOff(cInput, cOutput);
+           if(fCorrel->GSetup_corr_Beta_Gamma_bPlastSpillOff==true) Process_SpillOff_Gammas(cInput, cOutput);
 
              ///BDG with AIDA
           if(fCorrel->GSetup_corr_Beta_Gamma==true) Process_Beta_Gamma(cInput, cOutput);
@@ -187,9 +187,13 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
  /**----------------------------------    Timemachine   -------------------------**/
  /**----------------------------------------------------------------------------------------------**/
  void EventCorrelProc::Make_Timemachine_Histos(){
+     ///Check if FATIMA is used
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
      hFatVME_TMdT= MakeTH1('I',"TimeMachine/Systems_dT/Fatima_VME_TimeMachinedT","Fatima VME TM Ch.1 -Ch.2 ",200,0,2000);
 
      hFatTAMEX_TMdT= MakeTH1('I',"TimeMachine/Systems_dT/Fatima_Tamex_TimeMachinedT","Fatima TAMEX TM Ch.1 -Ch.2 ",200,0,2000);
+     }
+     
      hGe_TMdT= MakeTH1('I',"TimeMachine/Systems_dT/Ge_FEBEX_TimeMachinedT","Germanium FEBEX TM Ch.1 -Ch.2 ",200,0,2000);
 
      hbPlastic_TMdT= MakeTH1('I',"TimeMachine/Systems_dT/bPlast_TAMEX_TimeMachinedT","bPlastic TAMEX TM Ch.1 -Ch.2 ",200,0,2000);
@@ -200,15 +204,20 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
       hAIDA_WRTM_FRS = MakeTH1('I',"WR/AIDA/Timemachine_AIDA-FRS","White Rabbit AIDA WR TM - FRS",10000,-10000,10000,"WR dT(AIDA TM WR - FRS)[ns]", "Counts");
 
       hAIDA_WRTM_Ge = MakeTH1('I',"WR/AIDA/Timemachine_AIDA-Ge","White Rabbit AIDA WR TM - Ge",10000,-10000,10000,"WR dT(AIDA TM WR - Ge)[ns]", "Counts");
-
+  
+      ///Check if FATIMA is used
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
       hAIDA_WRTM_FatVME = MakeTH1('I',"WR/AIDA/Timemachine_AIDA-Fatima_VME","White Rabbit AIDA WR TM - Fatima_VME",10000,-10000,10000,"WR dT(AIDA TM WR - Fatima_VME)[ns]", "Counts");
 
       hAIDA_WRTM_FatTAMEX = MakeTH1('I',"WR/AIDA/Timemachine_AIDA-Fatima_TAMEX","White Rabbit AIDA WR TM - Fatima_TAMEX",10000,-10000,10000,"WR dT(AIDA TM WR - Fatima_TAMEX)[ns]", "Counts");
-
+     }
+     
       hAIDA_WRTM_bPlast = MakeTH1('I',"WR/AIDA/Timemachine_AIDA-bPlast","White Rabbit AIDA WR TM - bPlast",10000,-10000,10000,"WR dT(AIDA TM WR - bPlast)[ns]", "Counts");
 
 
      ///Coincidence matrices
+        ///Check if FATIMA is used
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
       hFatVME_FatTAMEX_TM = MakeTH2('D',"TimeMachine/Correlation_matrices/FatimaVME_FatTAMEX","Time Machine FATIMA VME vs Fatima TAMEX ", 200,0,2000, 200,0,2000,"Fatima VME TimeMachine", "Fatima TAMEX TimeMachine");
 
       hFatVME_Ge_TM = MakeTH2('D',"TimeMachine/Correlation_matrices/FatimaVME_Germanium","Time Machine FATIMA VME vs Germanium ", 200,0,2000, 200,0,2000,"Fatima VME TimeMachine", "Germanium FEBEX TimeMachine");
@@ -222,7 +231,8 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
       hFatTAMEX_bPlast_TM = MakeTH2('D',"TimeMachine/Correlation_matrices/FatimaTAMEX_bPlast","Time Machine FATIMA TAMEX vs bPlast ", 200,0,2000, 200,0,2000,"Fatima TAMEX TimeMachine", "bPlast TAMEX TimeMachine");
 
       hFatTAMEX_AIDA_TM = MakeTH2('D',"TimeMachine/Correlation_matrices/FatimaTAMEX_AIDA","Time Machine FATIMA TAMEX vs AIDA ", 200,0,2000, 200,0,2000,"Fatima TAMEX TimeMachine", "AIDA TimeMachine");
-
+     }
+     
       hGe_bPlast_TM = MakeTH2('D',"TimeMachine/Correlation_matrices/Germanium_bPlast","Time Machine Germanium vs bPlastic TAMEX", 200,0,2000, 200,0,2000,"Germanium FEBEX TimeMachine","bPlast TAMEX TimeMachine");
 
       hGe_AIDA_TM = MakeTH2('D',"TimeMachine/Correlation_matrices/Germanium_AIDA","Time Machine Germanium vs AIDA", 200,0,2000, 200,0,2000,"Germanium FEBEX TimeMachine","AIDA TimeMachine");
@@ -233,6 +243,8 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
  for(int i=0; i<10; i++){
    FatimaTAMEX_TimeMachine_dT[i]=0;
  }
+   ///Check if FATIMA is used
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
      ///Fatima VME
     for(int aa=0; aa<10; aa++){
 
@@ -258,6 +270,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 		cOutput->cFatimaTAMEX_TimeMachine_dT[b] = FatimaTAMEX_TimeMachine_dT[b];
         }
       }
+     }
      }
      ///Germanium
 
@@ -292,8 +305,11 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
      if(aida_t_o){
         if(cInputMain->pFRS_WR)   hAIDA_WRTM_FRS ->Fill(aida_t_o-cInputMain->pFRS_WR);
         if(cInputMain->pGe_WR)    hAIDA_WRTM_Ge ->Fill(aida_t_o-cInputMain->pGe_WR);
+          ///Check if FATIMA is used
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
         if(cInputMain->pFAT_WR)  hAIDA_WRTM_FatVME ->Fill(aida_t_o-cInputMain->pFAT_WR);
         if(cInputMain->pFAT_Tamex_WR)  hAIDA_WRTM_FatTAMEX ->Fill(aida_t_o-cInputMain->pFAT_Tamex_WR);
+     }
         if(cInputMain->pbPLAS_WR) hAIDA_WRTM_bPlast ->Fill(aida_t_o-cInputMain->pbPLAS_WR);
      }
      AIDA_TimeMachine_dT=0;
@@ -304,8 +320,10 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
 
      ///Now cross correlate
-
      for(int a=0; a<10; a++){
+  ///Check if FATIMA is used
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
+    
           ///Fatima VME vs Fatima TAMEX (WR gate 13.)
          if(cOutput->cFatimaVME_TimeMachine_dT[a]!=0 && cOutput->cFatimaTAMEX_TimeMachine_dT[a]!=0){
              if((cInputMain->pFAT_WR-cInputMain->pFAT_Tamex_WR)>fCorrel->GFat_Fattam_TLow && (cInputMain->pFAT_WR-cInputMain->pFAT_Tamex_WR)<fCorrel->GFat_Fattam_THigh){
@@ -364,7 +382,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
                 hFatTAMEX_AIDA_TM->Fill(cOutput->cFatimaTAMEX_TimeMachine_dT[a], cOutput->cAIDA_TimeMachine_dT);
             }
         }
-
+     }
        ///Germanium bPlast (WR gate 12.)
     if(cOutput->cGermanium_TimeMachine_dT!=0 && cOutput->cbPlast_TimeMachine_dT[a]!=0){
          if((cInputMain->pbPLAS_WR-cInputMain->pGe_WR)>fCorrel->GbPlast_Ge_TLow && (cInputMain->pbPLAS_WR-cInputMain->pGe_WR)<fCorrel->GbPlast_Ge_THigh){
@@ -411,15 +429,6 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
      for (int i = 0; i < conf->DSSDs(); ++i)
   {
-
-
-      //  hA_FRS_Z1Z2_implants_e_xy[i] = MakeTH2('F', Form("Correlations/AIDA-FRS/Implants/Z1Z2_Gate/DSSD%d_implants_energy_XY_Z1Z2g", i+1), Form("DSSD %d implant front energy vs back energy FRS Z1 Z2 gated", i+1), 1000, 0, 10000, 1000, 0, 10000, "X Energy", "Y Energy");
-
-//         hA_FRS_ZAoQ_implants_strip_xy[i] = MakeTH2('I', Form("Correlations/AIDA-FRS/Implants/ZvsAoQ_Gate/DSSD%d_implants_strip_XY_ZvsAoQ_Gate", i+1), Form("DSSD %d implant hit pattern FRS ZvsAoQ Gate", i+1), 128, 0, 128, 128, 0, 128, "X strip", "Y strip");
-//
-//         hA_FRS_ZAoQ_implants_e[i] = MakeTH1('F', Form("Correlations/AIDA-FRS/Implants/ZvsAoQ_Gate/DSSD%d_implants_energy_ZvsAoQ_Gate", i+1), Form("DSSD %d implant energy FRS AoQ vs Z Gate", i+1), 1000, 0, 10000, "Implant Energy/MeV");
-
-
         ///Z vs AoQ
         for(int gate=0; gate<MAX_FRS_GATE; gate++){
         hA_FRS_ZAoQ_implants_strip_xy[gate][i] = MakeTH2('I', Form("Correlations/AIDA-FRS/Implants/All/Z1vsAoQ/Z1vsAoQ_Gate%d/DSSD_XY/DSSD%d_implants_strip_XY_Z1vsAoQ_Gate%d", gate,i+1,gate), Form("DSSD %d implant hit pattern FRS Z1vsAoQ Gate%d", i+1,gate), 128, 0, 128, 128, 0, 128, "X strip", "Y strip");
@@ -610,7 +619,139 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
              }  //End of AIDA loop
           }
 
-
+/**----------------------------------------------------------------------------------------------**/
+ /**----------------------------------     FRS-AIDA-Gamma   -------------------------**/
+ /**----------------------------------------------------------------------------------------------**/
+//  void EventCorrelProc::Make_FRS_AIDA_Gamma_Histos(){
+//           for (int i = 0; i < conf->DSSDs(); ++i)
+//     {
+//       for(int gate=0; gate<MAX_FRS_GATE; gate++){
+//      hGermaniumAidaSpillOn[][]
+// 
+//       }
+//     }
+//     
+//     void EventCorrelProc::Process_FRS_AIDA_Gamma_Histos(cInput, cOutput){
+//         
+//     }
+      
+ /**----------------------------------------------------------------------------------------------**/
+ /**----------------------------------     FRS-bPlastic   -------------------------**/
+ /**----------------------------------------------------------------------------------------------**/
+//   void EventCorrelProc::Make_FRS_bPlast_Histos(){
+//       hbPlastUpstreamSideB_ToTvsChan=MakeTH2('D',"Correlations/FRS-bPlast/bPlastUpstreamSideB_ToTvsCh_All","", 25,0,24,4000,0,4000000,"bPlast Side B", "fast ToT");
+//      
+//       hbPlastDownstreamSideB_ToTvsChan=MakeTH2('D',"Correlations/FRS-bPlast/bPlastDownstreamSideB_ToTvsCh_All","", 25,0,24,4000,0,4000000,"bPlast Side B", "ToT");
+//       
+//       hbPlastUpstreamSideD_ToTvsChan=MakeTH2('D',"Correlations/FRS-bPlast/bPlastUpstreamSideD_ToTvsCh_All","", 25,0,24,4000,0,4000000,"bPlast Side D", "fast ToT");
+//      
+//       hbPlastDownstreamSideD_ToTvsChan=MakeTH2('D',"Correlations/FRS-bPlast/bPlastDownstreamSideD_ToTvsCh_All","", 25,0,24,4000,0,4000000,"bPlast Side D", "ToT");
+//      
+//      for(int i=0; i<MAX_FRS_GATE; i++){
+//       hbPlastUpstreamSideB_ToTvsChan_PIDGated[i]  = MakeTH2('D',Form("Correlations/FRS-bPlast/bPlastUpstream_ToTvsSide_PIDGated/SideB/bPlastUpstreamSideB_ToTvsCh_ZAoQGate%d",i),Form("bPlast ToT SideB vs Chan Gate: %d",i),  25,0,24,4000,0,4000000, "bPlast Side B", "Slow ToT");
+//       
+//       hbPlastDownstreamSideB_ToTvsChan_PIDGated[i]  = MakeTH2('D',Form("Correlations/FRS-bPlast/bPlastDownstream_ToTvsSide_PIDGated/SideB/bPlastDownstreamSideB_ToTvsCh_ZAoQGate%d",i),Form("bPlast ToT SideB vs Chan Gate: %d",i),  25,0,24,4000,0,4000000, "bPlast Side B", "Slow ToT");
+//       
+//       hbPlastUpstreamSideD_ToTvsChan_PIDGated[i]  = MakeTH2('D',Form("Correlations/FRS-bPlast/bPlastUpstream_ToTvsSide_PIDGated/SideD/bPlastUpstreamSideD_ToTvsCh_ZAoQGate%d",i),Form("bPlast ToT SideD vs Chan Gate: %d",i),  25,0,24,4000,0,4000000, "bPlast Side D", "Slow ToT");
+//       
+//       hbPlastDownstreamSideD_ToTvsChan_PIDGated[i]  = MakeTH2('D',Form("Correlations/FRS-bPlast/bPlastDownstream_ToTvsSide_PIDGated/SideD/bPlastDownstreamSideD_ToTvsCh_ZAoQGate%d",i),Form("bPlast ToT SideD vs Chan Gate: %d",i),  25,0,24,4000,0,4000000, "bPlast Side D", "Slow ToT");
+// 
+//      }
+//      
+//       hbPlast_Upstream_ToTvsChan_Stopped = MakeTH2('D',"Correlations/FRS-bPlast/Stopped/bPlast_Upstream_ToTvsChan_Stopped","", 64,0,63,4000,0,4000000,"bPlast Upstream Ch.", "Slow ToT");
+//     
+//     for(int i=0; i<MAX_FRS_GATE; i++){
+//        hbPlast_Upstream_ToTvsChan_Stopped_PIDGated[i]  = MakeTH2('D',Form("Correlations/FRS-bPlast/Stopped/bPlast_Upstream_ToTvsChan_Stopped_ZAoQGate%d",i),Form("bPlast ToT vs Chan Stopped Gate: %d",i),  64,0,63,4000,0,4000000, "bPlast Upstream Ch.", "Slow ToT");
+// 
+//      }
+//   }
+//   /**----------------------------------------------------------------------------------------------**/
+//   void EventCorrelProc::Process_FRS_bPlast(EventAnlStore* cInputMain, EventCorrelStore* cOutput){
+//      
+//       bool bPlast_SideB=false;
+//       int ch_sideB=-1;
+//       bool bPlast_SideD=false;
+//       int ch_sideD=-1;
+//      /// bPlast gated implants (taken from S496)
+//         for(int a=1; a<3; a++){ ///Detector number
+//             for (int b = 0; b <bPLASTIC_CHAN_PER_DET; b++){
+//                 if((a==1||a==2) &&(b>7&&b<32)){ bPlast_SideB=true;
+//         //  if((a==1||a==2) &&(b>39&&b<64)){ bPlast_SideD=true;
+//                     ///bPlast 'fake' Mapping for side vs ToT
+//                     ch_sideB=b-8;
+//                    
+//                 }
+//                 else bPlast_SideB=false;
+//                  if((a==1||a==2) &&(b>39&&b<64)){ bPlast_SideD=true;
+//                        ch_sideD=63-b;
+//             }
+//               else bPlast_SideD=false;
+//                  
+//                 ///Channel number
+//                 for (int c = 0; c < bPLASTIC_TAMEX_HITS; c++){ 
+//                     if(bPlast_SideB==true){
+//               
+//                         if( a==bPLASTIC_UPSTREAM_DET && cInputMain->pbPlas_Fast_ToTCalib[a][b][c]>0)   {  hbPlastUpstreamSideB_ToTvsChan->Fill(ch_sideB,cInputMain->pbPlas_Fast_ToTCalib[a][b][c]);
+//                     }
+// 
+//                         if( a==bPLASTIC_DOWNSTREAM_DET && cInputMain->pbPlas_Fast_ToTCalib[a][b][c]>0)   {  hbPlastDownstreamSideB_ToTvsChan->Fill(ch_sideB,cInputMain->pbPlas_Fast_ToTCalib[a][b][c]);
+//                     }
+//                     
+//                     ///PID gated bPlast
+//                   if(a==bPLASTIC_UPSTREAM_DET && cInputMain->pbPlas_Slow_ToTCalib[a][b][c]>0){
+//                     for(int gate=0; gate<MAX_FRS_GATE;gate++){
+//                         
+//                         if(cInputMain->pFRS_ZAoQ_pass[gate]==true ){
+//                         hbPlastUpstreamSideB_ToTvsChan_PIDGated[gate]->Fill(ch_sideB,cInputMain->pbPlas_Slow_ToTCalib[a][b][c]);
+//                              }
+//                     }
+//                       
+//                 }
+//                     if(a==bPLASTIC_DOWNSTREAM_DET && cInputMain->pbPlas_Slow_ToTCalib[a][b][c]>0){
+//                       for(int gate=0; gate<MAX_FRS_GATE;gate++){
+//                         if(cInputMain->pFRS_ZAoQ_pass[gate]==true ){
+//                         hbPlastDownstreamSideB_ToTvsChan_PIDGated[gate]->Fill(ch_sideB,cInputMain->pbPlas_Slow_ToTCalib[a][b][c]);
+//                                 
+//                                 }
+//                             }
+//                         }  
+//                     }
+//                     ///Side D
+//                       if(bPlast_SideD==true){
+//               
+//                        // if( a==bPLASTIC_UPSTREAM_DET && cInputMain->pbPlas_Slow_ToTCalib[a][b][c]>0)   {  hbPlastUpstreamSideD_ToTvsChan->Fill(ch_sideD,cInputMain->pbPlas_Slow_ToTCalib[a][b][c]);
+//                         if( a==bPLASTIC_UPSTREAM_DET && cInputMain->pbPlas_Fast_ToTCalib[a][b][c]>0)   {  hbPlastUpstreamSideD_ToTvsChan->Fill(ch_sideD,cInputMain->pbPlas_Fast_ToTCalib[a][b][c]);
+//                     }
+// 
+//                         //if( a==bPLASTIC_DOWNSTREAM_DET && cInputMain->pbPlas_Slow_ToTCalib[a][b][c]>0)   {  hbPlastDownstreamSideD_ToTvsChan->Fill(ch_sideD,cInputMain->pbPlas_Slow_ToTCalib[a][b][c]);
+//                         if( a==bPLASTIC_DOWNSTREAM_DET && cInputMain->pbPlas_Fast_ToTCalib[a][b][c]>0)   {  hbPlastDownstreamSideD_ToTvsChan->Fill(ch_sideD,cInputMain->pbPlas_Fast_ToTCalib[a][b][c]);
+//                     }
+//                     
+//                     ///PID gated bPlast
+//                  if(a==bPLASTIC_UPSTREAM_DET && cInputMain->pbPlas_Slow_ToTCalib[a][b][c]>0){
+//                     for(int gate=0; gate<MAX_FRS_GATE;gate++){
+//                         if(cInputMain->pFRS_ZAoQ_pass[gate]==true ){
+//                          
+//                         hbPlastUpstreamSideD_ToTvsChan_PIDGated[gate]->Fill(ch_sideD,cInputMain->pbPlas_Slow_ToTCalib[a][b][c]);
+//                 
+//                          }         
+//                     }
+//                  }
+//                              
+//                    if(a==bPLASTIC_DOWNSTREAM_DET && cInputMain->pbPlas_Slow_ToTCalib[a][b][c]>0){
+//                       for(int gate=0; gate<MAX_FRS_GATE;gate++){
+//                         if(cInputMain->pFRS_ZAoQ_pass[gate]==true ){
+//                          hbPlastDownstreamSideD_ToTvsChan_PIDGated[gate]->Fill(ch_sideD,cInputMain->pbPlas_Slow_ToTCalib[a][b][c]);
+//                        
+//                                }
+//                             }
+//                         } 
+//                     }
+//                 }
+//             }
+//         }///End of bPlast FRS gated
+//   }
+ 
   /**----------------------------------------------------------------------------------------------**/
  /**--------------------------------  FRS-Germanium Prompt (Isomers)  -------------**/
  /**----------------------------------------------------------------------------------------------**/
@@ -690,8 +831,8 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
       Ge_FirstT_prompt=0;
 for(int g=0; g<Germanium_MAX_DETS; g++){
             for(int h=0; h<Germanium_CRYSTALS; h++){
-	      if(cInputMain->pGe_T[g][h]>0){
-     hA_FRS_ZAoQ_GeEvsT_all->Fill((cInputMain->pGe_T[g][h] - cInputMain->pGe_T[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h]);
+	      if(cInputMain->pGe_T_Aligned[g][h]>0){
+     hA_FRS_ZAoQ_GeEvsT_all->Fill((cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h]);
 	      }
 	    }
 }
@@ -707,7 +848,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 
         if (cInputMain->pGe_EAddback[g][h]>0) {
         GeE_Prm[Ge_mult_prompt] = cInputMain->pGe_EAddback[g][h];
-        GeT_Prm[Ge_mult_prompt] = cInputMain->pGe_T[g][h];
+        GeT_Prm[Ge_mult_prompt] = cInputMain->pGe_T_Aligned[g][h];
 
              Ge_mult_prompt++;
 
@@ -722,7 +863,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 //       }
 
         ///Cut the prompt flash with 2D poly (accepts events in window)
-        if(cGe_EdT_cut[gate]->Test((cInputMain->pGe_T[g][h] - cInputMain->pGe_T[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h])==true) {
+        if(cGe_EdT_cut[gate]->Test((cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h])==true) {
 
                 ///Energy vs WR dT all
 //                 hA_FRS_GeEvsT->Fill(cInputMain->pGe_EAddback[g][h],dT_frsge_prompt);
@@ -734,8 +875,8 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
            /// if(Ge_mult_prompt==1){
                    ///  Ge_FirstT_prompt=cInputMain->pGe_T[g][h];
             ///Now FRS gated
-       if(cInputMain->pGe_T[g][h]>0 && cInputMain->pGe_T[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]>0){
-                dT_Ge_SCI=cInputMain->pGe_T[g][h] - cInputMain->pGe_T[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi];
+       if(cInputMain->pGe_T_Aligned[g][h]>0 && cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]>0){
+                dT_Ge_SCI=cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi];
        }
                ///Z vs A/Q gated
               if(cInputMain->pFRS_ZAoQ_pass[gate]==true ){
@@ -807,7 +948,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
                     if(m==n) continue;
                   if((GeT_Prm[m]-GeT_Prm[n])>fCorrel->GGe1_Ge2_Low && (GeT_Prm[m]-GeT_Prm[n])<fCorrel->GGe1_Ge2_High){
 
-    if(cGe_EdT_cut[gate]->Test(GeT_Prm[m] - cInputMain->pGe_T[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi],GeE_Prm[m])==true && cGe_EdT_cut[gate]->Test(GeT_Prm[n] - cInputMain->pGe_T[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi],GeE_Prm[n])==true) {
+    if(cGe_EdT_cut[gate]->Test(GeT_Prm[m] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi],GeE_Prm[m])==true && cGe_EdT_cut[gate]->Test(GeT_Prm[n] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi],GeE_Prm[n])==true) {
 
                 if(cInputMain->pFRS_ZAoQ_pass[gate]==true && fCorrel->GSetup_corr_FRS_Gamma_Gamma==1 )    hA_FRS_ZAoQ_GeE1_GeE2[gate]->Fill(GeE_Prm[m],GeE_Prm[n]);
 
@@ -926,7 +1067,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 
                           if(cInputMain->pGe_EAddback[g][h]>0 &&  (g!=Germanium_SC41_Det&&g!=Germanium_SC41_Det_Digi&&g!=Germanium_TimeMachine_Det)) {
                              GeE_Long[Ge_mult_long] = cInputMain->pGe_EAddback[g][h];
-                             GeT_Long[Ge_mult_long] = cInputMain->pGe_T[g][h];
+                             GeT_Long[Ge_mult_long] = cInputMain->pGe_T_Aligned[g][h];
 
                              Ge_mult_long++;
                           }
@@ -935,7 +1076,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 
                              if(Ge_mult_long==1 && cInputMain->pGe_EAddback[g][h]>0){
            ///Note that Ge_FirstT_Long is not always necessarily the 'first' gamma (i.e. lowest time) since it loops over all detectors starting from 0
-                        Ge_FirstT_long=cInputMain->pGe_T[g][h];
+                        Ge_FirstT_long=cInputMain->pGe_T_Aligned[g][h];
 
                     hA_FRS_ZAoQ_GeE_LongIso->Fill(cInputMain->pGe_EAddback[g][h]);
 
@@ -945,8 +1086,8 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
                             }
 
                 ///This is for when there is more than 1 gamma in an event to get the correct time
-                    if(Ge_mult_long>1 && cInputMain->pGe_T[g][h]>0 ){
-                            dT_GeT_long =(cInputMain->pGe_T[g][h]-Ge_FirstT_long);
+                    if(Ge_mult_long>1 && cInputMain->pGe_T_Aligned[g][h]>0 ){
+                            dT_GeT_long =(cInputMain->pGe_T_Aligned[g][h]-Ge_FirstT_long);
                             dT_frsge_mult_long=dT_frsge_long + ABS(dT_GeT_long);
 
                          if(cInputMain->pGe_EAddback[g][h]>10 && dT_frsge_mult_long>0){
@@ -994,14 +1135,14 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
                     for(int h=0; h<Germanium_CRYSTALS; h++){
                         if((g!=Germanium_SC41_Det&&g!=Germanium_SC41_Det_Digi&&g!=Germanium_TimeMachine_Det) && cInputMain->pGe_EAddback[g][h]>0){
                              GeE_Prm_Long[Ge_mult_prompt] = cInputMain->pGe_EAddback[g][h];
-                             GeT_Prm_Long[Ge_mult_prompt] = cInputMain->pGe_T[g][h];
+                             GeT_Prm_Long[Ge_mult_prompt] = cInputMain->pGe_T_Aligned[g][h];
                             Ge_mult_prompt++;
 
                     ///Cut the prompt flash with 2D poly
                         if(cGe_EdT_cut[fCorrel->GLongIso_PID_Gate]->Test(dT_frsge_prompt,cInputMain->pGe_EAddback[g][h])==true) {
                     ///Get the 'first' gamma
                  if(Ge_mult_prompt==1){
-                     Ge_FirstT_prompt=cInputMain->pGe_T[g][h];
+                     Ge_FirstT_prompt=cInputMain->pGe_T_Aligned[g][h];
 
                      ///Energy vs  dT
                     hA_FRS_ZAoQ_GeE_LongIso->Fill(cInputMain->pGe_EAddback[g][h]);
@@ -1011,9 +1152,9 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
                  }
 
               ///Correct the times for more than one gamma in an event
-                 if(Ge_mult_prompt>1 && cInputMain->pGe_T[g][h]>0 ){
+                 if(Ge_mult_prompt>1 && cInputMain->pGe_T_Aligned[g][h]>0 ){
 
-                  dT_GeT_prompt = (cInputMain->pGe_T[g][h]-Ge_FirstT_prompt);
+                  dT_GeT_prompt = (cInputMain->pGe_T_Aligned[g][h]-Ge_FirstT_prompt);
                   dT_frsge_mult_prompt=(cInputMain->pGe_WR-cInputMain->pFRS_WR) + ABS(dT_GeT_prompt);
 
                   hA_FRS_ZAoQ_GeE_LongIso->Fill(cInputMain->pGe_EAddback[g][h]);
@@ -1554,62 +1695,113 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
  /**-------------------- (FRS)-SpillOff-bPlastic-Gamma  (Beta-Delayed Gammas no AIDA)  ------**/
  /**-----------------------------------------------------------------**/
 
-  void EventCorrelProc::Make_Beta_Gamma_bPlast_SpillOff_Histos(){
+  void EventCorrelProc::Make_SpillOff_Gamma_Histos(){
+     ///Spill off gamma coincidences
+      hSpillOff_Germanium = MakeTH1('F', "Correlations/SpillOff_Gamma/OnlyGe/Ge_Energy_SpillOff", "", 2000, 0, 2000, "Energy/keV");
+      
+      hSpillOff_Germanium_gammagamma  = MakeTH2('D',"Correlations/SpillOff_Gamma/OnlyGe/Ge_GamGam_SpillOff","Gamma-Gamma bPlast Beta gated spill off", fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,"Ge Energy1 (keV)", "Ge Energy2 (keV)");
+      
+      hSpillOn_Germanium = MakeTH1('F', "Correlations/SpillOff_Gamma/OnlyGe/Ge_Energy_SpillOn", "", 2000, 0, 2000, "Energy/keV");
+      
+      ///Spill off bplast coincidences
+      hbPlast_SpillOff_Germanium = MakeTH1('F', "Correlations/SpillOff_Gamma/OnlyGe/Ge_Energy_bPlastBeta_SpillOff", "", 2000, 0, 2000, "Energy/keV");
+      
+     // hbPlast_SpillOn_Germanium = MakeTH1('F', "Correlations/SpillOn_Gamma/OnlyGe/Ge_Energy_bPlastBeta_SpillOn", "", 2000, 0, 2000, "Energy/keV");
 
-      hbPlast_SpillOff_Germanium = MakeTH1('F', "Correlations/bPlast_Gamma/Germanium/Ge_Energy_bPlastBeta_SpillOff", "", 2000, 0, 2000, "Energy/keV");
+      hbPlast_SpillOff_Germanium_gammagamma  = MakeTH2('D',"Correlations/SpillOff_Gamma/bPlast/Ge_GamGam_bPlastBeta_SpillOff","Gamma-Gamma bPlast Beta gated spill off", fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,"Ge Energy1 (keV)", "Ge Energy2 (keV)");
 
-      hbPlast_SpillOff_Germanium_gammagamma  = MakeTH2('D',"Correlations/bPlast_Gamma/Germanium/Ge_GamGam_bPlastBeta_SpillOff","Gamma-Gamma bPlast Beta gated spill off", fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,"Ge Energy1 (keV)", "Ge Energy2 (keV)");
+     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
+      hbPlast_SpillOff_Fatima = MakeTH1('F', "Correlations/SpillOff_Gamma/bPlast/Fatima/Fat_Energy_bPlastBeta_SpillOff", "", 4000, 0, 4000, "Energy/keV");
+      
+      //hbPlast_SpillOn_Fatima = MakeTH1('F', "Correlations/SpillOn_Gamma/bPlast/Fatima/Fat_Energy_bPlastBeta_SpillOn", "", 4000, 0, 4000, "Energy/keV");
 
-      hbPlast_SpillOff_Fatima = MakeTH1('F', "Correlations/bPlast_Gamma/Fatima/Fat_Energy_bPlastBeta_SpillOff", "", 4000, 0, 4000, "Energy/keV");
-
-     hbPlast_SpillOff_Fatima_gammagamma = MakeTH2('D',"Correlations/bPlast_Gamma/Fatima/Fat_GamGam_bPlastBeta_SpillOff","Gamma-Gamma Beta Spill Off gated", 2000,0,2000,2000,0,2000,"Fat Energy1 (keV)", "Fat Energy2 (keV)");
+      hbPlast_SpillOff_Fatima_gammagamma = MakeTH2('D',"Correlations/SpillOff_Gamma/bPlast/Fatima/Fat_GamGam_bPlastBeta_SpillOff","Gamma-Gamma Beta Spill Off gated", 2000,0,2000,2000,0,2000,"Fat Energy1 (keV)", "Fat Energy2 (keV)");
+     }
 
 
       //bPlast Spill On/Off
       for (int i =1; i<4; i++)
             {
      for(int j=0; j<bPLASTIC_CHAN_PER_DET; j++){
-      hbPlas_ToT_SpillOff[i][j] = MakeTH1('D', Form("Correlations/bPlast_Gamma/bPlastSpillOff/ToT Plas Det SpillOff. %2d Ch. %2d",  i,j), Form("ToT Spill Off Det. %2d Ch. %2d", i,j),20000, 0., 200000.);
-      hbPlas_ToT_SpillOn[i][j] = MakeTH1('D', Form("Correlations/bPlast_Gamma/bPlastSpillOn/ToT Plas Det SpillOn. %2d Ch. %2d",  i,j), Form("ToT Spill On Det. %2d Ch. %2d", i,j),20000, 0., 200000.);
+      hbPlas_ToT_SpillOff[i][j] = MakeTH1('D', Form("Correlations/SpillOff_Gamma/bPlast/bPlastSpillOff/ToT Plas Det SpillOff. %2d Ch. %2d",  i,j), Form("ToT Spill Off Det. %2d Ch. %2d", i,j),20000, 0., 200000.);
+      hbPlas_ToT_SpillOn[i][j] = MakeTH1('D', Form("Correlations/SpillOff_Gamma/bPlast/bPlastSpillOn/ToT Plas Det SpillOn. %2d Ch. %2d",  i,j), Form("ToT Spill On Det. %2d Ch. %2d", i,j),20000, 0., 200000.);
                 }
             }
+            
+            
+            ///Spill off AIDA coincidences
   }
 /**-----------------------------------------------------------------**/
-  void EventCorrelProc::Process_Beta_Gamma_bPlast_SpillOff(EventAnlStore* cInputMain, EventCorrelStore* cOutput){
+  void EventCorrelProc::Process_SpillOff_Gammas(EventAnlStore* cInputMain, EventCorrelStore* cOutput){
       //Declare the variables
         bool bPlast_Beta_Fatima=false;
         bool bPlast_Beta_Germanium=false;
-        double GeE_bPlast[Germanium_MAX_HITS];
-        double GeT_bPlast[Germanium_MAX_HITS];
+        double GeE_bPlast_SpillOff[Germanium_MAX_HITS];
+        double GeT_bPlast_SpillOff[Germanium_MAX_HITS];
+        double GeE_SpillOff[Germanium_MAX_HITS];
+        double GeT_SpillOff[Germanium_MAX_HITS]; 
         int Ge_mult_bPlast=0;
+        int gespilloffhits=0;
         for(int x=0; x<Germanium_MAX_HITS; x++){
 
-            GeE_bPlast[x]=0;
-            GeT_bPlast[x]=0;
+            GeE_SpillOff[x]=0;
+            GeT_SpillOff[x]=0;
+            
+            GeE_bPlast_SpillOff[x]=0;
+            GeT_bPlast_SpillOff[x]=0;
         }
-
+        
+       
+        ///Spill On/Off Germanium
+        for(int g=0; g<Germanium_MAX_DETS; g++){
+                    for(int h=0; h<Germanium_CRYSTALS; h++){
+                        if(g!=Germanium_SC41_Det&&g!=Germanium_SC41_Det_Digi&&g!=Germanium_TimeMachine_Det&&cInputMain->pGe_EAddback[g][h]>0){
+                            if(cInputMain->pOnSpill==0){
+                                hSpillOff_Germanium->Fill(cInputMain->pGe_EAddback[g][h]);
+                                GeE_SpillOff[gespilloffhits]=cInputMain->pGe_EAddback[g][h];
+                                GeT_SpillOff[gespilloffhits]=cInputMain->pGe_T_Aligned[g][h];
+                                gespilloffhits++;
+        
+                            }
+                            if(cInputMain->pOnSpill==1) hSpillOn_Germanium->Fill(cInputMain->pGe_EAddback[g][h]);
+                        }
+                    }
+        }
+        ///Fill gamma-gamma germanium matrix
+         for(int x=0; x<gespilloffhits; x++){
+                   for(int y=0; y<gespilloffhits; y++){
+                        if (x==y) continue;
+                        if((GeT_SpillOff[x]-GeT_SpillOff[y])>fCorrel->GGe1_Ge2_Low && (GeT_SpillOff[x]-    GeT_SpillOff[y])<fCorrel->GGe1_Ge2_High){
+                        hbPlast_SpillOff_Germanium_gammagamma->Fill(GeE_bPlast_SpillOff[x],GeE_bPlast_SpillOff[y]);
+                     hbPlast_SpillOff_Germanium_gammagamma->Fill(GeE_SpillOff[x],GeE_SpillOff[y]);
+                
+                            }
+                       }
+                   }
+                   
+                   
+        ///bPlastic Spill-off/on gammas (only Twinpeaks tamex for 2022)
         //Loop on bPlast
+       
          for(int a=1; a<3; a++){ ///Detector number
             for (int b = 0; b <bPLASTIC_CHAN_PER_DET; b++){  ///Channel number
                 for (int c = 0; c < bPLASTIC_TAMEX_HITS; c++){
 
-                //Ignore AND channels plugged in "Detector 1" (S452)
-                if((a==1&& b==15)||(a==1&& b==7)) continue;
-
-
+                //Ignore additional channels
+                if(a==bPLASTIC_ADDITIONAL_CH_MOD) continue;
                /// Plastic On and off Spill
-            if(cInputMain-> pbPlas_ToTCalib[a][b][c]>0){
-                if(cInputMain->pOnSpill==0)hbPlas_ToT_SpillOff[a][b]->Fill(cInputMain-> pbPlas_ToTCalib[a][b][c]);
-                if(cInputMain->pOnSpill==1)hbPlas_ToT_SpillOn[a][b]->Fill(cInputMain-> pbPlas_ToTCalib[a][b][c]);
+            if(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]>0){
+                if(cInputMain->pOnSpill==0)hbPlas_ToT_SpillOff[a][b]->Fill(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]);
+                if(cInputMain->pOnSpill==1)hbPlas_ToT_SpillOn[a][b]->Fill(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]);
 
 
              //Beta Gate + Spill off
-                 if(cInputMain-> pbPlas_ToTCalib[a][b][c]>Beta_Gate_Low[a][b]&& cInputMain-> pbPlas_ToTCalib[a][b][c]<Beta_Gate_High[a][b]&&cInputMain->pOnSpill==0){
+                 if(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]>Beta_Gate_Low[a][b]&& cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]<Beta_Gate_High[a][b]&&cInputMain->pOnSpill==0){
+                
+                     //WR gate bPlast Fatima (WR gate 10. in correl config)
+                    if (((cInputMain->pbPLAS_WR-cInputMain->pFAT_WR)> fCorrel->GbPlas_Fat_TLow && (cInputMain->pbPLAS_WR-cInputMain->pFAT_WR)<fCorrel->GbPlas_Fat_THigh) && Used_Systems[3]==1 )bPlast_Beta_Fatima=true;
 
-                     //WR gate bPlast Fatima (gate 10.)
-                    if (((cInputMain->pbPLAS_WR-cInputMain->pFAT_WR)> fCorrel->GbPlas_Fat_TLow && (cInputMain->pbPLAS_WR-cInputMain->pFAT_WR)<fCorrel->GbPlas_Fat_THigh))bPlast_Beta_Fatima=true;
-
-                    //WR gate bPlast Germanium (gate 12.)
+                    //WR gate bPlast Germanium (WR gate 12. in correl config)
                     if (((cInputMain->pbPLAS_WR-cInputMain->pGe_WR)> fCorrel->GbPlast_Ge_TLow && (cInputMain->pbPLAS_WR-cInputMain->pGe_WR)<fCorrel->GbPlast_Ge_THigh))bPlast_Beta_Germanium=true;
 
                  }
@@ -1617,15 +1809,16 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
             }
           }
         }
+    
         // bplast beta-gated spill-off fatima
-                 if(bPlast_Beta_Fatima==true  ){
-
+                 if(bPlast_Beta_Fatima==true &&Used_Systems[3]==1 ){
+                    
                      for(int k=0;k<cInputMain->pFatmult; k++){
-                hbPlast_SpillOff_Fatima->Fill(cInputMain->pFat_QDC_E[k]);
+                        hbPlast_SpillOff_Fatima->Fill(cInputMain->pFat_QDC_E[k]);
 
-                for(int l=0;l<cInputMain->pFatmult; l++){
-                      if(k==l) continue;
-                      hbPlast_SpillOff_Fatima_gammagamma->Fill(cInputMain->pFat_QDC_E[k],cInputMain->pFat_QDC_E[l]);
+                        for(int l=0;l<cInputMain->pFatmult; l++){
+                            if(k==l) continue;
+                                hbPlast_SpillOff_Fatima_gammagamma->Fill(cInputMain->pFat_QDC_E[k],cInputMain->pFat_QDC_E[l]);
                     //Remove second gamma if >700 and long
 //                      if(cInputMain->pFat_QDC_E[l]>700 && (cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])*0.025<-20&& (cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])*0.025>20)continue;
 //
@@ -1634,6 +1827,7 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
 //                             }
                         }
                  }///End if bplast-Fatima
+            }
 
             //Now bplast beta-gated spill-off germanium
             if(bPlast_Beta_Germanium==true ){
@@ -1641,32 +1835,28 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
       for(int g=0; g<Germanium_MAX_DETS; g++){
                     for(int h=0; h<Germanium_CRYSTALS; h++){
                         if(g!=Germanium_SC41_Det&&g!=Germanium_SC41_Det_Digi&&g!=Germanium_TimeMachine_Det&&cInputMain->pGe_EAddback[g][h]>0){
-                hbPlast_SpillOff_Germanium->Fill(cInputMain->pGe_EAddback[g][h]);
-                GeE_bPlast[Ge_mult_bPlast] = cInputMain->pGe_EAddback[g][h];
-                GeT_bPlast[Ge_mult_bPlast] = cInputMain->pGe_T[g][h];
-                Ge_mult_bPlast++;
+                            hbPlast_SpillOff_Germanium->Fill(cInputMain->pGe_EAddback[g][h]);
+                            GeE_bPlast_SpillOff[Ge_mult_bPlast] = cInputMain->pGe_EAddback[g][h];
+                            GeT_bPlast_SpillOff[Ge_mult_bPlast] = cInputMain->pGe_T_Aligned[g][h];
+                            Ge_mult_bPlast++;
 
                                     }
-                                  }
+                                }
                             }
 
                 for(int m=0; m<Ge_mult_bPlast; m++){
                     for(int n=0; n<Ge_mult_bPlast; n++){
                         if(m==n) continue;
 
-                        //I will keep the gamma-gamma time gate off for now (in case of isomers). AKM 07.04.21)
-                       if((GeT_bPlast[m]-GeT_bPlast[n])>fCorrel->GGe1_Ge2_Low && (GeT_Long[m]-GeT_Long[n])<fCorrel->GGe1_Ge2_High){
-                        hbPlast_SpillOff_Germanium_gammagamma->Fill(GeE_bPlast[m],GeE_bPlast[n]);
-
-
-                                           }
-//                 if(GeE_bPlast[n]>700&& (GeT_bPlast[m]-GeE_bPlast[n])<-20&& (GeT_bPlast[m]-GeE_bPlast[n])>20)continue;
-//                if(GeE_bPlast[m]>0)     hbPlast_SpillOff_Germanium_gcut->Fill(GeE_bPlast[m]);
+                       if((GeT_bPlast_SpillOff[m]-GeT_bPlast_SpillOff[n])>fCorrel->GGe1_Ge2_Low && (GeT_bPlast_SpillOff[m]-    GeT_bPlast_SpillOff[n])<fCorrel->GGe1_Ge2_High){
+                        hbPlast_SpillOff_Germanium_gammagamma->Fill(GeE_bPlast_SpillOff[m],GeE_bPlast_SpillOff[n]);
+                                    }
                                 }
                             }
                         }
                     }
-  }
+                        
+                    
 
  /**---------------------------------------------------------------------------**/
  /**-------------------- (FRS)-AIDA-bPlastic-Gamma  (Beta-Delayed Gammas)  ------**/
@@ -1674,13 +1864,11 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
  void EventCorrelProc::Make_Beta_Gamma_Histos(){
      TAidaConfiguration const* conf = TAidaConfiguration::GetInstance();
 
-      hAida_Decay_deadtime = MakeTH1('I',"WR/DeadTime/Aida_decay_deadtime","Dead Time AIDA decay", 500, 0, 500,"WR dT(Aida Decay)[us]", "Counts");
+     hAida_Decay_deadtime = MakeTH1('I',"WR/DeadTime/Aida_decay_deadtime","Dead Time AIDA decay", 500, 0, 500,"WR dT(Aida Decay)[us]", "Counts");
 
      hGe_BetaGamma = MakeTH1('F', "Correlations/Beta_Delayed_Gammas/Germanium/Ge_Energy_ImplantDecay_All", "Beta-Gamma Correlated energy", 4000, 0, 2000, "Energy/keV");
 
      hAida_Imp_bPlas_dT=  MakeTH1('I',"WR/AIDA/Aida_Implant-bPlast_WR_dT","White Rabbit Aida Implant-bPlas",10000,-100000,100000,"WR dT(Aida Implant - bPlast)[ns]", "Counts");
-
-
 
      hAida_Dec_bPlas_dT=  MakeTH1('I',"WR/AIDA/Aida_Decay-bPlast_WR_dT","White Rabbit Aida Decay-bPlast",1000,-100000,100000,"WR dT(Aida Decays-bPlast)[ns]", "Counts");
 
@@ -1773,7 +1961,7 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
         Int_t B = 1;
         int64_t DecTime = 0;
      ///   double testbg[100];
-        int galhits=0;
+        int gehits=0;
         double GeE[Germanium_MAX_HITS];
 
         for(int x=0; x<Germanium_MAX_HITS; x++)GeE[x]=0;
@@ -1873,7 +2061,7 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
                     if(fCorrel->GBDG_FRS_Gate==1 && cInputMain->pFRS_ZAoQ_pass[gate]==true ){
 
                         jPID.GatePass = gate;
-
+            
                     }
                     if(fCorrel->GBDG_FRS_Gate==2 && cInputMain->pFRS_Z_Z2_pass[fCorrel->GZ1Z2_Gate]==true && cInputMain->pFRS_x2AoQ_pass[gate]==true ){
 
@@ -1890,6 +2078,9 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
                ///Histograms to be implemented
                 //hAidaBestImpHitPat[imphit.DSSD-1]->Fill(imphit.StripX,imphit.StripY);
 
+               
+                
+                
                 numImpIonsAIDA++;
                 BestImp = imphit;
         }
@@ -2065,7 +2256,7 @@ for(int i=0;i<MAX_FRS_GATE;i++){
               //hAidaImpDecdT_Gate[i]->Fill(double(lastdT_Gate[i])/1E6);
              // hAidaDecHitPat_corr_Gate[DSSD_Gate[i]-1][i]->Fill(strx_Gate[i],stry_Gate[i]);
 
-            galhits=0;
+            gehits=0;
             ///  Correlated Germanium gammas
               for(int g=0; g<Germanium_MAX_DETS; g++){
                     for (int h=0; h<Germanium_CRYSTALS; h++){
@@ -2077,8 +2268,8 @@ for(int i=0;i<MAX_FRS_GATE;i++){
                        hGe_BetaGamma_dT[i]->Fill(double(lastdT_Gate[i])/1e9);
                        hGe_BetaGamma_EdT[i]->Fill(cInputMain->pGe_EAddback[g][h],double(lastdT_Gate[i])/1e9);
 
-                       GeE[galhits]=cInputMain->pGe_EAddback[g][h];
-                       galhits++;
+                       GeE[gehits]=cInputMain->pGe_EAddback[g][h];
+                       gehits++;
 
                }
             }
@@ -2086,8 +2277,8 @@ for(int i=0;i<MAX_FRS_GATE;i++){
 
                ///Gamma-Gamma
                if(fCorrel->GSetup_corr_Beta_Gamma_Gamma==true){
-                   for(int x=0; x<galhits; x++){
-                   for(int y=0; y<galhits; y++){
+                   for(int x=0; x<gehits; x++){
+                   for(int y=0; y<gehits; y++){
                         if (x==y) continue;
                      hGe_BetaGamma_GeE1_GeE2[i]->Fill(GeE[x],GeE[y]);
 

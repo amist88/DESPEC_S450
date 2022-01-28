@@ -212,6 +212,9 @@ public:
   Float_t       tof_brr6;        /* [ps/channel]             */
   Float_t       tof_a6;          /* shift [channels]         */
 
+  //-----for VFTX multihit TDC analysis------
+  float vftx_offset_2141;
+  float vftx_offset_2241;
 
   //-----for multihit TDC analysis------
   float mhtdc_factor_ch_to_ns;
@@ -280,7 +283,10 @@ public:
 
   //
   Float_t       pos_offset_sc81x;
-
+  Int_t         vftx_s2pos_option;
+  Float_t       vftx_length_2141;
+  Float_t       vftx_length_2241;
+  Float_t       vftx_vel_a_music41[4];
   //id analysis with multihit tdc
   Int_t         mhtdc_s2pos_option;
   Float_t       mhtdc_length_s2s8;
@@ -376,5 +382,74 @@ public:
 
   ClassDef(TMRTOFMSParameter,1)
 };
+
+// Range parameters
+class TRangeParameter : public TGo4Parameter {
+public:
+  TRangeParameter();
+  TRangeParameter(const char* name);
+  virtual ~TRangeParameter();
+  virtual void Print(Option_t* t="") const;
+  virtual Bool_t UpdateFrom(TGo4Parameter*);
+
+  Float_t       id_z_offset; //Correction for if there is an offset in calculated Z and real Z
+  Float_t       range_coeff;
+  Float_t       range_coeffi;
+  Float_t       range_exponent;
+  Float_t       range_master_coeff;
+
+  Float_t       range_F1;
+  Float_t       range_F2;
+  Float_t       range_F3;
+  Float_t       range_F4;
+  Float_t       range_F5;
+  Float_t       range_F6;
+  Float_t       range_F7;
+  Float_t       range_F8;
+  Float_t       range_F9;
+  Float_t       range_F10;
+
+  Float_t       degrader_rho;           // Equivalent rho of the degraders in Al in mg/cm^2
+  Float_t       pre_disk_thickness;     // Thickness of matter before the disk degrader
+
+  // Properties for disks HFSED4
+  bool          wedge_disk_in;          //Bool for whether in the beamline or not
+  Float_t       wedge_disk_sum_thick;   // Sum thickness of the disk shaped wedge degraders in mm
+  Float_t       wedge_disk_slope;       // Combined slope of the wedge disks
+  Float_t       dist_wedge_disk;        // Distance to the wedge disk in mm
+
+  // Properties for wedge plate HFSED5
+  bool          plate_1_in;             //Bool for whether in the beamline or not
+  Float_t       plate_1_slope;
+  Float_t       plate_1_min_thick;
+  Float_t       plate_1_pos;
+  Float_t       plate_1_thin_on_beam_h; // Thin edge on beam height
+  Float_t       dist_plate_1;
+
+  // Properties for wedge plate HFSED4
+  bool          plate_2_in;             //Bool for whether in the beamline or not
+  Float_t       plate_2_slope;
+  Float_t       plate_2_min_thick; //Minimum thickness in mg/cm^2
+  Float_t       plate_2_pos;
+  Float_t       plate_2_thin_on_beam_h; // Thin edge on beam height
+  Float_t       plate_2_rho_x;
+  Float_t       dist_plate_2;
+
+  // Degrader ladder HFSEM1GL
+  bool          ladder_1_in;            //Bool for whether ladder 1 in beamline
+  Float_t       ladder_1_slope;
+  Float_t       ladder_1_thickness; // Thickness of plate at 0 degrees
+  Float_t       dist_ladder_1;      //Distance from S4 in mm
+
+  // Degrader ladder HFSEM1GR
+  bool          ladder_2_in;        //Bool for whether ladder 2 in beamline
+  Float_t       ladder_2_slope;
+  Float_t       ladder_2_thickness; // Thickness of plate at 0 degrees
+  Float_t       dist_ladder_2;
+
+
+  ClassDef(TRangeParameter,1)
+};
+
 
 #endif //TFRSPARAMETER_H

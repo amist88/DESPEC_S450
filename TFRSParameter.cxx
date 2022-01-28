@@ -1526,3 +1526,183 @@ Bool_t TMRTOFMSParameter::UpdateFrom(TGo4Parameter* par) {
 }
 
 ClassImp(TMRTOFMSParameter)
+
+TRangeParameter::TRangeParameter() : TGo4Parameter("TRangeParameter")
+{
+  id_z_offset = 0; //Correct
+    //Default parameters for Al
+  range_F1 = -0.668659E-04;
+  range_F2 = -0.185311E-05;
+  range_F3 = 0.873192E-07;
+  range_F4 = -0.690141E-09;
+  range_F5 = -0.530758E+00;
+  range_F6 = 0.898953E-02;
+  range_F7 = 0.268916E+01;
+  range_F8 = -0.533772E-02;
+  range_F9 = -0.214131E+00;
+  range_F10 = 0.773008E-03;
+  range_coeffi = 1.0;
+  range_coeff  = 0.90;
+  degrader_rho = 0;
+  pre_disk_thickness = 0.0;
+  range_master_coeff = 1.0;
+
+  //Properties for disks
+  wedge_disk_sum_thick = 3.716;
+  wedge_disk_slope = 10.0;
+  dist_wedge_disk = 3000;
+
+  // Properties for wedge plate HFSED5
+  plate_1_slope = 0.01496;
+  plate_1_min_thick = 165.6;
+  plate_1_pos = 200;
+  plate_1_thin_on_beam_h = 0; 
+  dist_plate_1 = 3200.0;
+
+  // Properties for wedge plate HFSED4
+  plate_2_slope = 0.01499;
+  plate_2_min_thick = 157.1;
+  plate_2_pos = -200;
+  plate_2_thin_on_beam_h = 0; 
+  dist_plate_2 = 3200.0;
+
+  // Degrader ladder HFSEM1GL
+  ladder_1_slope = 0.0175;
+  ladder_1_thickness = 5.0 ; // Thickness of plate at 0 degrees in mm
+  dist_ladder_1 = 3300.;      //Distance from S4 in mm
+
+  // Degrader ladder HFSEM1GR
+  ladder_2_slope = 0.01691;
+  ladder_2_thickness = 10.0; // Thickness of plate at 0 degrees
+  dist_ladder_2 = 3300.0;
+
+  
+}
+
+TRangeParameter::TRangeParameter(const char* name) : TGo4Parameter(name)
+{
+  id_z_offset = 0; //Correct for z
+    //Default parameters for Al
+  range_F1 = -0.668659E-04;
+  range_F2 = -0.185311E-05;
+  range_F3 = 0.873192E-07;
+  range_F4 = -0.690141E-09;
+  range_F5 = -0.530758E+00;
+  range_F6 = 0.898953E-02;
+  range_F7 = 0.268916E+01;
+  range_F8 = -0.533772E-02;
+  range_F9 = -0.214131E+00;
+  range_F10 = 0.773008E-03;
+  range_coeffi = 1.0;
+  range_coeff  = 0.90;
+  degrader_rho = 0;
+  pre_disk_thickness = 0;
+  range_master_coeff = 1.0;
+
+  //Properties for disks
+  wedge_disk_in = false;
+  wedge_disk_sum_thick = 3.716;
+  wedge_disk_slope = 10.0;
+  dist_wedge_disk = 3000;
+
+  // Properties for wedge plate HFSED5
+  plate_1_in = false;
+  plate_1_slope = 0.01496;
+  plate_1_min_thick = 165.6;
+  plate_1_pos = 200;
+  plate_1_thin_on_beam_h = 0; 
+  dist_plate_1 = 3200.0;
+
+  // Properties for wedge plate HFSED4
+  plate_2_in = false;
+  plate_2_slope = 0.01499;
+  plate_2_min_thick = 157.1;
+  plate_2_pos = -200;
+  plate_2_thin_on_beam_h = 0; 
+  dist_plate_2 = 3200.0;
+
+  // Degrader ladder HFSEM1GL
+  ladder_1_in = false;
+  ladder_1_slope = 0.0175;
+  ladder_1_thickness = 5.0 ; // Thickness of plate at 0 degrees in mm
+  dist_ladder_1 = 3300.;      //Distance from S4 in mm
+
+  // Degrader ladder HFSEM1GR
+  ladder_2_in = false;
+  ladder_2_slope = 0.01691;
+  ladder_2_thickness = 10.0; // Thickness of plate at 0 degrees
+  dist_ladder_2 = 3300.0;
+}
+
+TRangeParameter::~TRangeParameter(){
+
+}
+
+void TRangeParameter::Print(Option_t*) const {
+  std::cout << "Parameter " << GetName() << std::endl;
+  return ;
+}
+
+Bool_t TRangeParameter::UpdateFrom(TGo4Parameter* par) {
+  TRangeParameter *from = dynamic_cast<TRangeParameter*> (par);
+  if (from==0) {
+    std::cout << "Wrong parameter object: " << par->ClassName() << std::endl; 
+    return kFALSE;   
+  }     
+
+  id_z_offset = from->id_z_offset; //Correct
+    //Default parameters for Al
+  range_F1 = from->range_F1;
+  range_F2 = from->range_F2;
+  range_F3 = from->range_F3;
+  range_F4 = from->range_F4;
+  range_F5 = from->range_F5;
+  range_F6 = from->range_F6;
+  range_F7 = from->range_F7;
+  range_F8 = from->range_F8;
+  range_F9 = from->range_F9;
+  range_F10 = from->range_F10;
+  range_coeffi = from->range_coeffi;
+  range_coeff  = from->range_coeff;
+  degrader_rho = from->degrader_rho;
+  pre_disk_thickness = from->pre_disk_thickness;
+  range_master_coeff = from->range_master_coeff;
+
+  //Properties for disks
+  wedge_disk_in = from->wedge_disk_in;
+  wedge_disk_sum_thick = from->wedge_disk_sum_thick;
+  wedge_disk_slope = from->wedge_disk_slope;
+  dist_wedge_disk = from->dist_wedge_disk;
+
+  // Properties for wedge plate HFSED5
+  plate_1_in = from->plate_1_in;
+  plate_1_slope = from->plate_1_slope;
+  plate_1_min_thick = from->plate_1_min_thick;
+  plate_1_pos = from->plate_1_pos;
+  plate_1_thin_on_beam_h = from->plate_1_thin_on_beam_h;
+  dist_plate_1 = from->dist_plate_1;
+
+  // Properties for wedge plate HFSED4
+  plate_2_in = from->plate_2_in;
+  plate_2_slope = from->plate_2_slope;
+  plate_2_min_thick = from->plate_2_min_thick;
+  plate_2_pos = from->plate_2_pos;
+  plate_2_thin_on_beam_h = from->plate_2_thin_on_beam_h; 
+  dist_plate_2 = from->dist_plate_2;
+
+  // Degrader ladder HFSEM1GL
+  ladder_1_in = from->ladder_1_in;
+  ladder_1_slope = from->ladder_1_slope;
+  ladder_1_thickness = from->ladder_1_thickness ; // Thickness of plate at 0 degrees in mm
+  dist_ladder_1 = from->dist_ladder_1;      //Distance from S4 in mm
+
+  // Degrader ladder HFSEM1GR
+  ladder_2_in = from->ladder_2_in;
+  ladder_2_slope = from->ladder_2_slope;
+  ladder_2_thickness = from->ladder_2_thickness; // Thickness of plate at 0 degrees
+  dist_ladder_2 = from->dist_ladder_2;
+
+  return kTRUE;     
+}
+
+ClassImp(TRangeParameter)
