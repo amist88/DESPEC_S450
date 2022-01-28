@@ -361,6 +361,15 @@ bool AIDA_Detector_System::BuildAIDAADCEvent(TGo4MbsSubEvent* psubevt, Int_t wor
       evt.Strip = FeeToStrip[channelID];
       Strip[Hits] = FeeToStrip[channelID];
     }
+    
+     if (conf->Wide() && conf->FEE(feeID).Side == conf->DSSD(evt.DSSD - 1).XSide)
+    {
+      int shift = 0;
+      if (conf->FEE(feeID).Segment == WideAIDASegment::Centre) shift = 128;
+      if (conf->FEE(feeID).Segment == WideAIDASegment::Right) shift = 256;
+      evt.Strip += shift;
+      Strip[Hits] += shift;
+    }
 
     evt.Intensity = (evt.Data - 32768) * evt.Side;
     // if (evt.HighEnergy)

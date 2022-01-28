@@ -141,15 +141,18 @@ private:
     Int_t   ibin_clean_for_spill;
     UInt_t  increase_scaler_temp[64];
 
-    Double_t TRaw_vftx_21L;
-    Double_t TRaw_vftx_21R;
-    Double_t TRaw_vftx_22L;
-    Double_t TRaw_vftx_22R;
-    Double_t TRaw_vftx_41L;
-    Double_t TRaw_vftx_41R;
-    Double_t TRaw_vftx_42L;
-    Double_t TRaw_vftx_42R;
-    Double_t TRaw_vftx[100];
+    Double_t TRaw_vftx_21L[32];
+    Double_t TRaw_vftx_21R[32];
+    Double_t TRaw_vftx_22L[32];
+    Double_t TRaw_vftx_22R[32];
+    Double_t TRaw_vftx_41L[32];
+    Double_t TRaw_vftx_41R[32];
+    Double_t TRaw_vftx_42L[32];
+    Double_t TRaw_vftx_42R[32];
+    Float_t ToF_vftx_2141[32];
+    Float_t ToF_vftx_2141_calib[32];
+    Float_t ToF_vftx_2241[32];
+    Float_t ToF_vftx_2241_calib[32];
 
     Float_t Raw_mhtdc_sc21lr_dt[10];
     Float_t Raw_mhtdc_sc21lr_x[10];
@@ -358,7 +361,7 @@ public:
 	void set_DATA_ID_Z_AoQ(Float_t,Float_t,Float_t,Float_t,Float_t,Float_t,Float_t);
 	void set_DATA_ID_Timestamp(Float_t,Float_t,Float_t);
     void set_DATA_FRS_SCALERS(Int_t,Int_t,Int_t,Int_t,Int_t,Int_t,Int_t,Int_t,UInt_t*);
-    void set_DATA_VFTX(Double_t,Double_t,Double_t,Double_t,Double_t,Double_t,Double_t,Double_t,Double_t*);
+    void set_DATA_VFTX(Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Float_t*, Float_t*,Float_t*,Float_t*);
 
     void set_DATA_RAW_MHTDC(Float_t*,Float_t*,Float_t*,Float_t*,Float_t,Float_t,Float_t,Float_t);
 
@@ -519,16 +522,21 @@ public:
     Int_t   get_FRS_ibin_clean_for_100ms();
     Int_t   get_FRS_ibin_clean_for_spill();
     UInt_t*  get_FRS_increase_scaler_temp();
+    
+  
 
-    Double_t get_FRS_TRaw_vftx_21l();
-    Double_t get_FRS_TRaw_vftx_21r();
-    Double_t get_FRS_TRaw_vftx_22l();
-    Double_t get_FRS_TRaw_vftx_22r();
-    Double_t get_FRS_TRaw_vftx_41l();
-    Double_t get_FRS_TRaw_vftx_41r();
-    Double_t get_FRS_TRaw_vftx_42l();
-    Double_t get_FRS_TRaw_vftx_42r();
-    Double_t get_FRS_TRaw_vftx(int i);
+   Double_t get_FRS_TRaw_vftx_21l(int i);
+    Double_t get_FRS_TRaw_vftx_21r(int i);
+    Double_t get_FRS_TRaw_vftx_22l(int i);
+    Double_t get_FRS_TRaw_vftx_22r(int i);
+    Double_t get_FRS_TRaw_vftx_41l(int i);
+    Double_t get_FRS_TRaw_vftx_41r(int i);
+    Double_t get_FRS_TRaw_vftx_42l(int i);
+    Double_t get_FRS_TRaw_vftx_42r(int i);
+    Float_t get_FRS_ToF_vftx_2141(int i);
+    Float_t get_FRS_ToF_vftx_2141_calib(int i);
+    Float_t get_FRS_ToF_vftx_2241(int i);
+    Float_t get_FRS_ToF_vftx_2241_calib(int i);
 
     Float_t get_FRS_Raw_mhtdc_sc21lr_dt(int i );
     Float_t get_FRS_Raw_mhtdc_sc21lr_x(int i);

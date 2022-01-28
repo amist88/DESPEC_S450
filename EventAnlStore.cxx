@@ -73,16 +73,29 @@ void EventAnlStore::Clear(Option_t *t)
     ZERO_ARRAY(pFRS_dEdeg_mhtdc);
     ZERO_ARRAY(pFRS_dEdegoQ_mhtdc);
 
+    ZERO_ARRAY(pTRaw_vftx_21l);
+      ZERO_ARRAY(pTRaw_vftx_21r);
+      ZERO_ARRAY(pTRaw_vftx_22l);
+      ZERO_ARRAY(pTRaw_vftx_22r);
+      ZERO_ARRAY(pTRaw_vftx_41l);
+      ZERO_ARRAY(pTRaw_vftx_41r);
+      ZERO_ARRAY(pTRaw_vftx_42l);
+      ZERO_ARRAY(pTRaw_vftx_42r);
 
-
-    pTRaw_vftx_21l=0;
-    pTRaw_vftx_21r=0;
-    pTRaw_vftx_22l=0;
-    pTRaw_vftx_22r=0;
-    pTRaw_vftx_41l=0;
-    pTRaw_vftx_41r=0;
-    pTRaw_vftx_42l=0;
-    pTRaw_vftx_42r=0;
+      ZERO_ARRAY(pbeta_vftx_2141);
+      ZERO_ARRAY(pgamma_vftx_2141);
+      ZERO_ARRAY(paoq_vftx_2141);
+      ZERO_ARRAY(paoq_corr_vftx_2141);
+      ZERO_ARRAY(pz1_vftx_2141);
+      ZERO_ARRAY(pz2_vftx_2141);
+      ZERO_ARRAY(pvcor_vftx_2141);
+      ZERO_ARRAY(pbeta_vftx_2241);
+      ZERO_ARRAY(pgamma_vftx_2241);
+      ZERO_ARRAY(paoq_vftx_2241);
+      ZERO_ARRAY(paoq_corr_vftx_2241);
+      ZERO_ARRAY(pz1_vftx_2241);
+      ZERO_ARRAY(pz2_vftx_2241);
+      ZERO_ARRAY(pvcor_vftx_2241);
    }
      pFRS_WR = 0;
    // for(int i=0; i< 50; i++){

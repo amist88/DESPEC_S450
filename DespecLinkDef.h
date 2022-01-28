@@ -53,6 +53,7 @@
 #pragma link C++ class TIDParameter+;
 #pragma link C++ class TSIParameter+;
 #pragma link C++ class TMRTOFMSParameter+;
+#pragma link C++ class TRangeParameter+;
 #endif
 
 

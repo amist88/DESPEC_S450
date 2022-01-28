@@ -71,15 +71,18 @@
 // #define SCI42L_CH 4 ///SCI42 L //4
 // #define SCI42R_CH 5 ///SCI42 R //5
 
-#define SCI21L_CH 5 ///SCI21 L //6
-#define SCI21R_CH 6 ///SCI21 R //7
-#define SCI22L_CH 12 ///SCI22 L //13
-#define SCI22R_CH 13 ///SCI22 R //14
-#define SCI41L_CH 7 ///SCI41 L //8
-#define SCI41R_CH 8 ///SCI41 R //9
-#define SCI42L_CH 3 ///SCI42 L //4
-#define SCI42R_CH 4 ///SCI42 R //5
-
+#define SCI_MOD 0
+#define SCI22L_CH 24 // input ch 12
+#define SCI22R_CH 26 // input ch 13
+#define SCI21L_CH 10 // input ch 5
+#define SCI21R_CH 12 // input ch 6
+#define SCI41L_CH 14 // input ch 7
+#define SCI41R_CH 16 // input ch 8
+#define SCI42L_CH 3
+#define SCI42R_CH 4
+#define SCI81L_CH 14
+#define SCI81R_CH 15
+#define SCITRI_CH 17
 class FRS_Detector_System : public Detector_System{
 
     public:
@@ -373,18 +376,18 @@ private:
     Int_t         dt_22r_81r;
 
 
-    // VFTX for new ToF
-    Double_t TRaw_vftx_21l;
-    Double_t TRaw_vftx_21r;
-    Double_t TRaw_vftx_22l;
-    Double_t TRaw_vftx_22r;
-    Double_t TRaw_vftx_41l;
-    Double_t TRaw_vftx_41r;
-    Double_t TRaw_vftx_42l;
-    Double_t TRaw_vftx_42r;
-    Double_t TRaw_vftx_sofia_l;
-    Double_t TRaw_vftx_sofia_r;
-    Double_t TRaw_vftx[32];
+       // VFTX for new ToF
+  Double_t TRaw_vftx_21l[32];
+  Double_t TRaw_vftx_21r[32];
+  Double_t TRaw_vftx_41l[32];
+  Double_t TRaw_vftx_41r[32];
+  Double_t TRaw_vftx_22l[32];
+  Double_t TRaw_vftx_22r[32];
+  Double_t TRaw_vftx_42l[32];
+  Double_t TRaw_vftx_42r[32];
+  Double_t TRaw_vftx_81l[32];
+  Double_t TRaw_vftx_81r[32];
+  Double_t TRaw_vftx_tri;
 
     // User multihit TDC
 
@@ -804,6 +807,12 @@ private:
 	Bool_t        sci_b_tofrr4;
     Bool_t        sci_b_tofll5;
     Bool_t        sci_b_tofrr5;
+    
+       //VFTX
+  Float_t       vftx_tof2141[32];
+  Float_t       vftx_tof2141_calib[32];
+  Float_t       vftx_tof2241[32];
+  Float_t       vftx_tof2241_calib[32];
 
      // MultiHitTDC
   Float_t       mhtdc_tof8121;
@@ -895,6 +904,23 @@ private:
 // 	Bool_t*       id_b_x4AoQ_Z;
 // 	Bool_t*       id_b_z_AoQ;
 // 	Bool_t*       id_b_music_z;
+    
+    Float_t       id_vftx_beta_2141[32];
+  Float_t       id_vftx_gamma_2141[32];
+  Float_t       id_vftx_delta_2141;
+  Float_t       id_vftx_aoq_2141[32];
+  Float_t       id_vftx_aoq_2141_corr[32];
+  Float_t       id_vftx_2141_z[32];
+  Float_t       id_vftx_2141_z2[32];
+  Float_t       id_vftx_2141_v_cor[32];
+  Float_t       id_vftx_beta_2241[32];
+  Float_t       id_vftx_gamma_2241[32];
+  Float_t       id_vftx_delta_2241;
+  Float_t       id_vftx_aoq_2241[32];
+  Float_t       id_vftx_aoq_2241_corr[32];
+  Float_t       id_vftx_2241_z[32];
+  Float_t       id_vftx_2241_z2[32];
+  Float_t       id_vftx_2241_v_cor[32];
 
   Float_t*       id_mhtdc_beta_s2s4;
   Float_t*       id_mhtdc_gamma_s2s4;
