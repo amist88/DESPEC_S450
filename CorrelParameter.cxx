@@ -7,6 +7,7 @@ CorrelParameter::CorrelParameter()
 : TGo4Parameter("AnaOnlineCorPar")
 {
     GSetup_corr_FRS_Ge =false;
+    GSetup_corr_FRS_bPlast = false;
     GSetup_corr_FRS_Gamma_Gamma =false;
     GSetup_corr_FRS_Ge_long =false;
     GSetup_corr_FRS_Ge_LongIso_incprmt = false;
@@ -122,6 +123,7 @@ CorrelParameter::CorrelParameter(const Text_t* name)
   if (file.fail()) {
         cout << "ERROR: CorrelParameter - Could not open file: Configuration_Files/DESPEC_General_Setup/Correlations_config.dat ! Correlations disabled!!\n"; 
          GSetup_corr_FRS_Ge =false;
+         GSetup_corr_FRS_bPlast = false;
          GSetup_corr_FRS_Gamma_Gamma =false;
          GSetup_corr_FRS_Ge_long=false;
          GSetup_corr_FRS_Ge_LongIso_incprmt=false;
@@ -234,6 +236,7 @@ else {
 cout << "CorrelParameter - reading from Configuration_Files/DESPEC_General_Setup/Correlations_config.dat";
         ///Detector system correlation pairs
        if(IsData(file)) file >> GSetup_corr_FRS_Aida;
+       if(IsData(file)) file >> GSetup_corr_FRS_bPlast;
        if(IsData(file)) file >> GSetup_corr_FRS_Ge >> GSetup_corr_FRS_Gamma_Gamma;
        if(IsData(file)) file >> GSetup_corr_FRS_Ge_long >>GSetup_corr_FRS_Ge_LongIso_incprmt;
        if(IsData(file)) file >> GSetup_corr_FRS_fat;
@@ -458,6 +461,7 @@ Bool_t CorrelParameter::UpdateFrom(TGo4Parameter *pp)
   {
     CorrelParameter *from = (CorrelParameter *) pp;
       GSetup_corr_FRS_Aida = from->GSetup_corr_FRS_Aida;
+      GSetup_corr_FRS_bPlast = from->GSetup_corr_FRS_bPlast;
       GSetup_corr_FRS_Ge = from->GSetup_corr_FRS_Ge;
       GSetup_corr_FRS_Gamma_Gamma = from->GSetup_corr_FRS_Gamma_Gamma;
       GSetup_corr_FRS_Ge_long = from->GSetup_corr_FRS_Ge_long;

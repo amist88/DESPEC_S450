@@ -113,6 +113,7 @@ class EventCorrelProc : public TGo4EventProcessor {
     int  IsData(std::ifstream &f);
 
     void Make_FRS_AIDA_Histos();
+    void Make_FRS_bPlast_Histos();
 
     void Make_FRS_Prompt_Ge_Histos();
     void Make_FRS_Prompt_Fat_Histos();
@@ -120,7 +121,7 @@ class EventCorrelProc : public TGo4EventProcessor {
     void Make_FRS_LongIso_Ge_Histos();
     void Make_FRS_LongIso_Fatima_Histos();
 
-    void Make_Beta_Gamma_bPlast_SpillOff_Histos();
+    void Make_SpillOff_Gamma_Histos();
     void Make_Beta_Gamma_Histos();
     void Make_Timemachine_Histos();
 
@@ -128,6 +129,7 @@ class EventCorrelProc : public TGo4EventProcessor {
     void Make_FRS_AIDA_FATIMA_Histos();
 
     void Process_FRS_AIDA(EventAnlStore* cInput, EventCorrelStore* cOutput);
+    void Process_FRS_bPlast(EventAnlStore* cInput, EventCorrelStore* cOutput);
 
     void Process_FRS_Prompt_Fat(EventAnlStore* cInput, EventCorrelStore* cOutput);
     void Process_FRS_Prompt_Ge(EventAnlStore* cInput, EventCorrelStore* cOutput);
@@ -135,7 +137,7 @@ class EventCorrelProc : public TGo4EventProcessor {
     void Process_FRS_LongIso_Ge(EventAnlStore* cInput, EventCorrelStore* cOutput);
     void Process_FRS_LongIso_Fat(EventAnlStore* cInput, EventCorrelStore* cOutput);
 
-    void Process_Beta_Gamma_bPlast_SpillOff(EventAnlStore* cInput, EventCorrelStore* cOutput);
+    void Process_SpillOff_Gammas(EventAnlStore* cInput, EventCorrelStore* cOutput);
 
     void Process_Beta_Gamma(EventAnlStore* cInput, EventCorrelStore* cOutput);
     void Process_Timemachine(EventAnlStore* cInput, EventCorrelStore* cOutput);
@@ -355,10 +357,14 @@ class EventCorrelProc : public TGo4EventProcessor {
       TH2 *hA_FRS_FatEvsT_LongIsoGated;
       TH2 *hA_FRS_FatE1vsFatE2_LongIsoGated;
 
-      //Spill of Beta-Gamma
+      //Spill off/on Beta-Gamma
+      TH1 *hSpillOff_Germanium;
+      TH2 *hSpillOff_Germanium_gammagamma;
+      TH1 *hSpillOn_Germanium;
       TH1 *hbPlast_SpillOff_Fatima;
       TH2 *hbPlast_SpillOff_Fatima_gammagamma;
       TH2 *hbPlast_SpillOff_Germanium_gammagamma;
+      TH1 *hbPlast_SpillOn_Germanium;
       TH2 *hbPlast_SpillOff_Fatima_GamGam;
       TH1 *hbPlast_SpillOff_Germanium;
       TH2 *hbPlast_SpillOff_Germanium_GamGam;

@@ -61,10 +61,11 @@
 ///bPLASTIC 
 ///1:twin peaks,  0 for pQDC 
 #define bPLASTIC_TWINPEAKS 0
+///TAMEX: 3 for narrow, 9 for wide
 #define bPLASTIC_TAMEX_MODULES 3
 #define bPLASTIC_TAMEX_HITS 20
 #define bPLASTIC_TAMEX_CHANNELS 16
-///bPlastic number of channels per detector 
+///bPlastic number of channels per detector (16 for narrow, 64 for wide)
 #define bPLASTIC_CHAN_PER_DET 16
 ///bPlastic Upstream Detector
 #define bPLASTIC_UPSTREAM_DET 2
@@ -83,7 +84,7 @@
 ///bPlast Time Machine Channels
 #define bPlastTimeMachineCh1 7
 #define bPlastTimeMachineCh2 8
-///bPlastic refence channels
+///bPlastic reference channels
 #define bPlastRefCh_Det1 0
 #define bPlastRefCh_Det2 0
 #define bPlastRefCh_Det3 0
