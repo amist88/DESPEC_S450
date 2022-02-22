@@ -1,5 +1,6 @@
 # DESPEC_S450
-DESPEC On/Nearline code for S452 (March 2021)
+DESPEC On/Nearline code for S450 (May 2022) (Zs. Podolyak)
+
 
 Developed by A.K.Mistry
 
