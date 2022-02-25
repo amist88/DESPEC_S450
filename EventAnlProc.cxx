@@ -974,7 +974,7 @@ void EventAnlProc::Make_FRS_Histos(){
       
       hID_x2AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1Z2x4AoQGated/ID_x2AoQ_Z1Z2x4AoQgate%d",i), Form("ID_x2AoQ_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on FRS AoQ, ID X4: X at S2 [mm]");
       
-      hID_Z1Z2_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x4AoQgate%d",i), Form("ID_Z1Z2_Z1Z2x4AoQgate%d",i),1500,frs_id->min_z_plot,frs_id->max_z_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on FRS AoQ, ID X4: Z music42");
+      hID_Z1Z2_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x4AoQgate%d",i), Form("ID_Z1Z2_Z1Z2x4AoQgate%d",i),750,frs_id->min_z_plot,frs_id->max_z_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on FRS AoQ, ID X4: Z music42");
        
       hID_ZAoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1Z2x4AoQGated/ID_Z1AoQ_Z1Z2x4AoQgate%d",i), Form("ID_Z1AoQ_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
        
@@ -984,7 +984,7 @@ void EventAnlProc::Make_FRS_Histos(){
       
       hID_a2AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1Z2x4AoQGated/ID_a2AoQ_Z1Z2x4AoQgate%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
 
-      hID_a4AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_Z1Z2x4AoQGated/ID_a4AoQ_Z1Z2x4AoQgate%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+      hID_a4AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_Z1Z2x4AoQGated/ID_a4AoQ_Z1Z2x4AoQgate%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate%d",i),750,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
        
        ///dE_deg (high charge states)
       sprintf(name,"dEdegZ1_%d",i);
@@ -1000,9 +1000,9 @@ void EventAnlProc::Make_FRS_Histos(){
       
       hID_x4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_dEdegated/ID_x4AoQ_dEdegZ%d",i), Form("ID_x4AoQ_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "X at S4 [mm]");
       
-      hID_a2AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_dEdegZGated/ID_a2AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+      hID_a2AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_dEdegZGated/ID_a2AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),720,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
 
-      hID_a4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_dEdegZGated/ID_a4AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+      hID_a4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_dEdegZGated/ID_a4AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),720,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
       
     ///-----------------------------NOTE MHTDC GATES  ---------------------///
       
