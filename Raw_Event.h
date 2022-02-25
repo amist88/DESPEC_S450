@@ -291,22 +291,22 @@ private:
     int         amount_hit_tamex_bPlas;
     int         tamex_id_bPlas[100];
     int         iterator_bPlas[bPLASTIC_TAMEX_MODULES];
-    double      trigger_coarse_bPlas[48];
-    double      trigger_fine_bPlas[48];
-    int         leading_array_bPlas[bPLASTIC_TAMEX_MODULES][48];
+    double      trigger_coarse_bPlas[bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      trigger_fine_bPlas[bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    int         leading_array_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
     int         leading_hits_bPlas[bPLASTIC_TAMEX_MODULES];
     int         trailing_hits_bPlas[bPLASTIC_TAMEX_MODULES];
-    int         phys_channel_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    int         leading_hits_ch_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    int         trailing_hits_ch_bPlas[bPLASTIC_TAMEX_MODULES][48];
+    int         phys_channel_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    int         leading_hits_ch_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    int         trailing_hits_ch_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
     int         ch_ID_bPlas[bPLASTIC_TAMEX_MODULES][100];
-    double      coarse_T_edge_lead_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    double      coarse_T_edge_trail_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    double      fine_T_edge_lead_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    double      fine_T_edge_trail_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    double      lead_T_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    double      trail_T_bPlas[bPLASTIC_TAMEX_MODULES][48];
-    double      ToT[bPLASTIC_TAMEX_MODULES][48];
+    double      coarse_T_edge_lead_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      coarse_T_edge_trail_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      fine_T_edge_lead_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      fine_T_edge_trail_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      lead_T_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      trail_T_bPlas[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
+    double      ToT[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_MODULES*bPLASTIC_TAMEX_CHANNELS];
     bool        fired_tamex_bPlas[bPLASTIC_TAMEX_MODULES];
     
      //bPlast Twinpeaks TAMEX

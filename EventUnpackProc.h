@@ -442,7 +442,7 @@ using namespace std;
             int TAMEX_Fat_ID[FATIMA_TAMEX_MODULES][FATIMA_TAMEX_CHANNELS];
             int TAMEX_bPlast_Det[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_CHANNELS];
             //int TAMEX_bPlast_Det;
-            int TAMEX_bPlast_Chan[4][bPLASTIC_TAMEX_CHANNELS];
+            int TAMEX_bPlast_Chan[bPLASTIC_TAMEX_MODULES][bPLASTIC_TAMEX_CHANNELS];
 			bool PADI_OR_PADIWA,VME_TAMEX_bPlas,VME_TAMEX_Fatima, VME_AND_TAMEX_Fatima;
 
         ///For AIDA
