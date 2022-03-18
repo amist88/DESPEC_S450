@@ -339,13 +339,17 @@ class EventCorrelProc : public TGo4EventProcessor {
       TH1 *hA_FRS_GeE;
       TH2 *hA_FRS_ZAoQ_GeEvsT_all;
       TH1 *hA_FRS_ZAoQ_GeE[MAX_FRS_GATE];
+      TH2 *hA_FRS_ZAoQ_GeEvsT[MAX_FRS_GATE];
+      TH1 *hA_FRS_Z1Z2_GeE[MAX_FRS_GATE];
+      TH2 *hA_FRS_Z1Z2_GeEvsT[MAX_FRS_GATE];
       TH1 *hA_FRS_Z1Z2_X2AoQ_GeE[MAX_FRS_GATE];
       TH2 *hA_FRS_Z1Z2_X2AoQ_GeEvsT[MAX_FRS_GATE];
       TH1 *hA_FRS_Z1Z2_X4AoQ_GeE[MAX_FRS_GATE];
       TH2 *hA_FRS_Z1Z2_X4AoQ_GeEvsT[MAX_FRS_GATE];
      // TH2 *hA_FRS_GeEvsT;
-      TH2 *hA_FRS_ZAoQ_GeEvsT[MAX_FRS_GATE];
+      
       TH2 *hA_FRS_ZAoQ_GeE1_GeE2[MAX_FRS_GATE];
+      TH2 *hA_FRS_Z1Z2_GeE1_GeE2[MAX_FRS_GATE];
       TH2 *hA_FRS_Z1Z2_X2AoQ_GeE1_GeE2[MAX_FRS_GATE];
       TH2 *hA_FRS_Z1Z2_X4AoQ_GeE1_GeE2[MAX_FRS_GATE];
 
