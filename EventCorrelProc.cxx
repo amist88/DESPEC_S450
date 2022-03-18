@@ -769,11 +769,20 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
        hA_FRS_ZAoQ_GeE1_GeE2[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1vsAoQ_Ge/Gamma-Gamma/GeE1_vs_GeE2_Z1vsAoQ_Gate%d",i),Form("Gamma-Gamma PID Gated: %d",i), fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,  fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax, "Ge Energy1 (keV)", "Ge Energy2 (keV)");
        }
        hA_FRS_ZAoQ_GeEvsT[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1vsAoQ_Ge/GeE_vs_FRSGe_dT/GeE_vs_FRSGe_dT_Z1vsAoQ_Gate%d",i),Form("T Diff FRS WR - Germanium T vs Germanium Energy Gate %d",i), 2100,-1000,20000,fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,"FRS - Ge time (ns)", "Ge Energy (keV)");
+       
+        //Z1Z2
+       hA_FRS_Z1Z2_GeE[i]  = MakeTH1('F', Form("Correlations/FRS-Prompt_Ge/Z1Z2_Ge/SinglesEnergy/Ge_Energy_Z1Z2Gate%d", i), Form("Germanium Energy FRS Z1Z2_X2AoQ Gate %d", i), 2000, 0, 2000, "Energy/keV");
+
+       hA_FRS_Z1Z2_GeEvsT[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_Ge/GeE_vs_dT/GeE_vs_FRSGe_dT_Z1Z2Gate%d",i),Form("T Diff FRS - Ge vs Ge Energy Z1Z2 Gate %d",i), 2100,-1000,20000,2000, 0, 2000,"Ge Energy (keV)", "FRS - Ge time (ns)");
+
+       if(fCorrel->GSetup_corr_FRS_Gamma_Gamma==1){
+       hA_FRS_Z1Z2_GeE1_GeE2[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_Ge/Gamma-Gamma/GeE1_vs_GeE2_Z1Z2_Gate%d",i),Form("Gamma-Gamma Z1Z2_Ge Gated: %d",i), fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,  fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax, "Ge Energy1 (keV)", "Ge Energy2 (keV)");
+       }
 
        //Z1Z2 X2AoQ
        hA_FRS_Z1Z2_X2AoQ_GeE[i]  = MakeTH1('F', Form("Correlations/FRS-Prompt_Ge/Z1Z2_X2AoQ_Ge/SinglesEnergy/Ge_Energy_Z1Z2_X2AoQGate%d", i), Form("Germanium Energy FRS Z1Z2_X2AoQ Gate %d", i), 2000, 0, 2000, "Energy/keV");
 
-       hA_FRS_Z1Z2_X2AoQ_GeEvsT[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_X2AoQ_Ge/GeE_vs_dT/GeE_vs_FRSGe_dT_Z1Z2_X2AoQGate%d",i),Form("T Diff FRS - Ge vs Ge Energy Z1Z2X4X2AoQ Gate %d",i), 2100,-1000,20000,2000, 0, 2000,"Ge Energy (keV)", "FRS - Ge time (ns)");
+       hA_FRS_Z1Z2_X2AoQ_GeEvsT[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_X2AoQ_Ge/GeE_vs_dT/GeE_vs_FRSGe_dT_Z1Z2_X2AoQGate%d",i),Form("T Diff FRS - Ge vs Ge Energy Z1Z2X2AoQ Gate %d",i), 2100,-1000,20000,2000, 0, 2000,"Ge Energy (keV)", "FRS - Ge time (ns)");
 
        if(fCorrel->GSetup_corr_FRS_Gamma_Gamma==1){
        hA_FRS_Z1Z2_X2AoQ_GeE1_GeE2[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_X2AoQ_Ge/Gamma-Gamma/GeE1_vs_GeE2_Z1Z2_X2AoQ_Gate%d",i),Form("Gamma-Gamma Z1Z2_X2AoQ_Ge Gated: %d",i), fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,  fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax, "Ge Energy1 (keV)", "Ge Energy2 (keV)");
@@ -886,6 +895,10 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
                                     }
 
               if(cInputMain->pFRS_Z_Z2_pass[fCorrel->GZ1Z2_Gate]==true){
+                   ///Z1Z2 gated
+                  hA_FRS_Z1Z2_GeE[gate]->Fill(cInputMain->pGe_EAddback[g][h]);
+                  hA_FRS_Z1Z2_GeEvsT[gate]->Fill((dT_Ge_SCI),cInputMain->pGe_EAddback[g][h]);
+                  
                ///Z1Z2 X2 AoQ gated
                 if(cInputMain->pFRS_x2AoQ_pass[gate]==true ){
                     hA_FRS_Z1Z2_X2AoQ_GeE[gate]->Fill(cInputMain->pGe_EAddback[g][h]);
@@ -954,7 +967,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 
 
                 if(cInputMain->pFRS_Z_Z2_pass[fCorrel->GZ1Z2_Gate]==true ){
-
+                    hA_FRS_Z1Z2_GeE1_GeE2[gate]->Fill(GeE_Prm[m],GeE_Prm[n]);
                         if(cInputMain->pFRS_x2AoQ_pass[gate]==true){
                         hA_FRS_Z1Z2_X2AoQ_GeE1_GeE2[gate]->Fill(GeE_Prm[m],GeE_Prm[n]);
 
@@ -1217,7 +1230,7 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 //
 //       hA_FRS_Fat_LT3_start_stop = MakeTH2('D', "Correlations/FRS-Prompt_Fatima/96Pd_Lifetime/FatdT_1415keV", "",1000,-50,50,1600,0,1600, "dT(ns)","Energy (keV)");
 
-     hFat_Energy_GainMonitor_188Ta= MakeTH2('D',"FATIMA_VME/Stats/Fatima_GainMonitor188Ta","FATIMA Energy-Time Matrix 188Ta",1240,16600,29000,2500,0,5000,"Time (minutes)","Fat Energy (keV)");
+    // hFat_Energy_GainMonitor_188Ta= MakeTH2('D',"FATIMA_VME/Stats/Fatima_GainMonitor188Ta","FATIMA Energy-Time Matrix 188Ta",1240,16600,29000,2500,0,5000,"Time (minutes)","Fat Energy (keV)");
 
       hA_FRS_Fat_LT1_start_stop = MakeTH1('D', "Correlations/FRS-Prompt_Fatima/Z1vsAoQ/Lifetime/Start-Stop/FRS_Fat_LT1_start_stop", "FRS-Fatima Lifetime Start-Stop Lifetime 1",20000,-10000,10000, "dT(ps)","Counts");
 
