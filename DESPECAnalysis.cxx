@@ -137,6 +137,8 @@ cout<<"MHTDC_OR_TAC " <<MHTDC_OR_TAC << endl;
   fSIPar = new TSIParameter("SIPar");
   AddParameter(fSIPar);
 
+   fRangePar = new TRangeParameter("RangePar");
+  AddParameter(fRangePar);
 //   ModPar = new TModParameter("ModPar");
 //   AddParameter(ModPar);
   

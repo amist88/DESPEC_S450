@@ -59,7 +59,7 @@ class DESPECAnalysis : public TGo4Analysis  {
        TSIParameter          *fSIPar;     //!
       // TModParameter * ModPar; //!
        TMRTOFMSParameter* MRtofPar; //!
-
+       TRangeParameter* fRangePar;//!
 
       Int_t               fEvents;
       Int_t               fLastEvent;
