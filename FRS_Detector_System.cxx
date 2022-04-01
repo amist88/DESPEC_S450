@@ -1085,83 +1085,83 @@ void FRS_Detector_System::Process_MBS(TGo4MbsSubEvent* psubevt){
     FRS_Unpack(psubevt);
 
     ///This is to use SCI 22 position for runs < 144 in S452 where the TPC delay was set incorrectly.
-    string data = "";
-    data = std::string(get_filename());
-   size_t pos1, pos2, pos3;
-   int filenumber;
-   pos1 = data.find("S452");
-  if(pos1!=string::npos){
-     pos2 = data.find("f",pos1+1);
-     pos3 = data.find("_",pos2+1);
-     filenumber = stoi(data.substr(pos2+1,(pos3-pos2)-1));
-  }
-
-  if(filenumber<144){
-    id->x_s2_select=3;
-    id->mhtdc_s2pos_option=1;
-  }
-      if(filenumber>143){
-	id->x_s2_select=1;
-	id->mhtdc_s2pos_option=2;
-      }
-      
-      if(filenumber<92){
-
-      //index 2 for Sc21
-     sci->x_a[0][2] =    830.4096;  //
-     sci->x_a[1][2] =   -0.24044;  // 
-     sci->x_a[2][2] =  0.000000;  //
-     sci->x_a[3][2] =  0.000000;  //
-     sci->x_a[4][2] =  0.000000;  //
-     sci->x_a[5][2] =  0.000000;  //
-     sci->x_a[6][2] =  0.000000;  //
-      //index 3 for Sc22
-     sci->x_a[0][3] =  1192.04677;  
-     sci->x_a[1][3] = -0.3507;  
-     sci->x_a[2][3] =  0.0000; 
-     sci->x_a[3][3] =  0.000000;  
-     sci->x_a[4][3] =  0.000000;  
-     sci->x_a[5][3] =  0.000000;  
-     sci->x_a[6][3] =  0.000000;  
-  }
-      else if(filenumber == 92) {
-   
-    //index 2 for Sc21   calibration is the same as files from f073 to f091 
-     sci->x_a[0][2] =    830.4096;  //
-     sci->x_a[1][2] =   -0.24044;  // 
-     sci->x_a[2][2] =  0.000000;  //
-     sci->x_a[3][2] =  0.000000;  //
-     sci->x_a[4][2] =  0.000000;  //
-     sci->x_a[5][2] =  0.000000;  //
-     sci->x_a[6][2] =  0.000000;  //
-        //index 3 for Sc22
-     sci->x_a[0][3] =  724.7298;  
-     sci->x_a[1][3] = -0.3574;  
-     sci->x_a[2][3] =  0.0000; 
-     sci->x_a[3][3] =  0.000000;  
-     sci->x_a[4][3] =  0.000000;  
-     sci->x_a[5][3] =  0.000000;  
-     sci->x_a[6][3] =  0.000000;
-  }
-      else {
-    //index 2 for Sc21
-  sci->x_a[0][2] =    477.29;  // quickly done for s452 on 08.03.2021 (from online)
-  sci->x_a[1][2] =   -0.2619;  // quickly done for s452 on 08.03.2021 (from online)
-  sci->x_a[2][2] =  0.000000;  //
-  sci->x_a[3][2] =  0.000000;  //
-  sci->x_a[4][2] =  0.000000;  //
-  sci->x_a[5][2] =  0.000000;  //
-  sci->x_a[6][2] =  0.000000;  //
-  
-  //index 3 for Sc22
-  sci->x_a[0][3] =  627.52;  // quickly done for s452 on 08.03.2021 (from online)
-  sci->x_a[1][3] = -0.3751;  //quickly done for s452 on 08.03.2021 (from online)
-  sci->x_a[2][3] =  0.0000;  //
-  sci->x_a[3][3] =  0.000000;  //
-  sci->x_a[4][3] =  0.000000;  //
-  sci->x_a[5][3] =  0.000000;  //
-  sci->x_a[6][3] =  0.000000;  //
-      }
+//     string data = "";
+//     data = std::string(get_filename());
+//    size_t pos1, pos2, pos3;
+//    int filenumber;
+//    pos1 = data.find("S452");
+//   if(pos1!=string::npos){
+//      pos2 = data.find("f",pos1+1);
+//      pos3 = data.find("_",pos2+1);
+//      filenumber = stoi(data.substr(pos2+1,(pos3-pos2)-1));
+//   }
+// 
+//   if(filenumber<144){
+//     id->x_s2_select=3;
+//     id->mhtdc_s2pos_option=1;
+//   }
+//       if(filenumber>143){
+// 	id->x_s2_select=1;
+// 	id->mhtdc_s2pos_option=2;
+//       }
+//       
+//       if(filenumber<92){
+// 
+//       //index 2 for Sc21
+//      sci->x_a[0][2] =    830.4096;  //
+//      sci->x_a[1][2] =   -0.24044;  // 
+//      sci->x_a[2][2] =  0.000000;  //
+//      sci->x_a[3][2] =  0.000000;  //
+//      sci->x_a[4][2] =  0.000000;  //
+//      sci->x_a[5][2] =  0.000000;  //
+//      sci->x_a[6][2] =  0.000000;  //
+//       //index 3 for Sc22
+//      sci->x_a[0][3] =  1192.04677;  
+//      sci->x_a[1][3] = -0.3507;  
+//      sci->x_a[2][3] =  0.0000; 
+//      sci->x_a[3][3] =  0.000000;  
+//      sci->x_a[4][3] =  0.000000;  
+//      sci->x_a[5][3] =  0.000000;  
+//      sci->x_a[6][3] =  0.000000;  
+//   }
+//       else if(filenumber == 92) {
+//    
+//     //index 2 for Sc21   calibration is the same as files from f073 to f091 
+//      sci->x_a[0][2] =    830.4096;  //
+//      sci->x_a[1][2] =   -0.24044;  // 
+//      sci->x_a[2][2] =  0.000000;  //
+//      sci->x_a[3][2] =  0.000000;  //
+//      sci->x_a[4][2] =  0.000000;  //
+//      sci->x_a[5][2] =  0.000000;  //
+//      sci->x_a[6][2] =  0.000000;  //
+//         //index 3 for Sc22
+//      sci->x_a[0][3] =  724.7298;  
+//      sci->x_a[1][3] = -0.3574;  
+//      sci->x_a[2][3] =  0.0000; 
+//      sci->x_a[3][3] =  0.000000;  
+//      sci->x_a[4][3] =  0.000000;  
+//      sci->x_a[5][3] =  0.000000;  
+//      sci->x_a[6][3] =  0.000000;
+//   }
+//       else {
+//     //index 2 for Sc21
+//   sci->x_a[0][2] =    477.29;  // quickly done for s452 on 08.03.2021 (from online)
+//   sci->x_a[1][2] =   -0.2619;  // quickly done for s452 on 08.03.2021 (from online)
+//   sci->x_a[2][2] =  0.000000;  //
+//   sci->x_a[3][2] =  0.000000;  //
+//   sci->x_a[4][2] =  0.000000;  //
+//   sci->x_a[5][2] =  0.000000;  //
+//   sci->x_a[6][2] =  0.000000;  //
+//   
+//   //index 3 for Sc22
+//   sci->x_a[0][3] =  627.52;  // quickly done for s452 on 08.03.2021 (from online)
+//   sci->x_a[1][3] = -0.3751;  //quickly done for s452 on 08.03.2021 (from online)
+//   sci->x_a[2][3] =  0.0000;  //
+//   sci->x_a[3][3] =  0.000000;  //
+//   sci->x_a[4][3] =  0.000000;  //
+//   sci->x_a[5][3] =  0.000000;  //
+//   sci->x_a[6][3] =  0.000000;  //
+//       }
 
 
    // if(skip==false){
@@ -2736,6 +2736,7 @@ for(int i=0;i<32; i++){
   v1190_channel_timeref[7] =103; //
 
   //
+
   v1190_channel_calibgrid[0] = 104;//tpc21grid
   v1190_channel_calibgrid[1] = 105;//tpc22grid
   v1190_channel_calibgrid[2] = 106;//tpc23grid
@@ -4167,6 +4168,7 @@ for (int k=0;k<10;k++){
 ///TAC stuff starts here
   // focal plane information
   // S2 priority: tpc2324 -> tpc2224 -> tpc2122 -> sc22 -> sc21
+ // cout<<"id->x_s2_select " <<id->x_s2_select << "  frs->magnification[2] " << frs->magnification[2] << endl;
      if(1 == id->x_s2_select){
 
   if(b_tpc_xy[2] && b_tpc_xy[3]){//tpc2324
@@ -4308,7 +4310,6 @@ for (int k=0;k<10;k++){
 
 
   /* for S2-S4 */
-
   if (sci_b_tofll2 && sci_b_tofrr2 && id_b_x2 && id_b_x4){
 
 
@@ -4316,6 +4317,7 @@ for (int k=0;k<10;k++){
       id_gamma = 1./sqrt(1. - id_beta * id_beta);
       id_AoQ   = id_brho[1]/id_beta/id_gamma/f ;
       id_AoQ_corr = id_AoQ - id->a2AoQCorr * id_a2;  //correction for id_a2, JK 16.9.11
+        
       if(id_AoQ_corr>0){
             
       for(int i=0; i<AoQ_Shift_array; i++){
