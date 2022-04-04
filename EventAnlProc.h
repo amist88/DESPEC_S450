@@ -514,16 +514,16 @@ class EventAnlProc : public TGo4EventProcessor {
              TH2 *hID_x4AoQ_Z1AoQgate[MAX_FRS_GATE];
              TH2 *hID_dEdegoQ_Z1_Z1AoQgate[MAX_FRS_GATE];
              TH2 *hID_dEdegZ1_Z1AoQgate[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_Z1AoQgate[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_Z1AoQgate[MAX_FRS_GATE];
+             TH1 *hID_a2_Z1AoQgate[MAX_FRS_GATE];
+             TH1 *hID_a4_Z1AoQgate[MAX_FRS_GATE];
                    
             ///Z1 Z2 gated
              TH2 *hID_Z1_Z2gate[MAX_FRS_GATE];
              TH2 *hID_x2AoQ_Z1Z2gate[MAX_FRS_GATE];
              TH2 *hID_x4AoQ_Z1Z2gate[MAX_FRS_GATE];
              TH2 *hID_ZAoQ_Z1Z2gate[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_Z1Z2gate[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_Z1Z2gate[MAX_FRS_GATE];
+             TH1 *hID_a2_Z1Z2gate[MAX_FRS_GATE];
+             TH1 *hID_a4_Z1Z2gate[MAX_FRS_GATE];
              TH2 *hID_dEdegZ1_Z1Z2gate[MAX_FRS_GATE];
              TH2 *hID_dEdegoQ_Z1_Z1Z2gate[MAX_FRS_GATE];
                    
@@ -537,8 +537,8 @@ class EventAnlProc : public TGo4EventProcessor {
              TH2 *hID_Z1Z2_Z1Z2x2AoQgate[MAX_FRS_GATE];
              TH2 *hID_dEdegZ1_Z1Z2x2AoQgate[MAX_FRS_GATE];
              TH2 *hID_dEdegoQ_Z1_Z1Z2x2AoQgate[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_Z1Z2x2AoQgate[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_Z1Z2x2AoQgate[MAX_FRS_GATE];
+             TH1 *hID_a2_Z1Z2x2AoQgate[MAX_FRS_GATE];
+             TH1 *hID_a4_Z1Z2x2AoQgate[MAX_FRS_GATE];
              
              ///X4 AoQ gated
              TH2 *hID_x4AoQ_x4AoQgate[MAX_FRS_GATE];
@@ -550,8 +550,8 @@ class EventAnlProc : public TGo4EventProcessor {
              TH2 *hID_Z1Z2_Z1Z2x4AoQgate[MAX_FRS_GATE];
              TH2 *hID_dEdegZ1_Z1Z2x4AoQgate[MAX_FRS_GATE];
              TH2 *hID_dEdegoQ_Z1_Z1Z2x4AoQgate[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_Z1Z2x4AoQgate[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_Z1Z2x4AoQgate[MAX_FRS_GATE];
+             TH1 *hID_a2_Z1Z2x4AoQgate[MAX_FRS_GATE];
+             TH1 *hID_a4_Z1Z2x4AoQgate[MAX_FRS_GATE];
              
              ///dEdegZ Gated
              TH2 *hID_Z1AoQ_dEdegZgate[MAX_FRS_GATE];
@@ -559,8 +559,8 @@ class EventAnlProc : public TGo4EventProcessor {
              TH2 *hID_Z1Z2_dEdegZgate[MAX_FRS_GATE];
              TH2 *hID_x2AoQ_dEdegZgate[MAX_FRS_GATE];
              TH2 *hID_x4AoQ_dEdegZgate[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_dEdegZgate[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_dEdegZgate[MAX_FRS_GATE];
+             TH1 *hID_a2_dEdegZgate[MAX_FRS_GATE];
+             TH1 *hID_a4_dEdegZgate[MAX_FRS_GATE];
  
              ///MHTDC
              ///Z vs AoQ Gated
@@ -570,16 +570,16 @@ class EventAnlProc : public TGo4EventProcessor {
              TH2 *hID_x4AoQ_Z1AoQgate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_dEdegoQ_Z1_Z1AoQgate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_dEdegZ1_Z1AoQgate_mhtdc[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_Z1AoQgate_mhtdc[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_Z1AoQgate_mhtdc[MAX_FRS_GATE];
+             TH1 *hID_a2_Z1AoQgate_mhtdc[MAX_FRS_GATE];
+             TH1 *hID_a4_Z1AoQgate_mhtdc[MAX_FRS_GATE];
              
              ///Z1 vs Z2 Gated
              TH2 *hID_Z1_Z2gate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_x2AoQ_Z1Z2gate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_x4AoQ_Z1Z2gate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_ZAoQ_Z1Z2gate_mhtdc[MAX_FRS_GATE];
-             TH2 *hID_a2AoQ_Z1Z2gate_mhtdc[MAX_FRS_GATE];
-             TH2 *hID_a4AoQ_Z1Z2gate_mhtdc[MAX_FRS_GATE];
+             TH1 *hID_a2_Z1Z2gate_mhtdc[MAX_FRS_GATE];
+             TH1 *hID_a4_Z1Z2gate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_dEdegZ1_Z1Z2gate_mhtdc[MAX_FRS_GATE];
              TH2 *hID_dEdegoQ_Z1_Z1Z2gate_mhtdc[MAX_FRS_GATE];
              
@@ -593,8 +593,8 @@ class EventAnlProc : public TGo4EventProcessor {
               TH2 *hID_ZAoQ_x2AoQgate_mhtdc[MAX_FRS_GATE];
               TH2 *hID_dEdegZ1_Z1Z2x2AoQgate_mhtdc[MAX_FRS_GATE];
               TH2 *hID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc[MAX_FRS_GATE];
-              TH2 *hID_a2AoQ_Z1Z2x2AoQgate_mhtdc[MAX_FRS_GATE];
-              TH2 *hID_a4AoQ_Z1Z2x2AoQgate_mhtdc[MAX_FRS_GATE];
+              TH1 *hID_a2_Z1Z2x2AoQgate_mhtdc[MAX_FRS_GATE];
+              TH1 *hID_a4_Z1Z2x2AoQgate_mhtdc[MAX_FRS_GATE];
               
               ///X4 vs AoQ Gated
              TH2 *hID_x4AoQ_x4AoQgate_mhtdc[MAX_FRS_GATE];
@@ -606,8 +606,8 @@ class EventAnlProc : public TGo4EventProcessor {
               TH2 *hID_ZAoQ_x4AoQgate_mhtdc[MAX_FRS_GATE];
               TH2 *hID_dEdegZ1_Z1Z2x4AoQgate_mhtdc[MAX_FRS_GATE];
               TH2 *hID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc[MAX_FRS_GATE];
-              TH2 *hID_a2AoQ_Z1Z2x4AoQgate_mhtdc[MAX_FRS_GATE];
-              TH2 *hID_a4AoQ_Z1Z2x4AoQgate_mhtdc[MAX_FRS_GATE];
+              TH1 *hID_a2_Z1Z2x4AoQgate_mhtdc[MAX_FRS_GATE];
+              TH1 *hID_a4_Z1Z2x4AoQgate_mhtdc[MAX_FRS_GATE];
               
                ///dE S2 deg vs Z1 Gated
               TH2 *hID_dEdegZ1_dEdegZ1Gated_mhtdc[MAX_FRS_GATE];
@@ -616,8 +616,8 @@ class EventAnlProc : public TGo4EventProcessor {
               TH2 *hID_Z1Z2_dEdegZgate_mhtdc[MAX_FRS_GATE];
               TH2 *hID_x2AoQ_dEdegZgate_mhtdc[MAX_FRS_GATE];
               TH2 *hID_x4AoQ_dEdegZgate_mhtdc[MAX_FRS_GATE];
-              TH2 *hID_a2AoQ_dEdegZgate_mhtdc[MAX_FRS_GATE];
-              TH2 *hID_a4AoQ_dEdegZgate_mhtdc[MAX_FRS_GATE];
+              TH1 *hID_a2_dEdegZgate_mhtdc[MAX_FRS_GATE];
+              TH1 *hID_a4_dEdegZgate_mhtdc[MAX_FRS_GATE];
              
             ///bPlast Histograms
 
