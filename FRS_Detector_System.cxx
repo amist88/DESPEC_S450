@@ -1181,8 +1181,6 @@ void FRS_Detector_System::FRS_Unpack(TGo4MbsSubEvent* psubevent){
   psubevt = psubevent;
   pdata = psubevt->GetDataField();
 
-
-
    len = 0;
    //vme_chn;
     bool skip_subevent=false;

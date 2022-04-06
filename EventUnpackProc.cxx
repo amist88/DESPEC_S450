@@ -48,6 +48,7 @@
 #include "PLASTIC_TAMEX_Detector_System.h"
 #include "PLASTIC_TWINPEAKS_Detector_System.h"
 #include "FINGER_Detector_System.h"
+#include "Beam_Monitor_Detector_System.h"
 #include "Germanium_Detector_System.h"
 #include "FRS_Detector_System.h"
 
@@ -96,7 +97,7 @@ EventUnpackProc::EventUnpackProc(const char* name) : TGo4EventProcessor(name)
    DESPECAnalysis* an = dynamic_cast<DESPECAnalysis*> (TGo4Analysis::Instance());
     frs_id = dynamic_cast<TIDParameter*> (an->GetParameter("IDPar"));
  //create Detector Systems
-  Detector_Systems = new Detector_System*[7];
+  Detector_Systems = new Detector_System*[8];
 
   // all non used systems intialized as NULL
   //-> calling uninitialized system will cause an error !
@@ -109,6 +110,7 @@ EventUnpackProc::EventUnpackProc(const char* name) : TGo4EventProcessor(name)
   Detector_Systems[4] = !Used_Systems[4] ? nullptr : new FATIMA_TAMEX_Detector_System();
   Detector_Systems[5] = !Used_Systems[5] ? nullptr : new Germanium_Detector_System();
   Detector_Systems[6] = !Used_Systems[6] ? nullptr : new FINGER_Detector_System();
+  Detector_Systems[7] = !Used_Systems[7] ? nullptr : new Beam_Monitor_Detector_System();
 
   ///Create some basic raw histograms
   if(Used_Systems[0]) Make_FRS_Histos();
@@ -120,6 +122,8 @@ EventUnpackProc::EventUnpackProc(const char* name) : TGo4EventProcessor(name)
  // if(Used_Systems[4]) Make_FATIMA_TAMEX_Histos();
 
   if(Used_Systems[5]) Make_Germanium_Histos();
+  
+  if(Used_Systems[7]) Make_BeamMonitor_Histos();
 
   RAW = new Raw_Event();
 
@@ -248,7 +252,6 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
   fOutput-> fevent_number = event_number;
  //cout<<"event_number " << event_number << endl;
   fOutput->fTrigger = fInput->GetTrigger();
-
   fInput->ResetIterator();
   TGo4MbsSubEvent* psubevt(0);
 
@@ -264,7 +267,6 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
   //if (event_number==141513){
 //  cout<<"event " << event_number <<endl;
 
-//      cout<<"IM HERE" <<endl;
       int subevent_iter = 0;
       Int_t PrcID_Conv = 0;
 
@@ -288,8 +290,8 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
         SubType = psubevt->GetSubtype();
 
         PrcID_Conv = get_Conversion(PrcID);
- //   cout<<"PrcID_Conv " <<PrcID_Conv << " PrcID " <<PrcID << endl;
-	if(PrcID_Conv==-1) continue;
+   
+        if(PrcID_Conv==-1) continue;
 
         fOutput -> fProcID[PrcID_Conv] = PrcID_Conv;
 
@@ -304,8 +306,8 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
             WR_d = WR->get_Detector_id();
             pdata = WR->get_pdata();
 
-            ///Temp Wr detector fix
-            if(PrcID ==10|| PrcID == 30 || PrcID==20 || PrcID == 25 || PrcID==41)WR_d=0;
+            ///Temp WR Skip fix
+           if(PrcID ==10|| PrcID == 30 || PrcID==20 || PrcID == 25 || PrcID==41)WR_d=0;
 
            if(WR_d==0) fOutput->fFRS_WR = WR_tmp; //FRS
            if(WR_d==1) fOutput->fAIDA_WR = WR_tmp; //AIDA
@@ -349,18 +351,30 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
         //=================================================================
         //UNPACKING
         ///send subevent to respective unpacker
-// cout<<"Detector_Systems[PrcID_Conv] " <<Detector_Systems[PrcID_Conv] <<" PrcID_Conv " <<PrcID_Conv<<endl;
-        if(Detector_Systems[PrcID_Conv] !=0){
-        Detector_Systems[PrcID_Conv]->Process_MBS(psubevt);
-        Detector_Systems[PrcID_Conv]->Process_MBS(pdata);
+            if(Detector_Systems[PrcID_Conv] !=0){
+                
+                ///I have to skip the pulser trigger here for the beam monitor
+                if(fOutput->fTrigger!=3 && PrcID_Conv==7){
+                  //  cout<<"fOutput->fTrigger " <<fOutput->fTrigger << endl;
+                    Detector_Systems[7]->Process_MBS(psubevt);
+                    Detector_Systems[7]->Process_MBS(pdata);
+                    pdata = Detector_Systems[7]->get_pdata();
+                    Detector_Systems[7]->get_Event_data(RAW);
+                        }
+                    
+        
+       if(PrcID_Conv!=7){
+           //cout<<"2 fOutput->fTrigger "<< fOutput->fTrigger << " PrcID_Conv " << PrcID_Conv <<endl;
+            Detector_Systems[PrcID_Conv]->Process_MBS(psubevt);
+            Detector_Systems[PrcID_Conv]->Process_MBS(pdata);
 
         ///get mbs stream data from unpacker (pointer copy solution)
-        pdata = Detector_Systems[PrcID_Conv]->get_pdata();
+            pdata = Detector_Systems[PrcID_Conv]->get_pdata();
 
         ///get data from subevent and send to RAW
-        Detector_Systems[PrcID_Conv]->get_Event_data(RAW);
-        }
-
+            Detector_Systems[PrcID_Conv]->get_Event_data(RAW);
+                }
+            }
 
         //=================================================================
         //HISTOGRAM FILLING (only singles)
@@ -476,18 +490,16 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
         ///Using MHTDC
 for (int i=0; i<10; i++){
   
-	if(RAW->get_FRS_id_mhtdc_aoq(i)>0) {fOutput->fFRS_AoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq(i);
-        
-        //if(i>0) cout<<"RAW->get_FRS_id_mhtdc_aoq(i) " << RAW->get_FRS_id_mhtdc_aoq(i) << " i " << i << " fOutput->fFRS_AoQ_mhtdc[i] " <<fOutput->fFRS_AoQ_mhtdc[i] <<endl;
-    }
-  if(RAW->get_FRS_id_mhtdc_aoq_corr(i)>0)  fOutput->fFRS_AoQ_corr_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq_corr(i);
-  if(RAW->get_FRS_id_mhtdc_beta(i)>0.0 &&  RAW->get_FRS_id_mhtdc_beta(i)<1.0)  fOutput->fFRS_beta_mhtdc[i] = RAW->get_FRS_id_mhtdc_beta(i);
-  if(RAW->get_FRS_id_mhtdc_tof4121(i)>0 )  fOutput->fFRS_tof4121_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4121(i);
-  if(RAW->get_FRS_id_mhtdc_tof4122(i)>0 )  fOutput->fFRS_tof4122_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4122(i);
-  if(RAW->get_FRS_id_mhtdc_z1(i)>0)  fOutput->fFRS_z_mhtdc[i] = RAW->get_FRS_id_mhtdc_z1(i);
-  if(RAW->get_FRS_id_mhtdc_z2(i)>0)  fOutput->fFRS_z2_mhtdc[i] = RAW->get_FRS_id_mhtdc_z2(i);
-  if(RAW->get_FRS_id_mhtdc_dEdeg(i)>0)fOutput->fFRS_dEdeg_mhtdc[i] = RAW->get_FRS_id_mhtdc_dEdeg(i);
-  if(RAW->get_FRS_id_mhtdc_dEdegoQ(i)>0)  fOutput->fFRS_dEdegoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_dEdegoQ(i);
+	
+	if(RAW->get_FRS_id_mhtdc_aoq(i)>0)   fOutput->fFRS_AoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq(i);
+	if(RAW->get_FRS_id_mhtdc_aoq_corr(i)>0)  fOutput->fFRS_AoQ_corr_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq_corr(i);
+	if(RAW->get_FRS_id_mhtdc_beta(i)>0.0 &&  RAW->get_FRS_id_mhtdc_beta(i)<1.0)  fOutput->fFRS_beta_mhtdc[i] = RAW->get_FRS_id_mhtdc_beta(i);
+	if(RAW->get_FRS_id_mhtdc_tof4121(i)>0 )  fOutput->fFRS_tof4121_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4121(i);
+	if(RAW->get_FRS_id_mhtdc_tof4122(i)>0 )  fOutput->fFRS_tof4122_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4122(i);
+	if(RAW->get_FRS_id_mhtdc_z1(i)>0)  fOutput->fFRS_z_mhtdc[i] = RAW->get_FRS_id_mhtdc_z1(i);
+	if(RAW->get_FRS_id_mhtdc_z2(i)>0)  fOutput->fFRS_z2_mhtdc[i] = RAW->get_FRS_id_mhtdc_z2(i);
+	if(RAW->get_FRS_id_mhtdc_dEdeg(i)>0)fOutput->fFRS_dEdeg_mhtdc[i] = RAW->get_FRS_id_mhtdc_dEdeg(i);
+	if(RAW->get_FRS_id_mhtdc_dEdegoQ(i)>0)  fOutput->fFRS_dEdegoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_dEdegoQ(i);
 
 }
 
@@ -529,14 +541,15 @@ for (int i=0; i<10; i++){
         if (Used_Systems[1] && PrcID_Conv==1){
           TAidaConfiguration const* conf = TAidaConfiguration::GetInstance();
           AIDA_Hits = RAW->get_AIDA_HITS();
+	  
+	  if(AIDA_Hits>AIDA_MAX_HITS){cout<<"MAX HIST AIDA EXCEEDED" <<endl; continue;} 
+	    AidaEvent evt;
+	    fOutput->fAIDAHits += AIDA_Hits;
 
-          AidaEvent evt;
-          fOutput->fAIDAHits += AIDA_Hits;
-
-          fOutput->fAidaScalers = RAW->get_AIDA_scaler();
+	    fOutput->fAidaScalers = RAW->get_AIDA_scaler();
 
           for(int i = 0; i<AIDA_Hits; i++){
-
+      
             AIDA_Energy[i] = RAW->get_AIDA_Energy(i);
 
             AIDA_FEE[i] = RAW-> get_AIDA_FEE_ID(i);
@@ -551,7 +564,7 @@ for (int i=0; i<10; i++){
             evt.Module = AIDA_FEE[i];
             evt.Time = AIDA_Time[i];
             evt.HighEnergy =  AIDA_HighE_veto[i];
-            //  cout<<"AIDA_FEE[i] " <<AIDA_FEE[i] <<" i " << i <<  endl;
+        if(conf->FEE(AIDA_FEE[i]).DSSD>2 || i>13000)     cout<<"AIDA_FEE[i] " <<AIDA_FEE[i] <<" i " << i << " conf->FEE(AIDA_FEE[i]).DSSD " <<conf->FEE(AIDA_FEE[i]).DSSD<<  endl;
             evt.DSSD = conf->FEE(AIDA_FEE[i]).DSSD;
             evt.Side = AIDA_Side[i];
             evt.Strip = AIDA_Strip[i];
@@ -602,14 +615,14 @@ for (int i=0; i<10; i++){
 
           if (conf->ucesb())
           {
-            lastTime = 0;
-            ResetMultiplexer();
-            totalEvents++;
+	      lastTime = 0;
+	      ResetMultiplexer();
+	      totalEvents++;
 
-            fOutput->Aida.push_back(fAida);
-            fAida.ImplantEvents.clear();
-            fAida.DecayEvents.clear();
-            fAida.AIDATime = 0;
+	      fOutput->Aida.push_back(fAida);
+	      fAida.ImplantEvents.clear();
+	      fAida.DecayEvents.clear();
+	      fAida.AIDATime = 0;
           }
         }
 
@@ -761,20 +774,20 @@ for (int i=0; i<10; i++){
                 if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==1){
                         if(RAW->get_bPLAST_TWINPEAKS_lead_T(i,j)>0){
                 Phys_Channel_Lead_Fast_bPlast[i][j] =TAMEX_bPlast_Chan[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1]; 
-              //  cout<<"1 UNPACK Phys_Channel_Lead_Fast_bPlast[i][j] " <<Phys_Channel_Lead_Fast_bPlast[i][j] << " i " << i << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 " << (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 << " RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) " <<RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) << endl;
+               //cout<<"1 UNPACK Phys_Channel_Lead_Fast_bPlast[i][j] " <<Phys_Channel_Lead_Fast_bPlast[i][j] << " i " << i << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 " << (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 << " RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) " <<RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) << endl;
                // cout<<" Phys_Channel_Lead_Fast_bPlast[i][j] " <<  Phys_Channel_Lead_Fast_bPlast[i][j] << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1/2 <<" i " << i << " j " << j << endl;
                  bPlasdetnum_fast=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
                   fOutput->fbPlasDetNum_Fast = bPlasdetnum_fast;
                
-//                     cout<<"bPlasdetnum_fast " <<bPlasdetnum_fast << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j))/2 " <<(RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j))/2 << " i " << i << " RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << endl;
-                int chan_bPlast_fast_lead = Phys_Channel_Lead_Fast_bPlast[i][j];
-                
-       // cout<<"LEAD FAST bPlasdetnum_fast " <<bPlasdetnum_fast << " chan_bPlast_fast_lead " <<chan_bPlast_fast_lead << " i " << i << " j " << j << endl;
-                
-                 fOutput->fbPlas_FastChan[bPlasdetnum_fast] = chan_bPlast_fast_lead;
-   //  cout<<"Phys_Channel_Lead_Fast_bPlast[i][j] " <<Phys_Channel_Lead_Fast_bPlast[i][j] << " i " << i << " j " << j <<" RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) <<  endl;
-                if(chan_bPlast_fast_lead>-1 && chan_bPlast_fast_lead<bPLASTIC_CHAN_PER_DET) {
-        //  cout<<"chan_bPlast_fast_lead " << chan_bPlast_fast_lead <<" i " << i << " j " << j <<" (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 " <<(RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2<< endl;
+                 //    cout<<"bPlasdetnum_fast " <<bPlasdetnum_fast << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j))/2 " <<(RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j))/2 << " i " << i << " RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << endl;
+               
+		     
+		  int chan_bPlast_fast_lead = Phys_Channel_Lead_Fast_bPlast[i][j];
+
+		    fOutput->fbPlas_FastChan[bPlasdetnum_fast] = chan_bPlast_fast_lead;
+   
+		  if(chan_bPlast_fast_lead>-1 && chan_bPlast_fast_lead<bPLASTIC_CHAN_PER_DET) {
+  
                     int N1_fast = fOutput->fbPlast_Fast_Lead_N[bPlasdetnum_fast][chan_bPlast_fast_lead]++;
           
                     fOutput->fbPlast_Fast_Lead[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] = RAW->get_bPLAST_TWINPEAKS_lead_T(i,j);
@@ -795,8 +808,8 @@ for (int i=0; i<10; i++){
     
                //   cout<<"LEAD SLOW bPlasdetnum_slow " <<bPlasdetnum_slow << " chan_bPlast_slow_lead " <<chan_bPlast_slow_lead << endl;
                      if(chan_bPlast_slow_lead>-1  && chan_bPlast_slow_lead<bPLASTIC_CHAN_PER_DET) {
-                 fOutput->fbPlas_SlowChan[bPlasdetnum_slow] = chan_bPlast_slow_lead;
-               
+			fOutput->fbPlas_SlowChan[bPlasdetnum_slow] = chan_bPlast_slow_lead;
+             //  cout<<"fOutput->fbPlas_SlowChan[bPlasdetnum_slow] " <<fOutput->fbPlas_SlowChan[bPlasdetnum_slow] << " bPlasdetnum_slow " <<bPlasdetnum_slow << endl;
                 
              
        
@@ -1383,6 +1396,26 @@ for (int i=0; i<10; i++){
             }
           }
         }
+         ///--------------------------------------------------------------------------------------------///
+         if (Used_Systems[7] && PrcID_Conv==7){
+             
+             BM_Hits_S2 = RAW->get_BM_Hits_S2();
+             BM_Hits_S4 = RAW->get_BM_Hits_S4();
+            
+             for(uint i=0; i<BM_Hits_S2; i++){             
+                BM_L_diff_S2[i] = RAW->get_BM_LDiff_S2(i);  
+             }
+           
+             for(uint i=0; i<BM_Hits_S4; i++){             
+                BM_L_diff_S4[i] = RAW->get_BM_LDiff_S4(i);  
+          //       cout<<"BM_L_diff_S4[i] " <<BM_L_diff_S4[i] << " BM_Hits_S4 " <<BM_Hits_S4  <<" i " << i << endl;
+             }
+             
+ 
+             
+            
+             
+         }
         ///--------------------------------------------------------------------------------------------///
 
       } //End of subevent loop
@@ -1406,13 +1439,16 @@ void EventUnpackProc::FILL_HISTOGRAMS(int PrcID_Conv, int PrcID, int SubType,Eve
 
   if(PrcID_Conv==0 && Used_Systems[0]) Fill_FRS_Histos(PrcID,Type,SubType);
 
-  if(PrcID_Conv==1 && Used_Systems[1])  Fill_AIDA_Histos();
+  if(PrcID_Conv==1 && Used_Systems[1]) Fill_AIDA_Histos();
 
   if(PrcID_Conv==3 && Used_Systems[3]) Fill_FATIMA_Histos(fOutput);
 
   //if(PrcID_Conv==4 && Used_Systems[4]) Fill_FATIMA_TAMEX_Histos();
 
   if(PrcID_Conv==5 && Used_Systems[5]) Fill_Germanium_Histos();
+  
+    ///Beam_Monitor is PrcID_Conv 7 && Used_Systems 7
+  if(PrcID_Conv==7 && Used_Systems[7]) Fill_BeamMonitor_Histos();
 }
 
 
@@ -1566,7 +1602,7 @@ void EventUnpackProc::load_FingerID_File(){
 //-----------------------------------------------------------------------------------------------------------------------------//
 Int_t EventUnpackProc::get_Conversion(Int_t PrcID){
 
-  for(int i = 0;i < 7;++i){
+  for(int i = 0;i < 8;++i){
     for(int j = 0;j < 8;++j){
         ///Fix for FRS
           if (PrcID==100) return -1;
@@ -1578,7 +1614,7 @@ Int_t EventUnpackProc::get_Conversion(Int_t PrcID){
 }
 
 void EventUnpackProc::get_used_systems(){
-    for(int i = 0;i < 6;i++) Used_Systems[i] = false;
+    for(int i = 0;i < 8;i++) Used_Systems[i] = false;
 
   ifstream data("Configuration_Files/DESPEC_General_Setup/Used_Systems.txt");
   if(data.fail()){
@@ -1596,12 +1632,12 @@ void EventUnpackProc::get_used_systems(){
     Used_Systems[i] = (id == 1);
     i++;
   }
-  string DET_NAME[7] = {"FRS","AIDA","PLASTIC","FATIMA_VME","FATIMA_TAMEX","Germanium","FINGER"};
+  string DET_NAME[8] = {"FRS","AIDA","PLASTIC","FATIMA_VME","FATIMA_TAMEX","Germanium","FINGER","Beam_Monitor"};
 
     cout << "\n=====================================================" << endl;
     cout << "\tUSED SYSTEMS" << endl;
     cout << "-----------------------------------------------------" << endl;
-    for(int j = 0;j < 6;++j){
+    for(int j = 0;j < 8;++j){
         if(Used_Systems[j]) cout <<"\t"<< DET_NAME[j] << endl;
     }
     cout << "=====================================================" << endl;
@@ -1892,12 +1928,12 @@ for(int i=0;i<7;i++)
     
      
       //TPCs At S4 focal plane
-  hTPC_X_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_X","S4_X",1000,-100.5,100.5,"x at S4 focus [mm]");
-  hTPC_Y_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_Y","S4_Y",1000,-100.5,100.5,"y at S4 focus [mm]");
-  hTPC_AX_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_AX","S4_AX",1000,-100.5,100.5, "angle_x at S4 [mrad]");
-  hTPC_AY_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_AY","S4_AY",1000,-100.5,100.5, "angle_y at S4 [mrad]");
-  hTPC_X_AX_S4=MakeTH2('D',"FRS/TPC/S4_focus/S4focus_X_angleX","S4focus_X_angleX", 400,-100.,100., 250,-50.0,50.0,"X at S4 [mm] ","x angle [mrad] ");
-  hTPC_Y_AY_S4=MakeTH2('D',"FRS/TPC/S4_focus/S4focus_Y_angleY","S4_Y_angleY", 400,-100.,100., 250,-50.0,50.0,"Y at S4 [mm] ","y angle [mrad] ");
+    hTPC_X_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_X","S4_X",1000,-100.5,100.5,"x at S4 focus [mm]");
+    hTPC_Y_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_Y","S4_Y",1000,-100.5,100.5,"y at S4 focus [mm]");
+    hTPC_AX_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_AX","S4_AX",1000,-100.5,100.5, "angle_x at S4 [mrad]");
+    hTPC_AY_S4=MakeTH1('D',"FRS/TPC/S4_focus/S4focus_AY","S4_AY",1000,-100.5,100.5, "angle_y at S4 [mrad]");
+    hTPC_X_AX_S4=MakeTH2('D',"FRS/TPC/S4_focus/S4focus_X_angleX","S4focus_X_angleX", 400,-100.,100., 250,-50.0,50.0,"X at S4 [mm] ","x angle [mrad] ");
+    hTPC_Y_AY_S4=MakeTH2('D',"FRS/TPC/S4_focus/S4focus_Y_angleY","S4_Y_angleY", 400,-100.,100., 250,-50.0,50.0,"Y at S4 [mm] ","y angle [mrad] ");
      
     hID_x2 = MakeTH1('D',"FRS/TPC/S2_X","ID_x2",200,-100,100);
     hID_y2 = MakeTH1('D',"FRS/TPC/S2_Y","ID_y2",200,-100,100);
@@ -2098,25 +2134,25 @@ for(int i=0;i<7;i++)
 //     TPC_X0 = RAW->get_FRS_tpcx0();
 //     TPC_X1 = RAW->get_FRS_tpcx1();
 
-TPC_X_s2_foc_23_24 = RAW->get_FRS_tpc_x_s2_foc_23_24();
-TPC_Y_s2_foc_23_24 = RAW->get_FRS_tpc_y_s2_foc_23_24();
-TPC_X_angle_s2_foc_23_24 = RAW->get_FRS_tpc_x_angle_s2_foc_23_24();
-TPC_Y_angle_s2_foc_23_24 = RAW->get_FRS_tpc_y_angle_s2_foc_23_24();
+    TPC_X_s2_foc_23_24 = RAW->get_FRS_tpc_x_s2_foc_23_24();
+    TPC_Y_s2_foc_23_24 = RAW->get_FRS_tpc_y_s2_foc_23_24();
+    TPC_X_angle_s2_foc_23_24 = RAW->get_FRS_tpc_x_angle_s2_foc_23_24();
+    TPC_Y_angle_s2_foc_23_24 = RAW->get_FRS_tpc_y_angle_s2_foc_23_24();
 
-TPC_23_24_X_sc21 = RAW->get_FRS_tpc23_24_x_sc21();
-TPC_23_24_Y_sc21 = RAW->get_FRS_tpc23_24_y_sc21();
-TPC_23_24_X_sc22 = RAW->get_FRS_tpc23_24_x_sc22();
-TPC_23_24_Y_sc22 = RAW->get_FRS_tpc23_24_y_sc22();
+    TPC_23_24_X_sc21 = RAW->get_FRS_tpc23_24_x_sc21();
+    TPC_23_24_Y_sc21 = RAW->get_FRS_tpc23_24_y_sc21();
+    TPC_23_24_X_sc22 = RAW->get_FRS_tpc23_24_x_sc22();
+    TPC_23_24_Y_sc22 = RAW->get_FRS_tpc23_24_y_sc22();
 
-TPC_X_s4 = RAW->get_FRS_tpc_x_s4();
-TPC_Y_s4 = RAW->get_FRS_tpc_y_s4();
-TPC_X_angle_s4 = RAW-> get_FRS_tpc_x_angle_s4();
-TPC_Y_angle_s4 = RAW-> get_FRS_tpc_y_angle_s4();
+    TPC_X_s4 = RAW->get_FRS_tpc_x_s4();
+    TPC_Y_s4 = RAW->get_FRS_tpc_y_s4();
+    TPC_X_angle_s4 = RAW-> get_FRS_tpc_x_angle_s4();
+    TPC_Y_angle_s4 = RAW-> get_FRS_tpc_y_angle_s4();
 
- TPC_X_sc41 = RAW-> get_FRS_tpc_x_sc41();
- TPC_Y_sc41 = RAW-> get_FRS_tpc_y_sc41();
- TPC_X_sc42 = RAW-> get_FRS_tpc_x_sc42();
- TPC_Y_sc42 = RAW-> get_FRS_tpc_y_sc42();
+    TPC_X_sc41 = RAW-> get_FRS_tpc_x_sc41();
+    TPC_Y_sc41 = RAW-> get_FRS_tpc_y_sc41();
+    TPC_X_sc42 = RAW-> get_FRS_tpc_x_sc42();
+    TPC_Y_sc42 = RAW-> get_FRS_tpc_y_sc42();
 
     sci_dt_21l_21r = RAW->get_FRS_dt_21l_21r();
     sci_dt_41l_41r = RAW->get_FRS_dt_41l_41r();
@@ -2797,7 +2833,7 @@ void EventUnpackProc::Make_FATIMA_Histos(){
 
 
 
-  for (int i=0; i<FAT_MAX_VME_CHANNELS; i++){
+  for(int i=0; i<FAT_MAX_VME_CHANNELS; i++){
     hFAT_Eraw_VME[i] = MakeTH1('D', Form("FATIMA_VME/Unpacker/Energy/Raw/E_Raw_LaBrCh. %02d", i),
     Form("LaBr%02d energy (raw)", i),2000,0,40000);
 
@@ -2861,7 +2897,7 @@ void EventUnpackProc::Fill_FATIMA_Histos(EventUnpackStore* fOutput){
     }
 
 
-//**----------------------------------------------------------------------------------------------**/
+/**----------------------------------------------------------------------------------------------**/
 /**----------------------------------------   Germanium   -----------------------------------------**/
 /**----------------------------------------------------------------------------------------------**/
 
@@ -2874,7 +2910,7 @@ void EventUnpackProc::Make_Germanium_Histos(){
 //                     }
 //     hFebTime  = MakeTH1('D',"SysTime/FebexClock","Febex clock",200000,0,200000);
                 }
-//-----------------------------------------------------------------------------------------------------------------------------//
+/**----------------------------------------------------------------------------------------------**/                
 void EventUnpackProc::Fill_Germanium_Histos(){
 
     double tmpGe[32];
@@ -2883,14 +2919,24 @@ void EventUnpackProc::Fill_Germanium_Histos(){
      /**------------------Germanium Raw Energy -----------------------------------------**/
       Germanium_hits = RAW->get_Germanium_am_Fired();
          for(int i=0; i<Germanium_hits; i++){
-	   if(RAW->get_Germanium_Det_id(i)>-1){
+       if(RAW->get_Germanium_Det_id(i)>-1){
          //  hFebTime->Fill(RAW->get_Germanium_Chan_T(i)*10E-9);
-	     GeID = RAW->get_Germanium_Det_id(i) * 3 + RAW->get_Germanium_Crystal_id(i);
+         GeID = RAW->get_Germanium_Det_id(i) * 3 + RAW->get_Germanium_Crystal_id(i);
         tmpGe[GeID] = RAW->get_Germanium_Chan_E(i);
         }
-	 }
+     }
    }
+//-----------------------------------------------------------------------------------------------------------------------------//
+/**----------------------------------------------------------------------------------------------**/
+/**----------------------------------------   Beam Monitor   -----------------------------------------**/
+/**----------------------------------------------------------------------------------------------**/
+void EventUnpackProc::Make_BeamMonitor_Histos(){
 
+   }
+   //-----------------------------------------------------------------------------------------------------------------------------//
+void EventUnpackProc::Fill_BeamMonitor_Histos(){
+    
+}
 
 //-----------------------------------------------------------------------------------------//
 

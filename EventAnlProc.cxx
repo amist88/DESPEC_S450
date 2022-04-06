@@ -2311,16 +2311,16 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
           
        // hbPlas_lead_lead_gated[i][j] = MakeTH1('D', Form("bPlastic/Lead-Lead_Egated/Lead-Lead Egated Plas Det. %2d Ch. %2d",  i,j), Form("Lead - Lead Energy gated Det. %2d Ch.  %2d", i,j),2500, -50000., 50000.); 
             
-       // hbPlas_SC41L_lead[i][j] = MakeTH1('D', Form("bPlastic/SC41-Lead_Plas/SC41_Lead Plas Det. %2d Ch.%02d", i,j), Form("SC41 Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4002, -100000., 100000.);    
-         hbPlas_fatimatamex_dT[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/FatTamChan-Lead_bPlas/(bPlast)FatTamChan_Lead bPlas Det.%2d Ch.%02d", i,j), Form("FATIMA tamex channel in bPlast: Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.); 
-         
-         hbPlas_fatimavme_dT[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/FatVMEChan-Lead_bPlas/(bPlast)FatVMEChan_Lead bPlas Det.%2d Ch.%02d", i,j), Form("FATIMA VME channel in bPlast: Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.); 
-            
-         hbPlas_fatimavme_dT[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/SC41R_Anal-Lead_bPlas/SC41R_Ana_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41R Analogue Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);    
-            
-         hbPlas_SC41L_Digi_lead[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/SC41L_Digi-Lead_bPlas/SC41L_Digi_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41L Digital Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.); 
-            
-         hbPlas_SC41R_Digi_lead[i][j] = MakeTH1('D', Form("bPlastic/SC41R_Digi-Lead_bPlas/SC41R_Digi_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41R Digital Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);             
+	  // hbPlas_SC41L_lead[i][j] = MakeTH1('D', Form("bPlastic/SC41-Lead_Plas/SC41_Lead Plas Det. %2d Ch.%02d", i,j), Form("SC41 Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4002, -100000., 100000.);    
+	    hbPlas_fatimatamex_dT[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/FatTamChan-Lead_bPlas/(bPlast)FatTamChan_Lead bPlas Det.%2d Ch.%02d", i,j), Form("FATIMA tamex channel in bPlast: Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.); 
+	    
+	    hbPlas_fatimavme_dT[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/FatVMEChan-Lead_bPlas/(bPlast)FatVMEChan_Lead bPlas Det.%2d Ch.%02d", i,j), Form("FATIMA VME channel in bPlast: Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.); 
+		
+	    hbPlas_fatimavme_dT[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/SC41R_Anal-Lead_bPlas/SC41R_Ana_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41R Analogue Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);    
+		
+	    hbPlas_SC41L_Digi_lead[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/SC41L_Digi-Lead_bPlas/SC41L_Digi_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41L Digital Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.); 
+		
+	    hbPlas_SC41R_Digi_lead[i][j] = MakeTH1('D', Form("bPlastic/SC41R_Digi-Lead_bPlas/SC41R_Digi_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41R Digital Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);             
         
           }
   }
@@ -2368,10 +2368,10 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
               for(int a=1; a<=3; a++){ ///Detector number
                     pOutput->pbPlas_FastChan[a]= pInput->fbPlas_FastChan[a];
                     pOutput->pbPlas_SlowChan[a]= pInput->fbPlas_SlowChan[a];
-             
+            
                  for (int b = 0; b < bPLASTIC_CHAN_PER_DET; b++){  ///Channel number 
                    
-                    
+                
  ///**---------------------------------------------Plastic Fast Lead Time ----------------------------------**/    
                        
             if(pInput->fbPlast_Fast_Lead_N[a][b]<bPLASTIC_TAMEX_HITS){
@@ -2383,10 +2383,11 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
                     lead_bplas_fast[a][b][j] = pInput->fbPlast_Fast_Lead[a][b][j];  
        
                 if(lead_bplas_fast[a][b][j]!=0){
-                    hbPlas_Lead_T_Fast[a][b]->Fill(lead_bplas_fast[a][b][j]);
-                   //  cout<<"ANL EVENT " << pInput->fevent_number << " pInput->fbPlas_FastChan[a] "<< pInput->fbPlas_FastChan[a]<<" lead_bplas_fast[a][b][j] " <<lead_bplas_fast[a][b][j] << " a " << a << " b " << b << " j " << j << endl;
+		 
                     hits_bplas_lead_fast++;  
                     pOutput->pbPlas_FastLeadT[a][b][j] = lead_bplas_fast[a][b][j]; 
+                     // cout<<"pOutput->pbPlas_FastChan[a] " <<pOutput->pbPlas_FastChan[a] << " a " << a <<" b " << b << "  pOutput->pbPlas_FastLeadT[a][b][j] " << pOutput->pbPlas_FastLeadT[a][b][j] <<  endl;    
+                    hbPlas_Lead_T_Fast[a][b]->Fill(lead_bplas_fast[a][b][j]);
                     
                     pOutput->pbPlas_FastLeadHits = hits_bplas_lead_fast; 
                   //  pOutput->pbPlas_FastLeadT_Avg = lead_bplas_fast[a][b][j]/hits_bplas_lead;

@@ -42,6 +42,7 @@
 #include "Detector_System.cxx"
 #include "AIDA_Detector_System.h"
 #include "FATIMA_Detector_System.h"
+#include "Beam_Monitor_Detector_System.h"
 #include "PLASTIC_TAMEX_Detector_System.h"
 #include "Germanium_Detector_System.h"
 #include "DESPECAnalysis.h"
@@ -477,11 +478,13 @@ using namespace std;
 						TH1* hAIDA_TimeMachine;
 
       ///End AIDA
-			int val_it;
+      ///Beam Monitor 
+       Long64_t BM_L_diff_S2[BM_MAX_HITS];
+       UInt_t  BM_Hits_S2;
+       Long64_t BM_L_diff_S4[BM_MAX_HITS];
+       UInt_t  BM_Hits_S4;
+	   int val_it;
             int event_number;
-
-
-
 			bool WR_used;
 			bool WHITE_RABBIT_USED; // Read from General Setup File
 
@@ -522,6 +525,9 @@ using namespace std;
 
             void Make_Finger_Histos();
             void Fill_Finger_Histos();
+            
+            void Make_BeamMonitor_Histos();
+            void Fill_BeamMonitor_Histos();
 
 			void FILL_HISTOGRAMS(int,int,int,EventUnpackStore* fOutput);
 

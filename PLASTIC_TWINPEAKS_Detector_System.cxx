@@ -309,7 +309,7 @@ void PLASTIC_TWINPEAKS_Detector_System::get_edges(){
             ch_ID_edge[tamex_iter][iterator[tamex_iter]] = data->ch_ID;
             lead_arr[tamex_iter][iterator[tamex_iter]] = (data->ch_ID % 2);
      
-     //    cout << "LEAD EDGE " <<" leading_hit "<<leading_hit<< edge_coarse[tamex_iter][iterator[tamex_iter]] << " fine " << edge_fine[tamex_iter][iterator[tamex_iter]]<< " Chan " << ch_ID_edge[tamex_iter][iterator[tamex_iter]] <<" tamex_iter " <<tamex_iter << " iterator[tamex_iter] " <<iterator[tamex_iter] <<  endl; 
+         //cout << "LEAD EDGE " <<" leading_hit "<<leading_hit<< edge_coarse[tamex_iter][iterator[tamex_iter]] << " fine " << edge_fine[tamex_iter][iterator[tamex_iter]]<< " Chan " << ch_ID_edge[tamex_iter][iterator[tamex_iter]] <<" tamex_iter " <<tamex_iter << " iterator[tamex_iter] " <<iterator[tamex_iter] <<  endl; 
         }
         
 //   if(data->leading_E ==1)  ch_ID_edge_lead[tamex_iter][iterator[tamex_iter]]=data->ch_ID;

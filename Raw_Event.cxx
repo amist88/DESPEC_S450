@@ -920,6 +920,20 @@ void Raw_Event::set_DATA_Germanium(int Ge_FIRED,ULong64_t* sum_time,int* hit_pat
 
 // #############################################################
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------- Beam Monitor  ------------------------------------------------//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Raw_Event::set_DATA_Beam_Monitor(Long64_t* L_DIFF_S2,UInt_t HITS_S2,Long64_t* L_DIFF_S4,UInt_t HITS_S4){
+      
+        Hits_S2 = HITS_S2;
+        Hits_S4 = HITS_S4;
+        for(uint i=0; i< Hits_S2; i++) L_diff_S2[i] = L_DIFF_S2[i];    
+        for(uint i=0; i< Hits_S4; i++) L_diff_S4[i] = L_DIFF_S4[i];
+      
+}
+
+
+
 //------------------------------------------ FRS ------------------------------------------//
 
 Float_t Raw_Event::get_FRS_MusicdE(int i){return MUSIC_dE[i];}
@@ -1389,8 +1403,6 @@ PLASTIC_DataStruct* Raw_Event::PassPLASTIC(){ return &PLASTIC_Data;}*/
 
     ULong64_t Raw_Event::get_Germanium_Event_T(int i){return Germanium_sum_time[i];}
 
-
-
     bool Raw_Event::get_Germanium_Pileup(int i){return Germanium_Pileup[i];}
 
     bool Raw_Event::get_Germanium_Overflow(int i){return Germanium_Overflow[i];}
@@ -1406,3 +1418,12 @@ PLASTIC_DataStruct* Raw_Event::PassPLASTIC(){ return &PLASTIC_Data;}*/
     int Raw_Event::get_Germanium_Crystal_id(int i){return Germanium_Crystal_Nums[i];}
 
     ULong64_t Raw_Event::get_Germanium_Channel_cf(int i){return Germanium_chan_cf[i];}
+    
+  //------------------------------------------ Beam Monitor ------------------------------------------//
+    Long64_t Raw_Event::get_BM_LDiff_S2(int i){return L_diff_S2[i];}
+    
+    UInt_t Raw_Event::get_BM_Hits_S2(){return Hits_S2;}
+    
+    Long64_t Raw_Event::get_BM_LDiff_S4(int i){return L_diff_S4[i];}
+    
+    UInt_t Raw_Event::get_BM_Hits_S4(){return Hits_S4;}

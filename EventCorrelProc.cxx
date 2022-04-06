@@ -241,12 +241,12 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 }
  void EventCorrelProc::Process_Timemachine(EventAnlStore* cInputMain, EventCorrelStore* cOutput){
  for(int i=0; i<10; i++){
-   FatimaTAMEX_TimeMachine_dT[i]=0;
+    FatimaTAMEX_TimeMachine_dT[i]=0;
  }
    ///Check if FATIMA is used
      if(Used_Systems[3]==1 || Used_Systems[4] ==1){
      ///Fatima VME
-    for(int aa=0; aa<10; aa++){
+        for(int aa=0; aa<10; aa++){
 
 
              if(cInputMain->pFat_TMCh1[aa] !=0 && cInputMain->pFat_TMCh2[aa] !=0){
@@ -260,7 +260,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
      ///Fatima TAMEX
      for(int b=0; b<10; b++){
-       //cout<<"b " <<b << endl;
+   
        if(b<10){
         if(cInputMain->pFat_Fast_LeadT[FatTAMEX_TimeMachineCh1][b]!=0 && cInputMain->pFat_Fast_LeadT[FatTAMEX_TimeMachineCh2][b]!=0 ){
                 FatimaTAMEX_TimeMachine_dT[b] = (cInputMain->pFat_Fast_LeadT[FatTAMEX_TimeMachineCh2][b]-cInputMain->pFat_Fast_LeadT[FatTAMEX_TimeMachineCh1][b])*5;
@@ -271,7 +271,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
         }
       }
      }
-     }
+    }
      ///Germanium
 
          if(cInputMain->pGe_T[Germanium_TimeMachine_Det][Germanium_TimeMachineCh1]!=0 && cInputMain->pGe_T[Germanium_TimeMachine_Det][Germanium_TimeMachineCh2]!=0){
@@ -283,9 +283,12 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
       ///bPlastic
       for(int c=0; c<10; c++){
-
-        if(cInputMain->pbPlas_LeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c]!=0 && cInputMain->pbPlas_LeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh2][c]!=0){
-          bPlast_TimeMachine_dT[c] = (cInputMain->pbPlas_LeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh2][c] - cInputMain->pbPlas_LeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c])*5;
+  //cout<<"bPLASTIC_ADDITIONAL_CH_MOD " <<bPLASTIC_ADDITIONAL_CH_MOD << " bPlastTimeMachineCh2 " <<bPlastTimeMachineCh2 <<" cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c] " <<cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c] <<endl;
+  
+  
+        if(cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c]!=0 && cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh2][c]!=0){
+	    //cout<<"cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c] " <<cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c] << endl;
+          bPlast_TimeMachine_dT[c] = (cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh2][c] - cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c])*5;
 
 
           hbPlastic_TMdT->Fill(bPlast_TimeMachine_dT[c]);
