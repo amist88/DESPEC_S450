@@ -339,7 +339,12 @@ private:
         bool        Germanium_Overflow[Germanium_MAX_HITS];
         ULong64_t   Germanium_chan_cf[Germanium_MAX_HITS];
         int Event_Type;
-
+        
+        ///Beam Monitor
+        Long64_t    L_diff_S2[BM_MAX_HITS];
+        UInt_t      Hits_S2;
+        Long64_t    L_diff_S4[BM_MAX_HITS];
+        UInt_t      Hits_S4;
 
 public:
 	//Raw_Event(bool);
@@ -367,6 +372,8 @@ public:
 
     void set_DATA_ID_MHTDC(Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t,Float_t*);
 	
+     void set_DATA_Beam_Monitor(Long64_t*, UInt_t,Long64_t*, UInt_t);
+    
     // FRS STUFF //
 
 
@@ -712,6 +719,14 @@ public:
         bool        get_Germanium_Pileup(int);
         bool        get_Germanium_Overflow(int);
         ULong64_t   get_Germanium_Channel_cf(int);
+        
+        
+        ///Beam Monitor
+        Long64_t  get_BM_LDiff_S2(int i);
+        UInt_t    get_BM_Hits_S2();
+        Long64_t  get_BM_LDiff_S4(int i);
+        UInt_t    get_BM_Hits_S4();
+        
 
 	//White Rabbit setter and getter
 	void set_WR(ULong64_t);
