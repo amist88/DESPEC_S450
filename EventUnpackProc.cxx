@@ -3165,7 +3165,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					} 
 				
 				if(BM_S2_Tdiffs[k] < BM_CR_Tlimit) { 
-					BM_CR_timesum+=BM_S2_TimeDiffs[k]; 
+					BM_CR_timesum+=BM_S2_Tdiffs[k]; 
 					++BM_CR_relevanthits;
 					}
 				}
@@ -3235,7 +3235,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					} 
 				
 				if(BM_S4_Tdiffs[k] < BM_CR_Tlimit) { 
-					BM_CR_timesum+=BM_S4_TimeDiffs[k]; 
+					BM_CR_timesum+=BM_S4_Tdiffs[k]; 
 					++BM_CR_relevanthits;
 					}
 				}
