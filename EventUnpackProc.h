@@ -479,10 +479,62 @@ using namespace std;
 
       ///End AIDA
       ///Beam Monitor 
+      // Beam Monitor Histograms and graphs
+	
+	//S4:
+      	TH1   *hBM_s4h_tdiff;
+      	TH1   *hBM_s4h_norm_tdiff;
+	TH1   *hBM_s4h_t1;
+	TH1   *hBM_s4h_n;
+	TH1   *hBM_s4h_poisson;
+	TH1   *hBM_s4h_c;
+	TH1   *hBM_s4h_cp;
+	TH1   *hBM_s4h_dc;
+	TGraph* gBM_s4gr_qf;
+	TGraph* gBM_s4gr_dt_avrg;
+	TGraph* gBM_s4gr_dcmin;
+	TGraph* gBM_s4gr_dctime;
+	
+	//S2:
+	TH1   *hBM_s2h_tdiff;
+      	TH1   *hBM_s2h_norm_tdiff;
+	TH1   *hBM_s2h_t1;
+	TH1   *hBM_s2h_n;
+	TH1   *hBM_s2h_poisson;
+	TH1   *hBM_s2h_c;
+	TH1   *hBM_s2h_cp;
+	TH1   *hBM_s2h_dc;
+	TGraph* gBM_s2gr_qf;
+	TGraph* gBM_s2gr_dt_avrg;
+	TGraph* gBM_s2gr_dcmin;
+	TGraph* gBM_s2gr_dctime;
+
+	// Constants and BM global variables
+	
+	// S2
+	const Int_t BM_S2_MaxTdiffs = 300000;
+	std::valarray<UInt_t>  BM_S2_Tdiffs(BM_S2_MaxTdiffs); 	// saves time differences from get_BM_LDiff_S2 for online analysis
+	UInt_t BM_S2_count; 					// counts through Tdiffs stored in BM_S2_Tdiffs, values from 0 to BM_S2_MaxTdiffs
+	const UInt_t BM_S2_DoAnalysisEvery = 100000;		// online analysis interval for S2 channel
+	Long64_t BM_S2_QFcount; 				// counts the number of BM QFs computed so far for S2
+
+	// S4
+	const Int_t BM_S4_MaxTdiffs = 100000;
+	std::valarray<UInt_t>  BM_S4_Tdiffs(BM_S4_MaxTdiffs); 	// saves S4 time differences from get_BM_LDiff_S4 for online analysis
+	UInt_t BM_S4_count; 					// counts through Tdiffs stored in BM_S4_Tdiffs, values from 0 to BM_S4_MaxTdiffs
+	const UInt_t BM_S4_DoAnalysisEvery = 30000;		// online analysis interval for S4 channel
+	Long64_t BM_S4_QFcount; 				// counts the number of BM QFs computed so far for S4
+
+	// both
+	const Int_t BM_NBinsMax = 100000;	// bins for HitTimes histograms (if not 10x NTimeMax, change the unit label in hist title)
+	const Int_t BM_NTimeMax = 10000;	// time axis displayed for HitTimes histograms in [ms]
+	const Int_t BM_MaxTimeDiff= 100000;	// max time difference counted in [100ns] units
+      
        Long64_t BM_L_diff_S2[BM_MAX_HITS];
        UInt_t  BM_Hits_S2;
        Long64_t BM_L_diff_S4[BM_MAX_HITS];
        UInt_t  BM_Hits_S4;
+       
 	   int val_it;
             int event_number;
 			bool WR_used;

@@ -2931,10 +2931,354 @@ void EventUnpackProc::Fill_Germanium_Histos(){
 /**----------------------------------------   Beam Monitor   -----------------------------------------**/
 /**----------------------------------------------------------------------------------------------**/
 void EventUnpackProc::Make_BeamMonitor_Histos(){
+	// set all counters to zero
+	BM_S2_count = 0;
+	BM_S2_QFcount = 0;
+	BM_S4_count = 0;
+ 	BM_S4_QFcount = 0;
 
+ 	// S4
+ 	
+	sprintf (chis,"BEAM_MONITOR/S4/NormalizedHitTimeDifference");
+	sprintf (chead,"S4 Normalized Hit Time Difference [100ns]");
+	hBM_s4h_norm_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S4/HitTimeDifference");
+	sprintf (chead,"S4 Hit Time Difference [100ns]");
+	hBM_s4h_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S4/HitTimes");
+	sprintf (chead,"S4 Hit Time [ms]: bins are 100us wide");
+	hBM_s4h_t1 = MakeTH1 ('D', chis, chead, BM_NBinsMax, 0, BM_NTimeMax);
+   	
+	sprintf (chis,"BEAM_MONITOR/S4/HitsPerSpill");
+	sprintf (chead,"S4 Hits per spill");	
+	hBM_s4h_n = MakeTH1 ('D', chis, chead, 600, 0, 6000);
+	
+	sprintf (chis,"BEAM_MONITOR/S4/Poisson");
+	sprintf (chead,"S4 Poisson");
+	hBM_s4h_poisson = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S4/CumulativeHits");
+	sprintf (chead,"S4 Cumulative Hit Times [100ns]");
+	hBM_s4h_c = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S4/CumulativeHitDiff");
+	sprintf (chead,"S4 Deviation of Cumulative Hit Times [100ns]");
+	hBM_s4h_dc = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);	
+		
+	sprintf (chis,"BEAM_MONITOR/S4/CumulativePoisson");
+	sprintf (chead,"S4 Cumulative Poisson [100ns]");
+	hBM_s4h_cp = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+
+	
+	gBM_s4gr_dt_avrg = MakeGraph("BEAM_MONITOR/S4/AverageTimeDifference","S4 Average Time Difference", 1,0,0);
+	gBM_s4gr_dt_avrg->GetXaxis()->SetTimeDisplay(1);
+	gBM_s4gr_dt_avrg->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s4gr_dt_avrg->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s4gr_dt_avrg->GetYaxis()->SetLimits(0,30);
+	gBM_s4gr_dt_avrg->GetYaxis()->SetTitle("t [ms]");
+	gBM_s4gr_dt_avrg->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s4gr_dt_avrg->SetMarkerColor(kBlack);
+   	gBM_s4gr_dt_avrg->SetMarkerStyle(20);
+	gBM_s4gr_dt_avrg->SetLineColor(kBlue);
+   	gBM_s4gr_dt_avrg->SetLineWidth(2);
+   	gBM_s4gr_dt_avrg->GetXaxis()->SetNdivisions(-4);
+	gBM_s4gr_dt_avrg->Draw("APC");
+	
+	gBM_s4gr_qf = MakeGraph("BEAM_MONITOR/S4/QualityFactor","S4 Quality Factor",  1,0,0);
+	gBM_s4gr_qf->GetXaxis()->SetTimeDisplay(1);
+	gBM_s4gr_qf->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s4gr_qf->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s4gr_qf->GetYaxis()->SetLimits(-10,10);
+	gBM_s4gr_qf->GetYaxis()->SetTitle("QF");
+	gBM_s4gr_qf->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s4gr_qf->SetMarkerColor(kBlack);
+   	gBM_s4gr_qf->SetMarkerStyle(20);
+	gBM_s4gr_qf->SetLineColor(kBlue);
+   	gBM_s4gr_qf->SetLineWidth(2);
+   	gBM_s4gr_qf->GetXaxis()->SetNdivisions(-4);
+	gBM_s4gr_qf->Draw("APC");
+	
+	gBM_s4gr_dcmin = MakeGraph("BEAM_MONITOR/S4/LargestDeviationFromIdeal","S4 Largest Deviation From Ideal", 1,0,0);
+	gBM_s4gr_dcmin->GetXaxis()->SetTimeDisplay(1);
+	gBM_s4gr_dcmin->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s4gr_dcmin->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s4gr_dcmin->GetYaxis()->SetLimits(-1,0);
+	gBM_s4gr_dcmin->GetYaxis()->SetTitle("QF2");
+	gBM_s4gr_dcmin->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s4gr_dcmin->SetMarkerColor(kBlack);
+   	gBM_s4gr_dcmin->SetMarkerStyle(20);
+	gBM_s4gr_dcmin->SetLineColor(kBlue);
+   	gBM_s4gr_dcmin->SetLineWidth(2);
+   	gBM_s4gr_dcmin->GetXaxis()->SetNdivisions(-4);
+	gBM_s4gr_dcmin->Draw("APC");
+	
+	gBM_s4gr_dctime = MakeGraph("BEAM_MONITOR/S4/TimeDifferenceLargestDeviation","S4 Time Difference with the largest deviation [us]",  1,0,0);
+	gBM_s4gr_dctime->GetXaxis()->SetTimeDisplay(1);
+	gBM_s4gr_dctime->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s4gr_dctime->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s4gr_dctime->GetYaxis()->SetLimits(0,100);
+	gBM_s4gr_dctime->GetYaxis()->SetTitle("QF3 time [us]");
+	gBM_s4gr_dctime->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s4gr_dctime->SetMarkerColor(kBlack);
+   	gBM_s4gr_dctime->SetMarkerStyle(20);
+	gBM_s4gr_dctime->SetLineColor(kBlue);
+   	gBM_s4gr_dctime->SetLineWidth(2);
+   	gBM_s4gr_dctime->GetXaxis()->SetNdivisions(-4);
+	gBM_s4gr_dctime->Draw("APC");
+	
+	
+	// S2
+	
+	sprintf (chis,"BEAM_MONITOR/S2/NormalizedHitTimeDifference");
+	sprintf (chead,"S2 Normalized Hit Time Difference [100ns]");
+	hBM_s2h_norm_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S2/HitTimeDifference");
+	sprintf (chead,"S2 Hit Time Difference [100ns]");
+	hBM_s2h_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S2/HitTimes");
+	sprintf (chead,"S2 Hit Time [ms]: bins are 100us wide");
+	hBM_s2h_t1 = MakeTH1 ('D', chis, chead, BM_NBinsMax, 0, BM_NTimeMax);
+   	
+	sprintf (chis,"BEAM_MONITOR/S2/HitsPerSpill");
+	sprintf (chead,"S2 Hits per spill");	
+	hBM_s2h_n = MakeTH1 ('D', chis, chead, 600, 0, 6000);
+	
+	sprintf (chis,"BEAM_MONITOR/S2/Poisson");
+	sprintf (chead,"S2 Poisson");
+	hBM_s2h_poisson = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S2/CumulativeHits");
+	sprintf (chead,"S2 Cumulative Hit Times [100ns]");
+	hBM_s2h_c = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+	
+	sprintf (chis,"BEAM_MONITOR/S2/CumulativeHitDiff");
+	sprintf (chead,"S2 Deviation of Cumulative Hit Times [100ns]");
+	hBM_s2h_dc = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);	
+		
+	sprintf (chis,"BEAM_MONITOR/S2/CumulativePoisson");
+	sprintf (chead,"S2 Cumulative Poisson [100ns]");
+	hBM_s2h_cp = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
+
+	
+	gBM_s2gr_dt_avrg = MakeGraph("BEAM_MONITOR/S2/AverageTimeDifference","S2 Average Time Difference", 1,0,0);
+	gBM_s2gr_dt_avrg->GetXaxis()->SetTimeDisplay(1);
+	gBM_s2gr_dt_avrg->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s2gr_dt_avrg->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s2gr_dt_avrg->GetYaxis()->SetLimits(0,30);
+	gBM_s2gr_dt_avrg->GetYaxis()->SetTitle("t [ms]");
+	gBM_s2gr_dt_avrg->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s2gr_dt_avrg->SetMarkerColor(kBlack);
+   	gBM_s2gr_dt_avrg->SetMarkerStyle(20);
+	gBM_s2gr_dt_avrg->SetLineColor(kBlue);
+   	gBM_s2gr_dt_avrg->SetLineWidth(2);
+   	gBM_s2gr_dt_avrg->GetXaxis()->SetNdivisions(-4);
+	gBM_s2gr_dt_avrg->Draw("APC");
+	
+	gBM_s2gr_qf = MakeGraph("BEAM_MONITOR/S2/QualityFactor","S2 Quality Factor",  1,0,0);
+	gBM_s2gr_qf->GetXaxis()->SetTimeDisplay(1);
+	gBM_s2gr_qf->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s2gr_qf->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s2gr_qf->GetYaxis()->SetLimits(-10,10);
+	gBM_s2gr_qf->GetYaxis()->SetTitle("QF");
+	gBM_s2gr_qf->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s2gr_qf->SetMarkerColor(kBlack);
+   	gBM_s2gr_qf->SetMarkerStyle(20);
+	gBM_s2gr_qf->SetLineColor(kBlue);
+   	gBM_s2gr_qf->SetLineWidth(2);
+   	gBM_s2gr_qf->GetXaxis()->SetNdivisions(-4);
+	gBM_s2gr_qf->Draw("APC");
+	
+	gBM_s2gr_dcmin = MakeGraph("BEAM_MONITOR/S2/LargestDeviationFromIdeal","S2 Largest Deviation From Ideal", 1,0,0);
+	gBM_s2gr_dcmin->GetXaxis()->SetTimeDisplay(1);
+	gBM_s2gr_dcmin->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s2gr_dcmin->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s2gr_dcmin->GetYaxis()->SetLimits(-1,0);
+	gBM_s2gr_dcmin->GetYaxis()->SetTitle("QF2");
+	gBM_s2gr_dcmin->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s2gr_dcmin->SetMarkerColor(kBlack);
+   	gBM_s2gr_dcmin->SetMarkerStyle(20);
+	gBM_s2gr_dcmin->SetLineColor(kBlue);
+   	gBM_s2gr_dcmin->SetLineWidth(2);
+   	gBM_s2gr_dcmin->GetXaxis()->SetNdivisions(-4);
+	gBM_s2gr_dcmin->Draw("APC");
+	
+	gBM_s2gr_dctime = MakeGraph("BEAM_MONITOR/S2/TimeDifferenceLargestDeviation","S2 Time Difference with the largest deviation [us]",  1,0,0);
+	gBM_s2gr_dctime->GetXaxis()->SetTimeDisplay(1);
+	gBM_s2gr_dctime->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
+	gBM_s2gr_dctime->GetXaxis()->SetTimeOffset(0,"local");
+	gBM_s2gr_dctime->GetYaxis()->SetLimits(0,100);
+	gBM_s2gr_dctime->GetYaxis()->SetTitle("QF3 time [us]");
+	gBM_s2gr_dctime->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
+	gBM_s2gr_dctime->SetMarkerColor(kBlack);
+   	gBM_s2gr_dctime->SetMarkerStyle(20);
+	gBM_s2gr_dctime->SetLineColor(kBlue);
+   	gBM_s2gr_dctime->SetLineWidth(2);
+   	gBM_s2gr_dctime->GetXaxis()->SetNdivisions(-4);
+	gBM_s2gr_dctime->Draw("APC");
    }
    //-----------------------------------------------------------------------------------------------------------------------------//
 void EventUnpackProc::Fill_BeamMonitor_Histos(){
+	Int_t BM_Hits;
+	Double_t BM_CountRate;
+	Double_t BM_CR_timesum;
+	Int_t BM_CR_relevanthits;
+	Double_t BM_CR_Tlimit = pow(10,6); // in [100ns] units, insures that times between spills are not counted when computing count rate, should be much lower than the expected time between spills (for 1s off spill, 100ms or lower should be fine)
+	
+	Double_t BM_Tdiff_integral;
+	Double_t BM_dc_MinValue;
+	Int_t BM_dc_MinBin;
+	
+	Long64_t BM_SumTdiff;
+		
+	Double_t BM_QF;
+	Double_t BM_Tmean;
+	
+	//S2:
+	BM_Hits = RAW->get_BM_Hits_S2();
+	for(Int_t i=0; i<BM_Hits; ++i) {
+
+		BM_S2_Tdiffs[BM_S2_count] = RAW->get_BM_LDiff_S2(i)/10; // save time diffs for analysis & change units from [10ns] to [100ns] 
+		BM_S2_SumTdiff
+		
+		hBM_s2h_tdiff->Fill(BM_S2_Tdiffs[BM_S2_count]);
+		++BM_S2_count;
+		
+		if(BM_S2_count > BM_S2_MaxTdiffs) {
+			BM_S2_count = BM_S2_count % BM_MaxTdiffs;	
+			}
+			
+		if(BM_S2_count % BM_S2_DoAnalysisEvery == 0) { // analysis of Tdiff data every BM_S2_DoAnalysisEvery number of hits
+			
+			BM_SumTdiff = 0;
+			BM_CR_timesum = 0;
+			BM_CR_relevanthits = 0;
+			
+			for(Int_t k=0; k<BM_S2_MaxTdiffs; ++k) {
+				if((Double_t) BM_SumTdiff < (Double_t) BM_NTimeMax*pow(10,5)) {
+					BM_SumTdiff += BM_S2_Tdiffs[ ( BM_S2_count + k ) % BM_S2_MaxTdiffs ];
+					hBM_s2h_t1->Fill((Double_t) BM_SumTdiff*pow(10,-5));
+					} 
+				
+				if(BM_S2_Tdiffs[k] < BM_CR_Tlimit) { 
+					BM_CR_timesum+=S2TimeDiffs[k]; 
+					++BM_CR_relevanthits;
+					}
+				}
+				
+			BM_CountRate = (Double_t) BM_CR_relevanthits / BM_CR_timesum;
+			
+			BM_Tdiff_integral = hBM_s2h_tdiff->Integral(0, BM_MaxTimeDiff);
+			
+			for(Int_t j=0; j<BM_S2MaxTdiffs; ++j) { 
+				hBM_s2h_norm_tdiff->SetBinContent(j, hBM_s2h_tdiff->GetBinContent(j) / BM_Tdiff_integral); 			// normalize hBM_s2h_tdiff
+				hBM_s2h_poisson->SetBinContent(j, exp(-BM_CountRate*((Double_t) j)) - exp(-BM_CountRate*((Double_t) j+1))); // get theoretical tdiffs from BM_CountRate
+				
+				// get cumulative histograms for measured, theoretical and their difference	
+				if(j==0) { 
+					hBM_s2h_c->SetBinContent(j,0);
+					hBM_s2h_cp->SetBinContent(j,0);
+					}
+				else {
+					hBM_s2h_c->SetBinContent(j,hBM_s2h_tdiff->GetBinContent(j-1) + hBM_s2h_tdiff->GetBinContent(j));
+					hBM_s2h_cp->SetBinContent(j,hBM_s2h_poisson->GetBinContent(j-1) + hBM_s2h_poisson->GetBinContent(j));
+					}
+				hBM_s2h_dc->SetBinContent(j,hBM_s2h_cp->GetBinContent(j) - hBM_s2h_c->GetBinContent(j));
+				}
+			
+			BM_dc_MinBin = hBM_s2h_dc->GetMinimumBin();
+			BM_dc_MinValue = hBM_s2h_dc->GetBinContent(BM_dc_MinBin);
+			BM_Tmean =  hBM_s2h_norm_tdiff->GetMean();
+			
+			// compute quality factor
+			BM_QF = 100.0*(1.0 - (hBM_s2h_norm_tdiff->Integral(0, (Int_t) BM_Tmean) / hBM_s2h_poisson->Integral(0, (Int_t) BM_Tmean)));
+			
+			// get local time
+			time_t rawtime;
+			time(&rawtime);
+			
+			// add points to graphs
+			gBM_s2gr_qf->TGraph::SetPoint(BM_S2_QFcount, rawtime, BM_QF);
+			gBM_s2gr_dcmin->TGraph::SetPoint(BM_S2_QFcount, rawtime, BM_dc_MinValue);
+			gBM_s2gr_dctime->TGraph::SetPoint(BM_S2_QFcount,rawtime,BM_dc_MinBin/10);
+			gBM_s2gr_dt_avrg->TGraph::SetPoint(BM_S2_QFcount,rawtime,BM_Tmean);
+			++BM_S2_QFcount;
+			}
+		}
+	//S4:
+	BM_Hits = RAW->get_BM_Hits_S4();
+	for(Int_t i=0; i<BM_Hits; ++i) {
+
+		BM_S4_Tdiffs[BM_S4_count] = RAW->get_BM_LDiff_S4(i)/10; // save time diffs for analysis & change units from [10ns] to [100ns] 
+		BM_S4_SumTdiff
+		
+		hBM_s4h_tdiff->Fill(BM_S4_Tdiffs[BM_S4_count]);
+		++BM_S4_count;
+		
+		if(BM_S4_count > BM_S4_MaxTdiffs) {
+			BM_S4_count = BM_S4_count % BM_MaxTdiffs;	
+			}
+			
+		if(BM_S4_count % BM_S4_DoAnalysisEvery == 0) { // analysis of Tdiff data every BM_S4_DoAnalysisEvery number of hits
+			
+			BM_SumTdiff = 0;
+			BM_CR_timesum = 0;
+			BM_CR_relevanthits = 0;
+			
+			for(Int_t k=0; k<BM_S4_MaxTdiffs; ++k) {
+				if((Double_t) BM_SumTdiff < (Double_t) BM_NTimeMax*pow(10,5)) {
+					BM_SumTdiff += BM_S4_Tdiffs[ ( BM_S4_count + k ) % BM_S4_MaxTdiffs ];
+					hBM_s4h_t1->Fill((Double_t) BM_SumTdiff*pow(10,-5));
+					} 
+				
+				if(BM_S4_Tdiffs[k] < BM_CR_Tlimit) { 
+					BM_CR_timesum+=S4TimeDiffs[k]; 
+					++BM_CR_relevanthits;
+					}
+				}
+				
+			BM_CountRate = (Double_t) BM_CR_relevanthits / BM_CR_timesum;
+			
+			BM_Tdiff_integral = hBM_s4h_tdiff->Integral(0, BM_MaxTimeDiff);
+			
+			for(Int_t j=0; j<BM_S4MaxTdiffs; ++j) { 
+				hBM_s4h_norm_tdiff->SetBinContent(j, hBM_s4h_tdiff->GetBinContent(j) / BM_Tdiff_integral); 			// normalize hBM_s4h_tdiff
+				hBM_s4h_poisson->SetBinContent(j, exp(-BM_CountRate*((Double_t) j)) - exp(-BM_CountRate*((Double_t) j+1))); // get theoretical tdiffs from BM_CountRate
+				
+				// get cumulative histograms for measured, theoretical and their difference	
+				if(j==0) { 
+					hBM_s4h_c->SetBinContent(j,0);
+					hBM_s4h_cp->SetBinContent(j,0);
+					}
+				else {
+					hBM_s4h_c->SetBinContent(j,hBM_s4h_tdiff->GetBinContent(j-1) + hBM_s4h_tdiff->GetBinContent(j));
+					hBM_s4h_cp->SetBinContent(j,hBM_s4h_poisson->GetBinContent(j-1) + hBM_s4h_poisson->GetBinContent(j));
+					}
+				hBM_s4h_dc->SetBinContent(j,hBM_s4h_cp->GetBinContent(j) - hBM_s4h_c->GetBinContent(j));
+				}
+			
+			BM_dc_MinBin = hBM_s4h_dc->GetMinimumBin();
+			BM_dc_MinValue = hBM_s4h_dc->GetBinContent(BM_dc_MinBin);
+			BM_Tmean =  hBM_s4h_norm_tdiff->GetMean();
+			
+			// compute quality factor
+			BM_QF = 100.0*(1.0 - (hBM_s4h_norm_tdiff->Integral(0, (Int_t) BM_Tmean) / hBM_s4h_poisson->Integral(0, (Int_t) BM_Tmean)));
+			
+			// get local time
+			time_t rawtime;
+			time(&rawtime);
+			
+			// add point to graphs
+			gBM_s4gr_qf->TGraph::SetPoint(BM_S4_QFcount, rawtime, BM_QF);
+			gBM_s4gr_dcmin->TGraph::SetPoint(BM_S4_QFcount, rawtime, BM_dc_MinValue);
+			gBM_s4gr_dctime->TGraph::SetPoint(BM_S4_QFcount,rawtime,BM_dc_MinBin/10);
+			gBM_s4gr_dt_avrg->TGraph::SetPoint(BM_S4_QFcount,rawtime,BM_Tmean);
+			++BM_S4_QFcount;
+			}
+		}
     
 }
 
