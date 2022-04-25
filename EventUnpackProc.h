@@ -29,6 +29,7 @@
 #include <array>
 #include <vector>
 #include <deque>
+#include <valarray>
 
 // Go4 Includes //
 #include "TGo4UserException.h"
@@ -513,14 +514,14 @@ using namespace std;
 	
 	// S2
 	const Int_t BM_S2_MaxTdiffs = 300000;
-	std::valarray<UInt_t>  BM_S2_Tdiffs(BM_S2_MaxTdiffs); 	// saves time differences from get_BM_LDiff_S2 for online analysis
+	std::valarray<UInt_t>  BM_S2_Tdiffs={0}; 		// saves time differences from get_BM_LDiff_S2 for online analysis
 	UInt_t BM_S2_count; 					// counts through Tdiffs stored in BM_S2_Tdiffs, values from 0 to BM_S2_MaxTdiffs
 	const UInt_t BM_S2_DoAnalysisEvery = 100000;		// online analysis interval for S2 channel
 	Long64_t BM_S2_QFcount; 				// counts the number of BM QFs computed so far for S2
 
 	// S4
 	const Int_t BM_S4_MaxTdiffs = 100000;
-	std::valarray<UInt_t>  BM_S4_Tdiffs(BM_S4_MaxTdiffs); 	// saves S4 time differences from get_BM_LDiff_S4 for online analysis
+	std::valarray<UInt_t>  BM_S4_Tdiffs={0}; 		// saves S4 time differences from get_BM_LDiff_S4 for online analysis
 	UInt_t BM_S4_count; 					// counts through Tdiffs stored in BM_S4_Tdiffs, values from 0 to BM_S4_MaxTdiffs
 	const UInt_t BM_S4_DoAnalysisEvery = 30000;		// online analysis interval for S4 channel
 	Long64_t BM_S4_QFcount; 				// counts the number of BM QFs computed so far for S4
