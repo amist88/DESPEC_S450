@@ -2938,7 +2938,9 @@ void EventUnpackProc::Make_BeamMonitor_Histos(){
  	BM_S4_QFcount = 0;
 
  	// S4
- 	
+ 	Text_t chis[256];
+  	Text_t chead[256];
+	
 	sprintf (chis,"BEAM_MONITOR/S4/NormalizedHitTimeDifference");
 	sprintf (chead,"S4 Normalized Hit Time Difference [100ns]");
 	hBM_s4h_norm_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
@@ -3142,13 +3144,12 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 	for(Int_t i=0; i<BM_Hits; ++i) {
 
 		BM_S2_Tdiffs[BM_S2_count] = RAW->get_BM_LDiff_S2(i)/10; // save time diffs for analysis & change units from [10ns] to [100ns] 
-		BM_S2_SumTdiff
 		
 		hBM_s2h_tdiff->Fill(BM_S2_Tdiffs[BM_S2_count]);
 		++BM_S2_count;
 		
 		if(BM_S2_count > BM_S2_MaxTdiffs) {
-			BM_S2_count = BM_S2_count % BM_MaxTdiffs;	
+			BM_S2_count = BM_S2_count % BM_S2_MaxTdiffs;	
 			}
 			
 		if(BM_S2_count % BM_S2_DoAnalysisEvery == 0) { // analysis of Tdiff data every BM_S2_DoAnalysisEvery number of hits
@@ -3164,7 +3165,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					} 
 				
 				if(BM_S2_Tdiffs[k] < BM_CR_Tlimit) { 
-					BM_CR_timesum+=S2TimeDiffs[k]; 
+					BM_CR_timesum+=BM_S2_TimeDiffs[k]; 
 					++BM_CR_relevanthits;
 					}
 				}
@@ -3173,7 +3174,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 			
 			BM_Tdiff_integral = hBM_s2h_tdiff->Integral(0, BM_MaxTimeDiff);
 			
-			for(Int_t j=0; j<BM_S2MaxTdiffs; ++j) { 
+			for(Int_t j=0; j<BM_S2_MaxTdiffs; ++j) { 
 				hBM_s2h_norm_tdiff->SetBinContent(j, hBM_s2h_tdiff->GetBinContent(j) / BM_Tdiff_integral); 			// normalize hBM_s2h_tdiff
 				hBM_s2h_poisson->SetBinContent(j, exp(-BM_CountRate*((Double_t) j)) - exp(-BM_CountRate*((Double_t) j+1))); // get theoretical tdiffs from BM_CountRate
 				
@@ -3213,13 +3214,12 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 	for(Int_t i=0; i<BM_Hits; ++i) {
 
 		BM_S4_Tdiffs[BM_S4_count] = RAW->get_BM_LDiff_S4(i)/10; // save time diffs for analysis & change units from [10ns] to [100ns] 
-		BM_S4_SumTdiff
 		
 		hBM_s4h_tdiff->Fill(BM_S4_Tdiffs[BM_S4_count]);
 		++BM_S4_count;
 		
 		if(BM_S4_count > BM_S4_MaxTdiffs) {
-			BM_S4_count = BM_S4_count % BM_MaxTdiffs;	
+			BM_S4_count = BM_S4_count % BM_S4_MaxTdiffs;	
 			}
 			
 		if(BM_S4_count % BM_S4_DoAnalysisEvery == 0) { // analysis of Tdiff data every BM_S4_DoAnalysisEvery number of hits
@@ -3235,7 +3235,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					} 
 				
 				if(BM_S4_Tdiffs[k] < BM_CR_Tlimit) { 
-					BM_CR_timesum+=S4TimeDiffs[k]; 
+					BM_CR_timesum+=BM_S4_TimeDiffs[k]; 
 					++BM_CR_relevanthits;
 					}
 				}
@@ -3244,7 +3244,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 			
 			BM_Tdiff_integral = hBM_s4h_tdiff->Integral(0, BM_MaxTimeDiff);
 			
-			for(Int_t j=0; j<BM_S4MaxTdiffs; ++j) { 
+			for(Int_t j=0; j<BM_S4_MaxTdiffs; ++j) { 
 				hBM_s4h_norm_tdiff->SetBinContent(j, hBM_s4h_tdiff->GetBinContent(j) / BM_Tdiff_integral); 			// normalize hBM_s4h_tdiff
 				hBM_s4h_poisson->SetBinContent(j, exp(-BM_CountRate*((Double_t) j)) - exp(-BM_CountRate*((Double_t) j+1))); // get theoretical tdiffs from BM_CountRate
 				
