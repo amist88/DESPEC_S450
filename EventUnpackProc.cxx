@@ -2946,35 +2946,35 @@ void EventUnpackProc::Make_BeamMonitor_Histos(){
  	Text_t chis[256];
   	Text_t chead[256];
 	
-	sprintf (chis,"BEAM_MONITOR/S4/NormalizedHitTimeDifference");
+	sprintf (chis,"BEAM_MONITOR/S4/NormalizedHitTimeDifferenceS4");
 	sprintf (chead,"S4 Normalized Hit Time Difference [100ns]");
 	hBM_s4h_norm_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S4/HitTimeDifference");
+	sprintf (chis,"BEAM_MONITOR/S4/HitTimeDifferenceS4");
 	sprintf (chead,"S4 Hit Time Difference [100ns]");
 	hBM_s4h_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S4/HitTimes");
+	sprintf (chis,"BEAM_MONITOR/S4/HitTimesS4");
 	sprintf (chead,"S4 Hit Time [ms]: bins are 100us wide");
 	hBM_s4h_t1 = MakeTH1 ('D', chis, chead, BM_NBinsMax, 0, BM_NTimeMax);
    	
-	sprintf (chis,"BEAM_MONITOR/S4/HitsPerSpill");
+	sprintf (chis,"BEAM_MONITOR/S4/HitsPerSpillS4");
 	sprintf (chead,"S4 Hits per spill");	
 	hBM_s4h_n = MakeTH1 ('D', chis, chead, 600, 0, 6000);
 	
-	sprintf (chis,"BEAM_MONITOR/S4/Poisson");
+	sprintf (chis,"BEAM_MONITOR/S4/PoissonS4");
 	sprintf (chead,"S4 Poisson");
 	hBM_s4h_poisson = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S4/CumulativeHits");
+	sprintf (chis,"BEAM_MONITOR/S4/CumulativeHitsS4");
 	sprintf (chead,"S4 Cumulative Hit Times [100ns]");
 	hBM_s4h_c = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S4/CumulativeHitDiff");
+	sprintf (chis,"BEAM_MONITOR/S4/CumulativeHitDiffS4");
 	sprintf (chead,"S4 Deviation of Cumulative Hit Times [100ns]");
 	hBM_s4h_dc = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);	
 		
-	sprintf (chis,"BEAM_MONITOR/S4/CumulativePoisson");
+	sprintf (chis,"BEAM_MONITOR/S4/CumulativePoissonS4");
 	sprintf (chead,"S4 Cumulative Poisson [100ns]");
 	hBM_s4h_cp = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 
@@ -3038,35 +3038,35 @@ void EventUnpackProc::Make_BeamMonitor_Histos(){
 	
 	// S2
 	
-	sprintf (chis,"BEAM_MONITOR/S2/NormalizedHitTimeDifference");
+	sprintf (chis,"BEAM_MONITOR/S2/NormalizedHitTimeDifferenceS2");
 	sprintf (chead,"S2 Normalized Hit Time Difference [100ns]");
 	hBM_s2h_norm_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S2/HitTimeDifference");
+	sprintf (chis,"BEAM_MONITOR/S2/HitTimeDifferenceS2");
 	sprintf (chead,"S2 Hit Time Difference [100ns]");
 	hBM_s2h_tdiff = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S2/HitTimes");
+	sprintf (chis,"BEAM_MONITOR/S2/HitTimesS2");
 	sprintf (chead,"S2 Hit Time [ms]: bins are 100us wide");
 	hBM_s2h_t1 = MakeTH1 ('D', chis, chead, BM_NBinsMax, 0, BM_NTimeMax);
    	
-	sprintf (chis,"BEAM_MONITOR/S2/HitsPerSpill");
+	sprintf (chis,"BEAM_MONITOR/S2/HitsPerSpillS2");
 	sprintf (chead,"S2 Hits per spill");	
 	hBM_s2h_n = MakeTH1 ('D', chis, chead, 600, 0, 6000);
 	
-	sprintf (chis,"BEAM_MONITOR/S2/Poisson");
+	sprintf (chis,"BEAM_MONITOR/S2/PoissonS2");
 	sprintf (chead,"S2 Poisson");
 	hBM_s2h_poisson = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S2/CumulativeHits");
+	sprintf (chis,"BEAM_MONITOR/S2/CumulativeHitsS2");
 	sprintf (chead,"S2 Cumulative Hit Times [100ns]");
 	hBM_s2h_c = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 	
-	sprintf (chis,"BEAM_MONITOR/S2/CumulativeHitDiff");
+	sprintf (chis,"BEAM_MONITOR/S2/CumulativeHitDiffS2");
 	sprintf (chead,"S2 Deviation of Cumulative Hit Times [100ns]");
 	hBM_s2h_dc = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);	
 		
-	sprintf (chis,"BEAM_MONITOR/S2/CumulativePoisson");
+	sprintf (chis,"BEAM_MONITOR/S2/CumulativePoissonS2");
 	sprintf (chead,"S2 Cumulative Poisson [100ns]");
 	hBM_s2h_cp = MakeTH1 ('D', chis, chead, BM_MaxTimeDiff, 0, BM_MaxTimeDiff);
 
