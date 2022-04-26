@@ -3241,7 +3241,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					hBM_s4h_t1->Fill((Double_t) BM_S4_SumTdiff*pow(10,-5));
 					} 
 				else {
-					hBM_s2h_t1->Reset("ICESM");
+					hBM_s4h_t1->Reset("ICESM");
 					BM_S4_SumTdiff = 0;
 					}
 										
