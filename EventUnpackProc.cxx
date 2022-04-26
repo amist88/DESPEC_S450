@@ -64,6 +64,11 @@
 
 using namespace std;
 
+// Beam Monitor global variables
+const Int_t BM_S2_MaxTdiffs = 300000;
+std::valarray<UInt_t>  BM_S2_Tdiffs(BM_S2_MaxTdiffs); 		// saves S2 time differences from get_BM_LDiff_S2 for online analysis
+const Int_t BM_S4_MaxTdiffs = 100000;
+std::valarray<UInt_t>  BM_S4_Tdiffs(BM_S4_MaxTdiffs); 		// saves S4 time differences from get_BM_LDiff_S4 for online analysis
 
 //***********************************************************
 EventUnpackProc::EventUnpackProc() :TGo4EventProcessor("Proc")
