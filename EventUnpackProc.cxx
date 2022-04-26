@@ -3138,8 +3138,6 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 	Double_t BM_Tdiff_integral;
 	Double_t BM_dc_MinValue;
 	Int_t BM_dc_MinBin;
-	
-	Long64_t BM_SumTdiff;
 		
 	Double_t BM_QF;
 	Double_t BM_Tmean;
@@ -3159,16 +3157,19 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 			
 		if(BM_S2_count % BM_S2_DoAnalysisEvery == 0) { // analysis of Tdiff data every BM_S2_DoAnalysisEvery number of hits
 			
-			BM_SumTdiff = 0;
 			BM_CR_timesum = 0;
 			BM_CR_relevanthits = 0;
 			
 			for(Int_t k=0; k<BM_S2_MaxTdiffs; ++k) {
-				if((Double_t) BM_SumTdiff < (Double_t) BM_NTimeMax*pow(10,5)) {
-					BM_SumTdiff += BM_S2_Tdiffs[ ( BM_S2_count + k ) % BM_S2_MaxTdiffs ];
-					hBM_s2h_t1->Fill((Double_t) BM_SumTdiff*pow(10,-5));
+				if((Double_t) BM_S2_SumTdiff < (Double_t) BM_NTimeMax*pow(10,5)) {
+					BM_S2_SumTdiff += BM_S2_Tdiffs[ ( BM_S2_count + k ) % BM_S2_MaxTdiffs ];
+					hBM_s2h_t1->Fill((Double_t) BM_S2_SumTdiff*pow(10,-5));
 					} 
-				
+				else {
+					hBM_s2h_t1->Reset("ICESM");
+					BM_S2_SumTdiff = 0;
+					}
+					
 				if(BM_S2_Tdiffs[k] < BM_CR_Tlimit) { 
 					BM_CR_timesum+=BM_S2_Tdiffs[k]; 
 					++BM_CR_relevanthits;
@@ -3229,16 +3230,19 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 			
 		if(BM_S4_count % BM_S4_DoAnalysisEvery == 0) { // analysis of Tdiff data every BM_S4_DoAnalysisEvery number of hits
 			
-			BM_SumTdiff = 0;
 			BM_CR_timesum = 0;
 			BM_CR_relevanthits = 0;
 			
 			for(Int_t k=0; k<BM_S4_MaxTdiffs; ++k) {
-				if((Double_t) BM_SumTdiff < (Double_t) BM_NTimeMax*pow(10,5)) {
-					BM_SumTdiff += BM_S4_Tdiffs[ ( BM_S4_count + k ) % BM_S4_MaxTdiffs ];
-					hBM_s4h_t1->Fill((Double_t) BM_SumTdiff*pow(10,-5));
+				if((Double_t) BM_S4_SumTdiff < (Double_t) BM_NTimeMax*pow(10,5)) {
+					BM_S4_SumTdiff += BM_S4_Tdiffs[ ( BM_S4_count + k ) % BM_S4_MaxTdiffs ];
+					hBM_s4h_t1->Fill((Double_t) BM_S4_SumTdiff*pow(10,-5));
 					} 
-				
+				else {
+					hBM_s2h_t1->Reset("ICESM");
+					BM_S4_SumTdiff = 0;
+					}
+										
 				if(BM_S4_Tdiffs[k] < BM_CR_Tlimit) { 
 					BM_CR_timesum+=BM_S4_Tdiffs[k]; 
 					++BM_CR_relevanthits;
