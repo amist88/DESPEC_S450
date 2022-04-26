@@ -2939,9 +2939,11 @@ void EventUnpackProc::Make_BeamMonitor_Histos(){
 	// set all counters to zero
 	BM_S2_count = 0;
 	BM_S2_QFcount = 0;
+	BM_S2_SumTdiff = 0;
 	BM_S4_count = 0;
  	BM_S4_QFcount = 0;
-
+	BM_S4_SumTdiff = 0
+		
  	// S4
  	Text_t chis[256];
   	Text_t chead[256];
