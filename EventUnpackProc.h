@@ -516,11 +516,13 @@ using namespace std;
 	UInt_t BM_S2_count; 					// counts through Tdiffs stored in BM_S2_Tdiffs, values from 0 to BM_S2_MaxTdiffs
 	const UInt_t BM_S2_DoAnalysisEvery = 100000;		// online analysis interval for S2 channel
 	Long64_t BM_S2_QFcount; 				// counts the number of BM QFs computed so far for S2
+	Long64_t BM_S2_SumTdiff;				// sum of time differences for S2
 
 	// S4
 	UInt_t BM_S4_count; 					// counts through Tdiffs stored in BM_S4_Tdiffs, values from 0 to BM_S4_MaxTdiffs
 	const UInt_t BM_S4_DoAnalysisEvery = 30000;		// online analysis interval for S4 channel
 	Long64_t BM_S4_QFcount; 				// counts the number of BM QFs computed so far for S4
+	Long64_t BM_S4_SumTdiff;				// sum of time differences for S4
 
 	// both
 	const Int_t BM_NBinsMax = 100000;	// bins for HitTimes histograms (if not 10x NTimeMax, change the unit label in hist title)
