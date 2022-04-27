@@ -340,6 +340,10 @@ private:
         ULong64_t   Germanium_chan_cf[Germanium_MAX_HITS];
         int Event_Type;
         
+        int Ge_Tr_Length;
+        int Ge_Tr_First;
+        int Ge_Tr_Second;
+        
         ///Beam Monitor
         Long64_t    L_diff_S2[BM_MAX_HITS];
         UInt_t      Hits_S2;
@@ -404,6 +408,8 @@ public:
     void set_DATA_SCALER(int, double*);
 
     void set_DATA_Germanium(int,ULong64_t*,int*,ULong64_t*,double*,int*,int*,bool*,bool*,ULong64_t*);
+    
+    void set_DATA_Germanium_Traces(int,int,int);
 
 
 
@@ -719,7 +725,9 @@ public:
         bool        get_Germanium_Pileup(int);
         bool        get_Germanium_Overflow(int);
         ULong64_t   get_Germanium_Channel_cf(int);
-        
+        int         get_Germanium_Trace_Length();
+        int         get_Germanium_Trace_First();
+        int         get_Germanium_Trace_Second();
         
         ///Beam Monitor
         Long64_t  get_BM_LDiff_S2(int i);
