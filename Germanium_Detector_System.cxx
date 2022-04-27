@@ -100,6 +100,8 @@ void Germanium_Detector_System::load_board_channel_file()
 void Germanium_Detector_System::get_Event_data(Raw_Event* RAW){
     
   RAW->set_DATA_Germanium(fired_FEBEX_amount,Sum_Time,Ge_channels,Chan_Time,Chan_Energy,det_ids,crystal_ids,Pileup,Overflow, Chan_CF);
+  
+  RAW->set_DATA_Germanium_Traces(l_trace_size,l_dat_fir,l_dat_sec);
     
 }
 
@@ -245,13 +247,67 @@ void Germanium_Detector_System::Process_MBS(int* pdata){
             //if ((*this->pdata & 0x40000000) != 0) cout<<" Bit 30 set "<<endl;
            // std::cout << "Pileup = " << fbx_Ch_En->pileup << ", OF = " << fbx_Ch_En->overflow << std::endl;
     
-            this->pdata++; // Moves to Future Use //
+            //this->pdata++; // Moves to Traces Use //
+           
     
             fired_FEBEX_amount++;
-            
             // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
             // @@@@ Traces Would Go Here @@@@@ //
             // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+           
+             ///skip words
+             this->pdata += 3;
+            printf("1_pdata=0x%08x\n",*this->pdata);
+            
+             l_cha_size = *this->pdata++; 
+            printf("2 l_cha_size=0x%08x\n",l_cha_size);
+            
+            l_trace_head = *this->pdata++;
+              printf("3 l_trace_head=0x%08x\n",l_trace_head);
+            
+            if ( ((l_trace_head & 0xf0000000) >> 24) != 0xa0)
+        {
+          printf ("ERROR>> trace header id is not 0xaa (0x%08x)\n",l_trace_head );
+          continue;  
+          
+        }
+            
+            l_trace_size = (l_cha_size/4) - 2;     // in longs/32bit
+            printf("4 l_trace_size[%d]: %d\n",idx,l_trace_size);
+            
+            for (int l_l=0; l_l<l_trace_size; l_l++)   // loop over samples of one trace 
+        {
+            // disentangle data
+            l_dat_fir = *this->pdata++;
+            l_dat_sec = l_dat_fir;
+            
+             l_dat_fir =  l_dat_fir & 0x3fff;         // 14bit
+             l_dat_sec = (l_dat_sec >> 16) & 0x3fff;
+            
+        }
+        l_trace_size = l_trace_size * 2; 
+        
+        l_trace_trail = *this->pdata; 
+         printf("5 l_trace_trail=0x%08x\n",*this->pdata);
+        if ( ((l_trace_trail & 0xf0000000) >> 24) != 0xb0)
+        {
+             printf ("ERROR>> trace trailer id is not 0xbb (0x%08x)\n",l_trace_trail);
+        }
+//             this->pdata++;
+//           //    FEBEX_Tr *fbx_Ch_Tr=(FEBEX_Tr*) this->pdata++;
+//              printf("5_pdata=0x%08x\n",*this->pdata);
+//              this->pdata++;
+//              printf("6_pdata=0x%08x\n",*this->pdata);
+//              this->pdata++;
+//              printf("6_pdata=0x%08x\n",*this->pdata);
+//              printf("4_pdata=0x%08x\n",*this->pdata);
+//              printf("4_pdata=0x%08x\n",*this->pdata);
+             
+           //cout<<"   fbx_Ch_Tr->ch_si_tr " <<  fbx_Ch_Tr->ch_si_tr << endl;
+//              Chan_Energy[fired_FEBEX_amount] = fbx_Ch_Tr->ch_si_tr;
+//              this->pdata++; // Moves to Traces Use //
+             
+            
             
                     }   
           else

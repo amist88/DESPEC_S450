@@ -916,6 +916,12 @@ void Raw_Event::set_DATA_Germanium(int Ge_FIRED,ULong64_t* sum_time,int* hit_pat
 
     Event_Type = 4;
 }
+
+void Raw_Event::set_DATA_Germanium_Traces(int ge_trace_length, int ge_trace_first, int ge_trace_second){
+        Ge_Tr_Length = ge_trace_length;
+        Ge_Tr_First = ge_trace_first;
+        Ge_Tr_Second = ge_trace_second;
+    }
 //TEMPORARY GETTERS FOR FRS, FATIMA, PLASTIC, and Germanium
 
 // #############################################################
@@ -1419,6 +1425,9 @@ PLASTIC_DataStruct* Raw_Event::PassPLASTIC(){ return &PLASTIC_Data;}*/
 
     ULong64_t Raw_Event::get_Germanium_Channel_cf(int i){return Germanium_chan_cf[i];}
     
+    int Raw_Event::get_Germanium_Trace_Length(){return Ge_Tr_Length;}
+    int Raw_Event::get_Germanium_Trace_First(){return Ge_Tr_First;}
+    int Raw_Event::get_Germanium_Trace_Second(){return Ge_Tr_Second;}
   //------------------------------------------ Beam Monitor ------------------------------------------//
     Long64_t Raw_Event::get_BM_LDiff_S2(int i){return L_diff_S2[i];}
     

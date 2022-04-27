@@ -42,6 +42,13 @@ private:
     bool* Overflow;
     bool* Pileup;
     
+    int         l_cha_size;
+    int         l_trace_head;
+    int         l_trace_size;
+    int         l_dat_fir;
+    int         l_dat_sec;  
+    int         l_trace_trail;
+    
 
     std::map<std::pair<int,int>, std::pair<int,int>> Germanium_map;
     
