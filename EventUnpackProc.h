@@ -476,6 +476,16 @@ using namespace std;
                                                 std::map<int, TH1*> hAIDA_Scaler;
                                                 std::map<int, std::deque<int>> aida_scaler_queue;
                                                 std::map<int, int> aida_scaler_cur_sec;
+                                                std::vector<TH1*> hAIDA_DeadTime;
+                                                TH1* hAIDA_DeadTime_Spill;
+                                                bool AIDA_DeadTime_OnSpill;
+                                                std::vector<std::vector<double>> aida_deadtime_queue;
+                                                std::vector<bool> aida_deadtime_spill_queue;
+                                                std::vector<size_t> aida_deadtime_pos;
+                                                size_t aida_deadtime_spill_pos;
+                                                std::vector<int64_t> last_pauses;
+                                                int64_t last_deadtime;
+                                                
 						TH1* hAIDA_TimeMachine;
 
       ///End AIDA

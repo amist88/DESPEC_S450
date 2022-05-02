@@ -436,7 +436,7 @@ int Raw_Event::get_Event_type(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //--------------------------------------AIDA  ------------------------------------------------//
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
- void Raw_Event::set_DATA_AIDA(double* Aida_E, int* Aida_feeID, int* Aida_ChID, ULong64_t* Aida_WR, int Aida_hits, bool* Aida_veto, int* Aida_side, int* Aida_strip, int* Aida_EvtID, ULong64_t* Aida_Fast, int* Aida_ADC, std::vector<AidaScaler> const& scaler){
+ void Raw_Event::set_DATA_AIDA(double* Aida_E, int* Aida_feeID, int* Aida_ChID, ULong64_t* Aida_WR, int Aida_hits, bool* Aida_veto, int* Aida_side, int* Aida_strip, int* Aida_EvtID, ULong64_t* Aida_Fast, int* Aida_ADC, std::vector<AidaScaler> const& scaler, std::vector<AidaPauseResume> const& pr){
 
     this->  AIDA_Hits = Aida_hits;
     for (int i =0; i< Aida_hits; i++){
@@ -457,6 +457,7 @@ int Raw_Event::get_Event_type(){
        }
    Event_Type = 1;
    AIDA_SCALERS = scaler;
+   AIDA_PAUSERESUME = pr;
  }
 
 
