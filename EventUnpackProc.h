@@ -418,8 +418,8 @@ using namespace std;
 
         int TAMEX_bPlasFat_ID[6][80];
 			// Germanium Histograms //
-			TH1 *hGe_Raw_E[Germanium_MAX_HITS];
-            TH1 *hFebTime;
+			TH1 *hGe_Raw_E[Germanium_MAX_DETS][Germanium_CRYSTALS];
+            TH1 *h_trace[Germanium_MAX_DETS][Germanium_CRYSTALS];
 
 		private:
 
