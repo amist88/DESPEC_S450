@@ -191,6 +191,7 @@ private:
 	ULong64_t   AIDA_FastTime[AIDA_MAX_HITS];
 	int         AIDA_ADC[AIDA_MAX_HITS];
 	std::vector<AidaScaler> AIDA_SCALERS;
+	std::vector<AidaPauseResume> AIDA_PAUSERESUME;
 
 
 
@@ -385,7 +386,7 @@ public:
 //      void set_DATA_AIDA_DECAY(double***, int, int*, ULong64_t**, int);
 //      void set_DATA_AIDA_IMP(double**, int, int*, ULong64_t**, int);
 
-     void set_DATA_AIDA(double*, int*, int*, ULong64_t*, int, bool*, int*, int*, int*, ULong64_t*, int*, std::vector<AidaScaler> const&);
+     void set_DATA_AIDA(double*, int*, int*, ULong64_t*, int, bool*, int*, int*, int*, ULong64_t*, int*, std::vector<AidaScaler> const&, std::vector<AidaPauseResume> const&);
      //void Nset_DATA_AIDA(AidaEvent*);
 
      void set_AIDA_Event(int);
@@ -585,6 +586,7 @@ public:
 	ULong64_t get_AIDA_FastTime(int i);
 	int     get_AIDA_ADC(int i);
 	std::vector<AidaScaler> const& get_AIDA_scaler() { return AIDA_SCALERS; }
+	std::vector<AidaPauseResume> const& get_AIDA_pr() { return AIDA_PAUSERESUME; }
 
 
 //     double get_AIDA_DecayEnergy(int i,int j,int k);

@@ -158,6 +158,7 @@ EventUnpackProc::EventUnpackProc(const char* name) : TGo4EventProcessor(name)
   fAida.Decays.clear();
   aida_scaler_cur_sec.clear();
   aida_scaler_queue.clear();
+  last_deadtime = 0;
   /// Setup AIDA arrays
   if(Used_Systems[1])
   {
@@ -532,6 +533,8 @@ for (int i=0; i<10; i++){
           fOutput->fFRS_scaler[i] = frs_scaler_value[i];
           fOutput->fFRS_scaler_delta[i] = increase_scaler_temp[i];
         }
+        if (increase_scaler_temp[8] > 0) AIDA_DeadTime_OnSpill = true;
+        if (increase_scaler_temp[9] > 0) AIDA_DeadTime_OnSpill = false;
 
         //fOutput->fFRS_z3 = RAW->get_FRS_z3();
             ///ID Timestamp
@@ -2666,6 +2669,34 @@ for(int i=0; i<32; i++){
           2000, -32768, 32767
         );
       }
+
+    }
+
+    hAIDA_DeadTime.resize(conf->FEEs());
+    aida_deadtime_queue.resize(conf->FEEs());
+    aida_deadtime_pos.resize(conf->FEEs());
+    last_pauses.resize(conf->FEEs());
+    hAIDA_DeadTime_Spill = MakeTH1('I',
+        Form("AIDA/DeadTime/DeadTime_Spill"),
+        Form("Spill flag for AIDA dead time"),
+        6000, 0, 600, "Time before now (seconds)",
+        "On spill?"
+    );
+    hAIDA_DeadTime_Spill->SetLineColor(kRed);
+    aida_deadtime_spill_queue.resize(6000);
+    aida_deadtime_spill_pos = 0;
+    AIDA_DeadTime_OnSpill = false;
+    for (int i = 0; i < conf->FEEs(); i++)
+    {
+      aida_deadtime_queue[i].resize(6000);
+      aida_deadtime_pos[i] = 0;
+      last_pauses[i] = 0;
+      hAIDA_DeadTime[i] = MakeTH1('I',
+          Form("AIDA/DeadTime/DeadTime_Fee%d", i+1),
+          Form("FEE %d Dead Time", i+1),
+          6000, 0, 600, "Time before now (seconds)",
+          "Dead Time (%)"
+        );
     }
 
     for (int i = 0; i < conf->FEEs(); i++)
@@ -2730,7 +2761,10 @@ void EventUnpackProc::Fill_AIDA_Histos() {
       if (aida_scaler_cur_sec[i] != -1)
       {
         int diff = second - aida_scaler_cur_sec[i];
-        while (diff-- > 1) aida_scaler_queue[i].push_front(0);
+        if (diff > 3600)
+          aida_scaler_queue[i].clear();
+        else
+          while (diff-- > 1) aida_scaler_queue[i].push_front(0);
       }
       aida_scaler_queue[i].push_front(1);
       while (aida_scaler_queue[i].size() > 3600) aida_scaler_queue[i].pop_back();
@@ -2751,6 +2785,96 @@ void EventUnpackProc::Fill_AIDA_Histos() {
     {
         hAIDA_Scaler[scaler.first]->SetBinContent(i + 1, val);
         i++;
+    }
+  }
+
+  // Dead time calculation
+  if (AIDA_Hits == 0) return;
+
+  int64_t now = RAW->get_AIDA_WR(AIDA_Hits - 1);
+
+  if (now == 0) return;
+
+  bool redraw = false;
+
+  int64_t nowbin = now / 100000000ULL;
+  if (nowbin != last_deadtime && last_deadtime != 0)
+  {
+    int64_t diff = nowbin - last_deadtime;
+    while(diff-- > 0) {
+      for(size_t i = 0; i < aida_deadtime_queue.size(); i++) {
+          aida_deadtime_pos[i] += 1;
+          aida_deadtime_pos[i] %= aida_deadtime_queue[i].size();
+          aida_deadtime_queue[i][aida_deadtime_pos[i]] = 0;
+      }
+      aida_deadtime_spill_pos += 1;
+      aida_deadtime_spill_pos %= aida_deadtime_spill_queue.size();
+      aida_deadtime_spill_queue[aida_deadtime_spill_pos] = AIDA_DeadTime_OnSpill;
+    }
+    redraw = true;
+  }
+  last_deadtime = nowbin;
+
+  // Loop through deadtimes to get intervals
+  auto pare = RAW->get_AIDA_pr();
+  for (auto& i : pare)
+  {
+    if (i.Pause) {
+      last_pauses[i.Module] = i.Time;
+      continue;
+    }
+
+    if (last_pauses[i.Module] == 0) continue;
+    int64_t interval = i.Time - last_pauses[i.Module];
+
+    int64_t intervalbins = interval / 100000000ULL;
+
+
+    int64_t resbins = i.Time / 100000000ULL;
+    int64_t paubins = last_pauses[i.Module] / 100000000ULL;
+
+    int start = nowbin - resbins;
+    int pos = aida_deadtime_pos[i.Module];
+    int m = aida_deadtime_queue[i.Module].size();
+
+    if (intervalbins == 0)
+    {
+      double frac = (interval) / 1e8;
+      aida_deadtime_queue[i.Module][(start + pos) % m] += frac;
+    }
+    else
+    {
+      double start_frac = 1 - ((last_pauses[i.Module] - paubins*100000000ULL) / 1e8);
+      aida_deadtime_queue[i.Module][(start + intervalbins + pos) % m] += start_frac;
+      for(int j = 1; j < intervalbins; j++)
+      {
+        aida_deadtime_queue[i.Module][(start + j + pos) % m] = 1;
+      }
+      double end_frac = (i.Time - resbins*100000000ULL) / 1e8;
+      aida_deadtime_queue[i.Module][(start + pos) % m] += end_frac;
+    }
+    redraw = true;
+    last_pauses[i.Module] = 0;
+  }
+
+  if (redraw) {
+    for (int i = 0; i < conf->FEEs(); i++)
+    {
+      int pos = aida_deadtime_pos[i];
+      int m = aida_deadtime_queue[i].size();
+      for (int j = 0; j < m; j++)
+      {
+          double val = aida_deadtime_queue[i][(pos + m - j) % m];
+          hAIDA_DeadTime[i]->SetBinContent(j + 1, val*100);
+      }
+    }
+    int pos = aida_deadtime_spill_pos;
+    int m = aida_deadtime_spill_queue.size();
+    hAIDA_DeadTime_Spill->SetEntries(0);
+    for (int j = 0; j < m; j++)
+    {
+      double val = aida_deadtime_spill_queue[(pos + m -j) % m] ? 1 : 0;
+      hAIDA_DeadTime_Spill->SetBinContent(j + 1, val);
     }
   }
 }
