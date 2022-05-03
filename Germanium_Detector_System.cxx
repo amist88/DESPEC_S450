@@ -33,7 +33,7 @@ Germanium_Detector_System::Germanium_Detector_System(){
 
     Germanium_T_CALIB = new Germanium_Time_Calibration();
     Germanium_E_CALIB = new Germanium_Energy_Calibration();
-    
+      if(Germanium_TRACES_ACTIVE){
     trace_channel_id= new int[max_am_dets];
     trace_board_id= new int[max_am_dets];
     l_dat_fir= new int*[max_am_dets];
@@ -42,6 +42,7 @@ Germanium_Detector_System::Germanium_Detector_System(){
         l_dat_fir[i]= new int[Germanium_TRACE_LENGTH/2];
         l_dat_sec[i]= new int[Germanium_TRACE_LENGTH/2];
     }
+      }
 
     load_board_channel_file();
 
@@ -65,6 +66,7 @@ Germanium_Detector_System::~Germanium_Detector_System(){
     delete[] Pileup;
     delete[] Overflow;
     
+      if(Germanium_TRACES_ACTIVE){
     delete[] trace_channel_id;
     delete[] trace_board_id;
     
@@ -75,7 +77,7 @@ Germanium_Detector_System::~Germanium_Detector_System(){
     }
     delete[] l_dat_fir; 
     delete[] l_dat_sec; 
-    
+      }
     delete Germanium_T_CALIB;
     delete Germanium_E_CALIB;
 }
@@ -121,9 +123,9 @@ void Germanium_Detector_System::load_board_channel_file()
 void Germanium_Detector_System::get_Event_data(Raw_Event* RAW){
     
   RAW->set_DATA_Germanium(fired_FEBEX_amount,Sum_Time,Ge_channels,Chan_Time,Chan_Energy,det_ids,crystal_ids,Pileup,Overflow, Chan_CF);
-  
+    if(Germanium_TRACES_ACTIVE){
   RAW->set_DATA_Germanium_Traces(fired_FEBEX_amount, l_trace_size,trace_board_id, trace_channel_id, l_dat_fir,l_dat_sec);
-    
+    }
 }
 
 //---------------------------------------------------------------
@@ -208,11 +210,11 @@ void Germanium_Detector_System::Process_MBS(int* pdata){
         }
     else if (FEBEXhead->ff == 0xF0){ // FEBEX channel indicator //( (l_dat & 0xff) == 0x34)  // channel header
             this->pdata--; // Moves back to DEADBEEF so channel loop functions properly //
-          // printf("Here at DEADBEEF=0x%08x\n",*this->pdata);
-           
+        
+         //  cout<<"num_channels " << num_channels << endl;
             for(int i=0; i<num_channels; ++i){
                 this->pdata++; // Moves to channel header //
-           // printf("Here at Chan=0x%08x\n",*this->pdata);
+          // printf("Here at Chan=0x%08x\n",*this->pdata);
           
                 FEBEX_Chan_Header *fbx_Ch=(FEBEX_Chan_Header*) this->pdata;
         
@@ -224,7 +226,8 @@ void Germanium_Detector_System::Process_MBS(int* pdata){
         {
     
           auto idx = std::make_pair(board_id, tmp_Ch_ID);
-            
+           
+          //cout<<"board_id " <<board_id << " tmp_Ch_ID " <<tmp_Ch_ID <<endl;
           if(Germanium_map.find(idx) != Germanium_map.end())
           {
             
@@ -241,18 +244,14 @@ void Germanium_Detector_System::Process_MBS(int* pdata){
 	   
             Chan_Time[fired_FEBEX_amount] = ((fbx_Ch_TS->chan_ts)+(tmp_ext_chan_ts<<32))*10; // in nanoseconds
             
-          
-          //cout<<"fbx_Ch_TS->chan_ts " <<fbx_Ch_TS->chan_ts << " tmp_ext_chan_ts " <<tmp_ext_chan_ts<<32 << endl;
-          // cout<<"Chan_Time[fired_FEBEX_amount] " <<Chan_Time[fired_FEBEX_amount]<< endl;
         
 	   
 	   this->pdata++; // Moves to Channel Energy //
-         //printf("Energy pdata=0x%08x\n",*this->pdata);
+  
             FEBEX_En *fbx_Ch_En=(FEBEX_En*) this->pdata; 
             
             Chan_Energy[fired_FEBEX_amount] = fbx_Ch_En->chan_en;
-           // cout<<"Chan_Energy[fired_FEBEX_amount] " <<Chan_Energy[fired_FEBEX_amount] << endl;
-             Chan_CF[fired_FEBEX_amount] = 10.0*((fbx_Ch_TS->chan_ts)+(fbx_Ch_En->cf)/64.0);
+            Chan_CF[fired_FEBEX_amount] = 10.0*((fbx_Ch_TS->chan_ts)+(fbx_Ch_En->cf)/64.0);
             
             //if(Chan_CF[fired_FEBEX_amount]!=0)cout<<"Chan_CF[fired_FEBEX_amount] " <<Chan_CF[fired_FEBEX_amount]<< endl;
                        // Sign extend the 24-bit energy so negative energies work properly
@@ -278,34 +277,20 @@ void Germanium_Detector_System::Process_MBS(int* pdata){
     
             //this->pdata++; // Moves to Traces Use //
            
-     
-            
-          //  printf("Channel Future 0_pdata=0x%08x\n",*this->pdata);
             this->pdata++; // Moves to Future Use //
-//               printf("Channel Future 1_pdata=0x%08x\n",*this->pdata);
-//               this->pdata++;
-//                 printf("Channel Future 2_pdata=0x%08x\n",*this->pdata);
-//                 this->pdata--;
-                // this->pdata--;
+
             fired_FEBEX_amount++;
-            
-               
-//           else
-//           {
-//             std::cout << "Unknown detector with channel: " << board_id << ", " << tmp_Ch_ID << std::endl;
-//             this->pdata += 3; // Moves to Future Use //
-//           }
+        
                 }///This is the mapping loop
                    
           
                     } ///this is the else condition 
-                    
-                      
-            
-      
-                    
             } //This is the channel loop 
+      
+    
+    
     if(Germanium_TRACES_ACTIVE){
+       
             // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
             // @@@@ Traces Go Here @@@@@ //
             // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
@@ -369,10 +354,12 @@ void Germanium_Detector_System::Process_MBS(int* pdata){
            fired_FEBEX_traces++;
                 } //Channel loop
             }///Ge traces active 
-            num_modules--;
+            
+           // printf ("This is the data here (0x%08x)\n",this->pdata);
+           num_modules--;
         } /// this is the channel header condition
         
-    
+   
         if (num_modules != 0){
             this->pdata++; 
             FEBEXhead  = (FEBEX_Header*) this->pdata;
