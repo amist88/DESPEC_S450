@@ -256,8 +256,9 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
   isValid=kTRUE;
   event_number=fInput->GetCount();
   fOutput-> fevent_number = event_number;
- //cout<<"event_number " << event_number << endl;
+ 
   fOutput->fTrigger = fInput->GetTrigger();
+ // cout<<"event_number " << event_number <<" fOutput->fTrigger " <<fOutput->fTrigger <<  endl;
   fInput->ResetIterator();
   TGo4MbsSubEvent* psubevt(0);
 
@@ -267,11 +268,11 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
   // |               START OF EVENT ANALYSIS              | //
   // |                                                    | //
   // ------------------------------------------------------ //
-
- //if (event_number==95498){
+//cout<<"event_number " <<event_number << endl;
+ //if (event_number==1495953){
  if(true){
   //if (event_number==141513){
-//  cout<<"event " << event_number <<endl;
+  //cout<<"HITS ME  " << event_number <<endl;
 
       int subevent_iter = 0;
       Int_t PrcID_Conv = 0;
@@ -300,6 +301,8 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
         if(PrcID_Conv==-1) continue;
 
         fOutput -> fProcID[PrcID_Conv] = PrcID_Conv;
+        
+      //  if(PrcID_Conv==5) cout<<fOutput->fTrigger;
 
         sub_evt_length  = (psubevt->GetDlen() - 2) / 2;
 
@@ -848,9 +851,9 @@ for (int i=0; i<10; i++){
                  
                 if(chan_bPlast_fast_trail>-1&& chan_bPlast_fast_trail<bPLASTIC_CHAN_PER_DET) {
             
-                    int N1_fast = fOutput->fbPlast_Fast_Trail_N[bPlasdetnum_fast][chan_bPlast_fast_trail]++;
+                 int N1_fast = fOutput->fbPlast_Fast_Trail_N[bPlasdetnum_fast][chan_bPlast_fast_trail]++;
           
-                    fOutput->fbPlast_Fast_Trail[bPlasdetnum_fast][chan_bPlast_fast_trail][N1_fast] = RAW->get_bPLAST_TWINPEAKS_trail_T(i,j);
+                 fOutput->fbPlast_Fast_Trail[bPlasdetnum_fast][chan_bPlast_fast_trail][N1_fast] = RAW->get_bPLAST_TWINPEAKS_trail_T(i,j);
                   
                     
                   //  cout<<"FAST TRAIL RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << " chan_bPlast_fast_trail " <<chan_bPlast_fast_trail << " N1_fast " <<N1_fast << " fOutput->fbPlast_Trail_Fast[chan_bPlast_fast_trail][N1_fast]  " <<fOutput->fbPlast_Trail_Fast[chan_bPlast_fast_trail][N1_fast]  << " i " << i << " j " << j << endl;
@@ -862,7 +865,7 @@ for (int i=0; i<10; i++){
                         
                 Phys_Channel_Trail_Slow_bPlast[i][j] =TAMEX_bPlast_Chan[i][(RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)/2)-1]; 
                 
-                  bPlasdetnum_slow=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
+                bPlasdetnum_slow=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
                   
                  // cout<<"Phys_Channel_Trail_Slow_bPlast[i][j] " <<Phys_Channel_Trail_Slow_bPlast[i][j] << " RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1/2 " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)/2-1 << " RAW " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << endl; 
                         //cout<<"SLOW CHAN " << Phys_Channel_Trail_Slow_bPlast[i][j]  << " bPlasdetnum_Slow " <<bPlasdetnum_slow << endl;
@@ -922,15 +925,10 @@ for (int i=0; i<10; i++){
                 N1 = fOutput->fbPlas_PMT_Lead_N[bPlasdetnum][chan]++;
 
 
-               // cout<<"fOutput->fbPlasDetNum " <<fOutput->fbPlasDetNum << endl;
-// 		cout<<"Phys_Channel_Lead_bPlas[i][j] " <<Phys_Channel_Lead_bPlas[i][j] << " i " << i << " j " << j <<" RAW->get_PLASTIC_physical_channel(i, j) " <<RAW->get_PLASTIC_physical_channel(i, j) << endl;
-
-//         cout<<"bPlasdetnum " <<bPlasdetnum << " chan " << chan << " RAW->get_PLASTIC_physical_channel(i, j) " <<RAW->get_PLASTIC_physical_channel(i, j) << " fOutput->fbPlas_PMT_Lead_N[bPlasdetnum][chan] " <<fOutput->fbPlas_PMT_Lead_N[bPlasdetnum][chan] <<endl;
-		 if(N1>-1 && N1<bPLASTIC_TAMEX_HITS){
+            if(N1>-1 && N1<bPLASTIC_TAMEX_HITS){
 
                fOutput->fbPlas_Lead_PMT[bPlasdetnum][chan][N1] = RAW->get_PLASTIC_lead_T(i,j);
-//cout<<"fOutput->fbPlas_Lead_PMT[bPlasdetnum][chan][N1] " <<fOutput->fbPlas_Lead_PMT[bPlasdetnum][chan][N1] << " chan " << chan << " N1 " << N1 << endl;
-                    }
+                  }
                 }
               }
                if(RAW->get_PLASTIC_CH_ID(i,j) % 2 == 0){ //Trail even j
@@ -1308,7 +1306,12 @@ for (int i=0; i<10; i++){
                 fOutput->fGe_Pileup[i] = RAW->get_Germanium_Pileup(i);
                 fOutput->fGe_Overflow[i] = RAW->get_Germanium_Overflow(i);
                 fOutput->fGe_fired++;
-
+                
+                
+                
+               //cout<<" get_Germanium_Trace_Length " <<RAW->get_Germanium_Trace_Length() << endl;
+               
+              
 
           }
         }
@@ -3011,18 +3014,9 @@ void EventUnpackProc::Fill_FATIMA_Histos(EventUnpackStore* fOutput){
      if(detTDC<=FAT_MAX_VME_CHANNELS){
         FAT_T[detTDC] = (RAW->get_FAT_TDC_timestamp(i));
         hFAT_Traw_VME[detTDC]->Fill(FAT_T[detTDC]*25); //in ps
-//     if(detTDC==48)cout<<"FAT_T[detTDC] " <<FAT_T[detTDC] <<" detTDC " << detTDC<< endl;
+
                 }
          }
-  /**------------------Scaler TIMING -----------------------------------------**/
-//          Scaler_iterator = RAW->get_scaler_iterator();
-//
-//           for (int g=0; g<Scaler_iterator; g++){
-//               if(RAW->get_scaler_data(g)>0){
-//                 hScaler_hit_pattern->Fill(g);
-//                 cout<<"g " << g << endl;
-//            }
-//         }
     }
 
 
@@ -3032,9 +3026,20 @@ void EventUnpackProc::Fill_FATIMA_Histos(EventUnpackStore* fOutput){
 
 
 void EventUnpackProc::Make_Germanium_Histos(){
+    Text_t chis[256];
+    Text_t chead[256];
+    for(int i=0; i<Germanium_MAX_DETS;i++){
+        for(int j=0; j<Germanium_CRYSTALS;j++){
+                    sprintf(chis,"Germanium/Traces/Ge_Det: %2d Crystal: %2d", i,j);
+                    sprintf(chead,"Trace");
+                    h_trace[i][j] = MakeTH1('I', chis,chead,Germanium_TRACE_LENGTH,0,Germanium_TRACE_LENGTH);
+                  
+                    hGe_Raw_E[i][j] = MakeTH1('D',Form("Germanium/Raw/Germanium_Energy_Spectra/Germanium_Raw_E_Det:%2d_Crystal:%2d",i,j),Form("Germanium Energy Raw Det%2d Crystal%2d",i,j),5000,0,5000);
+                    
+        }
+    }
 //   for (int j; j<Germanium_MAX_HITS; j++){
-//         hGe_Raw_E[j] = MakeTH1('D',Form("Germanium/Raw/Germanium_Energy_Spectra/Germanium_Raw_E%2d",j),
-//                             Form("Germanium Channel Energy Channel Raw %2d",j),20000,0,20000);
+//       
 //
 //                     }
 //     hFebTime  = MakeTH1('D',"SysTime/FebexClock","Febex clock",200000,0,200000);
@@ -3042,16 +3047,22 @@ void EventUnpackProc::Make_Germanium_Histos(){
 /**----------------------------------------------------------------------------------------------**/                
 void EventUnpackProc::Fill_Germanium_Histos(){
 
-    double tmpGe[32];
-    int  Germanium_hits, GeID;
+    //double tmpGe[32];
+    int  Germanium_hits;
+    //GeID;
 
      /**------------------Germanium Raw Energy -----------------------------------------**/
       Germanium_hits = RAW->get_Germanium_am_Fired();
+      
          for(int i=0; i<Germanium_hits; i++){
-       if(RAW->get_Germanium_Det_id(i)>-1){
-         //  hFebTime->Fill(RAW->get_Germanium_Chan_T(i)*10E-9);
-         GeID = RAW->get_Germanium_Det_id(i) * 3 + RAW->get_Germanium_Crystal_id(i);
-        tmpGe[GeID] = RAW->get_Germanium_Chan_E(i);
+            if(RAW->get_Germanium_Det_id(i)>-1){
+               hGe_Raw_E[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->Fill(RAW->get_Germanium_Chan_E(i));
+        
+        for(int l_l=0; l_l<RAW->get_Germanium_Trace_Length()/2; l_l++){
+                     
+                      h_trace[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->SetBinContent (l_l*2  ,RAW->get_Germanium_Trace_First(i,l_l));
+                      h_trace[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->SetBinContent (l_l*2+1,RAW->get_Germanium_Trace_Second(i,l_l));
+             }
         }
      }
    }

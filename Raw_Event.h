@@ -329,7 +329,7 @@ private:
     bool    fired_tamex_bPlastTwinPeaks[bPLASTIC_TAMEX_MODULES];
 
 	//Germanium
-        int         Ge_FIRED;
+        int         Ge_hits;
         int         Germanium_Det_Nums[Germanium_MAX_HITS];
         int         Germanium_Crystal_Nums[Germanium_MAX_HITS];
         ULong64_t   Germanium_sum_time[Germanium_MAX_HITS];
@@ -339,11 +339,13 @@ private:
         bool        Germanium_Pileup[Germanium_MAX_HITS];
         bool        Germanium_Overflow[Germanium_MAX_HITS];
         ULong64_t   Germanium_chan_cf[Germanium_MAX_HITS];
-        int Event_Type;
+        //int Event_Type;
         
         int Ge_Tr_Length;
-        int Ge_Tr_First;
-        int Ge_Tr_Second;
+        int Ge_Tr_BoardID[Germanium_MAX_HITS];
+        int Ge_Tr_ChanID[Germanium_MAX_HITS];
+        int Ge_Tr_First[Germanium_MAX_HITS][Germanium_TRACE_LENGTH/2];
+        int Ge_Tr_Second[Germanium_MAX_HITS][Germanium_TRACE_LENGTH/2];
         
         ///Beam Monitor
         Long64_t    L_diff_S2[BM_MAX_HITS];
@@ -410,7 +412,7 @@ public:
 
     void set_DATA_Germanium(int,ULong64_t*,int*,ULong64_t*,double*,int*,int*,bool*,bool*,ULong64_t*);
     
-    void set_DATA_Germanium_Traces(int,int,int);
+    void set_DATA_Germanium_Traces(int, int, int*, int*, int**, int**);
 
 
 
@@ -423,9 +425,9 @@ public:
 
 	//void set_DATA_Germanium(int,ULong64_t*,int*,int*,ULong64_t*,double*,int*);
 
-	int get_Event_type();
+//	int get_Event_type();
 
-	bool PLASTIC_CheckVME();
+//	bool PLASTIC_CheckVME();
 
 
 	// ####################################################
@@ -728,8 +730,10 @@ public:
         bool        get_Germanium_Overflow(int);
         ULong64_t   get_Germanium_Channel_cf(int);
         int         get_Germanium_Trace_Length();
-        int         get_Germanium_Trace_First();
-        int         get_Germanium_Trace_Second();
+        int         get_Germanium_Trace_BoardID(int);
+        int         get_Germanium_Trace_ChanID(int);
+        int         get_Germanium_Trace_First(int,int);
+        int         get_Germanium_Trace_Second(int,int);
         
         ///Beam Monitor
         Long64_t  get_BM_LDiff_S2(int i);

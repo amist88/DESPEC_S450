@@ -92,8 +92,10 @@
 ///FIBRE
 #define FIBRE_BOARD 3
 
-///Germanium (including additonal channel detectors (e.g.SC41 det)
-#define Germanium_MAX_DETS 5
+///Germanium (including additional channel detectors (e.g.SC41 det)
+#define Germanium_TRACES_ACTIVE 1
+#define Germanium_TRACE_LENGTH 2000
+#define Germanium_MAX_DETS 7
 #define Germanium_CRYSTALS 7
 #define Germanium_MAX_HITS (Germanium_MAX_DETS * Germanium_CRYSTALS)
 ///Important for FEBEX
@@ -103,7 +105,7 @@
 #define Germanium_SC41_Det 4
 #define Germanium_SC41L_Crystal 2
 #define Germanium_SC41R_Crystal 3
-#define Germanium_SC41_Det_Digi 4
+#define Germanium_SC41_Det_Digi 3
 #define Germanium_SC41L_Crystal_Digi 2
 #define Germanium_SC41R_Crystal_Digi 3
 #define Germanium_TimeMachine_Det 4
