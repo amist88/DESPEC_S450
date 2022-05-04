@@ -3121,7 +3121,7 @@ void EventUnpackProc::Make_BeamMonitor_Histos(){
 	gBM_s4gr_dt_avrg->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
 	gBM_s4gr_dt_avrg->GetXaxis()->SetTimeOffset(0,"local");
 	gBM_s4gr_dt_avrg->GetYaxis()->SetLimits(0,30);
-	gBM_s4gr_dt_avrg->GetYaxis()->SetTitle("t [ms]");
+	gBM_s4gr_dt_avrg->GetYaxis()->SetTitle("t [us]");
 	gBM_s4gr_dt_avrg->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
 	gBM_s4gr_dt_avrg->SetMarkerColor(kBlack);
    	gBM_s4gr_dt_avrg->SetMarkerStyle(20);
@@ -3213,7 +3213,7 @@ void EventUnpackProc::Make_BeamMonitor_Histos(){
 	gBM_s2gr_dt_avrg->GetXaxis()->SetTimeFormat("%Y-%m-%d %H:%M");
 	gBM_s2gr_dt_avrg->GetXaxis()->SetTimeOffset(0,"local");
 	gBM_s2gr_dt_avrg->GetYaxis()->SetLimits(0,30);
-	gBM_s2gr_dt_avrg->GetYaxis()->SetTitle("t [ms]");
+	gBM_s2gr_dt_avrg->GetYaxis()->SetTitle("t [us]");
 	gBM_s2gr_dt_avrg->GetXaxis()->SetTitle("Time [Y-M-D H:M]");
 	gBM_s2gr_dt_avrg->SetMarkerColor(kBlack);
    	gBM_s2gr_dt_avrg->SetMarkerStyle(20);
@@ -3327,8 +3327,8 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					hBM_s2h_cp->SetBinContent(j,0);
 					}
 				else {
-					hBM_s2h_c->SetBinContent(j,hBM_s2h_norm_tdiff->GetBinContent(j-1) + hBM_s2h_norm_tdiff->GetBinContent(j));
-					hBM_s2h_cp->SetBinContent(j,hBM_s2h_poisson->GetBinContent(j-1) + hBM_s2h_poisson->GetBinContent(j));
+					hBM_s2h_c->SetBinContent(j,hBM_s2h_c->GetBinContent(j-1) + hBM_s2h_norm_tdiff->GetBinContent(j));
+					hBM_s2h_cp->SetBinContent(j,hBM_s2h_cp->GetBinContent(j-1) + hBM_s2h_poisson->GetBinContent(j));
 					}
 				hBM_s2h_dc->SetBinContent(j,hBM_s2h_cp->GetBinContent(j) - hBM_s2h_c->GetBinContent(j));
 				}
@@ -3348,7 +3348,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 			gBM_s2gr_qf->TGraph::SetPoint(BM_S2_QFcount, rawtime, BM_QF);
 			gBM_s2gr_dcmin->TGraph::SetPoint(BM_S2_QFcount, rawtime, BM_dc_MinValue);
 			gBM_s2gr_dctime->TGraph::SetPoint(BM_S2_QFcount,rawtime,BM_dc_MinBin/10);
-			gBM_s2gr_dt_avrg->TGraph::SetPoint(BM_S2_QFcount,rawtime,BM_Tmean);
+			gBM_s2gr_dt_avrg->TGraph::SetPoint(BM_S2_QFcount,rawtime,(Double_t) BM_Tmean/10.);
 			++BM_S2_QFcount;
 			}
 		}
@@ -3400,8 +3400,8 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					hBM_s4h_cp->SetBinContent(j,0);
 					}
 				else {
-					hBM_s4h_c->SetBinContent(j,hBM_s4h_norm_tdiff->GetBinContent(j-1) + hBM_s4h_norm_tdiff->GetBinContent(j));
-					hBM_s4h_cp->SetBinContent(j,hBM_s4h_poisson->GetBinContent(j-1) + hBM_s4h_poisson->GetBinContent(j));
+					hBM_s4h_c->SetBinContent(j,hBM_s4h_c->GetBinContent(j-1) + hBM_s4h_norm_tdiff->GetBinContent(j));
+					hBM_s4h_cp->SetBinContent(j,hBM_s4h_cp->GetBinContent(j-1) + hBM_s4h_poisson->GetBinContent(j));
 					}
 				hBM_s4h_dc->SetBinContent(j,hBM_s4h_cp->GetBinContent(j) - hBM_s4h_c->GetBinContent(j));
 				}
@@ -3421,7 +3421,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 			gBM_s4gr_qf->TGraph::SetPoint(BM_S4_QFcount, rawtime, BM_QF);
 			gBM_s4gr_dcmin->TGraph::SetPoint(BM_S4_QFcount, rawtime, BM_dc_MinValue);
 			gBM_s4gr_dctime->TGraph::SetPoint(BM_S4_QFcount,rawtime,BM_dc_MinBin/10);
-			gBM_s4gr_dt_avrg->TGraph::SetPoint(BM_S4_QFcount,rawtime,BM_Tmean);
+			gBM_s4gr_dt_avrg->TGraph::SetPoint(BM_S4_QFcount,rawtime,(Double_t) BM_Tmean/10.);
 			++BM_S4_QFcount;
 			}
 		}
