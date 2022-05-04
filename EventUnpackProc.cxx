@@ -257,7 +257,7 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
   fOutput-> fevent_number = event_number;
  
   fOutput->fTrigger = fInput->GetTrigger();
- // cout<<"event_number " << event_number <<" fOutput->fTrigger " <<fOutput->fTrigger <<  endl;
+ //cout<<"event_number " << event_number <<  endl;
   fInput->ResetIterator();
   TGo4MbsSubEvent* psubevt(0);
 
@@ -268,7 +268,7 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
   // |                                                    | //
   // ------------------------------------------------------ //
 //cout<<"event_number " <<event_number << endl;
- //if (event_number==1495953){
+ //if (event_number==113169311){
  if(true){
   //if (event_number==141513){
   //cout<<"HITS ME  " << event_number <<endl;
@@ -2906,10 +2906,11 @@ void EventUnpackProc::Make_Germanium_Histos(){
     Text_t chead[256];
     for(int i=0; i<Germanium_MAX_DETS;i++){
         for(int j=0; j<Germanium_CRYSTALS;j++){
+              if(Germanium_TRACES_ACTIVE){
                     sprintf(chis,"Germanium/Traces/Ge_Det: %2d Crystal: %2d", i,j);
                     sprintf(chead,"Trace");
                     h_trace[i][j] = MakeTH1('I', chis,chead,Germanium_TRACE_LENGTH,0,Germanium_TRACE_LENGTH);
-                  
+              }
                     hGe_Raw_E[i][j] = MakeTH1('D',Form("Germanium/Raw/Germanium_Energy_Spectra/Germanium_Raw_E_Det:%2d_Crystal:%2d",i,j),Form("Germanium Energy Raw Det%2d Crystal%2d",i,j),5000,0,5000);
                     
         }
@@ -2933,11 +2934,12 @@ void EventUnpackProc::Fill_Germanium_Histos(){
          for(int i=0; i<Germanium_hits; i++){
             if(RAW->get_Germanium_Det_id(i)>-1){
                hGe_Raw_E[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->Fill(RAW->get_Germanium_Chan_E(i));
-        
-        for(int l_l=0; l_l<RAW->get_Germanium_Trace_Length()/2; l_l++){
+          if(Germanium_TRACES_ACTIVE){
+            for(int l_l=0; l_l<RAW->get_Germanium_Trace_Length()/2; l_l++){
                      
                       h_trace[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->SetBinContent (l_l*2  ,RAW->get_Germanium_Trace_First(i,l_l));
                       h_trace[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->SetBinContent (l_l*2+1,RAW->get_Germanium_Trace_Second(i,l_l));
+                  }
              }
         }
      }

@@ -917,19 +917,14 @@ void Raw_Event::set_DATA_Germanium(int Ge_hits,ULong64_t* sum_time,int* hit_patt
   //  Event_Type = 4;
 }
 
-void Raw_Event::set_DATA_Germanium_Traces(int ge_trace_fired, int ge_trace_length, int* ge_trace_boardid, int* ge_trace_chanid, int** ge_trace_first, int** ge_trace_second){
+void Raw_Event::set_DATA_Germanium_Traces(int ge_trace_fired, int ge_trace_length, int** ge_trace_first, int** ge_trace_second){
         Ge_Tr_Length = ge_trace_length;
         
         for(int i=0; i<ge_trace_fired;i++){
-           Ge_Tr_BoardID[i] = ge_trace_boardid[i];
-           Ge_Tr_ChanID[i] = ge_trace_chanid[i];
-        
-        
-        
-        for(int j=0; j<Ge_Tr_Length/2; j++){
-        Ge_Tr_First[i][j] = ge_trace_first[i][j];
-        Ge_Tr_Second[i][j] = ge_trace_second[i][j];
-                    }
+            for(int j=0; j<Ge_Tr_Length/2; j++){
+                Ge_Tr_First[i][j] = ge_trace_first[i][j];
+                Ge_Tr_Second[i][j] = ge_trace_second[i][j];
+                }
             }
         }
     
@@ -1437,8 +1432,6 @@ PLASTIC_DataStruct* Raw_Event::PassPLASTIC(){ return &PLASTIC_Data;}*/
     ULong64_t Raw_Event::get_Germanium_Channel_cf(int i){return Germanium_chan_cf[i];}
     
     int Raw_Event::get_Germanium_Trace_Length(){return Ge_Tr_Length;}
-    int Raw_Event::get_Germanium_Trace_BoardID(int i){return Ge_Tr_BoardID[i];}
-    int Raw_Event::get_Germanium_Trace_ChanID(int i){return Ge_Tr_ChanID[i];}
     int Raw_Event::get_Germanium_Trace_First(int i,int j){return Ge_Tr_First[i][j];}
     int Raw_Event::get_Germanium_Trace_Second(int i, int j){return Ge_Tr_Second[i][j];}
   //------------------------------------------ Beam Monitor ------------------------------------------//
