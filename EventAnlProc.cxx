@@ -3100,7 +3100,8 @@ if(Fatmult > 0){
         {
           hGe_Chan_E[i][j] = MakeTH1('D',Form("Germanium/Energy_Ch_1keV/Germanium_E_Det_%1d_%1d",i, j), Form("Germanium Channel Energy Detector %1d Crystal %1d",i, j),5000,0,5000);
 
-          hGe_ERaw[i][j]= MakeTH1('D',Form("Germanium/Raw/Germanium_ERaw_Det_%1d_%1d",i, j), Form("Germanium Channel Energy Detector %1d Crystal %1d",i, j),20000,0,10000);
+          ///I moved this back to unpack proc
+        //  hGe_ERaw[i][j]= MakeTH1('D',Form("Germanium/Raw/Germanium_ERaw_Det_%1d_%1d",i, j), Form("Germanium Channel Energy Detector %1d Crystal %1d",i, j),20000,0,10000);
 
           hGe_Chan_E_halfkev[i][j] = MakeTH1('D',Form("Germanium/Energy_Ch_0_5keV/Germanium_E_0_5keV_Det_%1d_%1d",i, j), Form("Germanium Channel 0.5keV Energy Detector %1d Crystal %1d",i, j),10000,0,5000);
 
@@ -3169,7 +3170,7 @@ if(Fatmult > 0){
            pOutput->pGe_E[det][crys] = GeE_Cal[i];
            pOutput->pGe_E_Raw[det][crys] = GeE[i];
 
-           hGe_ERaw[det][crys]->Fill(GeE[i]);
+          // hGe_ERaw[det][crys]->Fill(GeE[i]);
 
 
            if(det!=Germanium_SC41_Det  && det!=Germanium_SC41_Det_Digi && det!=Germanium_TimeMachine_Det){

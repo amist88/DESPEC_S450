@@ -342,8 +342,6 @@ private:
         //int Event_Type;
         
         int Ge_Tr_Length;
-        int Ge_Tr_BoardID[Germanium_MAX_HITS];
-        int Ge_Tr_ChanID[Germanium_MAX_HITS];
         int Ge_Tr_First[Germanium_MAX_HITS][Germanium_TRACE_LENGTH/2];
         int Ge_Tr_Second[Germanium_MAX_HITS][Germanium_TRACE_LENGTH/2];
         
@@ -379,7 +377,7 @@ public:
 
     void set_DATA_ID_MHTDC(Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,Float_t,Float_t*);
 	
-     void set_DATA_Beam_Monitor(Long64_t*, UInt_t,Long64_t*, UInt_t);
+    void set_DATA_Beam_Monitor(Long64_t*, UInt_t,Long64_t*, UInt_t);
     
     // FRS STUFF //
 
@@ -412,7 +410,7 @@ public:
 
     void set_DATA_Germanium(int,ULong64_t*,int*,ULong64_t*,double*,int*,int*,bool*,bool*,ULong64_t*);
     
-    void set_DATA_Germanium_Traces(int, int, int*, int*, int**, int**);
+    void set_DATA_Germanium_Traces(int, int, int**, int**);
 
 
 
@@ -730,8 +728,6 @@ public:
         bool        get_Germanium_Overflow(int);
         ULong64_t   get_Germanium_Channel_cf(int);
         int         get_Germanium_Trace_Length();
-        int         get_Germanium_Trace_BoardID(int);
-        int         get_Germanium_Trace_ChanID(int);
         int         get_Germanium_Trace_First(int,int);
         int         get_Germanium_Trace_Second(int,int);
         

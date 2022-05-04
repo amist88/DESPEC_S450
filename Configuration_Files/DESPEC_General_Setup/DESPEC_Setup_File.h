@@ -95,22 +95,22 @@
 ///Germanium (including additional channel detectors (e.g.SC41 det)
 #define Germanium_TRACES_ACTIVE 1
 #define Germanium_TRACE_LENGTH 2000
-#define Germanium_MAX_DETS 7
-#define Germanium_CRYSTALS 7
+#define Germanium_MAX_DETS 21
+#define Germanium_CRYSTALS 3
 #define Germanium_MAX_HITS (Germanium_MAX_DETS * Germanium_CRYSTALS)
 ///Important for FEBEX
-#define Germanium_FEBEX_MODULES 2
+#define Germanium_FEBEX_MODULES 4
 #define Germanium_MAX_CHANNELS 50
 ///Define here where SC41 is plugged into FEBEX ("Detector" and "crystal" for mapping purposes) Use the germanium allocation file for mapping of this
 #define Germanium_SC41_Det 4
-#define Germanium_SC41L_Crystal 2
-#define Germanium_SC41R_Crystal 3
-#define Germanium_SC41_Det_Digi 3
+#define Germanium_SC41L_Crystal 0
+#define Germanium_SC41R_Crystal 1
+#define Germanium_SC41_Det_Digi 2
 #define Germanium_SC41L_Crystal_Digi 2
-#define Germanium_SC41R_Crystal_Digi 3
-#define Germanium_TimeMachine_Det 4
-#define Germanium_TimeMachineCh1 2
-#define Germanium_TimeMachineCh2 3
+#define Germanium_SC41R_Crystal_Digi 2
+#define Germanium_TimeMachine_Det 5
+#define Germanium_TimeMachineCh1 0
+#define Germanium_TimeMachineCh2 1
 
 #define AIDA_MAX_HITS 13000
 ///Max hits for the beam monitor
