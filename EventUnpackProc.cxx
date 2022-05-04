@@ -3327,7 +3327,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					hBM_s2h_cp->SetBinContent(j,0);
 					}
 				else {
-					hBM_s2h_c->SetBinContent(j,hBM_s2h_tdiff->GetBinContent(j-1) + hBM_s2h_tdiff->GetBinContent(j));
+					hBM_s2h_c->SetBinContent(j,hBM_s2h_norm_tdiff->GetBinContent(j-1) + hBM_s2h_norm_tdiff->GetBinContent(j));
 					hBM_s2h_cp->SetBinContent(j,hBM_s2h_poisson->GetBinContent(j-1) + hBM_s2h_poisson->GetBinContent(j));
 					}
 				hBM_s2h_dc->SetBinContent(j,hBM_s2h_cp->GetBinContent(j) - hBM_s2h_c->GetBinContent(j));
@@ -3400,7 +3400,7 @@ void EventUnpackProc::Fill_BeamMonitor_Histos(){
 					hBM_s4h_cp->SetBinContent(j,0);
 					}
 				else {
-					hBM_s4h_c->SetBinContent(j,hBM_s4h_tdiff->GetBinContent(j-1) + hBM_s4h_tdiff->GetBinContent(j));
+					hBM_s4h_c->SetBinContent(j,hBM_s4h_norm_tdiff->GetBinContent(j-1) + hBM_s4h_norm_tdiff->GetBinContent(j));
 					hBM_s4h_cp->SetBinContent(j,hBM_s4h_poisson->GetBinContent(j-1) + hBM_s4h_poisson->GetBinContent(j));
 					}
 				hBM_s4h_dc->SetBinContent(j,hBM_s4h_cp->GetBinContent(j) - hBM_s4h_c->GetBinContent(j));
