@@ -67,9 +67,9 @@ class EventAnlProc : public TGo4EventProcessor {
         //double lead_lead_bplas[48][100], trail_trail_bplas[48][100];
       //  double lead_lead_fat[48][100];
 
-        double ToT_bplas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double lead_bplas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double trail_bplas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double ToT_bplas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double lead_bplas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double trail_bplas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
         //double lead_lead_bplas_gated[48][100];
         double lead_lead_bplas_Ref1[bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
         double lead_lead_bplas_Ref2[bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
@@ -91,26 +91,28 @@ class EventAnlProc : public TGo4EventProcessor {
         int hits_fat_lead, hits_fat_trail;
         int Fat_tot_hits[FATIMA_TAMEX_CHANNELS+1];
 
-        double bPlas_fatimatamex_dT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS], bPlas_fatimavme_dT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-        double SC41L_ANA_lead_bPlas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS], SC41R_ANA_lead_bPlas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-        double SC41L_DIG_lead_bPlas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS], SC41R_DIG_lead_bPlas[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+        double bPlas_fatimatamex_dT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS], bPlas_fatimavme_dT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+        double SC41L_ANA_lead_bPlas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS], SC41R_ANA_lead_bPlas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+        double SC41L_DIG_lead_bPlas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS], SC41R_DIG_lead_bPlas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+        double Ge_Trig_lead_bPlas[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
         double lead_lead_fat_Ref0[bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
         int hits_bplas_lead = 0, hits_bplas_trail=0;
         int hits_bplas_lead_fast = 0, hits_bplas_trail_fast=0;
         int hits_bplas_lead_slow = 0, hits_bplas_trail_slow=0;
         
-        double ToT_bplas_Fast[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double ToT_bplas_Slow[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double lead_bplas_fast[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double lead_bplas_slow[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double trail_bplas_fast[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
-        double trail_bplas_slow[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double ToT_bplas_Fast[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double ToT_bplas_Slow[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double lead_bplas_fast[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double lead_bplas_slow[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double trail_bplas_fast[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
+        double trail_bplas_slow[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS] ;
 
 
         double bPlas_TAM_SC41L_ANA;
         double bPlas_TAM_SC41R_ANA;
         double bPlas_TAM_SC41L_DIG;
         double bPlas_TAM_SC41R_DIG;
+        double bPlas_TAM_Ge_TRIG;
         double bPlas_TAM_FATVME;
         double bPlas_TAM_FATTAM;
 
@@ -622,7 +624,7 @@ class EventAnlProc : public TGo4EventProcessor {
             ///bPlast Histograms
 
             TH1 *hbPlas_ToT_det[4][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_Multiplicity_Chan[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_Multiplicity_Chan[4][bPLASTIC_CHAN_PER_DET];
 
             TH1 *hbPlas_Lead_T[4][bPLASTIC_CHAN_PER_DET];
             TH1 *hbPlas_Trail_T[4][bPLASTIC_CHAN_PER_DET];
@@ -631,28 +633,29 @@ class EventAnlProc : public TGo4EventProcessor {
             TH1 *hbPlas_Multiplicity_Det2;
             TH1 *hbPlas_Multiplicity_Det3;
 
-            TH1 *hbPlas_lead_lead_ref_det[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_lead_lead_gated[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_ToT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_lead_lead_ref_det[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_lead_lead_gated[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_ToT[4][bPLASTIC_CHAN_PER_DET];
 
-            TH1 *hbPlas_trail_trail[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_Energy_Calib[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_fatimatamex_dT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_fatimavme_dT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_SC41L_Digi_lead[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_SC41R_Digi_lead[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_ToT_Sum[bPLASTIC_TAMEX_MODULES+1];
-       // TH1 *hbPlas_ToT_Sum_FibreCorr[bPLASTIC_TAMEX_MODULES+1];
+            TH1 *hbPlas_trail_trail[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_Energy_Calib[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_fatimatamex_dT[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_fatimavme_dT[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_SC41L_Digi_lead[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_SC41R_Digi_lead[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_Ge_Trig_lead[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_ToT_Sum[4];
+       // TH1 *hbPlas_ToT_Sum_FibreCorr[4];
 
-            TH1 *hbPlas_hit_pattern_det[bPLASTIC_TAMEX_MODULES+1];
+            TH1 *hbPlas_hit_pattern_det[4];
             
             ///Additional for twinpeaks
-            TH1 *hbPlas_ToT_Sum_Slow[bPLASTIC_TAMEX_MODULES+1];
-            TH1 *hbPlas_ToT_Sum_Fast[bPLASTIC_TAMEX_MODULES+1];
-            TH1 *hbPlas_Lead_T_Slow[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-            TH1 *hbPlas_Lead_T_Fast[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];         
-            TH1 *hbPlas_ToT_det_Slow[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];  
-            TH1 *hbPlas_ToT_det_Fast[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];  
+            TH1 *hbPlas_ToT_Sum_Slow[4];
+            TH1 *hbPlas_ToT_Sum_Fast[4];
+            TH1 *hbPlas_Lead_T_Slow[4][bPLASTIC_CHAN_PER_DET];
+            TH1 *hbPlas_Lead_T_Fast[4][bPLASTIC_CHAN_PER_DET];         
+            TH1 *hbPlas_ToT_det_Slow[4][bPLASTIC_CHAN_PER_DET];  
+            TH1 *hbPlas_ToT_det_Fast[4][bPLASTIC_CHAN_PER_DET];  
             TH2 *hbPlas_ToT_Slow_vs_Fast_Det1;
             TH2 *hbPlas_ToT_Slow_vs_Fast_Det2;
 	    // NEW H.M.A.
@@ -789,7 +792,7 @@ class EventAnlProc : public TGo4EventProcessor {
 private :
      ///TEMP
                     bool fired_det1, fired_det2;
-                    int bPlas_tot_hits[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET] ;
+                    int bPlas_tot_hits[4][bPLASTIC_CHAN_PER_DET] ;
 
             bool FAT_dist_corr_used; // Read from General Setup File
             int  FAT_exclusion_dist; // Read from General Setup File
