@@ -150,17 +150,17 @@ void EventAnlStore::Clear(Option_t *t)
 
 
     if (pbPLAS_WR != 0) {
-    pbPlas_LeadHits = 0;
-    pbPlas_TrailHits = 0;
-    pbPlas_LeadT_Avg = 0;
-    pbPlasDetNum=0;
+   // pbPlas_LeadHits = 0;
+  //  pbPlas_TrailHits = 0;
+  //  pbPlas_LeadT_Avg = 0;
+  //  pbPlasDetNum=0;
 
-    ZERO_ARRAY(pbPlas_PMT_Lead_N);
-    ZERO_ARRAY(pbPlas_PMT_Trail_N);
-    ZERO_ARRAY(pbPlasChan);
-    ZERO_ARRAY(pbPlas_ToTCalib);
-    ZERO_ARRAY(pbPlas_LeadT);
-    ZERO_ARRAY(pbPlas_TrailT);
+//     ZERO_ARRAY(pbPlas_PMT_Lead_N);
+//     ZERO_ARRAY(pbPlas_PMT_Trail_N);
+//     ZERO_ARRAY(pbPlasChan);
+//     ZERO_ARRAY(pbPlas_ToTCalib);
+//     ZERO_ARRAY(pbPlas_LeadT);
+//     ZERO_ARRAY(pbPlas_TrailT);
     
      pbPlasDetNum_Fast=0;
       pbPlasDetNum_Slow=0;

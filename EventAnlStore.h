@@ -162,33 +162,33 @@ class EventAnlStore : public TGo4EventElement {
      // Int_t    pFat_TrailHits;
       Int_t    pFat_Tamex_chan[FATIMA_TAMEX_HITS];
 
-      Int_t    pbPlasDetNum;
-      Int_t    pbPlasChan[bPLASTIC_TAMEX_MODULES+1];
-      Double_t pbPlas_ToTCalib[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Int_t    pbPlas_PMT_Lead_N[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-      Double_t pbPlas_LeadT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Double_t pbPlas_LeadT_Avg;
-      Int_t    pbPlas_PMT_Trail_N[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-      Double_t pbPlas_TrailT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Int_t    pbPlas_LeadHits;
-      Int_t    pbPlas_TrailHits;
+//       Int_t    pbPlasDetNum;
+//       Int_t    pbPlasChan[4];
+//       Double_t pbPlas_ToTCalib[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+//       Int_t    pbPlas_PMT_Lead_N[4][bPLASTIC_CHAN_PER_DET];
+//       Double_t pbPlas_LeadT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+//       Double_t pbPlas_LeadT_Avg;
+//       Int_t    pbPlas_PMT_Trail_N[4][bPLASTIC_CHAN_PER_DET];
+//       Double_t pbPlas_TrailT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+//       Int_t    pbPlas_LeadHits;
+//       Int_t    pbPlas_TrailHits;
 
       Int_t pbPlasDetNum_Fast;
       Int_t pbPlasDetNum_Slow;
-      Int_t pbPlas_FastChan[bPLASTIC_TAMEX_MODULES+1];
-      Int_t pbPlas_SlowChan[bPLASTIC_TAMEX_MODULES+1];
-      Int_t pbPlas_Fast_Lead_N[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-      Int_t pbPlas_Slow_Lead_N[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-      Double_t pbPlas_FastLeadT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Double_t pbPlas_SlowLeadT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+      Int_t pbPlas_FastChan[4];
+      Int_t pbPlas_SlowChan[4];
+      Int_t pbPlas_Fast_Lead_N[4][bPLASTIC_CHAN_PER_DET];
+      Int_t pbPlas_Slow_Lead_N[4][bPLASTIC_CHAN_PER_DET];
+      Double_t pbPlas_FastLeadT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+      Double_t pbPlas_SlowLeadT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
       Int_t pbPlas_FastLeadHits;
       Int_t pbPlas_SlowLeadHits;
-      Int_t pbPlast_Fast_Trail_N[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-      Int_t pbPlast_Slow_Trail_N[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET];
-      Double_t pbPlas_Fast_TrailT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Double_t pbPlas_Slow_TrailT[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Double_t pbPlas_Fast_ToTCalib[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
-      Double_t pbPlas_Slow_ToTCalib[bPLASTIC_TAMEX_MODULES+1][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+      Int_t pbPlast_Fast_Trail_N[4][bPLASTIC_CHAN_PER_DET];
+      Int_t pbPlast_Slow_Trail_N[4][bPLASTIC_CHAN_PER_DET];
+      Double_t pbPlas_Fast_TrailT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+      Double_t pbPlas_Slow_TrailT[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+      Double_t pbPlas_Fast_ToTCalib[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
+      Double_t pbPlas_Slow_ToTCalib[4][bPLASTIC_CHAN_PER_DET][bPLASTIC_TAMEX_HITS];
       
       
           ULong64_t pGe_Event_T[Germanium_MAX_DETS][Germanium_CRYSTALS];

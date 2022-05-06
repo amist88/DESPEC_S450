@@ -82,6 +82,7 @@
 #define bPLASTIC_OR_UP_DOWN 13
 #define bPLASTIC_UP_COIN 12
 #define bPLASTIC_DOWN_COIN 11
+#define bPLASTIC_Ge_TRIGGER 11
 //Add ge trigger
 
 ///bPlast Time Machine Channels
@@ -98,7 +99,7 @@
 ///Germanium (including additional channel detectors (e.g.SC41 det)
 #define Germanium_TRACES_ACTIVE 1
 #define Germanium_TRACE_LENGTH 2000
-#define Germanium_MAX_DETS 15
+#define Germanium_MAX_DETS 16
 #define Germanium_CRYSTALS 7
 #define Germanium_MAX_HITS (Germanium_MAX_DETS * Germanium_CRYSTALS)
 ///Important for FEBEX

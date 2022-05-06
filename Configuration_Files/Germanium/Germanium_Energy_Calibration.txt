@@ -1,4 +1,4 @@
-#ID is (Detector Num * Max Crystals) + Crystal
+#ID is (Detector Num * Max Crystals) + Crystal Number
 #Det, Crystal: 0,0
 0	0	0.00276368    0.957019
 1	0	0.00174155    0.422846

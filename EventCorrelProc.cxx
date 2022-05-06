@@ -1976,23 +1976,22 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
         int64_t DecTime_Gate[8];
         Int_t B = 1;
         int64_t DecTime = 0;
-     ///   double testbg[100];
         int gehits=0;
         double GeE[Germanium_MAX_HITS];
 
         for(int x=0; x<Germanium_MAX_HITS; x++)GeE[x]=0;
 
-  /// for(int i=0;i<100; i++)testbg[i]=0;
+
 
         for(int i=0; i<MAX_FRS_GATE; i++)lastdT_Gate[i]=0;
-         //for(int i=0; i<32; i++)  cInputMain-> pbPlas_ToTCalib[i]=100;
+         //for(int i=0; i<32; i++)  cInputMain-> pbPlas_Slow_ToTCalib[i]=100;
 
 //         ///Get Plastic fired
 //     for(int a=1; a<3; a++){ ///Detector number
 //         for (int b = 0; b < 16; b++){  ///Channel number
 //             for (int c = 0; c < cInputMain->pbPlas_PMT_Lead_N[a][b]; c++){
-//        if (cInputMain-> pbPlas_ToTCalib[2][b][c]>0) bPlas_punchthrough=true;
-//        if (cInputMain-> pbPlas_ToTCalib[a][b][c]>fCorrel->GbPlast_Egate_low && cInputMain-> pbPlas_ToTCalib[a][b][c]<fCorrel->GbPlast_Egate_high) bPlas_fired=true;
+//        if (cInputMain-> pbPlas_Slow_ToTCalib[2][b][c]>0) bPlas_punchthrough=true;
+//        if (cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]>fCorrel->GbPlast_Egate_low && cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]<fCorrel->GbPlast_Egate_high) bPlas_fired=true;
 //                         }
 //                  }
 //              }
@@ -2023,17 +2022,17 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
 
             ///Get Plastic fired
    if(imphit.Time> fCorrel->GAIDA_Imp_bPlas_TLow && imphit.Time< fCorrel->GAIDA_Imp_bPlas_TLow){
-    for(int a=1; a<=cInputMain->pbPlasDetNum; a++){ ///Detector number
-        for (int b = 0; b <=cInputMain->pbPlasChan[a]; b++){  ///Channel number
+    for(int a=1; a<=cInputMain->pbPlasDetNum_Fast; a++){ ///Detector number
+        for (int b = 0; b <=cInputMain->pbPlas_SlowChan[a]; b++){  ///Channel number
             for (int c = 0; c < bPLASTIC_TAMEX_HITS; c++){
 
        ///Punchthrough in bPlast Downstream
-       if (cInputMain-> pbPlas_ToTCalib[bPLASTIC_DOWNSTREAM_DET][b][c]>0) bPlas_punchthrough=true;
+       if (cInputMain-> pbPlas_Slow_ToTCalib[bPLASTIC_DOWNSTREAM_DET][b][c]>0) bPlas_punchthrough=true;
 
-       if (cInputMain-> pbPlas_ToTCalib[a][b][c]>fCorrel->GbPlast_Egate_low && cInputMain-> pbPlas_ToTCalib[a][b][c]<fCorrel->GbPlast_Egate_high) bPlas_fired=true;
+       if (cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]>fCorrel->GbPlast_Egate_low && cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]<fCorrel->GbPlast_Egate_high) bPlas_fired=true;
 
-//        if(cInputMain-> pbPlas_ToTCalib[a][b][c]>0 && cInputMain->pOnSpill==false) bPlas_ToT_ch_beamoff[a][b]->Fill(cInputMain-> pbPlas_ToTCalib[a][b][c]);
-//        if(cInputMain-> pbPlas_ToTCalib[a][b][c]>0 && cInputMain->pOnSpill==true) bPlas_ToT_ch_beamon[a][b]->Fill(cInputMain-> pbPlas_ToTCalib[a][b][c]);
+//        if(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]>0 && cInputMain->pOnSpill==false) bPlas_ToT_ch_beamoff[a][b]->Fill(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]);
+//        if(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]>0 && cInputMain->pOnSpill==true) bPlas_ToT_ch_beamon[a][b]->Fill(cInputMain-> pbPlas_Slow_ToTCalib[a][b][c]);
 
                         }
                     }
