@@ -15,15 +15,16 @@
 //Set the white rabbit offset time in minutes for the FRS (used only for gain matching of Z and A/Q over time): Defined in the EventUnpackProc and used in FRS_Detector_System
 #define FRS_WR_GAINOFFSET 26900000
 
-#define FRS_MIN_AoQ 2.0
-#define FRS_MAX_AoQ 3.0
-#define FRS_MIN_Z 30
-#define FRS_MAX_Z 90
+//#define FRS_MIN_AoQ 2.0
+//#define FRS_MAX_AoQ 3.0
+//#define FRS_MIN_Z 30
+//#define FRS_MAX_Z 90
 ///Use High charge state gate for Correlations
-#define USE_dEdeg_Z1_GATE 0
+//#define USE_dEdeg_Z1_GATE 0
 
 ///Define number of FRS gates and Polygon Points
 #define MAX_FRS_GATE 8
+///Fix this
 #define MAX_FRS_PolyPoints 8
 
 #define FINGER_TAMEX_MODULES 4
@@ -63,14 +64,14 @@
 #define bPLASTIC_TWINPEAKS 1
 ///TAMEX: 3 for narrow, 9 for wide
 #define bPLASTIC_TAMEX_MODULES 9
-#define bPLASTIC_TAMEX_HITS 20
+#define bPLASTIC_TAMEX_HITS 5
 #define bPLASTIC_TAMEX_CHANNELS 16
 ///bPlastic number of channels per detector (16 for narrow, 64 for wide)
 #define bPLASTIC_CHAN_PER_DET 64
 ///bPlastic Upstream Detector
-#define bPLASTIC_UPSTREAM_DET 2
+#define bPLASTIC_UPSTREAM_DET 1
 ///bPlastic Downstream Detector
-#define bPLASTIC_DOWNSTREAM_DET 1
+#define bPLASTIC_DOWNSTREAM_DET 2
 ///bPlast Additional signals Module Num
 #define bPLASTIC_ADDITIONAL_CH_MOD 3
 ///bPlast Additional signals Channel Num
@@ -81,6 +82,8 @@
 #define bPLASTIC_OR_UP_DOWN 13
 #define bPLASTIC_UP_COIN 12
 #define bPLASTIC_DOWN_COIN 11
+//Add ge trigger
+
 ///bPlast Time Machine Channels
 #define bPlastTimeMachineCh1 7
 #define bPlastTimeMachineCh2 8
@@ -95,20 +98,20 @@
 ///Germanium (including additional channel detectors (e.g.SC41 det)
 #define Germanium_TRACES_ACTIVE 1
 #define Germanium_TRACE_LENGTH 2000
-#define Germanium_MAX_DETS 21
-#define Germanium_CRYSTALS 3
+#define Germanium_MAX_DETS 15
+#define Germanium_CRYSTALS 7
 #define Germanium_MAX_HITS (Germanium_MAX_DETS * Germanium_CRYSTALS)
 ///Important for FEBEX
 #define Germanium_FEBEX_MODULES 4
-#define Germanium_MAX_CHANNELS 50
+#define Germanium_MAX_CHANNELS 64
 ///Define here where SC41 is plugged into FEBEX ("Detector" and "crystal" for mapping purposes) Use the germanium allocation file for mapping of this
-#define Germanium_SC41_Det 4
+#define Germanium_SC41_Det 15
 #define Germanium_SC41L_Crystal 0
 #define Germanium_SC41R_Crystal 1
-#define Germanium_SC41_Det_Digi 2
+#define Germanium_SC41_Det_Digi 15
 #define Germanium_SC41L_Crystal_Digi 2
 #define Germanium_SC41R_Crystal_Digi 2
-#define Germanium_TimeMachine_Det 5
+#define Germanium_TimeMachine_Det 15
 #define Germanium_TimeMachineCh1 0
 #define Germanium_TimeMachineCh2 1
 

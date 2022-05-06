@@ -752,7 +752,7 @@ for (int i=0; i<10; i++){
 ///--------------------------------------------------------------------------------------------///
                                                 /**Output bPlast Twin Peaks TAMEX **/
         ///--------------------------------------------------------------------------------------------///
-       if(bPLASTIC_TWINPEAKS==1){
+       //if(bPLASTIC_TWINPEAKS==1){
         int bPlasfired[9];
         int Phys_Channel_Lead_Fast_bPlast[bPLASTIC_TAMEX_MODULES][256];
         int Phys_Channel_Trail_Fast_bPlast[bPLASTIC_TAMEX_MODULES][256];
@@ -772,38 +772,31 @@ for (int i=0; i<10; i++){
                 bPlasfired[i] = RAW->get_bPLAST_TWINPEAKS_am_Fired(i);
 
         for(int j = 0;j < bPlasfired[i];j++){///Loop over hits per board
-               // cout<<"Input UNPACK RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) " <<RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) <<" RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) " <<RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) <<  " RAW->get_bPLAST_TWINPEAKS_trail_T(i,j) " <<RAW->get_bPLAST_TWINPEAKS_trail_T(i,j) << " i " << i << " j " << j <<  endl;
                 
                
-          ////NOW DEFINE FAST (ODD CHANNELS) AND SLOW  (EVEN)     
-              if(j % 2 == 0 ){ //Lead even hits
-               //  cout<<"RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j)  " <<RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j)  << endl;
+          ///NOW DEFINE FAST (ODD CHANNELS) AND SLOW  (EVEN)     
+           if(j % 2 == 0 ){ ///Lead even hits
+            
                   ///Fast lead channels odd
-                if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==1){
-                        if(RAW->get_bPLAST_TWINPEAKS_lead_T(i,j)>0){
-                Phys_Channel_Lead_Fast_bPlast[i][j] =TAMEX_bPlast_Chan[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1]; 
-               //cout<<"1 UNPACK Phys_Channel_Lead_Fast_bPlast[i][j] " <<Phys_Channel_Lead_Fast_bPlast[i][j] << " i " << i << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 " << (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 << " RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) " <<RAW->get_bPLAST_TWINPEAKS_lead_T(i,j) << endl;
-               // cout<<" Phys_Channel_Lead_Fast_bPlast[i][j] " <<  Phys_Channel_Lead_Fast_bPlast[i][j] << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2 " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1/2 <<" i " << i << " j " << j << endl;
-                 bPlasdetnum_fast=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
-                  fOutput->fbPlasDetNum_Fast = bPlasdetnum_fast;
-               
-                 //    cout<<"bPlasdetnum_fast " <<bPlasdetnum_fast << " (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j))/2 " <<(RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j))/2 << " i " << i << " RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << endl;
-               
+             if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==1){
+                     if(RAW->get_bPLAST_TWINPEAKS_lead_T(i,j)>0){
+                            Phys_Channel_Lead_Fast_bPlast[i][j] =TAMEX_bPlast_Chan[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1]; 
+             
+                        bPlasdetnum_fast=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
+                        fOutput->fbPlasDetNum_Fast = bPlasdetnum_fast;
 		     
-		  int chan_bPlast_fast_lead = Phys_Channel_Lead_Fast_bPlast[i][j];
+                        int chan_bPlast_fast_lead = Phys_Channel_Lead_Fast_bPlast[i][j];
 
-		    fOutput->fbPlas_FastChan[bPlasdetnum_fast] = chan_bPlast_fast_lead;
+                        fOutput->fbPlas_FastChan[bPlasdetnum_fast] = chan_bPlast_fast_lead;
    
-		  if(chan_bPlast_fast_lead>-1 && chan_bPlast_fast_lead<bPLASTIC_CHAN_PER_DET) {
+                    if(chan_bPlast_fast_lead>-1 && chan_bPlast_fast_lead<bPLASTIC_CHAN_PER_DET) {
   
-                    int N1_fast = fOutput->fbPlast_Fast_Lead_N[bPlasdetnum_fast][chan_bPlast_fast_lead]++;
+                        int N1_fast = fOutput->fbPlast_Fast_Lead_N[bPlasdetnum_fast][chan_bPlast_fast_lead]++;
           
-                    fOutput->fbPlast_Fast_Lead[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] = RAW->get_bPLAST_TWINPEAKS_lead_T(i,j);
-            //  cout<<"2 UNPACK EVENT " << event_number << " FAST bPlasdetnum_fast " << bPlasdetnum_fast << " chan_bPlast_fast_lead " << chan_bPlast_fast_lead << " N1_fast " <<N1_fast <<" fOutput->fbPlast_Fast_Lead[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] " <<fOutput->fbPlast_Fast_Lead[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] << " i " << i << " j " << j <<endl;       
-                    //cout<<"FAST LEAD RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << " chan_bPlast_fast_lead " <<chan_bPlast_fast_lead << " N1_fast " <<N1_fast << " fOutput->fbPlast_Lead_Fast[chan_bPlast_fast_lead][N1_fast]  " <<fOutput->fbPlast_Lead_Fast[chan_bPlast_fast_lead][N1_fast]  << " i " << i << " j " << j << endl;
-                }
+                        fOutput->fbPlast_Fast_Lead[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] = RAW->get_bPLAST_TWINPEAKS_lead_T(i,j);
+                           }
                         }
-            }
+                      }
                     ///Slow lead channels, even 
         if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==0){
                         
@@ -814,26 +807,19 @@ for (int i=0; i<10; i++){
                  bPlasdetnum_slow=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
                   fOutput->fbPlasDetNum_Slow = bPlasdetnum_slow;
     
-               //   cout<<"LEAD SLOW bPlasdetnum_slow " <<bPlasdetnum_slow << " chan_bPlast_slow_lead " <<chan_bPlast_slow_lead << endl;
-                     if(chan_bPlast_slow_lead>-1  && chan_bPlast_slow_lead<bPLASTIC_CHAN_PER_DET) {
-			fOutput->fbPlas_SlowChan[bPlasdetnum_slow] = chan_bPlast_slow_lead;
-             //  cout<<"fOutput->fbPlas_SlowChan[bPlasdetnum_slow] " <<fOutput->fbPlas_SlowChan[bPlasdetnum_slow] << " bPlasdetnum_slow " <<bPlasdetnum_slow << endl;
-                
-             
-       
+     
+                if(chan_bPlast_slow_lead>-1  && chan_bPlast_slow_lead<bPLASTIC_CHAN_PER_DET) {
+                    fOutput->fbPlas_SlowChan[bPlasdetnum_slow] = chan_bPlast_slow_lead;
+         
                     int N1_slow = fOutput->fbPlast_Slow_Lead_N[bPlasdetnum_fast][chan_bPlast_slow_lead]++;
           
                     fOutput->fbPlast_Slow_Lead[bPlasdetnum_fast][chan_bPlast_slow_lead][N1_slow] = RAW->get_bPLAST_TWINPEAKS_lead_T(i,j);
                     
-                   //  cout<<"FAST bPlasdetnum_slow " << bPlasdetnum_slow << " chan_bPlast_fast_lead " << chan_bPlast_slow_lead << " N1_fast " <<N1_fast <<" fOutput->fbPlast_Lead_Fast[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] " <<fOutput->fbPlast_Lead_Fast[bPlasdetnum_fast][chan_bPlast_fast_lead][N1_fast] << " i " << i << " j " << j <<endl;
-                    
-                   // cout<<"SLOW LEAD RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << " chan_bPlast_slow_lead " <<chan_bPlast_slow_lead << " N1_slow " <<N1_slow << " fOutput->fbPlast_Lead_Slow[chan_bPlast_slow_lead][N1_slow]  " <<fOutput->fbPlast_Lead_Slow[chan_bPlast_slow_lead][N1_slow]  << " i " << i << " j " << j << endl;
                             }
-                        
                     }
               }///End of lead hits
               
-               if(j % 2 == 1){ //TRAIL 
+               if(j % 2 == 1){ ///TRAIL 
                               ///Fast trail channels even
         if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==0 && (RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2<256){
                         
@@ -841,31 +827,23 @@ for (int i=0; i<10; i++){
                   
                 int chan_bPlast_fast_trail = Phys_Channel_Trail_Fast_bPlast[i][j];
 
-                 bPlasdetnum_fast=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
-               
-//cout<<"FAST CHAN " << Phys_Channel_Trail_Fast_bPlast[i][j]  << " bPlasdetnum_fast " <<bPlasdetnum_fast << endl;
-                // cout<<"TRAIL FAST bPlasdetnum_fast " <<bPlasdetnum_fast << " chan_bPlast_fast_trail " <<chan_bPlast_fast_trail << endl;
-                 
+                bPlasdetnum_fast=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
+
                 if(chan_bPlast_fast_trail>-1&& chan_bPlast_fast_trail<bPLASTIC_CHAN_PER_DET) {
             
                  int N1_fast = fOutput->fbPlast_Fast_Trail_N[bPlasdetnum_fast][chan_bPlast_fast_trail]++;
           
                  fOutput->fbPlast_Fast_Trail[bPlasdetnum_fast][chan_bPlast_fast_trail][N1_fast] = RAW->get_bPLAST_TWINPEAKS_trail_T(i,j);
-                  
-                    
-                  //  cout<<"FAST TRAIL RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << " chan_bPlast_fast_trail " <<chan_bPlast_fast_trail << " N1_fast " <<N1_fast << " fOutput->fbPlast_Trail_Fast[chan_bPlast_fast_trail][N1_fast]  " <<fOutput->fbPlast_Trail_Fast[chan_bPlast_fast_trail][N1_fast]  << " i " << i << " j " << j << endl;
             
-                        }
+                }
             }
           ///Slow trail channels even
-          if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==1 &&RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)<256){
+          if(RAW->get_bPLAST_TWINPEAKS_CH_ID(i,j) % 2==1 && RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)<256){
                         
                 Phys_Channel_Trail_Slow_bPlast[i][j] =TAMEX_bPlast_Chan[i][(RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)/2)-1]; 
                 
                 bPlasdetnum_slow=TAMEX_bPlast_Det[i][((RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1)/2)-1];
-                  
-                 // cout<<"Phys_Channel_Trail_Slow_bPlast[i][j] " <<Phys_Channel_Trail_Slow_bPlast[i][j] << " RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)+1/2 " <<RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j)/2-1 << " RAW " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << endl; 
-                        //cout<<"SLOW CHAN " << Phys_Channel_Trail_Slow_bPlast[i][j]  << " bPlasdetnum_Slow " <<bPlasdetnum_slow << endl;
+                 
                 int chan_bPlast_slow_trail = Phys_Channel_Trail_Slow_bPlast[i][j];
                          
                 if(chan_bPlast_slow_trail>-1&& chan_bPlast_slow_trail<bPLASTIC_CHAN_PER_DET) {
@@ -874,78 +852,75 @@ for (int i=0; i<10; i++){
           
                     fOutput->fbPlast_Slow_Trail[bPlasdetnum_slow][chan_bPlast_slow_trail][N1_slow] = RAW->get_bPLAST_TWINPEAKS_trail_T(i,j);
                     
-                  //    cout<<"TRAIL SLOW bPlasdetnum_slow " <<bPlasdetnum_slow << " chan_bPlast_slow_trail " <<chan_bPlast_slow_trail << endl;
-                    
-                    //cout<<"SLOW TRAIL RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) " << RAW->get_bPLAST_TWINPEAKS_physical_channel(i, j) << " chan_bPlast_slow_trail " <<chan_bPlast_slow_trail << " N1_slow " <<N1_slow << " fOutput->fbPlast_Trail_Slow[chan_bPlast_slow_trail][N1_slow]  " <<fOutput->fbPlast_Trail_Slow[chan_bPlast_slow_trail][N1_slow]  << " i " << i << " j " << j << endl;
             
-                                        }
-                                }
-                           }       
-                    }
-                }
-            }
-        }
+                                        } /// end if max channel condition 
+                                } /// End slow trail 
+                           }  /// End trail
+                    }/// End bPlast hits loop
+                } ///end tamex hits loop
+            } ///End proc ID 2
+       // }
         ///--------------------------------------------------------------------------------------------///
                                                 /**Output bPLASTIC TAMEX  **/
         ///--------------------------------------------------------------------------------------------///
-           if(bPLASTIC_TWINPEAKS==0){
-            int bPlasfired[3];
-            int Phys_Channel_Lead_bPlas[3][bPLASTIC_CHAN_PER_DET];
-            int Phys_Channel_Trail_bPlas[3][bPLASTIC_CHAN_PER_DET];
-            int N1 =0;
-            int bPlasdetnum=-1;
-
-        if (Used_Systems[2]&& PrcID_Conv==2){
-      // cout<<"Event " << event_number<<endl;
-       for (int i=0; i<RAW->get_PLASTIC_tamex_hits(); i++){///Loop over tamex ID's
-
-            int chan=-1;
-
-           //fOutput->fbPlas_TAMEX_ID = i;
-            bPlasfired[i] = RAW->get_PLASTIC_am_Fired(i); ///Iterator
-
-
-            //TAMEX_bPlast_Det[bPlastTamID][bPlastTamCh]
-
-
-            for(int j = 0;j < bPlasfired[i];j++){
-
-              if(RAW->get_PLASTIC_CH_ID(i,j) % 2 == 1){ //Lead odd j
-                  //Phys_Channel_Lead_bPlas[TAMID][Hit]
-                Phys_Channel_Lead_bPlas[i][j] = TAMEX_bPlast_Chan[i][RAW->get_PLASTIC_physical_channel(i, j)];
-                chan = (Phys_Channel_Lead_bPlas[i][j]);
-                if(chan>-1){
-                /// PMT allocation succeeded
-                bPlasdetnum=TAMEX_bPlast_Det[i][RAW->get_PLASTIC_physical_channel(i, j)];
-                fOutput->fbPlasDetNum = bPlasdetnum;
-                fOutput->fbPlasChan[bPlasdetnum]=  chan;
-                N1 = fOutput->fbPlas_PMT_Lead_N[bPlasdetnum][chan]++;
-
-
-            if(N1>-1 && N1<bPLASTIC_TAMEX_HITS){
-
-               fOutput->fbPlas_Lead_PMT[bPlasdetnum][chan][N1] = RAW->get_PLASTIC_lead_T(i,j);
-                  }
-                }
-              }
-               if(RAW->get_PLASTIC_CH_ID(i,j) % 2 == 0){ //Trail even j
-
-                Phys_Channel_Trail_bPlas[i][j] = TAMEX_bPlast_Chan[i][RAW->get_PLASTIC_physical_channel(i, j)];
-                chan = (Phys_Channel_Trail_bPlas[i][j]);
-
-               if(chan>-1){
-
-                /// PMT allocation succeeded
-                 N1 = fOutput->fbPlas_PMT_Trail_N[bPlasdetnum][chan]++;
-                if(N1>-1&& N1<bPLASTIC_TAMEX_HITS){
-             fOutput->fbPlas_Trail_PMT[bPlasdetnum][chan][N1] = RAW->get_PLASTIC_trail_T(i,j);
-                 }
-               }
-             }
-           }
-         }
-       }
-     }
+//            if(bPLASTIC_TWINPEAKS==0){
+//             int bPlasfired[3];
+//             int Phys_Channel_Lead_bPlas[3][bPLASTIC_CHAN_PER_DET];
+//             int Phys_Channel_Trail_bPlas[3][bPLASTIC_CHAN_PER_DET];
+//             int N1 =0;
+//             int bPlasdetnum=-1;
+// 
+//         if (Used_Systems[2]&& PrcID_Conv==2){
+//       // cout<<"Event " << event_number<<endl;
+//        for (int i=0; i<RAW->get_PLASTIC_tamex_hits(); i++){///Loop over tamex ID's
+// 
+//             int chan=-1;
+// 
+//            //fOutput->fbPlas_TAMEX_ID = i;
+//             bPlasfired[i] = RAW->get_PLASTIC_am_Fired(i); ///Iterator
+// 
+// 
+//             //TAMEX_bPlast_Det[bPlastTamID][bPlastTamCh]
+// 
+// 
+//             for(int j = 0;j < bPlasfired[i];j++){
+// 
+//               if(RAW->get_PLASTIC_CH_ID(i,j) % 2 == 1){ //Lead odd j
+//                   //Phys_Channel_Lead_bPlas[TAMID][Hit]
+//                 Phys_Channel_Lead_bPlas[i][j] = TAMEX_bPlast_Chan[i][RAW->get_PLASTIC_physical_channel(i, j)];
+//                 chan = (Phys_Channel_Lead_bPlas[i][j]);
+//                 if(chan>-1){
+//                 /// PMT allocation succeeded
+//                 bPlasdetnum=TAMEX_bPlast_Det[i][RAW->get_PLASTIC_physical_channel(i, j)];
+//                 fOutput->fbPlasDetNum = bPlasdetnum;
+//                 fOutput->fbPlasChan[bPlasdetnum]=  chan;
+//                 N1 = fOutput->fbPlas_PMT_Lead_N[bPlasdetnum][chan]++;
+// 
+// 
+//             if(N1>-1 && N1<bPLASTIC_TAMEX_HITS){
+// 
+//                fOutput->fbPlas_Lead_PMT[bPlasdetnum][chan][N1] = RAW->get_PLASTIC_lead_T(i,j);
+//                   }
+//                 }
+//               }
+//                if(RAW->get_PLASTIC_CH_ID(i,j) % 2 == 0){ //Trail even j
+// 
+//                 Phys_Channel_Trail_bPlas[i][j] = TAMEX_bPlast_Chan[i][RAW->get_PLASTIC_physical_channel(i, j)];
+//                 chan = (Phys_Channel_Trail_bPlas[i][j]);
+// 
+//                if(chan>-1){
+// 
+//                 /// PMT allocation succeeded
+//                  N1 = fOutput->fbPlas_PMT_Trail_N[bPlasdetnum][chan]++;
+//                 if(N1>-1&& N1<bPLASTIC_TAMEX_HITS){
+//              fOutput->fbPlas_Trail_PMT[bPlasdetnum][chan][N1] = RAW->get_PLASTIC_trail_T(i,j);
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
+//      }
 
          ///--------------------------------------------------------------------------------------------///
                                                 /**Output FATIMA VME **/
@@ -1839,28 +1814,28 @@ void EventUnpackProc::get_used_systems(){
 
     //ID
 
-    hID_AoQ = MakeTH1('D',"FRS/ID/ID_AoQ","ID_AoQ",2000,FRS_MIN_AoQ,FRS_MAX_AoQ,"A/Q S2-S4");
-    hID_AoQ_corr = MakeTH1('D',"FRS/ID/ID_AoQ_corr","ID_AoQ_corr",2000,FRS_MIN_AoQ,FRS_MAX_AoQ,"A/Q S2-S4");
+    hID_AoQ = MakeTH1('D',"FRS/ID/ID_AoQ","ID_AoQ",2000,frs_id->min_aoq_plot,frs_id->max_aoq_plot,"A/Q S2-S4");
+    hID_AoQ_corr = MakeTH1('D',"FRS/ID/ID_AoQ_corr","ID_AoQ_corr",2000,frs_id->min_aoq_plot,frs_id->max_aoq_plot,"A/Q S2-S4");
     
     
 
-    hID_AoQ_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_AoQ_mhtdc","ID_AoQ",2000,FRS_MIN_AoQ,FRS_MAX_AoQ,"A/Q S2-S4");
-    hID_AoQ_corr_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_AoQ_corr_mhtdc","ID_AoQ_corr",2000,FRS_MIN_AoQ,FRS_MAX_AoQ,"A/Q S2-S4");
+    hID_AoQ_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_AoQ_mhtdc","ID_AoQ",2000,frs_id->min_aoq_plot,frs_id->max_aoq_plot,"A/Q S2-S4");
+    hID_AoQ_corr_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_AoQ_corr_mhtdc","ID_AoQ_corr",2000,frs_id->min_aoq_plot,frs_id->max_aoq_plot,"A/Q S2-S4");
 
 
-//     hID_Z_AoQ_mhtdc = MakeTH2('D',"FRS/MHTDC/ID/ID_Z1_AoQ_mhtdc", "Z1 vs A/Q",1500,FRS_MIN_AoQ,FRS_MAX_AoQ, 1500,FRS_MIN_Z,FRS_MAX_Z,"A/Q s2-s4", "Z1 s2-s4");
+//     hID_Z_AoQ_mhtdc = MakeTH2('D',"FRS/MHTDC/ID/ID_Z1_AoQ_mhtdc", "Z1 vs A/Q",1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Z1 s2-s4");
 // 
-//     hID_Z_AoQ_corr_mhtdc = MakeTH2('D',"FRS/MHTDC/ID/ID_Z_AoQ_corr_mhtdc", "Z1 vs A/Q",1500,FRS_MIN_AoQ,FRS_MAX_AoQ, 1000,FRS_MIN_Z,FRS_MAX_Z,"A/Q s2-s4", "Z1 s2-s4");
+//     hID_Z_AoQ_corr_mhtdc = MakeTH2('D',"FRS/MHTDC/ID/ID_Z_AoQ_corr_mhtdc", "Z1 vs A/Q",1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Z1 s2-s4");
 
-  //  hID_Z_Z2_mhtdc = MakeTH2('D',"FRS/MHTDC/ID/ID_Z1_Z2_mhtdc","Z1 vs. Z2", 1000,FRS_MIN_Z,FRS_MAX_Z, 1000,FRS_MIN_Z,FRS_MAX_Z,"Z1", "Z2");
+  //  hID_Z_Z2_mhtdc = MakeTH2('D',"FRS/MHTDC/ID/ID_Z1_Z2_mhtdc","Z1 vs. Z2", 1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"Z1", "Z2");
 
   //   hID_Z = MakeH1I("ID",Form("ID_Z, gain=%f",music->e1_gain[0]),1000,10,93,"Z s2-s4",2,6);
-    hID_Z = MakeTH1('D',"FRS/ID/ID_Z1","ID_Z1",1000,FRS_MIN_Z,FRS_MAX_Z,"Z1 s2-s4");
-    hID_Z2 = MakeTH1('D',"FRS/ID/ID_Z2","ID_Z2",1000,FRS_MIN_Z,FRS_MAX_Z,"Z2 s2-s4");
+    hID_Z = MakeTH1('D',"FRS/ID/ID_Z1","ID_Z1",1000,frs_id->min_z_plot,frs_id->max_z_plot,"Z1 s2-s4");
+    hID_Z2 = MakeTH1('D',"FRS/ID/ID_Z2","ID_Z2",1000,frs_id->min_z_plot,frs_id->max_z_plot,"Z2 s2-s4");
 
-    hID_Z_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_Z1_mhtdc","ID_Z1",1000,FRS_MIN_Z,FRS_MAX_Z,"Z1 s2-s4");
+    hID_Z_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_Z1_mhtdc","ID_Z1",1000,frs_id->min_z_plot,frs_id->max_z_plot,"Z1 s2-s4");
 
-    hID_Z2_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_Z2_mhtdc","ID_Z2",1000,FRS_MIN_Z,FRS_MAX_Z,"Z2 s2-s4");
+    hID_Z2_mhtdc = MakeTH1('D',"FRS/MHTDC/ID/ID_Z2_mhtdc","ID_Z2",1000,frs_id->min_z_plot,frs_id->max_z_plot,"Z2 s2-s4");
 
   
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -2934,6 +2909,7 @@ void EventUnpackProc::Fill_Germanium_Histos(){
          for(int i=0; i<Germanium_hits; i++){
             if(RAW->get_Germanium_Det_id(i)>-1){
                hGe_Raw_E[RAW->get_Germanium_Det_id(i)][RAW->get_Germanium_Crystal_id(i)]->Fill(RAW->get_Germanium_Chan_E(i));
+               
           if(Germanium_TRACES_ACTIVE){
             for(int l_l=0; l_l<RAW->get_Germanium_Trace_Length()/2; l_l++){
                      
