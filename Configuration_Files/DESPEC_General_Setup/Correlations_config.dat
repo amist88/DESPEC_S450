@@ -15,16 +15,16 @@
 1 1
 
 ## FRS Fatima 'prompt' gammas ##
-1
+0
 
 ## Include Fatima Lifetime Analysis for 'prompt' gammas ##
-1
+0
 
 ## Spill-Off Gammas ##
 1
 
 ## Beta-Delayed Gammas (AIDA Implant-Decay) (FRS-AIDA-bPlast gammas) 1 1 1 = [On], [Include Ge Gam-Gam], [Include Fatima] ##
-1 1 1
+1 1 0
 
 ## Include Fatima Lifetime Analysis for Beta-delayed gammas ##
 0

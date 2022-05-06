@@ -152,7 +152,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
         ///BDG with bPlastic/Spill Off
            if(fCorrel->GSetup_corr_Beta_Gamma_bPlastSpillOff==true) Process_SpillOff_Gammas(cInput, cOutput);
 
-             ///BDG with AIDA
+        ///BDG with AIDA
           if(fCorrel->GSetup_corr_Beta_Gamma==true) Process_Beta_Gamma(cInput, cOutput);
 
 
@@ -170,9 +170,9 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
 
 //
-    for (int i=0; i<MAX_FRS_GATE; i++){
-    if(USE_dEdeg_Z1_GATE==0)cInput->pFRS_dEdegZ1_pass[i]=true;
-    }
+//     for (int i=0; i<MAX_FRS_GATE; i++){
+//     if(USE_dEdeg_Z1_GATE==0)cInput->pFRS_dEdegZ1_pass[i]=true;
+//     }
 
   ///Gates input TESTING!!!
   // cInput->pFRS_ZAoQ_pass=true;
@@ -282,7 +282,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
          }
 
       ///bPlastic
-      for(int c=0; c<10; c++){
+      for(int c=0; c<bPLASTIC_TAMEX_HITS; c++){
   //cout<<"bPLASTIC_ADDITIONAL_CH_MOD " <<bPLASTIC_ADDITIONAL_CH_MOD << " bPlastTimeMachineCh2 " <<bPlastTimeMachineCh2 <<" cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c] " <<cInputMain->pbPlas_FastLeadT[bPLASTIC_ADDITIONAL_CH_MOD][bPlastTimeMachineCh1][c] <<endl;
   
   
