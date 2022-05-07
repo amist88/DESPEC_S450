@@ -759,12 +759,10 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
  /**--------------------------------  FRS-Germanium Prompt (Isomers)  -------------**/
  /**----------------------------------------------------------------------------------------------**/
  void EventCorrelProc::Make_FRS_Prompt_Ge_Histos(){
-
 //       hA_FRSWR_GeWR =  MakeTH1('I',"Correlations/FRS-Prompt_Ge/FRS-Ge_WR_dT","T Diff FRS WR -Germanium WR ",10000,-10000,10000,"Time[ns]", "Counts");
 
      // hA_FRS_GeE = MakeTH1('D', "Correlations/FRS-Prompt_Ge/Ge_EnergySum_allFRS", "Germanium Energy FRS (all) gated",6000, 0, 6000);
       hA_FRS_ZAoQ_GeEvsT_all= MakeTH2('D',"Correlations/FRS-Prompt_Ge/Z1vsAoQ_Ge/GeE_vs_FRSGe_dT_Z1vsAoQ_All","Ge vs T all", 2100,-1000,20000,fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,"Ge Energy (keV)", "FRS - Ge time (ns)");
-
       for(int i=0; i<MAX_FRS_GATE; i++){
        hA_FRS_ZAoQ_GeE[i]  = MakeTH1('F', Form("Correlations/FRS-Prompt_Ge/Z1vsAoQ_Ge/SinglesEnergy/Ge_EnergySum_Z1vsAoQ_Gate%d", i), Form("Germanium Energy FRS PID gated %d", i), 2000, 0, 2000, "Energy/keV");
 
@@ -781,7 +779,6 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
        if(fCorrel->GSetup_corr_FRS_Gamma_Gamma==1){
        hA_FRS_Z1Z2_GeE1_GeE2[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_Ge/Gamma-Gamma/GeE1_vs_GeE2_Z1Z2_Gate%d",i),Form("Gamma-Gamma Z1Z2_Ge Gated: %d",i), fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,  fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax, "Ge Energy1 (keV)", "Ge Energy2 (keV)");
        }
-
        //Z1Z2 X2AoQ
        hA_FRS_Z1Z2_X2AoQ_GeE[i]  = MakeTH1('F', Form("Correlations/FRS-Prompt_Ge/Z1Z2_X2AoQ_Ge/SinglesEnergy/Ge_Energy_Z1Z2_X2AoQGate%d", i), Form("Germanium Energy FRS Z1Z2_X2AoQ Gate %d", i), 2000, 0, 2000, "Energy/keV");
 
@@ -790,7 +787,6 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
        if(fCorrel->GSetup_corr_FRS_Gamma_Gamma==1){
        hA_FRS_Z1Z2_X2AoQ_GeE1_GeE2[i]  = MakeTH2('D',Form("Correlations/FRS-Prompt_Ge/Z1Z2_X2AoQ_Ge/Gamma-Gamma/GeE1_vs_GeE2_Z1Z2_X2AoQ_Gate%d",i),Form("Gamma-Gamma Z1Z2_X2AoQ_Ge Gated: %d",i), fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,  fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax, "Ge Energy1 (keV)", "Ge Energy2 (keV)");
        }
-
         //Z1Z2 X2AoQ
        hA_FRS_Z1Z2_X4AoQ_GeE[i]  = MakeTH1('F', Form("Correlations/FRS-Prompt_Ge/Z1Z2_X4AoQ_Ge/SinglesEnergy/Ge_Energy_Z1Z2_X4AoQGate%d", i), Form("Germanium Energy FRS Z1Z2_X4AoQ Gate %d", i), 2000, 0, 2000, "Energy/keV");
 
@@ -802,7 +798,6 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
       }
 //       hA_FRS_GeEvsT  = MakeTH2('D',"Correlations/FRS-Prompt_Ge/FRS_T-GALWR_T_vs_GeE","T Diff FRS - Ge vs Ge Energy", 1250, 0, 5000, 1000,-10000,10000,"Ge Energy (keV)", "FRS WR - Ge WR time (ns)");
-
       Float_t init_Ge_EdT_cut[MAX_FRS_GATE][MAX_FRS_PolyPoints][2];
       //Float_t init_ID_Z_AoQ_corrstep_Ge[8][8][2];
       for(int m=0; m<MAX_FRS_GATE; m++){
@@ -824,11 +819,11 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
         sprintf(name,"cGe_EdT_cut%d",i);
         cGe_EdT_cut[i] = MakePolyCond("cGe_EdT_cut", name,MAX_FRS_PolyPoints, init_Ge_EdT_cut[i], "Ge Prompt flash cut");
       }
+
     }
   /**----------------------------------------------------------------------------------------------**/
 
  void EventCorrelProc::Process_FRS_Prompt_Ge(EventAnlStore* cInputMain, EventCorrelStore* cOutput){
-
      int    GeHitsPrm=0;
      double GeE_Prm[Germanium_MAX_HITS];
      double GeT_Prm[Germanium_MAX_HITS];
@@ -841,16 +836,17 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
       dT_frsge_mult_prompt=0;
       dT_GeT_prompt=0;
       Ge_FirstT_prompt=0;
-for(int g=0; g<Germanium_MAX_DETS; g++){
+      
+      for(int g=0; g<Germanium_MAX_DETS; g++){
             for(int h=0; h<Germanium_CRYSTALS; h++){
 	      if(cInputMain->pGe_T_Aligned[g][h]>0){
-     hA_FRS_ZAoQ_GeEvsT_all->Fill((cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h]);
+                hA_FRS_ZAoQ_GeEvsT_all->Fill((cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h]);
+                cout<<"GO 2 " << endl;
 	      }
 	    }
 }
 
     if(cInputMain->pFRS_WR>0 && cInputMain->pGe_WR>0)  dT_frsge_prompt = (cInputMain->pGe_WR - cInputMain->pFRS_WR);
-
     if(cInputMain->pGe_WR!=0){
      for(int g=0; g<Germanium_MAX_DETS; g++){
             for(int h=0; h<Germanium_CRYSTALS; h++){
@@ -876,7 +872,6 @@ for(int g=0; g<Germanium_MAX_DETS; g++){
 
         ///Cut the prompt flash with 2D poly (accepts events in window)
         if(cGe_EdT_cut[gate]->Test((cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h])==true) {
-
                 ///Energy vs WR dT all
 //                 hA_FRS_GeEvsT->Fill(cInputMain->pGe_EAddback[g][h],dT_frsge_prompt);
 
@@ -1726,21 +1721,21 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
 
       hbPlast_SpillOff_Germanium_gammagamma  = MakeTH2('D',"Correlations/SpillOff_Gamma/bPlast/Ge_GamGam_bPlastBeta_SpillOff","Gamma-Gamma bPlast Beta gated spill off", fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,fCorrel->GGe1_Ge2_HistoBin,fCorrel->GGe1_Ge2_HistoMin,fCorrel->GGe1_Ge2_HistoMax,"Ge Energy1 (keV)", "Ge Energy2 (keV)");
 
-     if(Used_Systems[3]==1 || Used_Systems[4] ==1){
-      hbPlast_SpillOff_Fatima = MakeTH1('F', "Correlations/SpillOff_Gamma/bPlast/Fatima/Fat_Energy_bPlastBeta_SpillOff", "", 4000, 0, 4000, "Energy/keV");
-      
-      //hbPlast_SpillOn_Fatima = MakeTH1('F', "Correlations/SpillOn_Gamma/bPlast/Fatima/Fat_Energy_bPlastBeta_SpillOn", "", 4000, 0, 4000, "Energy/keV");
-
-      hbPlast_SpillOff_Fatima_gammagamma = MakeTH2('D',"Correlations/SpillOff_Gamma/bPlast/Fatima/Fat_GamGam_bPlastBeta_SpillOff","Gamma-Gamma Beta Spill Off gated", 2000,0,2000,2000,0,2000,"Fat Energy1 (keV)", "Fat Energy2 (keV)");
-     }
+//      if(Used_Systems[3]==1 || Used_Systems[4] ==1){
+//       hbPlast_SpillOff_Fatima = MakeTH1('F', "Correlations/SpillOff_Gamma/bPlast/Fatima/Fat_Energy_bPlastBeta_SpillOff", "", 4000, 0, 4000, "Energy/keV");
+//       
+//       //hbPlast_SpillOn_Fatima = MakeTH1('F', "Correlations/SpillOn_Gamma/bPlast/Fatima/Fat_Energy_bPlastBeta_SpillOn", "", 4000, 0, 4000, "Energy/keV");
+// 
+//       hbPlast_SpillOff_Fatima_gammagamma = MakeTH2('D',"Correlations/SpillOff_Gamma/bPlast/Fatima/Fat_GamGam_bPlastBeta_SpillOff","Gamma-Gamma Beta Spill Off gated", 2000,0,2000,2000,0,2000,"Fat Energy1 (keV)", "Fat Energy2 (keV)");
+//      }
 
 
       //bPlast Spill On/Off
       for (int i =1; i<4; i++)
             {
      for(int j=0; j<bPLASTIC_CHAN_PER_DET; j++){
-      hbPlas_ToT_SpillOff[i][j] = MakeTH1('D', Form("Correlations/SpillOff_Gamma/bPlast/bPlastSpillOff/ToT Plas Det SpillOff. %2d Ch. %2d",  i,j), Form("ToT Spill Off Det. %2d Ch. %2d", i,j),20000, 0., 200000.);
-      hbPlas_ToT_SpillOn[i][j] = MakeTH1('D', Form("Correlations/SpillOff_Gamma/bPlast/bPlastSpillOn/ToT Plas Det SpillOn. %2d Ch. %2d",  i,j), Form("ToT Spill On Det. %2d Ch. %2d", i,j),20000, 0., 200000.);
+      hbPlas_ToT_SpillOff[i][j] = MakeTH1('D', Form("Correlations/SpillOff_Gamma/bPlast/bPlastSpillOff/ToT Plas Det SpillOff. %2d Ch. %2d",  i,j), Form("ToT Spill Off Det. %2d Ch. %2d", i,j),2000, 0., 200000.);
+      hbPlas_ToT_SpillOn[i][j] = MakeTH1('D', Form("Correlations/SpillOff_Gamma/bPlast/bPlastSpillOn/ToT Plas Det SpillOn. %2d Ch. %2d",  i,j), Form("ToT Spill On Det. %2d Ch. %2d", i,j),2000, 0., 200000.);
                 }
             }
             
@@ -1827,23 +1822,23 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
         }
     
         // bplast beta-gated spill-off fatima
-                 if(bPlast_Beta_Fatima==true &&Used_Systems[3]==1 ){
-                    
-                     for(int k=0;k<cInputMain->pFatmult; k++){
-                        hbPlast_SpillOff_Fatima->Fill(cInputMain->pFat_QDC_E[k]);
-
-                        for(int l=0;l<cInputMain->pFatmult; l++){
-                            if(k==l) continue;
-                                hbPlast_SpillOff_Fatima_gammagamma->Fill(cInputMain->pFat_QDC_E[k],cInputMain->pFat_QDC_E[l]);
-                    //Remove second gamma if >700 and long
-//                      if(cInputMain->pFat_QDC_E[l]>700 && (cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])*0.025<-20&& (cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])*0.025>20)continue;
-//
-//                       if((cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])<10 && cInputMain->pFat_QDC_E[l]<700){
-//                        if(cInputMain->pFat_QDC_E[k]>0)  hbPlast_SpillOff_Fatima_gcut->Fill(cInputMain->pFat_QDC_E[k]);
-//                             }
-                        }
-                 }///End if bplast-Fatima
-            }
+//                  if(bPlast_Beta_Fatima==true &&Used_Systems[3]==1 ){
+//                     
+//                      for(int k=0;k<cInputMain->pFatmult; k++){
+//                         hbPlast_SpillOff_Fatima->Fill(cInputMain->pFat_QDC_E[k]);
+// 
+//                         for(int l=0;l<cInputMain->pFatmult; l++){
+//                             if(k==l) continue;
+//                                 hbPlast_SpillOff_Fatima_gammagamma->Fill(cInputMain->pFat_QDC_E[k],cInputMain->pFat_QDC_E[l]);
+//                     //Remove second gamma if >700 and long
+// //                      if(cInputMain->pFat_QDC_E[l]>700 && (cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])*0.025<-20&& (cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])*0.025>20)continue;
+// //
+// //                       if((cInputMain->pFat_TDC_T[k]-cInputMain->pFat_TDC_T[l])<10 && cInputMain->pFat_QDC_E[l]<700){
+// //                        if(cInputMain->pFat_QDC_E[k]>0)  hbPlast_SpillOff_Fatima_gcut->Fill(cInputMain->pFat_QDC_E[k]);
+// //                             }
+//                         }
+//                  }///End if bplast-Fatima
+//             }
 
             //Now bplast beta-gated spill-off germanium
             if(bPlast_Beta_Germanium==true ){
@@ -1906,7 +1901,7 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
      hGe_BetaGamma_E[i] = MakeTH1('F', Form("Correlations/Beta_Delayed_Gammas/Germanium/Energy/Ge_BetaGam_Energy_PIDGate%d", i), Form("Germanium Energy Aida Beta-Gamma PID %d", i), 2000, 0, 2000, "Energy/keV");
 
      if(fCorrel->GSetup_corr_Beta_Gamma_Gamma==true){
-     hGe_BetaGamma_GeE1_GeE2[i] = MakeTH2('D',Form("Correlations/Beta_Delayed_Gammas/Germanium/Energy/Gamma-Gamma/Ge1Ge2_BetaGam_PIDGate%d",i),Form("Germanium Gamma-Gamma Imp-Dec, PID Gate: %d",i), 2000, 0, 2000, 2000,0,2000,"Ge Energy1 (keV)", "Ge Energy2 (keV)");
+    // hGe_BetaGamma_GeE1_GeE2[i] = MakeTH2('D',Form("Correlations/Beta_Delayed_Gammas/Germanium/Energy/Gamma-Gamma/Ge1Ge2_BetaGam_PIDGate%d",i),Form("Germanium Gamma-Gamma Imp-Dec, PID Gate: %d",i), 2000, 0, 2000, 2000,0,2000,"Ge Energy1 (keV)", "Ge Energy2 (keV)");
      }
 
      hGe_BetaGamma_dT[i] = MakeTH1('F', Form("Correlations/Beta_Delayed_Gammas/Germanium/dT(Implant-Decay)/Implant-DecaydT_PIDGate%d", i), Form("dT Aida Implant-Decay Beta-Gamma PID %d", i), fCorrel->GAidaImpDecT_HBin,fCorrel->GAidaImpDecT_Low,fCorrel->GAidaImpDecT_High, "Implant-Decay dT (s)");
@@ -2295,7 +2290,7 @@ for(int i=0;i<MAX_FRS_GATE;i++){
                    for(int x=0; x<gehits; x++){
                    for(int y=0; y<gehits; y++){
                         if (x==y) continue;
-                     hGe_BetaGamma_GeE1_GeE2[i]->Fill(GeE[x],GeE[y]);
+               //      hGe_BetaGamma_GeE1_GeE2[i]->Fill(GeE[x],GeE[y]);
 
 
                        }
