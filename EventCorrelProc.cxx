@@ -1782,9 +1782,9 @@ dT_frsfat_prompt = ((cInputMain->pFat_TDC_T[k]-cInputMain->pSC40[0])*0.025);
          for(int x=0; x<gespilloffhits; x++){
                    for(int y=0; y<gespilloffhits; y++){
                         if (x==y) continue;
-                        if((GeT_SpillOff[x]-GeT_SpillOff[y])>fCorrel->GGe1_Ge2_Low && (GeT_SpillOff[x]-    GeT_SpillOff[y])<fCorrel->GGe1_Ge2_High){
-                        hbPlast_SpillOff_Germanium_gammagamma->Fill(GeE_bPlast_SpillOff[x],GeE_bPlast_SpillOff[y]);
-                     hbPlast_SpillOff_Germanium_gammagamma->Fill(GeE_SpillOff[x],GeE_SpillOff[y]);
+                        if((GeT_SpillOff[x]-GeT_SpillOff[y])>fCorrel->GGe1_Ge2_Low && (GeT_SpillOff[x]- GeT_SpillOff[y])<fCorrel->GGe1_Ge2_High){
+        
+                        hSpillOff_Germanium_gammagamma->Fill(GeE_SpillOff[x],GeE_SpillOff[y]);
                 
                             }
                        }
