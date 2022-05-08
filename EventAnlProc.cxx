@@ -2009,9 +2009,10 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
   hit.ClusterSizeX  = i.first.N;
   hit.ClusterSizeY = i.second.N;
 
-  hit.Energy = (i.first.Energy + i.second.Energy) / 2;
+  //hit.Energy = (i.first.Energy + i.second.Energy) / 2;
   hit.EnergyFront = i.first.Energy;
   hit.EnergyBack = i.second.Energy;
+  hit.Energy = hit.EnergyFront; // AIDA Triple n+n (back) has terrible energy resolution!
 
   hit.Time = std::min(i.first.Time, i.second.Time);
   hit.TimeFront = i.first.Time;
