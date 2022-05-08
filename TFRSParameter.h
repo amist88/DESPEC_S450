@@ -215,7 +215,11 @@ public:
   //-----for VFTX multihit TDC analysis------
   float vftx_offset_2141;
   float vftx_offset_2241;
-
+  // KW add
+  float vftx_offset_2142;
+  float vftx_offset_2242;
+  // end KW
+  
   //-----for multihit TDC analysis------
   float mhtdc_factor_ch_to_ns;
   float mhtdc_offset_21l_21r;  float mhtdc_factor_21l_21r ;
@@ -286,6 +290,10 @@ public:
   Int_t         vftx_s2pos_option;
   Float_t       vftx_length_2141;
   Float_t       vftx_length_2241;
+  // KW add
+  Float_t       vftx_length_2142;
+  Float_t       vftx_length_2242;
+  // end KW
   Float_t       vftx_vel_a_music41[4];
   //id analysis with multihit tdc
   Int_t         mhtdc_s2pos_option;

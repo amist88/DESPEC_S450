@@ -438,20 +438,24 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
 	}
 
              if(PrcID==20){
-    for(int i=0; i<32; i++){
-            if(RAW->get_FRS_TRaw_vftx_21l(i)!=0)fOutput->fTRaw_vftx_21l[i] = RAW->get_FRS_TRaw_vftx_21l(i);
-            if(RAW->get_FRS_TRaw_vftx_21r(i)!=0)fOutput->fTRaw_vftx_21r[i] = RAW->get_FRS_TRaw_vftx_21r(i);
-            if(RAW->get_FRS_TRaw_vftx_22l(i)!=0)fOutput->fTRaw_vftx_22l[i] = RAW->get_FRS_TRaw_vftx_22l(i);
-            if(RAW->get_FRS_TRaw_vftx_22r(i)!=0)fOutput->fTRaw_vftx_22r[i] = RAW->get_FRS_TRaw_vftx_22r(i);
-            if(RAW->get_FRS_TRaw_vftx_41l(i)!=0)fOutput->fTRaw_vftx_41l[i] = RAW->get_FRS_TRaw_vftx_41l(i);
-            if(RAW->get_FRS_TRaw_vftx_41r(i)!=0)fOutput->fTRaw_vftx_41r[i] = RAW->get_FRS_TRaw_vftx_41r(i);
-            if(RAW->get_FRS_TRaw_vftx_42l(i)!=0)fOutput->fTRaw_vftx_42l[i] = RAW->get_FRS_TRaw_vftx_42l(i);
-            if(RAW->get_FRS_TRaw_vftx_42r(i)!=0)fOutput->fTRaw_vftx_42r[i] = RAW->get_FRS_TRaw_vftx_42r(i);
-            if(RAW->get_FRS_ToF_vftx_2141(i)!=0)fOutput->fToF_vftx_2141[i] = RAW->get_FRS_ToF_vftx_2141(i);
-            if(RAW->get_FRS_ToF_vftx_2141_calib(i)!=0)fOutput->fToF_vftx_2141_calib[i] = RAW->get_FRS_ToF_vftx_2141_calib(i);
-            if(RAW->get_FRS_ToF_vftx_2241(i)!=0)fOutput->fToF_vftx_2241[i] = RAW->get_FRS_ToF_vftx_2241(i);
-            if(RAW->get_FRS_ToF_vftx_2241_calib(i)!=0)fOutput->fToF_vftx_2241_calib[i] = RAW->get_FRS_ToF_vftx_2241_calib(i);
-             }
+	       // KW rem
+	       // for(int i=0; i<32; i++){
+	       // KW add
+	       for(int i=0; i<VFTX_MAX_HITS; i++){
+		 // end KW
+		 if(RAW->get_FRS_TRaw_vftx_21l(i)!=0)fOutput->fTRaw_vftx_21l[i] = RAW->get_FRS_TRaw_vftx_21l(i);
+		 if(RAW->get_FRS_TRaw_vftx_21r(i)!=0)fOutput->fTRaw_vftx_21r[i] = RAW->get_FRS_TRaw_vftx_21r(i);
+		 if(RAW->get_FRS_TRaw_vftx_22l(i)!=0)fOutput->fTRaw_vftx_22l[i] = RAW->get_FRS_TRaw_vftx_22l(i);
+		 if(RAW->get_FRS_TRaw_vftx_22r(i)!=0)fOutput->fTRaw_vftx_22r[i] = RAW->get_FRS_TRaw_vftx_22r(i);
+		 if(RAW->get_FRS_TRaw_vftx_41l(i)!=0)fOutput->fTRaw_vftx_41l[i] = RAW->get_FRS_TRaw_vftx_41l(i);
+		 if(RAW->get_FRS_TRaw_vftx_41r(i)!=0)fOutput->fTRaw_vftx_41r[i] = RAW->get_FRS_TRaw_vftx_41r(i);
+		 if(RAW->get_FRS_TRaw_vftx_42l(i)!=0)fOutput->fTRaw_vftx_42l[i] = RAW->get_FRS_TRaw_vftx_42l(i);
+		 if(RAW->get_FRS_TRaw_vftx_42r(i)!=0)fOutput->fTRaw_vftx_42r[i] = RAW->get_FRS_TRaw_vftx_42r(i);
+		 if(RAW->get_FRS_ToF_vftx_2141(i)!=0)fOutput->fToF_vftx_2141[i] = RAW->get_FRS_ToF_vftx_2141(i);
+		 if(RAW->get_FRS_ToF_vftx_2141_calib(i)!=0)fOutput->fToF_vftx_2141_calib[i] = RAW->get_FRS_ToF_vftx_2141_calib(i);
+		 if(RAW->get_FRS_ToF_vftx_2241(i)!=0)fOutput->fToF_vftx_2241[i] = RAW->get_FRS_ToF_vftx_2241(i);
+		 if(RAW->get_FRS_ToF_vftx_2241_calib(i)!=0)fOutput->fToF_vftx_2241_calib[i] = RAW->get_FRS_ToF_vftx_2241_calib(i);
+	       }
              }
             ///SCI TOF
 //         fOutput->fFRS_sci_tofll2 = RAW->get_FRS_tofll2();
@@ -1970,8 +1974,11 @@ for(int i=0;i<7;i++)
 
   //  hMUSIC1_MUSIC2 = MakeTH2('D',"FRS/MUSIC/MUSIC1_MUSIC2","dE1_dE2", 1024,0,4096,1024,0,4096);
 
-    for(int i=0;i<32;i++)
-     {
+   // KW rem
+   // for(int i=0; i<32; i++){
+   // KW add
+   for(int i=0; i<VFTX_MAX_HITS; i++){
+     // end KW
        hvftx_TRaw[i] = MakeTH1('D', Form("FRS/VFTXSCI/TRaw/TRaw%2d",i), Form("T Raw %2d",i), 2000,1E6,1E8);
      }
    hvftx_Hit_Pattern= MakeTH1('D',"FRS/VFTXSCI/HitPattern","Hit Pattern",16,0.,16);
@@ -1992,32 +1999,111 @@ for(int i=0;i<7;i++)
     
     h1_VFTX_TOF_41_22_calib = (TH1D*)MakeTH1('D',"FRS/VFTX/TOF/Sci2142_calib","TOF_Sci21_Sci42 calib",8000,100000.,400000.,"TOF = Sci41 - Sci21 [1ps/bin]");
 
+   // KW add
+   // left right time differences for the first hit, all hits, and versus position from TPC
+   h1_VFTX_deltaT_S21 =      (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S21","S21_deltaT",10000,-5000.,5000.,"deltaT_S21 = Left - Right [1ps/bin]");
+   h1_VFTX_deltaT_S21_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S21_mhit","S21_deltaT_mhit",10000,-5000.,5000.,"deltaT_S21 = Left - Right [1ps/bin]");
+   h2_VFTX_deltaT_S21_TPC =  (TH2I*)MakeTH2('D',"FRS/VFTXSCI/deltaT/deltaT_S21_TPC","deltaT_S21_TPC",10000,-5000,5000,240,-120,120,"deltaT_S21 = Left - Right [1ps/bin]","X from TPC [mm]");
+   h1_VFTX_deltaT_S22 =      (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S22","S22_deltaT",10000,-5000.,5000.,"deltaT_S22 = Left - Right [1ps/bin]");
+   h1_VFTX_deltaT_S22_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S22_mhit","S22_deltaT_mhit",10000,-5000.,5000.,"deltaT_S22 = Left - Right [1ps/bin]");
+   h2_VFTX_deltaT_S22_TPC =  (TH2I*)MakeTH2('D',"FRS/VFTXSCI/deltaT/deltaT_S22_TPC","deltaT_S22_TPC",10000,-5000,5000,240,-120,120,"deltaT_S22 = Left - Right [1ps/bin]","X from TPC [mm]");
+					   
+   h1_VFTX_deltaT_S41 =      (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S41","S41_deltaT",10000,-5000.,5000.,"deltaT_S41 = Left - Right [1ps/bin]");
+   h1_VFTX_deltaT_S41_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S41_mhit","S41_deltaT_mhit",10000,-5000.,5000.,"deltaT_S41 = Left - Right [1ps/bin]");
+   h2_VFTX_deltaT_S41_TPC =  (TH2I*)MakeTH2('D',"FRS/VFTXSCI/deltaT/deltaT_S41_TPC","deltaT_S41_TPC",10000,-5000,5000,240,-120,120,"deltaT_S41 = Left - Right [1ps/bin]","X from TPC [mm]");
+   h1_VFTX_deltaT_S42 =      (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S42","S42_deltaT",10000,-5000.,5000.,"deltaT_S42 = Left - Right [1ps/bin]");
+   h1_VFTX_deltaT_S42_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/deltaT/deltaT_S42_mhit","S42_deltaT_mhit",10000,-5000.,5000.,"deltaT_S42 = Left - Right [1ps/bin]");
+   h2_VFTX_deltaT_S42_TPC =  (TH2I*)MakeTH2('D',"FRS/VFTXSCI/deltaT/deltaT_S42_TPC","deltaT_S42_TPC",10000,-5000,5000,240,-120,120,"deltaT_S42 = Left - Right [1ps/bin]" ,"X from TPC [mm]");
 
+   // time of flights for the first hit, all hits, and calibrated == offset removed
+   h1_VFTX_TOF_S21_S41 = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S21_S41","TOF_S21_S41",8000,0.,400000.,"TOF = S41 - S21 [50 ps/bin]");
+   h1_VFTX_TOF_S22_S41 = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S22_S41","TOF_S22_S41",8000,0.,400000.,"TOF = S41 - S22 [50 ps/bin]");
+   h1_VFTX_TOF_S21_S42 = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S21_S42","TOF_S21_S42",8000,0.,400000.,"TOF = S42 - S21 [50 ps/bin]");
+   h1_VFTX_TOF_S22_S42 = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S22_S42","TOF_S22_S42",8000,0.,400000.,"TOF = S42 - S22 [50 ps/bin]");
+
+   h1_VFTX_TOF_S21_S41_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S21_S41_mhit","TOF_S21_S41_mhit",8000,0.,400000.,"TOF = S41 - S21 [50 ps/bin]");
+   h1_VFTX_TOF_S22_S41_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S22_S41_mhit","TOF_S22_S41_mhit",8000,0.,400000.,"TOF = S41 - S22 [50 ps/bin]");
+   h1_VFTX_TOF_S21_S42_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S21_S42_mhit","TOF_S21_S42_mhit",8000,0.,400000.,"TOF = S42 - S21 [50 ps/bin]");
+   h1_VFTX_TOF_S22_S42_mhit = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S22_S42_mhit","TOF_S22_S42_mhit",8000,0.,400000.,"TOF = S42 - S22 [50 ps/bin]");
+
+   h1_VFTX_TOF_S21_S41_calib = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S21_S41_calib","TOF_S21_S41_calib",10000,100.,250.,"TOF = S41 - S21 [ns, 15 ps/bin]");
+   h1_VFTX_TOF_S22_S41_calib = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S22_S41_calib","TOF_S22_S41_calib",10000,100.,250.,"TOF = S41 - S22 [ns, 15 ps/bin]");
+   h1_VFTX_TOF_S21_S42_calib = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S21_S42_calib","TOF_S21_S42_calib",10000,100.,250.,"TOF = S42 - S21 [ns, 15 ps/bin]");
+   h1_VFTX_TOF_S22_S42_calib = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/TOF/TOF_S22_S42_calib","TOF_S22_S42_calib",10000,100.,250.,"TOF = S42 - S22 [ns, 15 ps/bin]");
+
+   // physics data
+   h1_VFTX_beta_S21_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S41/beta_S21_S41",       "beta_S21_S41",       1000,0,1,             "beta S21 S41");
+   h1_VFTX_aoq_S21_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S41/aoq_S21_S41",        "aoq_S21_S41",        1000,2,4,             "A/q S21 S41");
+   h1_VFTX_aoq_cor_S21_S41    = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S41/aoq_cor_S21_S41",    "aoq_cor_S21_S41",    1000,2,4,             "A/q_cor S21 S41");
+   h1_VFTX_z_S21_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S41/z_S21_S41",          "z_S21_S41",          1000,50,100,          "Z S21 S41");
+   h1_VFTX_z2_S21_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S41/z2_S21_S41",         "z2_S21_S41",         1000,50,100,          "Z2 S21 S41");
+   h2_VFTX_z_aoq_S21_S41      = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S41/z_aoq_S21_S41",      "z_aoq_S21_S41",      1000,2,4,1000,50,100, "Z vs. A/q S21 S41");
+   h2_VFTX_z_aoq_cor_S21_S41  = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S41/z_aoq_cor_S21_S41",  "z_aoq_cor_S21_S41",  1000,2,4,1000,50,100, "Z vs. A/q_cor S21 S41");
+   h2_VFTX_z2_aoq_S21_S41     = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S41/z2_aoq_S21_S41",     "z2_aoq_S21_S41",     1000,2,4,1000,50,100, "Z2 vs. A/q S21 S41");
+   h2_VFTX_z2_aoq_cor_S21_S41 = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S41/z2_aoq_cor_S21_S41", "z2_aoq_cor_S21_S41", 1000,2,4,1000,50,100, "Z2 vs. A/q_cor S21 S41");
+
+   h1_VFTX_beta_S22_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S41/beta_S22_S41",       "beta_S22_S41",       1000,0,1,             "beta S22 S41");
+   h1_VFTX_aoq_S22_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S41/aoq_S22_S41",        "aoq_S22_S41",        1000,2,4,             "A/q S22 S41");
+   h1_VFTX_aoq_cor_S22_S41    = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S41/aoq_cor_S22_S41",    "aoq_cor_S22_S41",    1000,2,4,             "A/q_cor S22 S41");
+   h1_VFTX_z_S22_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S41/z_S22_S41",          "z_S22_S41",          1000,50,100,          "Z S22 S41");
+   h1_VFTX_z2_S22_S41	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S41/z2_S22_S41",         "z2_S22_S41",         1000,50,100,          "Z2 S22 S41");
+   h2_VFTX_z_aoq_S22_S41      = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S41/z_aoq_S22_S41",      "z_aoq_S22_S41",      1000,2,4,1000,50,100, "Z vs. A/q S22 S41");
+   h2_VFTX_z_aoq_cor_S22_S41  = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S41/z_aoq_cor_S22_S41",  "z_aoq_cor_S22_S41",  1000,2,4,1000,50,100, "Z vs. A/q_cor S22 S41");
+   h2_VFTX_z2_aoq_S22_S41     = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S41/z2_aoq_S22_S41",     "z2_aoq_S22_S41",     1000,2,4,1000,50,100, "Z2 vs. A/q S22 S41");
+   h2_VFTX_z2_aoq_cor_S22_S41 = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S41/z2_aoq_cor_S22_S41", "z2_aoq_cor_S22_S41", 1000,2,4,1000,50,100, "Z2 vs. A/q_cor S22 S41");
+
+   h1_VFTX_beta_S21_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S42/beta_S21_S42",       "beta_S21_S42",       1000,0,1,             "beta S21 S42");
+   h1_VFTX_aoq_S21_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S42/aoq_S21_S42",        "aoq_S21_S42",        1000,2,4,             "A/q S21 S42");
+   h1_VFTX_aoq_cor_S21_S42    = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S42/aoq_cor_S21_S42",    "aoq_cor_S21_S42",    1000,2,4,             "A/q_cor S21 S42");
+   h1_VFTX_z_S21_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S42/z_S21_S42",          "z_S21_S42",          1000,50,100,          "Z S21 S42");
+   h1_VFTX_z2_S21_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S21_S42/z2_S21_S42",         "z2_S21_S42",         1000,50,100,          "Z2 S21 S42");
+   h2_VFTX_z_aoq_S21_S42      = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S42/z_aoq_S21_S42",      "z_aoq_S21_S42",      1000,2,4,1000,50,100, "Z vs. A/q S21 S42");
+   h2_VFTX_z_aoq_cor_S21_S42  = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S42/z_aoq_cor_S21_S42",  "z_aoq_cor_S21_S42",  1000,2,4,1000,50,100, "Z vs. A/q_cor S21 S42");
+   h2_VFTX_z2_aoq_S21_S42     = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S42/z2_aoq_S21_S42",     "z2_aoq_S21_S42",     1000,2,4,1000,50,100, "Z2 vs. A/q S21 S42");
+   h2_VFTX_z2_aoq_cor_S21_S42 = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S21_S42/z2_aoq_cor_S21_S42", "z2_aoq_cor_S21_S42", 1000,2,4,1000,50,100, "Z2 vs. A/q_cor S21 S42");
+
+   h1_VFTX_beta_S22_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S42/beta_S22_S42",       "beta_S22_S42",       1000,0,1,             "beta S22 S42");
+   h1_VFTX_aoq_S22_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S42/aoq_S22_S42",        "aoq_S22_S42",        1000,2,4,             "A/q S22 S42");
+   h1_VFTX_aoq_cor_S22_S42    = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S42/aoq_cor_S22_S42",    "aoq_cor_S22_S42",    1000,2,4,             "A/q_cor S22 S42");
+   h1_VFTX_z_S22_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S42/z_S22_S42",          "z_S22_S42",          1000,50,100,          "Z S22 S42");
+   h1_VFTX_z2_S22_S42	      = (TH1D*)MakeTH1('D',"FRS/VFTXSCI/ID/S22_S42/z2_S22_S42",         "z2_S22_S42",         1000,50,100,          "Z2 S22 S42");
+   h2_VFTX_z_aoq_S22_S42      = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S42/z_aoq_S22_S42",      "z_aoq_S22_S42",      1000,2,4,1000,50,100, "Z vs. A/q S22 S42");
+   h2_VFTX_z_aoq_cor_S22_S42  = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S42/z_aoq_cor_S22_S42",  "z_aoq_cor_S22_S42",  1000,2,4,1000,50,100, "Z vs. A/q_cor S22 S42");
+   h2_VFTX_z2_aoq_S22_S42     = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S42/z2_aoq_S22_S42",     "z2_aoq_S22_S42",     1000,2,4,1000,50,100, "Z2 vs. A/q S22 S42");
+   h2_VFTX_z2_aoq_cor_S22_S42 = (TH2I*)MakeTH2('D',"FRS/VFTXSCI/ID/S22_S42/z2_aoq_cor_S22_S42", "z2_aoq_cor_S22_S42", 1000,2,4,1000,50,100, "Z2 vs. A/q_cor S22 S42");
+   
+   // end KW
+
+    
 //     htimestamp = MakeTH1('D',"FRS/timestamp","timestamp",30,0.,300.);
 //     hts = MakeTH1('D',"FRS/ts","ts",30,0.,300.);
 //     hts2 = MakeTH1('D',"FRS/ts2","ts2",30,0.,300.);
 
 
   }
-  //-----------------------------------------------------------------------------------------------------------------------------//
-  void EventUnpackProc::Fill_FRS_Histos(int PrcID, int Type, int SubType){
+//-----------------------------------------------------------------------------------------------------------------------------//
+void EventUnpackProc::Fill_FRS_Histos(int PrcID, int Type, int SubType){
 
 
-     time_in_ms = 0;
-     spill_count = 0;
-     ibin_for_s = 0;
-     ibin_for_100ms = 0;
-     ibin_for_spill = 0;
+  time_in_ms = 0;
+  spill_count = 0;
+  ibin_for_s = 0;
+  ibin_for_100ms = 0;
+  ibin_for_spill = 0;
 
 
-    for(int i =0; i<8; i++){
-        Music_E1[i] = 0;
-        Music_E2[i] = 0;
-        Music_T1[i] = 0;
-        Music_T2[i] = 0;
-    }
+  for(int i =0; i<8; i++){
+    Music_E1[i] = 0;
+    Music_E2[i] = 0;
+    Music_T1[i] = 0;
+    Music_T2[i] = 0;
+  }
 
-  for(int i =0; i<32; i++){
+  // KW rem
+  // for(int i=0; i<32; i++){
+  // KW add
+  for(int i=0; i<VFTX_MAX_HITS; i++){
+    // end KW
     TRaw_vftx_21l[i] =0;
     TRaw_vftx_21r[i] =0;
     TRaw_vftx_22l[i] =0;
@@ -2030,164 +2116,192 @@ for(int i=0;i<7;i++)
     ToF_vftx_2141_calib[i] =0;
     ToF_vftx_2241[i] =0;
     ToF_vftx_2241_calib[i] =0;
-    FRS_vftx_beta_2141[i] = 0;
-    FRS_vftx_gamma_2141[i] = 0;
-    FRS_vftx_aoq_2141[i] = 0;
-    FRS_vftx_aoq_2141_corr[i] = 0;
-    FRS_vftx_2141_z[i] = 0;
-    FRS_vftx_2141_v_cor[i] = 0;
-    FRS_vftx_beta_2241[i] = 0;
-    FRS_vftx_gamma_2241[i] = 0;
-    FRS_vftx_aoq_2241[i] =0;
-    FRS_vftx_aoq_2241_corr[i] = 0;
-    FRS_vftx_2241_z[i] = 0;
-    FRS_vftx_2241_v_cor[i] = 0;
-//     ToF_vftx_2142[i] =0;
-//     ToF_vftx_2142_calib[i] =0;
     
-     }
+    FRS_vftx_beta_2141[i] = 0;
+    //FRS_vftx_gamma_2141[i] = 0;
+    FRS_vftx_aoq_2141[i] = 0;
+    FRS_vftx_aoq_corr_2141[i] = 0;
+    FRS_vftx_z_2141[i] = 0;
+    FRS_vftx_z2_2141[i] = 0;
+    //FRS_vftx_vcor_2141[i] = 0;
+    FRS_vftx_beta_2241[i] = 0;
+    //FRS_vftx_gamma_2241[i] = 0;
+    FRS_vftx_aoq_2241[i] =0;
+    FRS_vftx_aoq_corr_2241[i] = 0;
+    FRS_vftx_z_2241[i] = 0;
+    FRS_vftx_z2_2241[i] = 0;
+    //FRS_vftx_vcor_2241[i] = 0;
+
+    // KW add 42
+    ToF_vftx_2142[i] =0;
+    ToF_vftx_2142_calib[i] =0;
+    ToF_vftx_2242[i] =0;
+    ToF_vftx_2242_calib[i] =0;
+    FRS_vftx_beta_2142[i] = 0;
+    //FRS_vftx_gamma_2142[i] = 0;
+    FRS_vftx_aoq_2142[i] = 0;
+    FRS_vftx_aoq_corr_2142[i] = 0;
+    FRS_vftx_z_2142[i] = 0;
+    FRS_vftx_z2_2142[i] = 0;
+    //FRS_vftx_vcor_2142[i] = 0;
+    FRS_vftx_beta_2242[i] = 0;
+    //FRS_vftx_gamma_2242[i] = 0;
+    FRS_vftx_aoq_2242[i] =0;
+    FRS_vftx_aoq_corr_2242[i] = 0;
+    FRS_vftx_z_2242[i] = 0;
+    FRS_vftx_z2_2242[i] = 0;
+    //FRS_vftx_vcor_2242[i] = 0;
+    // end KW
+    
+    //     ToF_vftx_2142[i] =0;
+    //     ToF_vftx_2142_calib[i] =0;
+  }
 
 
-    for(int i =0; i<3; i++){
-        Music_dE[i] = RAW->get_FRS_MusicdE(i);
-        Music_dE_corr[i] = RAW->get_FRS_MusicdE_corr(i);
+  for(int i =0; i<3; i++){
+    Music_dE[i] = RAW->get_FRS_MusicdE(i);
+    Music_dE_corr[i] = RAW->get_FRS_MusicdE_corr(i);
 
-    }
-    for(int i=0; i<8; i++){
-        Music_E1[i] = RAW->get_FRS_MusicE1(i);
-        Music_E2[i] = RAW->get_FRS_MusicE2(i);
-        Music_T1[i] = RAW->get_FRS_MusicT1(i);
-        Music_T2[i] = RAW->get_FRS_MusicT2(i);
+  }
+  for(int i=0; i<8; i++){
+    Music_E1[i] = RAW->get_FRS_MusicE1(i);
+    Music_E2[i] = RAW->get_FRS_MusicE2(i);
+    Music_T1[i] = RAW->get_FRS_MusicT1(i);
+    Music_T2[i] = RAW->get_FRS_MusicT2(i);
 
-    }
+  }
 
-    for(int l=0;l<12;++l){
-        sci_l[l] = RAW->get_FRS_sci_l(l);
-        sci_r[l] = RAW->get_FRS_sci_r(l);
-        sci_e[l] = RAW->get_FRS_sci_e(l);
-        sci_tx[l] = RAW->get_FRS_sci_tx(l);
-        sci_x[l] = RAW->get_FRS_sci_x(l);
+  for(int l=0;l<12;++l){
+    sci_l[l] = RAW->get_FRS_sci_l(l);
+    sci_r[l] = RAW->get_FRS_sci_r(l);
+    sci_e[l] = RAW->get_FRS_sci_e(l);
+    sci_tx[l] = RAW->get_FRS_sci_tx(l);
+    sci_x[l] = RAW->get_FRS_sci_x(l);
 
-    }
-    sci_tofll2 = RAW->get_FRS_tofll2();
-    sci_tofll3 = RAW->get_FRS_tofll3();
-    sci_tofll5 = RAW->get_FRS_tofll5(); ///S22-S41 calibrated ToF
+  }
+  sci_tofll2 = RAW->get_FRS_tofll2();
+  sci_tofll3 = RAW->get_FRS_tofll3();
+  sci_tofll5 = RAW->get_FRS_tofll5(); ///S22-S41 calibrated ToF
 
-    sci_tofrr2 = RAW->get_FRS_tofrr2();
-    sci_tofrr3 = RAW->get_FRS_tofrr3();
-    sci_tofrr5 = RAW->get_FRS_tofrr5(); ///S22-S41 calibrated ToF
-    sci_tof2 = RAW->get_FRS_tof2();
-    sci_tof3 = RAW->get_FRS_tof3();
-    sci_tof5 = RAW->get_FRS_tof5();
+  sci_tofrr2 = RAW->get_FRS_tofrr2();
+  sci_tofrr3 = RAW->get_FRS_tofrr3();
+  sci_tofrr5 = RAW->get_FRS_tofrr5(); ///S22-S41 calibrated ToF
+  sci_tof2 = RAW->get_FRS_tof2();
+  sci_tof3 = RAW->get_FRS_tof3();
+  sci_tof5 = RAW->get_FRS_tof5();
 
-    sci_tof2_calib = RAW->get_FRS_tof2_calib();
-    sci_tof3_calib = RAW->get_FRS_tof3_calib();
-    sci_tof5_calib = RAW->get_FRS_tof5_calib();
+  sci_tof2_calib = RAW->get_FRS_tof2_calib();
+  sci_tof3_calib = RAW->get_FRS_tof3_calib();
+  sci_tof5_calib = RAW->get_FRS_tof5_calib();
 
 
-    ID_x2 = RAW->get_FRS_x2();
-    ID_y2 = RAW->get_FRS_y2();
-    ID_a2 = RAW->get_FRS_a2();
-    ID_b2 = RAW->get_FRS_b2();
+  ID_x2 = RAW->get_FRS_x2();
+  ID_y2 = RAW->get_FRS_y2();
+  ID_a2 = RAW->get_FRS_a2();
+  ID_b2 = RAW->get_FRS_b2();
 
-    ID_x4 = RAW->get_FRS_x4();
-    ID_y4 = RAW->get_FRS_y4();
-    ID_a4 = RAW->get_FRS_a4();
-    ID_b4 = RAW->get_FRS_b4();
+  ID_x4 = RAW->get_FRS_x4();
+  ID_y4 = RAW->get_FRS_y4();
+  ID_a4 = RAW->get_FRS_a4();
+  ID_b4 = RAW->get_FRS_b4();
 
-    for (int i=0; i<7; i++){
-        TPC_X[i]=0;
-        TPC_Y[i]=0;
-    }
+  for (int i=0; i<7; i++){
+    TPC_X[i]=0;
+    TPC_Y[i]=0;
+  }
 
-    for(int i =0; i<7; i++){
+  for(int i =0; i<7; i++){
     TPC_X[i] = RAW-> get_FRS_tpcX(i);
     TPC_Y[i] = RAW-> get_FRS_tpcY(i);
     for(int j=0; j<4; j++){
-        TPC_A[i][j] = RAW -> get_FRS_tpc_a(i,j);
-        for(int k=0; k<64; k++) TPC_DT[i][j][k] = RAW->get_FRS_tpc_dt(i,j,k);
+      TPC_A[i][j] = RAW -> get_FRS_tpc_a(i,j);
+      for(int k=0; k<64; k++) TPC_DT[i][j][k] = RAW->get_FRS_tpc_dt(i,j,k);
     }
 
     for(int j=0; j<2; j++){
-        TPC_L[i][j] =  RAW -> get_FRS_tpc_l(i,j);
-        TPC_R[i][j] =  RAW -> get_FRS_tpc_r(i,j);
-        for(int k=0; k<64; k++){
-    TPC_LT[i][j][k] = RAW->get_FRS_tpclt(i,j,k);
-    TPC_RT[i][j][k] = RAW->get_FRS_tpcrt(i,j,k);
-            }
-        }
+      TPC_L[i][j] =  RAW -> get_FRS_tpc_l(i,j);
+      TPC_R[i][j] =  RAW -> get_FRS_tpc_r(i,j);
+      for(int k=0; k<64; k++){
+	TPC_LT[i][j][k] = RAW->get_FRS_tpclt(i,j,k);
+	TPC_RT[i][j][k] = RAW->get_FRS_tpcrt(i,j,k);
+      }
     }
-//     TPC_X0 = RAW->get_FRS_tpcx0();
-//     TPC_X1 = RAW->get_FRS_tpcx1();
-
-    TPC_X_s2_foc_23_24 = RAW->get_FRS_tpc_x_s2_foc_23_24();
-    TPC_Y_s2_foc_23_24 = RAW->get_FRS_tpc_y_s2_foc_23_24();
-    TPC_X_angle_s2_foc_23_24 = RAW->get_FRS_tpc_x_angle_s2_foc_23_24();
-    TPC_Y_angle_s2_foc_23_24 = RAW->get_FRS_tpc_y_angle_s2_foc_23_24();
-
-    TPC_23_24_X_sc21 = RAW->get_FRS_tpc23_24_x_sc21();
-    TPC_23_24_Y_sc21 = RAW->get_FRS_tpc23_24_y_sc21();
-    TPC_23_24_X_sc22 = RAW->get_FRS_tpc23_24_x_sc22();
-    TPC_23_24_Y_sc22 = RAW->get_FRS_tpc23_24_y_sc22();
-
-    TPC_X_s4 = RAW->get_FRS_tpc_x_s4();
-    TPC_Y_s4 = RAW->get_FRS_tpc_y_s4();
-    TPC_X_angle_s4 = RAW-> get_FRS_tpc_x_angle_s4();
-    TPC_Y_angle_s4 = RAW-> get_FRS_tpc_y_angle_s4();
-
-    TPC_X_sc41 = RAW-> get_FRS_tpc_x_sc41();
-    TPC_Y_sc41 = RAW-> get_FRS_tpc_y_sc41();
-    TPC_X_sc42 = RAW-> get_FRS_tpc_x_sc42();
-    TPC_Y_sc42 = RAW-> get_FRS_tpc_y_sc42();
-
-    sci_dt_21l_21r = RAW->get_FRS_dt_21l_21r();
-    sci_dt_41l_41r = RAW->get_FRS_dt_41l_41r();
-    sci_dt_42l_42r = RAW->get_FRS_dt_42l_42r();
-    sci_dt_43l_43r = RAW->get_FRS_dt_43l_43r();
-
-    sci_dt_21l_41l = RAW->get_FRS_dt_21l_41l();
-    sci_dt_21r_41r = RAW->get_FRS_dt_21r_41r();
-
-    sci_dt_21l_42l = RAW->get_FRS_dt_21l_42l();
-    sci_dt_21r_42r = RAW->get_FRS_dt_21r_42r();
-
-
-    for(int k =0; k<2; ++k){
-        ID_brho[k] = RAW->get_FRS_brho(k);
-        ID_rho = RAW->get_FRS_rho(k);
-
-    }
-    ///Using TAC
-    beta=0;
-    beta = RAW->get_FRS_beta();
-
-    beta3 = RAW->get_FRS_beta3();
-    gamma = RAW->get_FRS_gamma();
-    AoQ = RAW->get_FRS_AoQ();
-    AoQ_corr = RAW->get_FRS_AoQ_corr();
-
-    ID_z = RAW->get_FRS_z();
-    ID_z2 = RAW->get_FRS_z2();
-    ID_z3 = RAW->get_FRS_z3();
-
-
-    ///Using MHTDC
-
-   if(PrcID==20){
-     for (int i=0; i<10; i++){
-    AoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq(i);
-    AoQ_corr_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq_corr(i);
-    beta_mhtdc[i] = RAW->get_FRS_id_mhtdc_beta(i);
-    ID_tof4121_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4121(i);
-    ID_tof4122_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4122(i);
-    ID_z_mhtdc[i] = RAW->get_FRS_id_mhtdc_z1(i);
-    ID_z2_mhtdc[i] = RAW->get_FRS_id_mhtdc_z2(i);
   }
+  //     TPC_X0 = RAW->get_FRS_tpcx0();
+  //     TPC_X1 = RAW->get_FRS_tpcx1();
+
+  TPC_X_s2_foc_23_24 = RAW->get_FRS_tpc_x_s2_foc_23_24();
+  TPC_Y_s2_foc_23_24 = RAW->get_FRS_tpc_y_s2_foc_23_24();
+  TPC_X_angle_s2_foc_23_24 = RAW->get_FRS_tpc_x_angle_s2_foc_23_24();
+  TPC_Y_angle_s2_foc_23_24 = RAW->get_FRS_tpc_y_angle_s2_foc_23_24();
+
+  TPC_23_24_X_sc21 = RAW->get_FRS_tpc23_24_x_sc21();
+  TPC_23_24_Y_sc21 = RAW->get_FRS_tpc23_24_y_sc21();
+  TPC_23_24_X_sc22 = RAW->get_FRS_tpc23_24_x_sc22();
+  TPC_23_24_Y_sc22 = RAW->get_FRS_tpc23_24_y_sc22();
+
+  TPC_X_s4 = RAW->get_FRS_tpc_x_s4();
+  TPC_Y_s4 = RAW->get_FRS_tpc_y_s4();
+  TPC_X_angle_s4 = RAW-> get_FRS_tpc_x_angle_s4();
+  TPC_Y_angle_s4 = RAW-> get_FRS_tpc_y_angle_s4();
+
+  TPC_X_sc41 = RAW-> get_FRS_tpc_x_sc41();
+  TPC_Y_sc41 = RAW-> get_FRS_tpc_y_sc41();
+  TPC_X_sc42 = RAW-> get_FRS_tpc_x_sc42();
+  TPC_Y_sc42 = RAW-> get_FRS_tpc_y_sc42();
+
+  sci_dt_21l_21r = RAW->get_FRS_dt_21l_21r();
+  sci_dt_41l_41r = RAW->get_FRS_dt_41l_41r();
+  sci_dt_42l_42r = RAW->get_FRS_dt_42l_42r();
+  sci_dt_43l_43r = RAW->get_FRS_dt_43l_43r();
+
+  sci_dt_21l_41l = RAW->get_FRS_dt_21l_41l();
+  sci_dt_21r_41r = RAW->get_FRS_dt_21r_41r();
+
+  sci_dt_21l_42l = RAW->get_FRS_dt_21l_42l();
+  sci_dt_21r_42r = RAW->get_FRS_dt_21r_42r();
+
+
+  for(int k =0; k<2; ++k){
+    ID_brho[k] = RAW->get_FRS_brho(k);
+    ID_rho = RAW->get_FRS_rho(k);
+
+  }
+  ///Using TAC
+  beta=0;
+  beta = RAW->get_FRS_beta();
+
+  beta3 = RAW->get_FRS_beta3();
+  gamma = RAW->get_FRS_gamma();
+  AoQ = RAW->get_FRS_AoQ();
+  AoQ_corr = RAW->get_FRS_AoQ_corr();
+
+  ID_z = RAW->get_FRS_z();
+  ID_z2 = RAW->get_FRS_z2();
+  ID_z3 = RAW->get_FRS_z3();
+
+
+  ///Using MHTDC
+
+  if(PrcID==20){
+    for (int i=0; i<10; i++){
+      AoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq(i);
+      AoQ_corr_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq_corr(i);
+      beta_mhtdc[i] = RAW->get_FRS_id_mhtdc_beta(i);
+      ID_tof4121_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4121(i);
+      ID_tof4122_mhtdc[i] = RAW->get_FRS_id_mhtdc_tof4122(i);
+      ID_z_mhtdc[i] = RAW->get_FRS_id_mhtdc_z1(i);
+      ID_z2_mhtdc[i] = RAW->get_FRS_id_mhtdc_z2(i);
+    }
     ID_tof4221_mhtdc = RAW->get_FRS_id_mhtdc_tof4221();
   
-   }
-   // ID_z3 = RAW->get_FRS_z3();
-for(int i=0; i<32; i++){
+  }
+  // ID_z3 = RAW->get_FRS_z3();
+  // KW rem
+  // for(int i=0; i<32; i++){
+  // KW add
+  for(int i=0; i<VFTX_MAX_HITS; i++){
+    // end KW
     TRaw_vftx_21l[i] = RAW->get_FRS_TRaw_vftx_21l(i);
     TRaw_vftx_21r[i] = RAW->get_FRS_TRaw_vftx_21r(i);
     TRaw_vftx_22l[i] = RAW->get_FRS_TRaw_vftx_22l(i);
@@ -2200,189 +2314,220 @@ for(int i=0; i<32; i++){
     ToF_vftx_2141_calib[i] = RAW->get_FRS_ToF_vftx_2141_calib(i);
     ToF_vftx_2241[i] = RAW->get_FRS_ToF_vftx_2241(i);
     ToF_vftx_2241_calib[i] = RAW->get_FRS_ToF_vftx_2241_calib(i);
-//     ToF_vftx_2142[i] = RAW->get_FRS_ToF_vftx_2142(i);
-//     ToF_vftx_2142_calib[i] = RAW->get_FRS_ToF_vftx_2142_calib(i);
+    // KW add 42
+    ToF_vftx_2142[i] = RAW->get_FRS_ToF_vftx_2142(i);
+    ToF_vftx_2142_calib[i] = RAW->get_FRS_ToF_vftx_2142_calib(i);
+    ToF_vftx_2242[i] = RAW->get_FRS_ToF_vftx_2242(i);
+    ToF_vftx_2242_calib[i] = RAW->get_FRS_ToF_vftx_2242_calib(i);
+    // end KW
+    //     ToF_vftx_2142[i] = RAW->get_FRS_ToF_vftx_2142(i);
+    //     ToF_vftx_2142_calib[i] = RAW->get_FRS_ToF_vftx_2142_calib(i);
     
+    // KW add physics
+    FRS_vftx_beta_2141[i] = RAW->get_FRS_vftx_beta_2141(i);
+    FRS_vftx_aoq_2141[i] = RAW->get_FRS_vftx_aoq_2141(i);
+    FRS_vftx_aoq_corr_2141[i] = RAW->get_FRS_vftx_aoq_corr_2141(i);
+    FRS_vftx_z_2141[i] = RAW->get_FRS_vftx_z_2141(i);
+    FRS_vftx_z2_2141[i] = RAW->get_FRS_vftx_z2_2141(i);
+
+    FRS_vftx_beta_2241[i] = RAW->get_FRS_vftx_beta_2241(i);
+    FRS_vftx_aoq_2241[i] = RAW->get_FRS_vftx_aoq_2241(i);
+    FRS_vftx_aoq_corr_2241[i] = RAW->get_FRS_vftx_aoq_corr_2241(i);
+    FRS_vftx_z_2241[i] = RAW->get_FRS_vftx_z_2241(i);
+    FRS_vftx_z2_2241[i] = RAW->get_FRS_vftx_z2_2241(i);
+
+    FRS_vftx_beta_2142[i] = RAW->get_FRS_vftx_beta_2142(i);
+    FRS_vftx_aoq_2142[i] = RAW->get_FRS_vftx_aoq_2142(i);
+    FRS_vftx_aoq_corr_2142[i] = RAW->get_FRS_vftx_aoq_corr_2142(i);
+    FRS_vftx_z_2142[i] = RAW->get_FRS_vftx_z_2142(i);
+    FRS_vftx_z2_2142[i] = RAW->get_FRS_vftx_z2_2142(i);
+
+    FRS_vftx_beta_2242[i] = RAW->get_FRS_vftx_beta_2242(i);
+    FRS_vftx_aoq_2242[i] = RAW->get_FRS_vftx_aoq_2242(i);
+    FRS_vftx_aoq_corr_2242[i] = RAW->get_FRS_vftx_aoq_corr_2242(i);
+    FRS_vftx_z_2242[i] = RAW->get_FRS_vftx_z_2242(i);
+    FRS_vftx_z2_2242[i] = RAW->get_FRS_vftx_z2_2242(i);
+    // end KW
     
- }  
+  }  
 
-//     for(int i=0; i<32; i++){
-//    TRaw_vftx[i] = RAW->get_FRS_TRaw_vftx(i);
-//     }
-    timestamp = RAW->get_FRS_timestamp();
-    ts = RAW->get_FRS_ts(); //Spill time structrue
-    ts2 = RAW->get_FRS_ts2();
+  //     for(int i=0; i<32; i++){
+  //    TRaw_vftx[i] = RAW->get_FRS_TRaw_vftx(i);
+  //     }
+  timestamp = RAW->get_FRS_timestamp();
+  ts = RAW->get_FRS_ts(); //Spill time structrue
+  ts2 = RAW->get_FRS_ts2();
 
-     /// --------FRS SCALARS-------------------------------- //
-
-
-    time_in_ms           = RAW->get_FRS_time_in_ms();
-    spill_count          = RAW->get_FRS_spill_count();
-    ibin_for_s           = RAW->get_FRS_ibin_for_s();
-    ibin_for_100ms       = RAW->get_FRS_ibin_for_100ms();
-    ibin_for_spill       = RAW->get_FRS_ibin_for_spill();
-    ibin_clean_for_s     = RAW->get_FRS_ibin_clean_for_s();
-    ibin_clean_for_100ms = RAW->get_FRS_ibin_clean_for_100ms();
-    ibin_clean_for_spill = RAW->get_FRS_ibin_clean_for_spill();
-    increase_scaler_temp = RAW->get_FRS_increase_scaler_temp();
-    static bool scalers_done = false;
-
-    /// ------------MUSIC---------------------------- //
+  /// --------FRS SCALARS-------------------------------- //
 
 
-     //MUSIC 1 is TUM MUSIC (8 anodes). MUSIC 3 not required
-    /*for(int i=0; i<3; i++){
-   //  hMUSIC1_MUSIC2->Fill(Music_dE[0],Music_dE[1]);
-   //  hMUSIC1_dE1dE2->Fill(Music_E1[0],Music_E1[1]);
-    }*/
-    if(PrcID==20){
+  time_in_ms           = RAW->get_FRS_time_in_ms();
+  spill_count          = RAW->get_FRS_spill_count();
+  ibin_for_s           = RAW->get_FRS_ibin_for_s();
+  ibin_for_100ms       = RAW->get_FRS_ibin_for_100ms();
+  ibin_for_spill       = RAW->get_FRS_ibin_for_spill();
+  ibin_clean_for_s     = RAW->get_FRS_ibin_clean_for_s();
+  ibin_clean_for_100ms = RAW->get_FRS_ibin_clean_for_100ms();
+  ibin_clean_for_spill = RAW->get_FRS_ibin_clean_for_spill();
+  increase_scaler_temp = RAW->get_FRS_increase_scaler_temp();
+  static bool scalers_done = false;
+
+  /// ------------MUSIC---------------------------- //
+
+
+  //MUSIC 1 is TUM MUSIC (8 anodes). MUSIC 3 not required
+  /*for(int i=0; i<3; i++){
+  //  hMUSIC1_MUSIC2->Fill(Music_dE[0],Music_dE[1]);
+  //  hMUSIC1_dE1dE2->Fill(Music_E1[0],Music_E1[1]);
+  }*/
+  if(PrcID==20){
     for(int i=0; i<8; i++){
-   if(Music_E1[i]!=0) hMUSIC1_E[i]->Fill(Music_E1[i]);
-   if(Music_E2[i]!=0) hMUSIC2_E[i]->Fill(Music_E2[i]);
-   if(Music_T1[i]!=0) hMUSIC1_T[i]->Fill(Music_T1[i]);
-   if(Music_T2[i]!=0) hMUSIC2_T[i]->Fill(Music_T2[i]);
-        }
+      if(Music_E1[i]!=0) hMUSIC1_E[i]->Fill(Music_E1[i]);
+      if(Music_E2[i]!=0) hMUSIC2_E[i]->Fill(Music_E2[i]);
+      if(Music_T1[i]!=0) hMUSIC1_T[i]->Fill(Music_T1[i]);
+      if(Music_T2[i]!=0) hMUSIC2_T[i]->Fill(Music_T2[i]);
     }
-     /*-------------------------------------------------------------------------*/
-    /* focus index: detector number                  tof index  tof path       */
-    /*       0:     Sc01                                0:     TA - S1         */
-    /*       1:     Sc11                                1:     S1 - S2         */
-    /*       2:     Sc21                                2:     S2 - S41        */
-    /*       3:     Sc21                                3:     S2 - S42        */
-    /*       4:     Sc31                                4:     S2 - 81         */
-    /*       5:     Sc41                                5:     S2 - E1         */
-    /*                                                                         */
-    /*       6:     Sc42                              tof index not used up to */
-    /*       7:     Sc43 (previously Sc51)             now, only separate      */
-    /*       8:     Sc61                              variables for S2-S41 and */
-    /*       9:     ScE1 (ESR)                                S2-S42           */
-    /*      10:     Sc81                                                       */
-    /*      11:     Sc82                                                       */
-    /*-------------------------------------------------------------------------*/
-    //SCI
+  }
+  /*-------------------------------------------------------------------------*/
+  /* focus index: detector number                  tof index  tof path       */
+  /*       0:     Sc01                                0:     TA - S1         */
+  /*       1:     Sc11                                1:     S1 - S2         */
+  /*       2:     Sc21                                2:     S2 - S41        */
+  /*       3:     Sc21                                3:     S2 - S42        */
+  /*       4:     Sc31                                4:     S2 - 81         */
+  /*       5:     Sc41                                5:     S2 - E1         */
+  /*                                                                         */
+  /*       6:     Sc42                              tof index not used up to */
+  /*       7:     Sc43 (previously Sc51)             now, only separate      */
+  /*       8:     Sc61                              variables for S2-S41 and */
+  /*       9:     ScE1 (ESR)                                S2-S42           */
+  /*      10:     Sc81                                                       */
+  /*      11:     Sc82                                                       */
+  /*-------------------------------------------------------------------------*/
+  //SCI
 
-    for (int cnt=0;cnt<6;cnt++) //
-     {
-         int idx = 0 ;
-       //int mw_idx = 0;
-       //Float_t mwx = 0;
-       switch(cnt)
-     {
-     case 0:        /* SC21 */
-       idx = 2;
-       //mw_idx = 2;
-       //mwx = clb.sc21_x;
-       break;
-     case 1:        /* SC21 delayed */
-       idx = 3;
-       //mw_idx = 2;
-       //mwx = clb.sc21_x;
-       break;
-     case 2:        /* SC41 */
-       idx = 5;
-       //mw_idx = 5;
-       //mwx = clb.tpc_sc41_x;
-       break;
-     case 3:        /* SC42 */
-           idx = 6;
-       break;
-     case 4:
-       idx = 7;     /* SC43 */
-       break;
-     case 5:
-       idx = 10;    /* SC81 */
-       break;
-     default: idx = 2;
-     }
+  for (int cnt=0;cnt<6;cnt++) //
+    {
+      int idx = 0 ;
+      //int mw_idx = 0;
+      //Float_t mwx = 0;
+      switch(cnt)
+	{
+	case 0:        /* SC21 */
+	  idx = 2;
+	  //mw_idx = 2;
+	  //mwx = clb.sc21_x;
+	  break;
+	case 1:        /* SC21 delayed */
+	  idx = 3;
+	  //mw_idx = 2;
+	  //mwx = clb.sc21_x;
+	  break;
+	case 2:        /* SC41 */
+	  idx = 5;
+	  //mw_idx = 5;
+	  //mwx = clb.tpc_sc41_x;
+	  break;
+	case 3:        /* SC42 */
+	  idx = 6;
+	  break;
+	case 4:
+	  idx = 7;     /* SC43 */
+	  break;
+	case 5:
+	  idx = 10;    /* SC81 */
+	  break;
+	default: idx = 2;
+	}
 
       if(PrcID==10 &&SubType==1 ){
 
-     if(sci_l[idx]!=0)   hSCI_L[idx]->Fill(sci_l[idx]);
-	      if(sci_r[idx]!=0)   hSCI_R[idx]->Fill(sci_r[idx]);
-	      if(sci_e[idx]!=0)   hSCI_E[idx]->Fill(sci_e[idx]);
-	        if(sci_e[2]!=0 && sci_e[5]!=0)    hSCI_dE24->Fill(sci_e[2],sci_e[5]);
+	if(sci_l[idx]!=0)   hSCI_L[idx]->Fill(sci_l[idx]);
+	if(sci_r[idx]!=0)   hSCI_R[idx]->Fill(sci_r[idx]);
+	if(sci_e[idx]!=0)   hSCI_E[idx]->Fill(sci_e[idx]);
+	if(sci_e[2]!=0 && sci_e[5]!=0)    hSCI_dE24->Fill(sci_e[2],sci_e[5]);
       }
-     if(PrcID==20 &&SubType==1 ){
-//          cout<<"event " << event_number<<" sci_r[idx] " <<sci_r[idx]<< " idx " << idx <<" cnt " << cnt <<" PrcID " <<PrcID<< " SubType " << SubType << endl;
+      if(PrcID==20 &&SubType==1 ){
+	//          cout<<"event " << event_number<<" sci_r[idx] " <<sci_r[idx]<< " idx " << idx <<" cnt " << cnt <<" PrcID " <<PrcID<< " SubType " << SubType << endl;
         if(beta!=0 && cnt==0 )hID_beta->Fill(beta*1000);
       
-//
+	//
 
-         scalers_done = false;
+	scalers_done = false;
 
-	   // if(PrcID==10){
-	      if(sci_tx[idx]!=0)  hSCI_Tx[idx]->Fill(sci_tx[idx]);
-	      if(sci_x[idx]!=0)   hSCI_X[idx]->Fill(sci_x[idx]);
+	// if(PrcID==10){
+	if(sci_tx[idx]!=0)  hSCI_Tx[idx]->Fill(sci_tx[idx]);
+	if(sci_x[idx]!=0)   hSCI_X[idx]->Fill(sci_x[idx]);
 
-            }
-     }
+      }
+    }
     
-    ///SCI vs TPC for SCI pos calib
-          if(sci_tx[2]!=0 && TPC_23_24_X_sc21!=-999) hSCI_Tx_XTPC[2]->Fill(sci_tx[2],TPC_23_24_X_sc21);
-          if(sci_tx[3]!=0&& TPC_23_24_X_sc22!=-999) hSCI_Tx_XTPC[3]->Fill(sci_tx[3],TPC_23_24_X_sc22);
-          if(sci_tx[5]!=0&& TPC_X_sc41!=-999) hSCI_Tx_XTPC[5]->Fill(sci_tx[5],TPC_X_sc41);
-          if(sci_tx[6]!=0&& TPC_X_sc42!=-999) hSCI_Tx_XTPC[6]->Fill(sci_tx[6],TPC_X_sc42);
+  ///SCI vs TPC for SCI pos calib
+  if(sci_tx[2]!=0 && TPC_23_24_X_sc21!=-999) hSCI_Tx_XTPC[2]->Fill(sci_tx[2],TPC_23_24_X_sc21);
+  if(sci_tx[3]!=0&& TPC_23_24_X_sc22!=-999) hSCI_Tx_XTPC[3]->Fill(sci_tx[3],TPC_23_24_X_sc22);
+  if(sci_tx[5]!=0&& TPC_X_sc41!=-999) hSCI_Tx_XTPC[5]->Fill(sci_tx[5],TPC_X_sc41);
+  if(sci_tx[6]!=0&& TPC_X_sc42!=-999) hSCI_Tx_XTPC[6]->Fill(sci_tx[6],TPC_X_sc42);
           
-	      if(sci_x[2]!=0 && TPC_23_24_X_sc21!=-999) hSCI_X_XTPC[2]->Fill(sci_x[2],TPC_23_24_X_sc21);
-          if(sci_x[3]!=0 && TPC_23_24_X_sc22!=-999) hSCI_X_XTPC[3]->Fill(sci_x[3],TPC_23_24_X_sc22);
-          if(sci_x[5]!=0 && TPC_X_sc41!=-999) hSCI_X_XTPC[5]->Fill(sci_x[5],TPC_X_sc41);
-          if(sci_x[6]!=0 && TPC_X_sc42!=-999) hSCI_X_XTPC[6]->Fill(sci_x[6],TPC_X_sc42);
+  if(sci_x[2]!=0 && TPC_23_24_X_sc21!=-999) hSCI_X_XTPC[2]->Fill(sci_x[2],TPC_23_24_X_sc21);
+  if(sci_x[3]!=0 && TPC_23_24_X_sc22!=-999) hSCI_X_XTPC[3]->Fill(sci_x[3],TPC_23_24_X_sc22);
+  if(sci_x[5]!=0 && TPC_X_sc41!=-999) hSCI_X_XTPC[5]->Fill(sci_x[5],TPC_X_sc41);
+  if(sci_x[6]!=0 && TPC_X_sc42!=-999) hSCI_X_XTPC[6]->Fill(sci_x[6],TPC_X_sc42);
 
-//      if(sci_e[5]!=0 && TPC_X[5]!=0) hSCIdE41_TPC42X->Fill(sci_e[5],TPC_X[5]); //dE_SCI_41 vs TPC_42X
-//      if(sci_l[5]!=0 &&TPC_X[5]!=0) hSCIdE41L_TPC42X->Fill(sci_l[5],TPC_X[5]); //dE_SCI_41L vs TPC_42X
-//      if(sci_l[5]!=0 &&TPC_X[4]!=0) hSCIdE41L_TPC41X->Fill(sci_l[5],TPC_X[4]); //dE_SCI_41L vs TPC_41X
-//      if(sci_r[5]!=0 &&TPC_X[5]!=0) hSCIdE41R_TPC42X->Fill(sci_r[5],TPC_X[5]); //dE_SCI_41R vs TPC_42X
-//      if(sci_r[5]!=0 &&TPC_X[4]!=0) hSCIdE41R_TPC41X->Fill(sci_r[5],TPC_X[4]); //dE_SCI_41R vs TPC_41X
-//       //cout<<"sci_e[0] " << sci_e[0] <<endl;
-//      if(sci_e[0]!=0 &&TPC_X[5]!=0) hSCIdE21_TPC42X->Fill(sci_e[0],TPC_X[5]); //dE_SCI_21 vs TPC_42X
-//      if(sci_l[0]!=0 &&TPC_X[5]!=0) hSCIdE21L_TPC42X->Fill(sci_l[0],TPC_X[5]); //dE_SCI_21L vs TPC_42X
-//      if(sci_l[0]!=0 &&TPC_X[4]!=0) hSCIdE21L_TPC41X->Fill(sci_l[0],TPC_X[4]); //dE_SCI_21L vs TPC_41X
-//      if(sci_l[0]!=0 &&TPC_X[4]!=0) hSCIdE21R_TPC42X->Fill(sci_l[0],TPC_X[4]); //dE_SCI_21R vs TPC_42X
-//      if(sci_r[0]!=0 &&TPC_X[4]!=0) hSCIdE21R_TPC41X->Fill(sci_r[0],TPC_X[4]); //dE_SCI_21R vs TPC_41X
+  //      if(sci_e[5]!=0 && TPC_X[5]!=0) hSCIdE41_TPC42X->Fill(sci_e[5],TPC_X[5]); //dE_SCI_41 vs TPC_42X
+  //      if(sci_l[5]!=0 &&TPC_X[5]!=0) hSCIdE41L_TPC42X->Fill(sci_l[5],TPC_X[5]); //dE_SCI_41L vs TPC_42X
+  //      if(sci_l[5]!=0 &&TPC_X[4]!=0) hSCIdE41L_TPC41X->Fill(sci_l[5],TPC_X[4]); //dE_SCI_41L vs TPC_41X
+  //      if(sci_r[5]!=0 &&TPC_X[5]!=0) hSCIdE41R_TPC42X->Fill(sci_r[5],TPC_X[5]); //dE_SCI_41R vs TPC_42X
+  //      if(sci_r[5]!=0 &&TPC_X[4]!=0) hSCIdE41R_TPC41X->Fill(sci_r[5],TPC_X[4]); //dE_SCI_41R vs TPC_41X
+  //       //cout<<"sci_e[0] " << sci_e[0] <<endl;
+  //      if(sci_e[0]!=0 &&TPC_X[5]!=0) hSCIdE21_TPC42X->Fill(sci_e[0],TPC_X[5]); //dE_SCI_21 vs TPC_42X
+  //      if(sci_l[0]!=0 &&TPC_X[5]!=0) hSCIdE21L_TPC42X->Fill(sci_l[0],TPC_X[5]); //dE_SCI_21L vs TPC_42X
+  //      if(sci_l[0]!=0 &&TPC_X[4]!=0) hSCIdE21L_TPC41X->Fill(sci_l[0],TPC_X[4]); //dE_SCI_21L vs TPC_41X
+  //      if(sci_l[0]!=0 &&TPC_X[4]!=0) hSCIdE21R_TPC42X->Fill(sci_l[0],TPC_X[4]); //dE_SCI_21R vs TPC_42X
+  //      if(sci_r[0]!=0 &&TPC_X[4]!=0) hSCIdE21R_TPC41X->Fill(sci_r[0],TPC_X[4]); //dE_SCI_21R vs TPC_41X
 
-//  TPC_X_s2_foc_23_24 = RAW->get_FRS_tpc_x_s2_foc_23_24();
-// TPC_Y_s2_foc_23_24 = RAW->get_FRS_tpc_y_s2_foc_23_24();
-// TPC_X_angle_s2_foc_23_24 = RAW->get_FRS_tpc_x_angle_s2_foc_23_24();
-// TPC_Y_angle_s2_foc_23_24 = RAW->get_FRS_tpc_y_angle_s2_foc_23_24();
+  //  TPC_X_s2_foc_23_24 = RAW->get_FRS_tpc_x_s2_foc_23_24();
+  // TPC_Y_s2_foc_23_24 = RAW->get_FRS_tpc_y_s2_foc_23_24();
+  // TPC_X_angle_s2_foc_23_24 = RAW->get_FRS_tpc_x_angle_s2_foc_23_24();
+  // TPC_Y_angle_s2_foc_23_24 = RAW->get_FRS_tpc_y_angle_s2_foc_23_24();
 
 
 
-      if(TPC_X_s2_foc_23_24!=-999)hTPC_X_S2_TPC_23_24->Fill(TPC_X_s2_foc_23_24);
-      if(TPC_Y_s2_foc_23_24!=-999)hTPC_Y_S2_TPC_23_24->Fill(TPC_Y_s2_foc_23_24);
-  	  if(TPC_X_angle_s2_foc_23_24!=-999)hTPC_AX_S2_TPC_23_24->Fill(TPC_X_angle_s2_foc_23_24);
-  	  if(TPC_Y_angle_s2_foc_23_24!=-999)hTPC_AY_S2_TPC_23_24->Fill(TPC_Y_angle_s2_foc_23_24);
-	   if(TPC_X_s2_foc_23_24!=-999 && TPC_X_angle_s2_foc_23_24!=-999) hTPC_X_AX_S2_TPC_23_24->Fill(TPC_X_s2_foc_23_24, TPC_X_angle_s2_foc_23_24);
-	  if(TPC_Y_s2_foc_23_24!=-999 && TPC_Y_angle_s2_foc_23_24!=-999)hTPC_Y_AY_S2_TPC_23_24->Fill(TPC_Y_s2_foc_23_24, TPC_Y_angle_s2_foc_23_24);
+  if(TPC_X_s2_foc_23_24!=-999)hTPC_X_S2_TPC_23_24->Fill(TPC_X_s2_foc_23_24);
+  if(TPC_Y_s2_foc_23_24!=-999)hTPC_Y_S2_TPC_23_24->Fill(TPC_Y_s2_foc_23_24);
+  if(TPC_X_angle_s2_foc_23_24!=-999)hTPC_AX_S2_TPC_23_24->Fill(TPC_X_angle_s2_foc_23_24);
+  if(TPC_Y_angle_s2_foc_23_24!=-999)hTPC_AY_S2_TPC_23_24->Fill(TPC_Y_angle_s2_foc_23_24);
+  if(TPC_X_s2_foc_23_24!=-999 && TPC_X_angle_s2_foc_23_24!=-999) hTPC_X_AX_S2_TPC_23_24->Fill(TPC_X_s2_foc_23_24, TPC_X_angle_s2_foc_23_24);
+  if(TPC_Y_s2_foc_23_24!=-999 && TPC_Y_angle_s2_foc_23_24!=-999)hTPC_Y_AY_S2_TPC_23_24->Fill(TPC_Y_s2_foc_23_24, TPC_Y_angle_s2_foc_23_24);
       
-      hTPC_X_S4->Fill(TPC_X_s4);
-	  hTPC_Y_S4->Fill(TPC_Y_s4);
-	  hTPC_AX_S4->Fill(TPC_X_angle_s4);
-	  hTPC_AY_S4->Fill(TPC_Y_angle_s4);
-	  hTPC_X_AX_S4->Fill(TPC_X_s4,TPC_X_angle_s4);
-	  hTPC_Y_AY_S4->Fill(TPC_Y_s4,TPC_Y_angle_s4);
+  hTPC_X_S4->Fill(TPC_X_s4);
+  hTPC_Y_S4->Fill(TPC_Y_s4);
+  hTPC_AX_S4->Fill(TPC_X_angle_s4);
+  hTPC_AY_S4->Fill(TPC_Y_angle_s4);
+  hTPC_X_AX_S4->Fill(TPC_X_s4,TPC_X_angle_s4);
+  hTPC_Y_AY_S4->Fill(TPC_Y_s4,TPC_Y_angle_s4);
       
 
-    if(PrcID==30){
+  if(PrcID==30){
 
 
-     if(sci_tofll2!=0)  hSCI_TofLL2->Fill(sci_tofll2);
+    if(sci_tofll2!=0)  hSCI_TofLL2->Fill(sci_tofll2);
 
-     if(sci_tofll3!=0) hSCI_TofLL3->Fill(sci_tofll3);
-     if(sci_tofll5!=0) hSCI_TofLL5->Fill(sci_tofll5);
+    if(sci_tofll3!=0) hSCI_TofLL3->Fill(sci_tofll3);
+    if(sci_tofll5!=0) hSCI_TofLL5->Fill(sci_tofll5);
 
 
-     if(sci_tofrr2!=0)   hSCI_TofRR2->Fill(sci_tofrr2);
-     if(sci_tofrr3!=0)  hSCI_TofRR3->Fill(sci_tofrr3);
-     if(sci_tofrr5!=0)  hSCI_TofRR5->Fill(sci_tofrr5);
-     if(sci_tof2!=0) hSCI_Tof2->Fill(sci_tof2);
-     if(sci_tof3!=0)  hSCI_Tof3->Fill(sci_tof3);
-     if(sci_tof5!=0)  hSCI_Tof5->Fill(sci_tof5);
+    if(sci_tofrr2!=0)   hSCI_TofRR2->Fill(sci_tofrr2);
+    if(sci_tofrr3!=0)  hSCI_TofRR3->Fill(sci_tofrr3);
+    if(sci_tofrr5!=0)  hSCI_TofRR5->Fill(sci_tofrr5);
+    if(sci_tof2!=0) hSCI_Tof2->Fill(sci_tof2);
+    if(sci_tof3!=0)  hSCI_Tof3->Fill(sci_tof3);
+    if(sci_tof5!=0)  hSCI_Tof5->Fill(sci_tof5);
 
-     if(sci_tof2_calib!=0) hSCI_Tof2_calib->Fill(sci_tof2_calib);
-     if(sci_tof3_calib!=0) hSCI_Tof3_calib->Fill(sci_tof3_calib);
-     if(sci_tof5_calib!=0) hSCI_Tof5_calib->Fill(sci_tof5_calib);
-     }
-if(PrcID==35 && SubType==1){
+    if(sci_tof2_calib!=0) hSCI_Tof2_calib->Fill(sci_tof2_calib);
+    if(sci_tof3_calib!=0) hSCI_Tof3_calib->Fill(sci_tof3_calib);
+    if(sci_tof5_calib!=0) hSCI_Tof5_calib->Fill(sci_tof5_calib);
+  }
+  if(PrcID==35 && SubType==1){
 
     if(ID_x2!=0) hID_x2->Fill(ID_x2);
     if(ID_y2!=0) hID_y2->Fill(ID_y2);
@@ -2393,240 +2538,334 @@ if(PrcID==35 && SubType==1){
     if(ID_y4!=0) hID_y4->Fill(ID_y4);
     if(ID_a4!=0) hID_a4->Fill(ID_a4);
     if(ID_b4!=0) hID_b4->Fill(ID_b4);
-}
+  }
 
-if(PrcID==20 && SubType==1){
+  if(PrcID==20 && SubType==1){
     for(int i=0; i<7; i++){
 
-       if(TPC_X[i]!=0)  { hTPC_X[i]->Fill(TPC_X[i]);}
-       if(TPC_Y[i]!=0)    hTPC_Y[i]->Fill(TPC_Y[i]);
-       if(TPC_X[i]!=0 && TPC_Y[i]!=0)    hcTPC_XY[i]->Fill(TPC_X[i],TPC_Y[i]);
+      if(TPC_X[i]!=0)  { hTPC_X[i]->Fill(TPC_X[i]);}
+      if(TPC_Y[i]!=0)    hTPC_Y[i]->Fill(TPC_Y[i]);
+      if(TPC_X[i]!=0 && TPC_Y[i]!=0)    hcTPC_XY[i]->Fill(TPC_X[i],TPC_Y[i]);
       // for(int j=0; j<2; j++){
-           for(int k=0; k<64; k++){
-      // if(TPC_LT[i][j][0]!=0 && TPC_RT[i][j][0]!=0)    hTPC_LTRT[i]->Fill(TPC_LT[i][j][0],TPC_RT[i][j][0]);
+      for(int k=0; k<64; k++){
+	// if(TPC_LT[i][j][0]!=0 && TPC_RT[i][j][0]!=0)    hTPC_LTRT[i]->Fill(TPC_LT[i][j][0],TPC_RT[i][j][0]);
          
-      if(TPC_LT[i][0][k]!=0) hTPC_LT0[i]->Fill(TPC_LT[i][0][k]);
-      if(TPC_RT[i][0][k]!=0) hTPC_RT0[i]->Fill(TPC_RT[i][0][k]);
-      if(TPC_LT[i][1][k]!=0) hTPC_LT1[i]->Fill(TPC_LT[i][1][k]);
-      if(TPC_RT[i][1][k]!=0) hTPC_RT1[i]->Fill(TPC_RT[i][1][k]);
-           }
-       ///ADC channels
-         if(TPC_L[i][0]!=0)  hTPC_L0[i]->Fill(TPC_L[i][0]);
-    	 if(TPC_R[i][0]!=0)  hTPC_R0[i]->Fill(TPC_R[i][0]);
-    	 if(TPC_L[i][1]!=0)  hTPC_L1[i]->Fill(TPC_L[i][1]);
-    	 if(TPC_R[i][1]!=0)  hTPC_R1[i]->Fill(TPC_R[i][1]);
-           // }
-         for(int j=0; j<4; j++){  
-             hTPC_A[i][j]->Fill(TPC_A[i][j]);
-            for(int k=0; k<64; k++) hTPC_DT[i][j] ->Fill(TPC_DT[i][j][k]);
-        }
+	if(TPC_LT[i][0][k]!=0) hTPC_LT0[i]->Fill(TPC_LT[i][0][k]);
+	if(TPC_RT[i][0][k]!=0) hTPC_RT0[i]->Fill(TPC_RT[i][0][k]);
+	if(TPC_LT[i][1][k]!=0) hTPC_LT1[i]->Fill(TPC_LT[i][1][k]);
+	if(TPC_RT[i][1][k]!=0) hTPC_RT1[i]->Fill(TPC_RT[i][1][k]);
+      }
+      ///ADC channels
+      if(TPC_L[i][0]!=0)  hTPC_L0[i]->Fill(TPC_L[i][0]);
+      if(TPC_R[i][0]!=0)  hTPC_R0[i]->Fill(TPC_R[i][0]);
+      if(TPC_L[i][1]!=0)  hTPC_L1[i]->Fill(TPC_L[i][1]);
+      if(TPC_R[i][1]!=0)  hTPC_R1[i]->Fill(TPC_R[i][1]);
+      // }
+      for(int j=0; j<4; j++){  
+	hTPC_A[i][j]->Fill(TPC_A[i][j]);
+	for(int k=0; k<64; k++) hTPC_DT[i][j] ->Fill(TPC_DT[i][j][k]);
+      }
      
         
     }
-}
+  }
 
-//     htpc_X2->Fill(TPC_X[2]);
-//     htpc_Y2->Fill(TPC_Y[2]);
-//     htpc_X4->Fill(TPC_X[4]);
-//     htpc_Y4->Fill(TPC_Y[4]);
-    for(int i=0;i<2;i++){
-      if(ID_brho[i]!=0)hID_BRho[i]->Fill(ID_brho[i]);
-    }
+  //     htpc_X2->Fill(TPC_X[2]);
+  //     htpc_Y2->Fill(TPC_Y[2]);
+  //     htpc_X4->Fill(TPC_X[4]);
+  //     htpc_Y4->Fill(TPC_Y[4]);
+  for(int i=0;i<2;i++){
+    if(ID_brho[i]!=0)hID_BRho[i]->Fill(ID_brho[i]);
+  }
 
-    //SCI tx
-    //if(sci_dt_21l_21r) hSCI_dT_21l_21r->Fill(sci_dt_21l_21r);
-//     if(sci_dt_41l_41r) hSCI_dT_41l_41r->Fill(sci_dt_41l_41r);
-//     if(sci_dt_42l_42r) hSCI_dT_42l_42r->Fill(sci_dt_42l_42r);
+  //SCI tx
+  //if(sci_dt_21l_21r) hSCI_dT_21l_21r->Fill(sci_dt_21l_21r);
+  //     if(sci_dt_41l_41r) hSCI_dT_41l_41r->Fill(sci_dt_41l_41r);
+  //     if(sci_dt_42l_42r) hSCI_dT_42l_42r->Fill(sci_dt_42l_42r);
 
-//    if(sci_dt_21l_41l!=0) hSCI_dT_21l_41l->Fill(sci_dt_21l_41l);
-//     if(sci_dt_21r_41r!=0) hSCI_dT_21r_41r->Fill(sci_dt_21r_41r);
-//
-//     if(sci_dt_21l_42l!=0) hSCI_dT_21l_42l->Fill(sci_dt_21l_42l);
-//     if(sci_dt_21r_42r!=0) hSCI_dT_21r_42r->Fill(sci_dt_21r_42r);
+  //    if(sci_dt_21l_41l!=0) hSCI_dT_21l_41l->Fill(sci_dt_21l_41l);
+  //     if(sci_dt_21r_41r!=0) hSCI_dT_21r_41r->Fill(sci_dt_21r_41r);
+  //
+  //     if(sci_dt_21l_42l!=0) hSCI_dT_21l_42l->Fill(sci_dt_21l_42l);
+  //     if(sci_dt_21r_42r!=0) hSCI_dT_21r_42r->Fill(sci_dt_21r_42r);
 
-///For TAC
-// if(beta!=0)cout<<"beta " << beta*1000<<endl;
-//     if(beta!=0) hID_beta->Fill(beta*1000);
-   // if(beta3) hbeta3->Fill(beta3);
-//}
+  ///For TAC
+  // if(beta!=0)cout<<"beta " << beta*1000<<endl;
+  //     if(beta!=0) hID_beta->Fill(beta*1000);
+  // if(beta3) hbeta3->Fill(beta3);
+  //}
 
 
-if(PrcID==20){
- //if(AoQ!=0)cout<<"FILL AoQ " <<AoQ << " SubType " << SubType<<endl;
-     if(AoQ!=0) hID_AoQ->Fill(AoQ);
-       if(AoQ_corr!=0) hID_AoQ_corr->Fill(AoQ_corr);
+  if(PrcID==20){
+    //if(AoQ!=0)cout<<"FILL AoQ " <<AoQ << " SubType " << SubType<<endl;
+    if(AoQ!=0) hID_AoQ->Fill(AoQ);
+    if(AoQ_corr!=0) hID_AoQ_corr->Fill(AoQ_corr);
 
     /****  S4  (MUSIC 1)   */
-     if(ID_z!=0)hID_Z->Fill(ID_z);
+    if(ID_z!=0)hID_Z->Fill(ID_z);
 
-     /****  S4  (MUSIC 2)   */
-     if(ID_z2!=0) hID_Z2->Fill(ID_z2);
-     /****  S4  (MUSIC OLD)   */
-     //hID_Z3->Fill(ID_z3);
+    /****  S4  (MUSIC 2)   */
+    if(ID_z2!=0) hID_Z2->Fill(ID_z2);
+    /****  S4  (MUSIC OLD)   */
+    //hID_Z3->Fill(ID_z3);
 
-//      hID_Z_Z2->Fill(ID_z,ID_z2);
-//      if(ID_z!=0 && Music_dE[1]!=0)hID_Z_dE2->Fill(ID_z,Music_dE[1]);
+    //      hID_Z_Z2->Fill(ID_z,ID_z2);
+    //      if(ID_z!=0 && Music_dE[1]!=0)hID_Z_dE2->Fill(ID_z,Music_dE[1]);
     // hID_Z_Z3->Fill(ID_z,ID_z3);
-     //if(ID_z!=0 && sci_l[2]!=0 && sci_r[2]!=0)hID_Z_Sc21E->Fill(ID_z, sqrt(sci_l[2]*sci_r[2]));
+    //if(ID_z!=0 && sci_l[2]!=0 && sci_r[2]!=0)hID_Z_Sc21E->Fill(ID_z, sqrt(sci_l[2]*sci_r[2]));
 
-//      if(ID_x2!=0&&ID_x4!=0 ) hID_x2x4->Fill(ID_x2, ID_x4);
-//      if(AoQ!=0 && sci_e[5]!=0) hID_SC41dE_AoQ->Fill(AoQ, sci_e[5]);
-// 
-//      if(sci_tof2!=0 && Music_dE[0]!=0) hID_dEToF->Fill(sci_tof2, Music_dE[0]);
-// 
-//      if(ID_z!=0 && ID_x2!=0) hID_x2z->Fill(ID_z, ID_x2);// MUSIC1
-//      if(ID_z!=0 && ID_x4!=0) hID_x4z->Fill(ID_z, ID_x4);// MUSIC1
-// 
-//      if(ID_x4!=0 && Music_dE[0]!=0) hID_E_Xs4->Fill(ID_x4,Music_dE[0]);
-//      if(ID_x4!=0 && Music_dE[0]!=0)hID_E_Xs2->Fill(ID_x2,Music_dE[0]);
-// 
-//      if(ID_x2!=0 && ID_a2!=0)hID_x2a2->Fill(ID_x2,ID_a2);
-//      if(ID_y2!=0 && ID_b2!=0)hID_y2b2->Fill(ID_y2,ID_b2);
-//      if(ID_x4!=0 && ID_a4!=0)hID_x4a4->Fill(ID_x4,ID_a4);
-//      if(ID_x4!=0 && ID_b4!=0) hID_y4b4->Fill(ID_y4,ID_b4);
-//      
-//      if(AoQ_corr!=0 && ID_a2!=0)hID_AoQa2->Fill(AoQ_corr,ID_a2);
-//      if(AoQ_corr!=0 && ID_a4!=0)hID_AoQa4->Fill(AoQ_corr,ID_a4);
+    //      if(ID_x2!=0&&ID_x4!=0 ) hID_x2x4->Fill(ID_x2, ID_x4);
+    //      if(AoQ!=0 && sci_e[5]!=0) hID_SC41dE_AoQ->Fill(AoQ, sci_e[5]);
+    // 
+    //      if(sci_tof2!=0 && Music_dE[0]!=0) hID_dEToF->Fill(sci_tof2, Music_dE[0]);
+    // 
+    //      if(ID_z!=0 && ID_x2!=0) hID_x2z->Fill(ID_z, ID_x2);// MUSIC1
+    //      if(ID_z!=0 && ID_x4!=0) hID_x4z->Fill(ID_z, ID_x4);// MUSIC1
+    // 
+    //      if(ID_x4!=0 && Music_dE[0]!=0) hID_E_Xs4->Fill(ID_x4,Music_dE[0]);
+    //      if(ID_x4!=0 && Music_dE[0]!=0)hID_E_Xs2->Fill(ID_x2,Music_dE[0]);
+    // 
+    //      if(ID_x2!=0 && ID_a2!=0)hID_x2a2->Fill(ID_x2,ID_a2);
+    //      if(ID_y2!=0 && ID_b2!=0)hID_y2b2->Fill(ID_y2,ID_b2);
+    //      if(ID_x4!=0 && ID_a4!=0)hID_x4a4->Fill(ID_x4,ID_a4);
+    //      if(ID_x4!=0 && ID_b4!=0) hID_y4b4->Fill(ID_y4,ID_b4);
+    //      
+    //      if(AoQ_corr!=0 && ID_a2!=0)hID_AoQa2->Fill(AoQ_corr,ID_a2);
+    //      if(AoQ_corr!=0 && ID_a4!=0)hID_AoQa4->Fill(AoQ_corr,ID_a4);
 
 
-     ///MHTDC
-          if(ID_tof4221_mhtdc!=0)hMultiHitTDC_TOF_42_21->Fill(ID_tof4221_mhtdc);
+    ///MHTDC
+    if(ID_tof4221_mhtdc!=0)hMultiHitTDC_TOF_42_21->Fill(ID_tof4221_mhtdc);
 
      
 
-     for(int i=0; i<10;i++){
-     if(AoQ_mhtdc[i]!=0){
+    for(int i=0; i<10;i++){
+      if(AoQ_mhtdc[i]!=0){
 
-  if(ID_tof4121_mhtdc[i]!=0) hMultiHitTDC_TOF_41_21->Fill(ID_tof4121_mhtdc[i]);
-  if(ID_tof4122_mhtdc[i]!=0) hMultiHitTDC_TOF_41_22->Fill(ID_tof4122_mhtdc[i]);
+	if(ID_tof4121_mhtdc[i]!=0) hMultiHitTDC_TOF_41_21->Fill(ID_tof4121_mhtdc[i]);
+	if(ID_tof4122_mhtdc[i]!=0) hMultiHitTDC_TOF_41_22->Fill(ID_tof4122_mhtdc[i]);
 
-  //if(ID_tof4121_mhtdc[i]!=0 && i==0) hMultiHitTDC_TOF_41_21_first_hit->Fill(ID_tof4121_mhtdc[i]);
+	//if(ID_tof4121_mhtdc[i]!=0 && i==0) hMultiHitTDC_TOF_41_21_first_hit->Fill(ID_tof4121_mhtdc[i]);
 
-//  if(ID_tof4121_mhtdc[i]!=0 && i>0) hMultiHitTDC_TOF_41_21_excl_first_hit->Fill(ID_tof4121_mhtdc[i]);
-
-
-    //  if(ID_tof4121_mhtdc>147.3 && ID_tof4121_mhtdc<147.73)
-
-   }
+	//  if(ID_tof4121_mhtdc[i]!=0 && i>0) hMultiHitTDC_TOF_41_21_excl_first_hit->Fill(ID_tof4121_mhtdc[i]);
 
 
-     if(AoQ_mhtdc[i]>0){
-       hID_AoQ_mhtdc->Fill(AoQ_mhtdc[i]);
-     //  hID_AoQ_vsAngle2_mhtdc->Fill(AoQ_mhtdc[i],ID_a2);
-     }
-        if(AoQ_corr_mhtdc[i]!=0)hID_AoQ_corr_mhtdc->Fill(AoQ_corr_mhtdc[i]);
+	//  if(ID_tof4121_mhtdc>147.3 && ID_tof4121_mhtdc<147.73)
 
-        if(beta_mhtdc[i]!=0)hID_beta_mhtdc->Fill(beta_mhtdc[i]*1000);
-
-        if(ID_z_mhtdc[i]!=0)hID_Z_mhtdc->Fill(ID_z_mhtdc[i]);
-        if(ID_z2_mhtdc[i]!=0)hID_Z2_mhtdc->Fill(ID_z2_mhtdc[i]);
+      }
 
 
-  //   if(ID_z_mhtdc[i]!=0&& ID_z2_mhtdc[i]!=0)hID_Z_Z2_mhtdc->Fill(ID_z_mhtdc[i],ID_z2_mhtdc[i]);
+      if(AoQ_mhtdc[i]>0){
+	hID_AoQ_mhtdc->Fill(AoQ_mhtdc[i]);
+	//  hID_AoQ_vsAngle2_mhtdc->Fill(AoQ_mhtdc[i],ID_a2);
+      }
+      if(AoQ_corr_mhtdc[i]!=0)hID_AoQ_corr_mhtdc->Fill(AoQ_corr_mhtdc[i]);
+
+      if(beta_mhtdc[i]!=0)hID_beta_mhtdc->Fill(beta_mhtdc[i]*1000);
+
+      if(ID_z_mhtdc[i]!=0)hID_Z_mhtdc->Fill(ID_z_mhtdc[i]);
+      if(ID_z2_mhtdc[i]!=0)hID_Z2_mhtdc->Fill(ID_z2_mhtdc[i]);
+
+
+      //   if(ID_z_mhtdc[i]!=0&& ID_z2_mhtdc[i]!=0)hID_Z_Z2_mhtdc->Fill(ID_z_mhtdc[i],ID_z2_mhtdc[i]);
     }
-}
-if (PrcID == 35 && !scalers_done)
-{
-//     if(timestamp) htimestamp->Fill(timestamp);
-//     if(ts) hts->Fill(ts);
-//     if(ts2) hts2->Fill(ts2);
+  }
+  if (PrcID == 35 && !scalers_done)
+    {
+      //     if(timestamp) htimestamp->Fill(timestamp);
+      //     if(ts) hts->Fill(ts);
+      //     if(ts2) hts2->Fill(ts2);
 
-    for(int ii=0; ii<64; ii++){
+      for(int ii=0; ii<64; ii++){
 
-      //printf("ch %d: this event = %lld, increase =%lld\n",ii,src.sc_long[ii],increase_scaler_temp);
-    hScaler_per_s[ii]->AddBinContent(ibin_for_s, increase_scaler_temp[ii]);
-    hScaler_per_100ms[ii]->AddBinContent(ibin_for_100ms, increase_scaler_temp[ii]);
-//    hScaler_per_spill[ii]->AddBinContent(ibin_for_spill, increase_scaler_temp[ii]);
-    // if(ii=50)cout<<"ibin_clean_for_s " << ibin_clean_for_s << " increase_scaler_temp " << increase_scaler_temp<< endl;
-    frs_scaler_value[ii] += increase_scaler_temp[ii];
+	//printf("ch %d: this event = %lld, increase =%lld\n",ii,src.sc_long[ii],increase_scaler_temp);
+	hScaler_per_s[ii]->AddBinContent(ibin_for_s, increase_scaler_temp[ii]);
+	hScaler_per_100ms[ii]->AddBinContent(ibin_for_100ms, increase_scaler_temp[ii]);
+	//    hScaler_per_spill[ii]->AddBinContent(ibin_for_spill, increase_scaler_temp[ii]);
+	// if(ii=50)cout<<"ibin_clean_for_s " << ibin_clean_for_s << " increase_scaler_temp " << increase_scaler_temp<< endl;
+	frs_scaler_value[ii] += increase_scaler_temp[ii];
 
-    }
-     for(int ii=0; ii<64; ii++){
-    hScaler_per_s[ii]->SetBinContent(ibin_clean_for_s, 0);
-    hScaler_per_100ms[ii]->SetBinContent(ibin_clean_for_100ms, 0);
-//    hScaler_per_spill[ii]->SetBinContent(ibin_clean_for_spill, 0);
-        }
-    scalers_done = true;
+      }
+      for(int ii=0; ii<64; ii++){
+	hScaler_per_s[ii]->SetBinContent(ibin_clean_for_s, 0);
+	hScaler_per_100ms[ii]->SetBinContent(ibin_clean_for_100ms, 0);
+	//    hScaler_per_spill[ii]->SetBinContent(ibin_clean_for_spill, 0);
+      }
+      scalers_done = true;
     }
 
   if(PrcID==20){
-     ///  SCI21 Position
-for(int i=0; i<32; i++){
-   if(TRaw_vftx_21l[i]!=0. && TRaw_vftx_21r[i]!=0.){
-   hvftx_Sci21PosRaw->Fill((TRaw_vftx_21l[i]-TRaw_vftx_21r[i])); ///1ps
-//cout<<"TRaw_vftx_21l " <<TRaw_vftx_21l << " TRaw_vftx_21r " <<TRaw_vftx_21r << endl;
-   }
-    /// SCI22 Position
-     if(TRaw_vftx_22l[i]!=0. && TRaw_vftx_22r[i]!=0.){
-   hvftx_Sci22PosRaw->Fill((TRaw_vftx_22l[i]-TRaw_vftx_22r[i])); ///1ps
+    // KW add first hits
+    if(TRaw_vftx_21l[0]!=0.&&TRaw_vftx_21r[0]!=0.){
+      h1_VFTX_deltaT_S21->Fill(TRaw_vftx_21l[0]-TRaw_vftx_21r[0]);
+      h2_VFTX_deltaT_S21_TPC->Fill(TRaw_vftx_21l[0]-TRaw_vftx_21r[0], TPC_23_24_X_sc21);
     }
-    /// SCI41 Position
-      if(TRaw_vftx_41l[i]!=0. && TRaw_vftx_41r[i]!=0.){
-   hvftx_Sci41PosRaw->Fill((TRaw_vftx_41l[i]-TRaw_vftx_41r[i])); ///1ps
-//  cout<<"event " << event_number << " TRaw_vftx_41l " << TRaw_vftx_41l << " TRaw_vftx_41r " << TRaw_vftx_41r<<" TRaw_vftx_41l-TRaw_vftx_41r " <<TRaw_vftx_41l-TRaw_vftx_41r << endl; 
+    if(TRaw_vftx_22l[0]!=0.&&TRaw_vftx_22r[0]!=0.){
+      h1_VFTX_deltaT_S22->Fill(TRaw_vftx_22l[0]-TRaw_vftx_22r[0]);
+      h2_VFTX_deltaT_S22_TPC->Fill(TRaw_vftx_22l[0]-TRaw_vftx_22r[0], TPC_23_24_X_sc22);
     }
-    /// SCI42 Position
-     if(TRaw_vftx_42l[i]!=0. && TRaw_vftx_42r[i]!=0.){
-   hvftx_Sci42PosRaw->Fill((TRaw_vftx_42l[i]-TRaw_vftx_42r[i])); ///1ps
+    if(TRaw_vftx_41l[0]!=0.&&TRaw_vftx_41r[0]!=0.){
+      h1_VFTX_deltaT_S41->Fill(TRaw_vftx_41l[0]-TRaw_vftx_41r[0]);
+      h2_VFTX_deltaT_S41_TPC->Fill(TRaw_vftx_41l[0]-TRaw_vftx_41r[0], TPC_X_sc41);
+    }
+    if(TRaw_vftx_42l[0]!=0.&&TRaw_vftx_42r[0]!=0.){
+      h1_VFTX_deltaT_S42->Fill(TRaw_vftx_42l[0]-TRaw_vftx_42r[0]);
+      h2_VFTX_deltaT_S42_TPC->Fill(TRaw_vftx_42l[0]-TRaw_vftx_42r[0], TPC_X_sc42);
+    }
+    // time difference
+    h1_VFTX_TOF_S21_S41->Fill(ToF_vftx_2141[0]);
+    h1_VFTX_TOF_S22_S41->Fill(ToF_vftx_2241[0]);
+    h1_VFTX_TOF_S21_S42->Fill(ToF_vftx_2142[0]);
+    h1_VFTX_TOF_S22_S42->Fill(ToF_vftx_2242[0]);
+    // offset corrected
+    h1_VFTX_TOF_S21_S41_calib->Fill(ToF_vftx_2141_calib[0]);
+    h1_VFTX_TOF_S22_S41_calib->Fill(ToF_vftx_2241_calib[0]);
+    h1_VFTX_TOF_S21_S42_calib->Fill(ToF_vftx_2142_calib[0]);
+    h1_VFTX_TOF_S22_S42_calib->Fill(ToF_vftx_2242_calib[0]);
 
-    }
+    // physics
+    h1_VFTX_beta_S21_S41->Fill(FRS_vftx_beta_2141[0]);
+    h1_VFTX_aoq_S21_S41->Fill(FRS_vftx_aoq_2141[0]);
+    h1_VFTX_aoq_cor_S21_S41->Fill(FRS_vftx_aoq_corr_2141[0]);
+    h1_VFTX_z_S21_S41->Fill(FRS_vftx_z_2141[0]);
+    h1_VFTX_z2_S21_S41->Fill(FRS_vftx_z2_2141[0]);
+    h2_VFTX_z_aoq_S21_S41->Fill(FRS_vftx_z_2141[0], FRS_vftx_aoq_2141[0]);
+    h2_VFTX_z_aoq_cor_S21_S41->Fill(FRS_vftx_z_2141[0], FRS_vftx_aoq_corr_2141[0]);
+    h2_VFTX_z2_aoq_S21_S41->Fill(FRS_vftx_z2_2141[0], FRS_vftx_aoq_2141[0]);
+    h2_VFTX_z2_aoq_cor_S21_S41->Fill(FRS_vftx_z2_2141[0], FRS_vftx_aoq_corr_2141[0]);
+
+    h1_VFTX_beta_S22_S41->Fill(FRS_vftx_beta_2241[0]);
+    h1_VFTX_aoq_S22_S41->Fill(FRS_vftx_aoq_2241[0]);
+    h1_VFTX_aoq_cor_S22_S41->Fill(FRS_vftx_aoq_corr_2241[0]);
+    h1_VFTX_z_S22_S41->Fill(FRS_vftx_z_2241[0]);
+    h1_VFTX_z2_S22_S41->Fill(FRS_vftx_z2_2241[0]);
+    h2_VFTX_z_aoq_S22_S41->Fill(FRS_vftx_z_2241[0], FRS_vftx_aoq_2241[0]);
+    h2_VFTX_z_aoq_cor_S22_S41->Fill(FRS_vftx_z_2241[0], FRS_vftx_aoq_corr_2241[0]);
+    h2_VFTX_z2_aoq_S22_S41->Fill(FRS_vftx_z2_2241[0], FRS_vftx_aoq_2241[0]);
+    h2_VFTX_z2_aoq_cor_S22_S41->Fill(FRS_vftx_z2_2241[0], FRS_vftx_aoq_corr_2241[0]);
     
-    ///ToF's
-   if(ToF_vftx_2141[i]!=0) h1_VFTX_TOF_41_21->Fill(ToF_vftx_2141[i]);
-    if(ToF_vftx_2241[i]!=0) h1_VFTX_TOF_41_22->Fill(ToF_vftx_2241[i]);
-    //h1_VFTX_TOF_42_21->Fill(ToF_vftx_2142[i]);
+    h1_VFTX_beta_S21_S42->Fill(FRS_vftx_beta_2142[0]);
+    h1_VFTX_aoq_S21_S42->Fill(FRS_vftx_aoq_2142[0]);
+    h1_VFTX_aoq_cor_S21_S42->Fill(FRS_vftx_aoq_corr_2142[0]);
+    h1_VFTX_z_S21_S42->Fill(FRS_vftx_z_2142[0]);
+    h1_VFTX_z2_S21_S42->Fill(FRS_vftx_z2_2142[0]);
+    h2_VFTX_z_aoq_S21_S42->Fill(FRS_vftx_z_2142[0], FRS_vftx_aoq_2142[0]);
+    h2_VFTX_z_aoq_cor_S21_S42->Fill(FRS_vftx_z_2142[0], FRS_vftx_aoq_corr_2142[0]);
+    h2_VFTX_z2_aoq_S21_S42->Fill(FRS_vftx_z2_2142[0], FRS_vftx_aoq_2142[0]);
+    h2_VFTX_z2_aoq_cor_S21_S42->Fill(FRS_vftx_z2_2142[0], FRS_vftx_aoq_corr_2142[0]);
+
+    h1_VFTX_beta_S22_S42->Fill(FRS_vftx_beta_2242[0]);
+    h1_VFTX_aoq_S22_S42->Fill(FRS_vftx_aoq_2242[0]);
+    h1_VFTX_aoq_cor_S22_S42->Fill(FRS_vftx_aoq_corr_2242[0]);
+    h1_VFTX_z_S22_S42->Fill(FRS_vftx_z_2242[0]);
+    h1_VFTX_z2_S22_S42->Fill(FRS_vftx_z2_2242[0]);
+    h2_VFTX_z_aoq_S22_S42->Fill(FRS_vftx_z_2242[0], FRS_vftx_aoq_2242[0]);
+    h2_VFTX_z_aoq_cor_S22_S42->Fill(FRS_vftx_z_2242[0], FRS_vftx_aoq_corr_2242[0]);
+    h2_VFTX_z2_aoq_S22_S42->Fill(FRS_vftx_z2_2242[0], FRS_vftx_aoq_2242[0]);
+    h2_VFTX_z2_aoq_cor_S22_S42->Fill(FRS_vftx_z2_2242[0], FRS_vftx_aoq_corr_2242[0]);
     
-    if(ToF_vftx_2141_calib[i]!=0) h1_VFTX_TOF_41_21_calib->Fill(ToF_vftx_2141_calib[i]);
-    if(ToF_vftx_2241_calib[i]!=0) h1_VFTX_TOF_41_22_calib->Fill(ToF_vftx_2241_calib[i]);
-   // h1_VFTX_TOF_42_21->Fill(ToF_vftx_2142_calib[i]);
+    // end KW
+
+
+    ///  SCI21 Position
+    //KW rem
+    //for(int i=0; i<32; i++){
+    //KW add
+    for(int i=0; i<VFTX_MAX_HITS; i++){
+      // end KW
+      if(TRaw_vftx_21l[i]!=0. && TRaw_vftx_21r[i]!=0.){
+	hvftx_Sci21PosRaw->Fill((TRaw_vftx_21l[i]-TRaw_vftx_21r[i])); ///1ps
+	//cout<<"TRaw_vftx_21l " <<TRaw_vftx_21l << " TRaw_vftx_21r " <<TRaw_vftx_21r << endl;
+      }
+      /// SCI22 Position
+      if(TRaw_vftx_22l[i]!=0. && TRaw_vftx_22r[i]!=0.){
+	hvftx_Sci22PosRaw->Fill((TRaw_vftx_22l[i]-TRaw_vftx_22r[i])); ///1ps
+      }
+      /// SCI41 Position
+      if(TRaw_vftx_41l[i]!=0. && TRaw_vftx_41r[i]!=0.){
+	hvftx_Sci41PosRaw->Fill((TRaw_vftx_41l[i]-TRaw_vftx_41r[i])); ///1ps
+	//  cout<<"event " << event_number << " TRaw_vftx_41l " << TRaw_vftx_41l << " TRaw_vftx_41r " << TRaw_vftx_41r<<" TRaw_vftx_41l-TRaw_vftx_41r " <<TRaw_vftx_41l-TRaw_vftx_41r << endl; 
+      }
+      /// SCI42 Position
+      if(TRaw_vftx_42l[i]!=0. && TRaw_vftx_42r[i]!=0.){
+	hvftx_Sci42PosRaw->Fill((TRaw_vftx_42l[i]-TRaw_vftx_42r[i])); ///1ps
+
+      }
     
+      ///ToF's
+      if(ToF_vftx_2141[i]!=0) h1_VFTX_TOF_41_21->Fill(ToF_vftx_2141[i]);
+      if(ToF_vftx_2241[i]!=0) h1_VFTX_TOF_41_22->Fill(ToF_vftx_2241[i]);
+      //h1_VFTX_TOF_42_21->Fill(ToF_vftx_2142[i]);
     
-    
-   // cout<<" TRaw_vftx_41l "<<TRaw_vftx_41l << " TRaw_vftx_41r "<<TRaw_vftx_41r <<" TRaw_vftx_21l "<<TRaw_vftx_21l <<" TRaw_vftx_21r " <<TRaw_vftx_21r  << "TOF " <<(0.5*((TRaw_vftx_41l+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r)))<< endl;
-//    ///SCI41 -SCI21 ToF
-//   if(TRaw_vftx_41l[i]!=0.&&TRaw_vftx_41r[i]!=0.&&TRaw_vftx_21l[i]!=0.&&TRaw_vftx_21r[i]!=0.){
-//    hvftx_ToFraw_2141->Fill((0.5*((TRaw_vftx_41l[i]+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r))));//ps
-// 
-//     }
-//     ///SCI41 -SCI21 LL
-//   if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
-//    hvftx_ToFraw_2141LL->Fill((TRaw_vftx_41l-TRaw_vftx_21l));//ps
-// 
-//     }
-//     
-//     ///SCI41 -SCI22 LL
-//   if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
-//    hvftx_ToFraw_2241LL->Fill((TRaw_vftx_41l-TRaw_vftx_22l));//ps
-// 
-//     }
-//     
-//     ///SCI41 -SCI21 RR
-//   if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
-//    hvftx_ToFraw_2241RR->Fill((TRaw_vftx_41r-TRaw_vftx_22r));//ps
-// 
-//     }
-//     
-//     ///SCI41 -SCI22 RR
-//   if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
-//    hvftx_ToFraw_2141RR->Fill((TRaw_vftx_41r-TRaw_vftx_21r));//ps
-// 
-//     }
-//     
-//      ///SCI42 -SCI21 LL
-//   if(TRaw_vftx_42l!= 0 &&TRaw_vftx_21l!= 0){
-//    hvftx_ToFraw_2142LL->Fill((TRaw_vftx_42l-TRaw_vftx_21l));//ps
-// 
-//     }
-//     
-//     ///SCI42 -SCI21 RR
-//   if(TRaw_vftx_42r!=0 && TRaw_vftx_21r!=0){
-//    hvftx_ToFraw_2141RR->Fill((TRaw_vftx_42r-TRaw_vftx_21r));//ps
-// 
-//         }
-        
-}
-    }
-  }
+      if(ToF_vftx_2141_calib[i]!=0) h1_VFTX_TOF_41_21_calib->Fill(ToF_vftx_2141_calib[i]);
+      if(ToF_vftx_2241_calib[i]!=0) h1_VFTX_TOF_41_22_calib->Fill(ToF_vftx_2241_calib[i]);
+      // h1_VFTX_TOF_42_21->Fill(ToF_vftx_2142_calib[i]);
+      
+      
+      
+      // cout<<" TRaw_vftx_41l "<<TRaw_vftx_41l << " TRaw_vftx_41r "<<TRaw_vftx_41r <<" TRaw_vftx_21l "<<TRaw_vftx_21l <<" TRaw_vftx_21r " <<TRaw_vftx_21r  << "TOF " <<(0.5*((TRaw_vftx_41l+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r)))<< endl;
+      //    ///SCI41 -SCI21 ToF
+      //   if(TRaw_vftx_41l[i]!=0.&&TRaw_vftx_41r[i]!=0.&&TRaw_vftx_21l[i]!=0.&&TRaw_vftx_21r[i]!=0.){
+      //    hvftx_ToFraw_2141->Fill((0.5*((TRaw_vftx_41l[i]+TRaw_vftx_41r)-(TRaw_vftx_21l+TRaw_vftx_21r))));//ps
+      // 
+      //     }
+      //     ///SCI41 -SCI21 LL
+      //   if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
+      //    hvftx_ToFraw_2141LL->Fill((TRaw_vftx_41l-TRaw_vftx_21l));//ps
+      // 
+      //     }
+      //     
+      //     ///SCI41 -SCI22 LL
+      //   if(TRaw_vftx_41l!=0.&&TRaw_vftx_21l!=0.){
+      //    hvftx_ToFraw_2241LL->Fill((TRaw_vftx_41l-TRaw_vftx_22l));//ps
+      // 
+      //     }
+      //     
+      //     ///SCI41 -SCI21 RR
+      //   if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
+      //    hvftx_ToFraw_2241RR->Fill((TRaw_vftx_41r-TRaw_vftx_22r));//ps
+      // 
+      //     }
+      //     
+      //     ///SCI41 -SCI22 RR
+      //   if(TRaw_vftx_41r!=0.&& TRaw_vftx_21r!=0.){
+      //    hvftx_ToFraw_2141RR->Fill((TRaw_vftx_41r-TRaw_vftx_21r));//ps
+      // 
+      //     }
+      //     
+      //      ///SCI42 -SCI21 LL
+      //   if(TRaw_vftx_42l!= 0 &&TRaw_vftx_21l!= 0){
+      //    hvftx_ToFraw_2142LL->Fill((TRaw_vftx_42l-TRaw_vftx_21l));//ps
+      // 
+      //     }
+      //     
+      //     ///SCI42 -SCI21 RR
+      //   if(TRaw_vftx_42r!=0 && TRaw_vftx_21r!=0){
+      //    hvftx_ToFraw_2141RR->Fill((TRaw_vftx_42r-TRaw_vftx_21r));//ps
+      // 
+      //         }
+      // KW add all hits
+      if(TRaw_vftx_21l[i]!=0.&&TRaw_vftx_21r[i]!=0.)
+	h1_VFTX_deltaT_S21->Fill(TRaw_vftx_21l[i]-TRaw_vftx_21r[i]);
+      if(TRaw_vftx_22l[i]!=0.&&TRaw_vftx_22r[i]!=0.)
+	h1_VFTX_deltaT_S22->Fill(TRaw_vftx_22l[i]-TRaw_vftx_22r[i]);
+      if(TRaw_vftx_41l[i]!=0.&&TRaw_vftx_41r[i]!=0.)
+	h1_VFTX_deltaT_S41->Fill(TRaw_vftx_41l[i]-TRaw_vftx_41r[i]);
+      if(TRaw_vftx_42l[i]!=0.&&TRaw_vftx_42r[i]!=0.)
+	h1_VFTX_deltaT_S42->Fill(TRaw_vftx_42l[i]-TRaw_vftx_42r[i]);
+      
+      h1_VFTX_TOF_S21_S41_mhit->Fill(ToF_vftx_2141[i]);
+      h1_VFTX_TOF_S22_S41_mhit->Fill(ToF_vftx_2241[i]);
+      h1_VFTX_TOF_S21_S42_mhit->Fill(ToF_vftx_2142[i]);
+      h1_VFTX_TOF_S22_S42_mhit->Fill(ToF_vftx_2242[i]);
+      
+
+      // end KW
+
+      
+    }// sci mult vftx
+  }//prcid == 20
+}//fill FRS histos
 
   /**----------------------------------------------------------------------------------------------**/
   /**-------------------------------------------  AIDA   ------------------------------------------**/

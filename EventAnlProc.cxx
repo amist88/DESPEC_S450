@@ -2317,7 +2317,7 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
 		
 	    hbPlas_SC41R_Digi_lead[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/SC41R_Digi-Lead_bPlas/SC41R_Digi_Lead bPlas Det. %2d Ch.%02d", i,j), Form("SC41R Digital Lead - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);    
         
-        hbPlas_Ge_Trig_lead[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/Ge_Trig-Lead_bPlas/SC41R_Digi_Lead bPlas Det. %2d Ch.%02d", i,j), Form("Ge Trigger - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);    
+        hbPlas_Ge_Trig_lead[i][j] = MakeTH1('D', Form("bPlastic/AdditionalChannels/Ge_Trig-Lead_bPlas/Ge_Trig_Lead bPlas Det. %2d Ch.%02d", i,j), Form("Ge Trigger - bPlas Lead Det. %2d Lead Ch. %2d ", i,j), 4000, -100000., 100000.);    
         
           }
   }

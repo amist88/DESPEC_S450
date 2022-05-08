@@ -178,6 +178,10 @@ void setup_s496_011()
   id->vftx_s2pos_option=2; //(1: sc21x-timediff(not implemented), 2:tpc) 
   id->vftx_length_2141 = 37.16826894; // SCI 21-41 s460 U 210419
   id->vftx_length_2241 = 36.304866; // SCI 22-41 s460 U 210419
+  // KW add
+  id->vftx_length_2141 = 37.16826894; // SCI 21-41 DUMMY
+  id->vftx_length_2241 = 36.304866; // SCI 22-41 DUMMY
+  // end KW
   id->vftx_vel_a_music41[0]=12720.; //s460 U 210416 
   id->vftx_vel_a_music41[1]=-18597.;
   id->vftx_vel_a_music41[2]=8089.2;
@@ -907,7 +911,10 @@ void setup_s496_011()
   // for VFTX
   sci->vftx_offset_2141  =  -185.44; //ns // s460 U 210419
   sci->vftx_offset_2241  =  -168.77; //ns // s460 U 210419
-  
+  // KW add
+  sci->vftx_offset_2141  =  -185.44; //ns // DUMMY
+  sci->vftx_offset_2241  =  -168.77; //ns // DUMMY
+  // end KW
   // for multihitTDC
   sci->mhtdc_factor_ch_to_ns =  0.025;// tp be set in parameter...
   sci->mhtdc_offset_21l_21r  =  -39.6625+20.0;    sci->mhtdc_factor_21l_21r = 62.5341;  // pos = offset + factor*dt

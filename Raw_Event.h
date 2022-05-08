@@ -13,6 +13,9 @@
 #include "AIDA_Decay_Event_Store.h"
 #include "Configuration_Files/DESPEC_General_Setup/DESPEC_Setup_File.h"
 
+// KW add
+#include "TFRSVftxSetting.h"
+// end KW
 //#include "Rtypes.h"
 
 typedef unsigned long ULong;
@@ -141,19 +144,50 @@ private:
     Int_t   ibin_clean_for_spill;
     UInt_t  increase_scaler_temp[64];
 
-    Double_t TRaw_vftx_21L[32];
-    Double_t TRaw_vftx_21R[32];
-    Double_t TRaw_vftx_22L[32];
-    Double_t TRaw_vftx_22R[32];
-    Double_t TRaw_vftx_41L[32];
-    Double_t TRaw_vftx_41R[32];
-    Double_t TRaw_vftx_42L[32];
-    Double_t TRaw_vftx_42R[32];
-    Float_t ToF_vftx_2141[32];
-    Float_t ToF_vftx_2141_calib[32];
-    Float_t ToF_vftx_2241[32];
-    Float_t ToF_vftx_2241_calib[32];
+  //KW changed [32] to [VFTX_MAX_HITS] because, why not?
+    Double_t TRaw_vftx_21L[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_21R[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_22L[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_22R[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_41L[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_41R[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_42L[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_42R[VFTX_MAX_HITS];
+    Float_t ToF_vftx_2141[VFTX_MAX_HITS];
+    Float_t ToF_vftx_2141_calib[VFTX_MAX_HITS];
+    Float_t ToF_vftx_2241[VFTX_MAX_HITS];
+    Float_t ToF_vftx_2241_calib[VFTX_MAX_HITS];
+  // KW add
+  Float_t ToF_vftx_2142[VFTX_MAX_HITS];
+  Float_t ToF_vftx_2142_calib[VFTX_MAX_HITS];
+  Float_t ToF_vftx_2242[VFTX_MAX_HITS];
+  Float_t ToF_vftx_2242_calib[VFTX_MAX_HITS];
 
+  Float_t ID_vftx_aoq_2141[VFTX_MAX_HITS];
+  Float_t ID_vftx_aoq_corr_2141[VFTX_MAX_HITS];
+  Float_t ID_vftx_z_2141[VFTX_MAX_HITS];
+  Float_t ID_vftx_z2_2141[VFTX_MAX_HITS];
+  Float_t ID_vftx_beta_2141[VFTX_MAX_HITS];
+
+  Float_t ID_vftx_aoq_2241[VFTX_MAX_HITS];
+  Float_t ID_vftx_aoq_corr_2241[VFTX_MAX_HITS];
+  Float_t ID_vftx_z_2241[VFTX_MAX_HITS];
+  Float_t ID_vftx_z2_2241[VFTX_MAX_HITS];
+  Float_t ID_vftx_beta_2241[VFTX_MAX_HITS];
+
+  Float_t ID_vftx_aoq_2142[VFTX_MAX_HITS];
+  Float_t ID_vftx_aoq_corr_2142[VFTX_MAX_HITS];
+  Float_t ID_vftx_z_2142[VFTX_MAX_HITS];
+  Float_t ID_vftx_z2_2142[VFTX_MAX_HITS];
+  Float_t ID_vftx_beta_2142[VFTX_MAX_HITS];
+
+  Float_t ID_vftx_aoq_2242[VFTX_MAX_HITS];
+  Float_t ID_vftx_aoq_corr_2242[VFTX_MAX_HITS];
+  Float_t ID_vftx_z_2242[VFTX_MAX_HITS];
+  Float_t ID_vftx_z2_2242[VFTX_MAX_HITS];
+  Float_t ID_vftx_beta_2242[VFTX_MAX_HITS];
+  
+  // end KW
     Float_t Raw_mhtdc_sc21lr_dt[10];
     Float_t Raw_mhtdc_sc21lr_x[10];
     Float_t Raw_mhtdc_sc22lr_dt[10];
@@ -371,7 +405,16 @@ public:
 	void set_DATA_ID_Z_AoQ(Float_t,Float_t,Float_t,Float_t,Float_t,Float_t,Float_t);
 	void set_DATA_ID_Timestamp(Float_t,Float_t,Float_t);
     void set_DATA_FRS_SCALERS(Int_t,Int_t,Int_t,Int_t,Int_t,Int_t,Int_t,Int_t,UInt_t*);
-    void set_DATA_VFTX(Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Float_t*, Float_t*,Float_t*,Float_t*);
+  // KW rem
+  // void set_DATA_VFTX(Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Float_t*, Float_t*,Float_t*,Float_t*);
+  // KW add S42
+  void set_DATA_VFTX(Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Double_t*,Float_t*, Float_t*,Float_t*,Float_t*,Float_t*, Float_t*,Float_t*,Float_t*);
+  
+  void set_DATA_ID_VFTX(Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,
+			Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,
+			Float_t*,Float_t*,Float_t*,Float_t*,Float_t*,
+			Float_t*,Float_t*,Float_t*,Float_t*,Float_t*);
+  // end KW
 
     void set_DATA_RAW_MHTDC(Float_t*,Float_t*,Float_t*,Float_t*,Float_t,Float_t,Float_t,Float_t);
 
@@ -551,7 +594,39 @@ public:
     Float_t get_FRS_ToF_vftx_2141_calib(int i);
     Float_t get_FRS_ToF_vftx_2241(int i);
     Float_t get_FRS_ToF_vftx_2241_calib(int i);
+  //KW add
+  Float_t get_FRS_ToF_vftx_2142(int i);
+  Float_t get_FRS_ToF_vftx_2142_calib(int i);
+  Float_t get_FRS_ToF_vftx_2242(int i);
+  Float_t get_FRS_ToF_vftx_2242_calib(int i);
+  
+  Float_t get_FRS_vftx_aoq_2141(int i){ return ID_vftx_aoq_2141[i];}
+  Float_t get_FRS_vftx_aoq_corr_2141(int i){ return ID_vftx_aoq_corr_2141[i];}
+  Float_t get_FRS_vftx_z_2141(int i){ return ID_vftx_z_2141[i];}
+  Float_t get_FRS_vftx_z2_2141(int i){ return ID_vftx_z2_2141[i];}
+  Float_t get_FRS_vftx_beta_2141(int i){ return ID_vftx_beta_2141[i];}
+                        
+  Float_t get_FRS_vftx_aoq_2241(int i){ return ID_vftx_aoq_2241[i];}
+  Float_t get_FRS_vftx_aoq_corr_2241(int i){ return ID_vftx_aoq_corr_2241[i];}
+  Float_t get_FRS_vftx_z_2241(int i){ return ID_vftx_z_2241[i];}
+  Float_t get_FRS_vftx_z2_2241(int i){ return ID_vftx_z2_2241[i];}
+  Float_t get_FRS_vftx_beta_2241(int i){ return ID_vftx_beta_2241[i];}
+  
+  Float_t get_FRS_vftx_aoq_2142(int i){ return ID_vftx_aoq_2142[i];}
+  Float_t get_FRS_vftx_aoq_corr_2142(int i){ return ID_vftx_aoq_corr_2142[i];}
+  Float_t get_FRS_vftx_z_2142(int i){ return ID_vftx_z_2142[i];}
+  Float_t get_FRS_vftx_z2_2142(int i){ return ID_vftx_z2_2142[i];}
+  Float_t get_FRS_vftx_beta_2142(int i){ return ID_vftx_beta_2142[i];}
+  
+  Float_t get_FRS_vftx_aoq_2242(int i){ return ID_vftx_aoq_2242[i];}
+  Float_t get_FRS_vftx_aoq_corr_2242(int i){ return ID_vftx_aoq_corr_2242[i];}
+  Float_t get_FRS_vftx_z_2242(int i){ return ID_vftx_z_2242[i];}
+  Float_t get_FRS_vftx_z2_2242(int i){ return ID_vftx_z2_2242[i];}
+  Float_t get_FRS_vftx_beta_2242(int i){ return ID_vftx_beta_2242[i];}
 
+  // end KW
+
+  
     Float_t get_FRS_Raw_mhtdc_sc21lr_dt(int i );
     Float_t get_FRS_Raw_mhtdc_sc21lr_x(int i);
     Float_t get_FRS_Raw_mhtdc_sc22lr_dt(int i);
