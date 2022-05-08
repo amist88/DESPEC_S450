@@ -39,6 +39,10 @@
 #include <sys/types.h>
 #include <TRandom3.h>
 
+// KW add
+#include "TFRSVftxSetting.h"
+// KW rem
+/*
 // This should be discommented only for vftx channel calibration
 #define CALIBRATION_VFTX 0
 
@@ -83,6 +87,9 @@
 #define SCI81L_CH 14
 #define SCI81R_CH 15
 #define SCITRI_CH 17
+*/
+// end KW
+
 class FRS_Detector_System : public Detector_System{
 
     public:
@@ -95,12 +102,17 @@ virtual ~FRS_Detector_System();
     void Process_MBS(TGo4MbsSubEvent* psubevt);
     void Process_MBS_Anl();
 
+  // KW rem
+  /*
     UInt_t Vftx_Stat[VFTX_N][VFTX_MAX_CHN];
      // void VFTX_Calibration();
 
  // TH1 * h1_vftx_ft[VFTX_N][VFTX_MAX_CHN];
      TH1D  *h1_vftx_ft[1][32] ;
-    //void Process_FRS(TGo4MbsSubEvent* psubevt);
+  */
+  // end KW
+  
+  //void Process_FRS(TGo4MbsSubEvent* psubevt);
   //  TModParameter* ModSetup;
     TMWParameter* mw;
     TTPCParameter* tpc;
@@ -126,7 +138,13 @@ virtual ~FRS_Detector_System();
     bool calibration_done(){return false;}
     void write(){return;};
     void set_Gain_Match_Filename(std::string){return;};
-    void VFTX_Calibration(int module, int channel);
+  // KW rem
+  //  void VFTX_Calibration(int module, int channel);
+  // KW add
+  void VFTX_Readout(Int_t **pdata, int module);
+  void ClearVftx();
+  // end KW
+
     const char* get_filename();
 //     #if CALIBRATION_VFTX
 //   void VFTX_Calibration(int module, int channel);
@@ -146,8 +164,14 @@ private:
     Int_t nbins;
     Double_t min_val,max_val;
     Double_t bins_x_arr[1000];
-    double VFTX_Cal_arr[1][32][1001];
-
+  // KW add
+  TRandom3 rand;
+  void   m_VFTX_Bin2Ps();
+  float  VFTX_Bin2Ps[VFTX_N][VFTX_MAX_CHN][1000];
+  double VFTX_GetTraw_ps(int, int, int, int, float);
+  // KW rem
+  // double VFTX_Cal_arr[1][32][1001];
+  // end KW
      //void load_VFTX_Calibration_Files();
 
 
@@ -214,9 +238,19 @@ private:
   UInt_t tpat_main[32];
   UInt_t scaler_frs[32];            // VME scaler in frs crate
 
-  UShort_t vftx_cc[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
-  UShort_t vftx_ft[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
-  UShort_t vftx_mult[VFTX_N][VFTX_MAX_CHN];
+  // KW add
+  Int_t vftx_leading_cc[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  Int_t vftx_leading_ft[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  Double_t vftx_leading_time[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  Int_t vftx_trailing_cc[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  Int_t vftx_trailing_ft[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  Double_t vftx_trailing_time[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  Int_t vftx_mult[VFTX_N][VFTX_MAX_CHN];
+  // KW del
+  // UShort_t vftx_cc[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  // UShort_t vftx_ft[VFTX_N][VFTX_MAX_CHN][VFTX_MAX_HITS];
+  // UShort_t vftx_mult[VFTX_N][VFTX_MAX_CHN];
+  // end KW
 
   Int_t Proc_iterator;
    bool skip;
@@ -255,10 +289,12 @@ private:
   /* *************************************** */
   /*         VFTX : RAW TIME IN PS           */
   /* *************************************** */
-  TRandom3 rand;
-  void   m_VFTX_Bin2Ps();
-  float  VFTX_Bin2Ps[VFTX_N][VFTX_MAX_CHN][1000];
-  double VFTX_GetTraw_ps(int, int, int, int, float);
+  // KW del (just move to upack step, in order to stay consistent with the FRS order)
+  // TRandom3 rand;
+  // void   m_VFTX_Bin2Ps();
+  // float  VFTX_Bin2Ps[VFTX_N][VFTX_MAX_CHN][1000];
+  // double VFTX_GetTraw_ps(int, int, int, int, float);
+  // end KW
 
     Long64_t StartOfSpilTime;
     Long64_t StartOfSpilTime2; //does not reset at end of extraction
@@ -377,16 +413,19 @@ private:
 
 
        // VFTX for new ToF
-  Double_t TRaw_vftx_21l[32];
-  Double_t TRaw_vftx_21r[32];
-  Double_t TRaw_vftx_41l[32];
-  Double_t TRaw_vftx_41r[32];
-  Double_t TRaw_vftx_22l[32];
-  Double_t TRaw_vftx_22r[32];
-  Double_t TRaw_vftx_42l[32];
-  Double_t TRaw_vftx_42r[32];
-  Double_t TRaw_vftx_81l[32];
-  Double_t TRaw_vftx_81r[32];
+  //KW changed [32] to [VFTX_MAX_HITS] because, why not?
+  Double_t TRaw_vftx_21l[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_21r[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_41l[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_41r[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_22l[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_22r[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_42l[VFTX_MAX_HITS];
+  Double_t TRaw_vftx_42r[VFTX_MAX_HITS];
+  // KW rem (S8 not needed)
+  // Double_t TRaw_vftx_81l[VFTX_MAX_HITS];
+  // Double_t TRaw_vftx_81r[VFTX_MAX_HITS];
+  // end KW
   Double_t TRaw_vftx_tri;
 
     // User multihit TDC
@@ -809,11 +848,18 @@ private:
     Bool_t        sci_b_tofrr5;
     
        //VFTX
-  Float_t       vftx_tof2141[32];
-  Float_t       vftx_tof2141_calib[32];
-  Float_t       vftx_tof2241[32];
-  Float_t       vftx_tof2241_calib[32];
-
+  //KW changed [32] to [VFTX_MAX_HITS] because, why not?
+  Float_t       vftx_tof2141[VFTX_MAX_HITS];
+  Float_t       vftx_tof2141_calib[VFTX_MAX_HITS];
+  Float_t       vftx_tof2241[VFTX_MAX_HITS];
+  Float_t       vftx_tof2241_calib[VFTX_MAX_HITS];
+  // KW add tof S42
+  Float_t       vftx_tof2142[VFTX_MAX_HITS];
+  Float_t       vftx_tof2142_calib[VFTX_MAX_HITS];
+  Float_t       vftx_tof2242[VFTX_MAX_HITS];
+  Float_t       vftx_tof2242_calib[VFTX_MAX_HITS];
+  //end KW
+  
      // MultiHitTDC
   Float_t       mhtdc_tof8121;
   Float_t*      mhtdc_tof4121;
@@ -905,23 +951,48 @@ private:
 // 	Bool_t*       id_b_z_AoQ;
 // 	Bool_t*       id_b_music_z;
     
-    Float_t       id_vftx_beta_2141[32];
-  Float_t       id_vftx_gamma_2141[32];
-  Float_t       id_vftx_delta_2141;
-  Float_t       id_vftx_aoq_2141[32];
-  Float_t       id_vftx_aoq_2141_corr[32];
-  Float_t       id_vftx_2141_z[32];
-  Float_t       id_vftx_2141_z2[32];
-  Float_t       id_vftx_2141_v_cor[32];
-  Float_t       id_vftx_beta_2241[32];
-  Float_t       id_vftx_gamma_2241[32];
-  Float_t       id_vftx_delta_2241;
-  Float_t       id_vftx_aoq_2241[32];
-  Float_t       id_vftx_aoq_2241_corr[32];
-  Float_t       id_vftx_2241_z[32];
-  Float_t       id_vftx_2241_z2[32];
-  Float_t       id_vftx_2241_v_cor[32];
+  //KW changed [32] to [VFTX_MAX_HITS] because, why not?
+  Float_t       id_vftx_beta_2141[VFTX_MAX_HITS];
+  Float_t       id_vftx_gamma_2141[VFTX_MAX_HITS];
+  // KW rem (delta 2 -> 4 all identical)
+  // Float_t       id_vftx_delta_2141;
+  // end KW
+  Float_t       id_vftx_aoq_2141[VFTX_MAX_HITS];
+  Float_t       id_vftx_aoq_corr_2141[VFTX_MAX_HITS];
+  Float_t       id_vftx_z_2141[VFTX_MAX_HITS];
+  Float_t       id_vftx_z2_2141[VFTX_MAX_HITS];
+  Float_t       id_vftx_vcor_2141[VFTX_MAX_HITS];
+  Float_t       id_vftx_beta_2241[VFTX_MAX_HITS];
+  Float_t       id_vftx_gamma_2241[VFTX_MAX_HITS];
+  // KW rem (delta 2 -> 4 all identical)
+  // Float_t       id_vftx_delta_2241;
+  // end KW
+  Float_t       id_vftx_aoq_2241[VFTX_MAX_HITS];
+  Float_t       id_vftx_aoq_corr_2241[VFTX_MAX_HITS];
+  Float_t       id_vftx_z_2241[VFTX_MAX_HITS];
+  Float_t       id_vftx_z2_2241[VFTX_MAX_HITS];
+  Float_t       id_vftx_vcor_2241[VFTX_MAX_HITS];
 
+  // KW add same for 42?
+  Float_t       id_vftx_beta_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_gamma_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_aoq_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_aoq_corr_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_z_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_z2_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_vcor_2142[VFTX_MAX_HITS];
+  Float_t       id_vftx_beta_2242[VFTX_MAX_HITS];
+  Float_t       id_vftx_gamma_2242[VFTX_MAX_HITS];
+  Float_t       id_vftx_aoq_2242[VFTX_MAX_HITS];
+  Float_t       id_vftx_aoq_corr_2242[VFTX_MAX_HITS];
+  Float_t       id_vftx_z_2242[VFTX_MAX_HITS];
+  Float_t       id_vftx_z2_2242[VFTX_MAX_HITS];
+  Float_t       id_vftx_vcor_2242[VFTX_MAX_HITS];
+
+  Float_t       id_vftx_delta_24;
+
+  // end KW
+  
   Float_t*       id_mhtdc_beta_s2s4;
   Float_t*       id_mhtdc_gamma_s2s4;
   Float_t*       id_mhtdc_delta_s2s4;

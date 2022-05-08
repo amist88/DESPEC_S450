@@ -1,0 +1,10 @@
+*.o
+*.root
+*.pcm
+G__SCN.cxx
+libGo4UserAnalysis.rootmap
+libGo4UserAnalysis.so
+*_dictUmbrella.h
+*.hotstart
+setroot6.24
+*~

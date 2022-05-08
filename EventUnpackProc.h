@@ -190,24 +190,46 @@ using namespace std;
     UInt_t* increase_scaler_temp;
     UInt_t frs_scaler_value[64];
 
-   Double_t TRaw_vftx_21l[32], TRaw_vftx_21r[32],TRaw_vftx_22l[32], TRaw_vftx_22r[32];
-    Double_t TRaw_vftx_41l[32], TRaw_vftx_41r[32], TRaw_vftx_42l[32], TRaw_vftx_42r[32];
-    Float_t ToF_vftx_2141[32], ToF_vftx_2141_calib[32], ToF_vftx_2241[32], ToF_vftx_2241_calib[32];
-    //Double_t TRaw_vftx[32];
-    Float_t  FRS_vftx_beta_2141[32];
-    Float_t  FRS_vftx_gamma_2141[32];
-    Float_t  FRS_vftx_aoq_2141[32];
-    Float_t  FRS_vftx_aoq_2141_corr[32];
-    Float_t  FRS_vftx_2141_z[32];
-    Float_t  FRS_vftx_2141_z2[32];
-    Float_t  FRS_vftx_2141_v_cor[32];
-    Float_t  FRS_vftx_beta_2241[32];
-    Float_t  FRS_vftx_gamma_2241[32];
-    Float_t  FRS_vftx_aoq_2241[32];
-    Float_t  FRS_vftx_aoq_2241_corr[32];
-    Float_t  FRS_vftx_2241_z[32];
-    Float_t  FRS_vftx_2241_z2[32];
-    Float_t  FRS_vftx_2241_v_cor[32];
+	  // KW change 32 to VFTX_MAX_HITS
+    Double_t TRaw_vftx_21l[VFTX_MAX_HITS], TRaw_vftx_21r[VFTX_MAX_HITS],TRaw_vftx_22l[VFTX_MAX_HITS], TRaw_vftx_22r[VFTX_MAX_HITS];
+    Double_t TRaw_vftx_41l[VFTX_MAX_HITS], TRaw_vftx_41r[VFTX_MAX_HITS], TRaw_vftx_42l[VFTX_MAX_HITS], TRaw_vftx_42r[VFTX_MAX_HITS];
+    Float_t ToF_vftx_2141[VFTX_MAX_HITS], ToF_vftx_2141_calib[VFTX_MAX_HITS], ToF_vftx_2241[VFTX_MAX_HITS], ToF_vftx_2241_calib[VFTX_MAX_HITS];
+    // KW add
+    Float_t ToF_vftx_2142[VFTX_MAX_HITS], ToF_vftx_2142_calib[VFTX_MAX_HITS], ToF_vftx_2242[VFTX_MAX_HITS], ToF_vftx_2242_calib[VFTX_MAX_HITS];
+    // end KW
+    //Double_t TRaw_vftx[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_beta_2141[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_gamma_2141[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_2141[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_corr_2141[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z_2141[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z2_2141[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_vcor_2141[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_beta_2241[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_gamma_2241[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_2241[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_corr_2241[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z_2241[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z2_2241[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_vcor_2241[VFTX_MAX_HITS];
+
+    // KW add
+    Float_t  FRS_vftx_beta_2142[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_gamma_2142[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_2142[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_corr_2142[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z_2142[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z2_2142[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_vcor_2142[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_beta_2242[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_gamma_2242[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_2242[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_aoq_corr_2242[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z_2242[VFTX_MAX_HITS];
+    Float_t  FRS_vftx_z2_2242[VFTX_MAX_HITS];
+	  //Float_t  FRS_vftx_vcor_2242[VFTX_MAX_HITS];
+    // end KW	  
+	  
 			TH1* hID_x2;
 			TH1* hID_y2;
 			TH1* hID_a2;
@@ -339,7 +361,7 @@ using namespace std;
 						TH1 *hMultiHitTDC_TOF_41_21_first_hit;
 						TH1 *hMultiHitTDC_TOF_41_21_excl_first_hit;
 
-            TH1* hvftx_TRaw[32];
+            TH1* hvftx_TRaw[VFTX_MAX_HITS];
             TH1* hvftx_Hit_Pattern;
             TH1* hvftx_Sci21PosRaw;
             TH1* hvftx_Sci22PosRaw;
@@ -352,7 +374,80 @@ using namespace std;
             TH1* h1_VFTX_TOF_41_21_calib;
             TH1* h1_VFTX_TOF_41_22_calib;
             TH1* h1_VFTX_TOF_42_21_calib;
-            
+
+	
+	  // KW add
+	  // left right time differences for the first hit, all hits, and versus position from TPC
+	  TH1D          *h1_VFTX_deltaT_S21;
+	  TH1D          *h1_VFTX_deltaT_S21_mhit;
+	  TH2I          *h2_VFTX_deltaT_S21_TPC;
+	  TH1D          *h1_VFTX_deltaT_S22;
+	  TH1D          *h1_VFTX_deltaT_S22_mhit;
+	  TH2I          *h2_VFTX_deltaT_S22_TPC;
+	  
+	  TH1D          *h1_VFTX_deltaT_S41;
+	  TH1D          *h1_VFTX_deltaT_S41_mhit;
+	  TH2I          *h2_VFTX_deltaT_S41_TPC;
+	  TH1D          *h1_VFTX_deltaT_S42;
+	  TH1D          *h1_VFTX_deltaT_S42_mhit;
+	  TH2I          *h2_VFTX_deltaT_S42_TPC;
+
+	  // time of flights for the first hit, all hits, and calibrated == offset removed
+	  TH1D          *h1_VFTX_TOF_S21_S41;
+	  TH1D          *h1_VFTX_TOF_S21_S41_mhit;
+	  TH1D          *h1_VFTX_TOF_S21_S41_calib;
+	  TH1D          *h1_VFTX_TOF_S22_S41;
+	  TH1D          *h1_VFTX_TOF_S22_S41_mhit;
+	  TH1D          *h1_VFTX_TOF_S22_S41_calib;
+
+	  TH1D          *h1_VFTX_TOF_S21_S42;
+	  TH1D          *h1_VFTX_TOF_S21_S42_mhit;
+	  TH1D          *h1_VFTX_TOF_S21_S42_calib;
+	  TH1D          *h1_VFTX_TOF_S22_S42;
+	  TH1D          *h1_VFTX_TOF_S22_S42_mhit;
+	  TH1D          *h1_VFTX_TOF_S22_S42_calib;
+
+	  TH1D *h1_VFTX_beta_S21_S41;
+	  TH1D *h1_VFTX_aoq_S21_S41;
+	  TH1D *h1_VFTX_aoq_cor_S21_S41;
+	  TH1D *h1_VFTX_z_S21_S41;
+	  TH1D *h1_VFTX_z2_S21_S41;
+	  TH2I *h2_VFTX_z_aoq_S21_S41;
+	  TH2I *h2_VFTX_z_aoq_cor_S21_S41;
+	  TH2I *h2_VFTX_z2_aoq_S21_S41;
+	  TH2I *h2_VFTX_z2_aoq_cor_S21_S41;
+	  
+	  TH1D *h1_VFTX_beta_S22_S41;
+	  TH1D *h1_VFTX_aoq_S22_S41;
+	  TH1D *h1_VFTX_aoq_cor_S22_S41;
+	  TH1D *h1_VFTX_z_S22_S41;
+	  TH1D *h1_VFTX_z2_S22_S41;
+	  TH2I *h2_VFTX_z_aoq_S22_S41;
+	  TH2I *h2_VFTX_z_aoq_cor_S22_S41;
+	  TH2I *h2_VFTX_z2_aoq_S22_S41;
+	  TH2I *h2_VFTX_z2_aoq_cor_S22_S41;
+
+	  TH1D *h1_VFTX_beta_S21_S42;
+	  TH1D *h1_VFTX_aoq_S21_S42;
+	  TH1D *h1_VFTX_aoq_cor_S21_S42;
+	  TH1D *h1_VFTX_z_S21_S42;
+	  TH1D *h1_VFTX_z2_S21_S42;
+	  TH2I *h2_VFTX_z_aoq_S21_S42;
+	  TH2I *h2_VFTX_z_aoq_cor_S21_S42;
+	  TH2I *h2_VFTX_z2_aoq_S21_S42;
+	  TH2I *h2_VFTX_z2_aoq_cor_S21_S42;
+	  
+	  TH1D *h1_VFTX_beta_S22_S42;
+	  TH1D *h1_VFTX_aoq_S22_S42;
+	  TH1D *h1_VFTX_aoq_cor_S22_S42;
+	  TH1D *h1_VFTX_z_S22_S42;
+	  TH1D *h1_VFTX_z2_S22_S42;
+	  TH2I *h2_VFTX_z_aoq_S22_S42;
+	  TH2I *h2_VFTX_z_aoq_cor_S22_S42;
+	  TH2I *h2_VFTX_z2_aoq_S22_S42;
+	  TH2I *h2_VFTX_z2_aoq_cor_S22_S42;
+	  // end KW
+  
 			TH1* htimestamp;
 			TH1* hts;
 			TH1* hts2;

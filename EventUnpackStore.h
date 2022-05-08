@@ -20,6 +20,9 @@
 #include "AIDA_Event.h"
 #include "TGo4EventElement.h"
 
+// KW add
+#include "TFRSVftxSetting.h"
+// end KW
 
 #include "Configuration_Files/DESPEC_General_Setup/DESPEC_Setup_File.h"
 
@@ -52,12 +55,12 @@ public:
    Float_t fFRS_sci_l[12], fFRS_sci_r[12], fFRS_sci_e[12], fFRS_sci_tx[12], fFRS_sci_x[12];
 
 
-   Double_t fTRaw_vftx_21l[32],fTRaw_vftx_21r[32],fTRaw_vftx_22l[32],fTRaw_vftx_22r[32],fTRaw_vftx_41l[32],fTRaw_vftx_41r[32],fTRaw_vftx_42l[32],fTRaw_vftx_42r[32];
-   Float_t fToF_vftx_2141[32], fToF_vftx_2141_calib[32], fToF_vftx_2241[32], fToF_vftx_2241_calib[32];
-   
-   Float_t fbeta_vftx_2141[32] , fgamma_vftx_2141[32] , faoq_vftx_2141[32] , faoq_corr_vftx_2141[32], fz1_vftx_2141[32],fz2_vftx_2141[32] , fvcor_vftx_2141[32];
-   
-   Float_t fbeta_vftx_2241[32] , fgamma_vftx_2241[32] , faoq_vftx_2241[32] , faoq_corr_vftx_2241[32], fz1_vftx_2241[32] ,fz2_vftx_2241[32] , fvcor_vftx_2241[32];
+  //KW changed [32] to [VFTX_MAX_HITS] because, why not?
+  Double_t fTRaw_vftx_21l[VFTX_MAX_HITS],fTRaw_vftx_21r[VFTX_MAX_HITS],fTRaw_vftx_22l[VFTX_MAX_HITS],fTRaw_vftx_22r[VFTX_MAX_HITS],fTRaw_vftx_41l[VFTX_MAX_HITS],fTRaw_vftx_41r[VFTX_MAX_HITS],fTRaw_vftx_42l[VFTX_MAX_HITS],fTRaw_vftx_42r[VFTX_MAX_HITS];
+  Float_t fToF_vftx_2141[VFTX_MAX_HITS], fToF_vftx_2141_calib[VFTX_MAX_HITS], fToF_vftx_2241[VFTX_MAX_HITS], fToF_vftx_2241_calib[VFTX_MAX_HITS];
+  Float_t fbeta_vftx_2141[VFTX_MAX_HITS] , fgamma_vftx_2141[VFTX_MAX_HITS] , faoq_vftx_2141[VFTX_MAX_HITS] , faoq_corr_vftx_2141[VFTX_MAX_HITS], fz1_vftx_2141[VFTX_MAX_HITS],fz2_vftx_2141[VFTX_MAX_HITS] , fvcor_vftx_2141[VFTX_MAX_HITS]; 
+  Float_t fbeta_vftx_2241[VFTX_MAX_HITS] , fgamma_vftx_2241[VFTX_MAX_HITS] , faoq_vftx_2241[VFTX_MAX_HITS] , faoq_corr_vftx_2241[VFTX_MAX_HITS], fz1_vftx_2241[VFTX_MAX_HITS] ,fz2_vftx_2241[VFTX_MAX_HITS] , fvcor_vftx_2241[VFTX_MAX_HITS];
+  // end KW
   //  Float_t fFRS_sci_e[12];
   //  Float_t fFRS_sci_tofll2, fFRS_sci_tofll3, fFRS_sci_tof2, fFRS_sci_tofrr2, fFRS_sci_tofrr3, fFRS_sci_tof3;
     Float_t fFRS_sci_tof2;

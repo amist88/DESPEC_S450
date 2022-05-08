@@ -8,6 +8,7 @@ class AidaAnlData
 class AidaEvent
 class AidaHit
 class AidaHitPID
+class AidaPauseResume
 class AidaScaler
 class AidaUnpackData
 class CalibParameter
@@ -32,4 +33,5 @@ class TSCIParameter
 class TSIParameter
 class TTPCParameter
 class vector<AidaAnlData>
+class vector<AidaPauseResume>
 class vector<AidaScaler>
