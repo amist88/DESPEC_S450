@@ -25,7 +25,7 @@
 ///Define number of FRS gates and Polygon Points
 #define MAX_FRS_GATE 8
 ///Fix this
-#define MAX_FRS_PolyPoints 8
+#define MAX_FRS_PolyPoints 50
 
 #define FINGER_TAMEX_MODULES 4
 #define FINGER_TAMEX_HITS    512
