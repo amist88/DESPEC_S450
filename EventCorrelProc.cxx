@@ -841,7 +841,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
             for(int h=0; h<Germanium_CRYSTALS; h++){
 	      if(cInputMain->pGe_T_Aligned[g][h]>0){
                 hA_FRS_ZAoQ_GeEvsT_all->Fill((cInputMain->pGe_T_Aligned[g][h] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi]),cInputMain->pGe_EAddback[g][h]);
-                cout<<"GO 2 " << endl;
+               
 	      }
 	    }
 }
