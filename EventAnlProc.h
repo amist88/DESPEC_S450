@@ -294,17 +294,17 @@ class EventAnlProc : public TGo4EventProcessor {
 
        // From unpacker
           int    GeFired;
-          int    GeDet[Germanium_MAX_HITS];
-          int    GeCrys[Germanium_MAX_HITS];
-          double GeE[Germanium_MAX_HITS];
-          double GeE_Cal[Germanium_MAX_HITS];
-          ULong64_t GeT[Germanium_MAX_HITS];
-          ULong64_t GeCF_T[Germanium_MAX_HITS];
+          int    GeDet[Germanium_MAX_CHANNELS];
+          int    GeCrys[Germanium_MAX_CHANNELS];
+          double GeE[Germanium_MAX_CHANNELS];
+          double GeE_Cal[Germanium_MAX_CHANNELS];
+          ULong64_t GeT[Germanium_MAX_CHANNELS];
+          ULong64_t GeCF_T[Germanium_MAX_CHANNELS];
           ULong64_t RefTGe, RefCFDGe;
           Long64_t Ge_time_mins;
-          double GeEventT[Germanium_MAX_HITS];
-          bool GePileUp[Germanium_MAX_HITS];
-          bool GeOverFlow[Germanium_MAX_HITS];
+          double GeEventT[Germanium_MAX_CHANNELS];
+          bool GePileUp[Germanium_MAX_CHANNELS];
+          bool GeOverFlow[Germanium_MAX_CHANNELS];
 
 
           int Gam_mult;

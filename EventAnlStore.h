@@ -75,18 +75,18 @@ class EventAnlStore : public TGo4EventElement {
       UInt_t pFRS_scaler[64];
       UInt_t pFRS_scaler_delta[64];
 
-       Double_t pTRaw_vftx_21l[32];
-      Double_t pTRaw_vftx_21r[32];
-      Double_t pTRaw_vftx_22l[32];
-      Double_t pTRaw_vftx_22r[32];
-      Double_t pTRaw_vftx_41l[32];
-      Double_t pTRaw_vftx_41r[32];
-      Double_t pTRaw_vftx_42l[32];
-      Double_t pTRaw_vftx_42r[32];
+      Double_t pTRaw_vftx_21l[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_21r[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_22l[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_22r[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_41l[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_41r[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_42l[VFTX_MAX_HITS];
+      Double_t pTRaw_vftx_42r[VFTX_MAX_HITS];
       
-      Float_t pbeta_vftx_2141[32] , pgamma_vftx_2141[32] , paoq_vftx_2141[32] , paoq_corr_vftx_2141[32], pz1_vftx_2141[32],pz2_vftx_2141[32] , pvcor_vftx_2141[32];
+      Float_t pbeta_vftx_2141[VFTX_MAX_HITS] , pgamma_vftx_2141[VFTX_MAX_HITS] , paoq_vftx_2141[VFTX_MAX_HITS] , paoq_corr_vftx_2141[VFTX_MAX_HITS], pz1_vftx_2141[VFTX_MAX_HITS],pz2_vftx_2141[VFTX_MAX_HITS] , pvcor_vftx_2141[VFTX_MAX_HITS];
    
-      Float_t pbeta_vftx_2241[32] , pgamma_vftx_2241[32] , paoq_vftx_2241[32] , paoq_corr_vftx_2241[32], pz1_vftx_2241[32],pz2_vftx_2241[32] , pvcor_vftx_2241[32];
+      Float_t pbeta_vftx_2241[VFTX_MAX_HITS] , pgamma_vftx_2241[VFTX_MAX_HITS] , paoq_vftx_2241[VFTX_MAX_HITS] , paoq_corr_vftx_2241[VFTX_MAX_HITS], pz1_vftx_2241[VFTX_MAX_HITS],pz2_vftx_2241[VFTX_MAX_HITS] , pvcor_vftx_2241[VFTX_MAX_HITS];
 
       Bool_t pFRS_ZAoQ_pass[MAX_FRS_GATE];
       Bool_t pFRS_ZAoQ_pass_mhtdc[MAX_FRS_GATE];

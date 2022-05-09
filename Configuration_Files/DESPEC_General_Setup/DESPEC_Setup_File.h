@@ -97,7 +97,7 @@
 #define FIBRE_BOARD 3
 
 ///Germanium (including additional channel detectors (e.g.SC41 det)
-#define Germanium_TRACES_ACTIVE 1
+#define Germanium_TRACES_ACTIVE 0
 #define Germanium_TRACE_LENGTH 2000
 #define Germanium_MAX_DETS 16
 #define Germanium_CRYSTALS 7
