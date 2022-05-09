@@ -60,8 +60,8 @@ private:
     
     int num_channels_fired = 0;
 
-    int pileup_flags[16];
-    int Ge_channels[16];
+    int pileup_flags[Germanium_MAX_HITS];
+    int Ge_channels[Germanium_MAX_HITS];
     int fired_FEBEX_amount;
     void load_board_channel_file();
     void reset_fired_channels();

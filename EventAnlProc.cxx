@@ -186,7 +186,7 @@ Bool_t EventAnlProc::BuildEvent(TGo4EventElement* dest)
 
         }
         ///VFTX
-        for(int i = 0; i < 32; i++){
+        for(int i = 0; i < VFTX_MAX_HITS; i++){
         pOutput->pTRaw_vftx_21l[i] = pInput->fTRaw_vftx_21l[i];
         pOutput->pTRaw_vftx_21r[i] = pInput->fTRaw_vftx_21r[i];
         pOutput->pTRaw_vftx_22l[i] = pInput->fTRaw_vftx_22l[i];
@@ -540,7 +540,7 @@ if(Fatmult > 0){
        GeFired = -1;
        RefTGe=0;
        //Ge_WR = 0;
-       for(int g = 0; g<Germanium_MAX_HITS; g++){
+       for(int g = 0; g<Germanium_MAX_CHANNELS; g++){
           GeDet[g] = -1;
           GeCrys[g] = -1;
           GeE[g] = -1;
@@ -569,7 +569,7 @@ if(Fatmult > 0){
 
           // Maybe keep this for auto calibration program purposes
           int id = GeDet[i] * Germanium_CRYSTALS + GeCrys[i];
-	  if(id<64){
+	  if(id<Germanium_MAX_CHANNELS){
           GeE_Cal[i] = (fCal->AGe[id]* pow( GeE[i],2) + fCal->BGe[id]*  GeE[i] + fCal->CGe[id]);
 
        }
