@@ -844,11 +844,11 @@ void EventAnlProc::Make_FRS_Histos(){
     
     ///Now define the 2D Polygon PID Gated
 
-    int num_ID_x2AoQ = {MAX_FRS_GATE};
-    int num_ID_x4AoQ = {MAX_FRS_GATE};
-    int num_ID_Z_Z2 = {MAX_FRS_GATE};
-    int num_ID_Z_AoQ = {MAX_FRS_GATE};
-    int num_ID_dEdegZ1{MAX_FRS_GATE};
+//     int num_ID_x2AoQ = {MAX_FRS_GATE};
+//     int num_ID_x4AoQ = {MAX_FRS_GATE};
+//     int num_ID_Z_Z2 = {MAX_FRS_GATE};
+//     int num_ID_Z_AoQ = {MAX_FRS_GATE};
+//     int num_ID_dEdegZ1{MAX_FRS_GATE};
      Float_t init_ID_x2AoQ[MAX_FRS_GATE][MAX_FRS_PolyPoints][2];
      Float_t init_ID_x4AoQ[MAX_FRS_GATE][MAX_FRS_PolyPoints][2];
      Float_t init_ID_x2AoQ_mhtdc[MAX_FRS_GATE][MAX_FRS_PolyPoints][2];
@@ -3419,8 +3419,11 @@ TGo4PolyCond* EventAnlProc::MakePolyCond(const char* fname,
 ///-------------------------------------------------------------------------------------------------------
 void EventAnlProc::FRS_Gates(){
   Int_t i;
+  Int_t j;
+  Int_t first;
   ifstream    file;
-   string line;
+  string line;
+  stringstream ss;
 //    Float_t frs_wr_a;
 //    Float_t frs_wr_b;
 //    Float_t frs_wr_i;
@@ -3468,113 +3471,277 @@ void EventAnlProc::FRS_Gates(){
 // 
 //   file.close();
 
+  
    file.open("Configuration_Files/2D_Gates/ID_x2AoQ.txt");
-
-    for (i = 0; i < MAX_FRS_GATE; i++){
-         for (int j = 0; j < MAX_FRS_PolyPoints ; j++){
-       if(IsData(file)) file >> XX2_AoQ[i][j]>> YX2_AoQ[i][j] ;
-     // cout<<" XX2_AoQ[i][j] " << XX2_AoQ[i][j] << " YX2_AoQ[i][j] " <<YX2_AoQ[i][j] << " i " << i << " j " << j << endl;
-         }
+   
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+     if(line.empty()) break;
+     if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> XX2_AoQ[j][i] >> YX2_AoQ[j][i];
+        }
+        else cout << "Warning: problem with ID_x2AoQ.txt." << endl;
+        i++;
+     }
     }
-  file.close();
+    num_ID_x2AoQ = j;
+    file.close();   
 
 
  ///--------------------------------------------------------------------------------
   file.open("Configuration_Files/2D_Gates/ID_x4AoQ.txt");
-
-    for (i = 0; i < MAX_FRS_GATE; i++){
-        for (int j = 0; j < MAX_FRS_PolyPoints ; j++){
-       if(IsData(file)) file >>XX4_AoQ[i][j]>> YX4_AoQ[i][j] ;
+  
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+     if(line.empty()) break;
+     if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> XX4_AoQ[j][i] >> YX4_AoQ[j][i];
         }
+        else cout << "Warning: problem with ID_x4AoQ.txt." << endl;
+        i++;
+     }
     }
-  file.close();
+    num_ID_x4AoQ = j;
+    file.close();    
+  
 
   ///--------------------------------------------------------------------------------
    file.open("Configuration_Files/2D_Gates/ID_x4AoQ_mhtdc.txt");
-
-     for (i = 0; i < MAX_FRS_GATE; i++){
-         for (int j = 0; j < MAX_FRS_PolyPoints ; j++){
-        if(IsData(file)) file >>XX4_AoQ_mhtdc[i][j]>> YX4_AoQ_mhtdc[i][j] ;
-         }
+   
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+     if(line.empty()) break;  
+     if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
      }
-   file.close();
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> XX4_AoQ_mhtdc[j][i] >> YX4_AoQ_mhtdc[j][i];
+        }
+        else cout << "Warning: problem with ID_x4AoQ_mhtdc." << endl;
+        i++;
+     }
+    }
+    num_ID_x4AoQ_mhtdc = j;
+    file.close();     
+   
 
    ///--------------------------------------------------------------------------------
     file.open("Configuration_Files/2D_Gates/ID_x2AoQ_mhtdc.txt");
-
-      for (i = 0; i < MAX_FRS_GATE; i++){
-          for (int j = 0; j < MAX_FRS_PolyPoints ; j++){
-         if(IsData(file)) file >>XX2_AoQ_mhtdc[i][j]>> YX2_AoQ_mhtdc[i][j] ;
-          }
-      }
-    file.close();
+    
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+      if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> XX2_AoQ_mhtdc[j][i] >> YX2_AoQ_mhtdc[j][i];
+        }
+        else cout << "Warning: problem with ID_x2AoQ_mhtdc.txt." << endl;
+        i++;
+     }
+    }
+    num_ID_x2AoQ_mhtdc = j;
+    file.close(); 
 
  ///--------------------------------------------------------------------------------
 
   file.open("Configuration_Files/2D_Gates/ID_Z_Z2.txt");
- for (i = 0; i < MAX_FRS_GATE; i++){
-    for (int j = 0; j < MAX_FRS_PolyPoints ; j++){
-       if(IsData(file)) file >> X_ZZ2[i][j]>> Y_ZZ2[i][j] ;
+  
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+      if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> X_ZZ2[j][i] >> Y_ZZ2[j][i];
+        }
+        else cout << "Warning: problem with ID_Z_Z2.txt." << endl;
+        i++;
+     }
+    }
+    num_ID_Z_Z2 = j;
+    file.close();   
+  
 
-    }
-    }
-  file.close();
   ///--------------------------------------------------------------------------------
 
   file.open("Configuration_Files/2D_Gates/ID_Z_Z2_mhtdc.txt");
- for (i = 0; i < MAX_FRS_GATE; i++){
-    for (int j = 0; j < MAX_FRS_PolyPoints ; j++){
-       if(IsData(file)) file >> X_ZZ2_mhtdc[i][j]>> Y_ZZ2_mhtdc[i][j] ;
-
+  
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+      if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> X_ZZ2_mhtdc[j][i] >> Y_ZZ2_mhtdc[j][i];
+        }
+        else cout << "Warning: problem with ID_Z_Z2_mhtdc.txt." << endl;
+        i++;
+     }
     }
-    }
-  file.close();
+    num_ID_Z_Z2_mhtdc = j;
+    file.close();  
 
 
  ///--------------------------------------------------------------------------------
-      file.open("Configuration_Files/2D_Gates/ID_ZvsAoQ.txt");
+    file.open("Configuration_Files/2D_Gates/ID_ZvsAoQ.txt");
 
-    for (i = 0; i < MAX_FRS_GATE; i++){
-        for(int j=0; j<MAX_FRS_PolyPoints; j++){
-       if(IsData(file)) file >> X_ZAoQ[i][j]>> Y_ZAoQ[i][j] ;
-
-     //  cout<<"X_ZAoQ[i][j] " <<X_ZAoQ[i][j] <<" Y_ZAoQ[i][j] " <<Y_ZAoQ[i][j] << " i " << i << endl;
-        }
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+       if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+       }
+       if(line.rfind("#",0) != 0){
+          first = 1;
+          ss.clear();
+          ss << line;
+          if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+             ss >> X_ZAoQ[j][i] >> Y_ZAoQ[j][i];
+          }
+        else cout << "Warning: problem with ID_ZvsAoQ.txt." << endl;
+        i++;
+     }
     }
-  file.close();
+    num_ID_Z_AoQ = j;
+    file.close();
+
 
  ///------------------------------------Elif--------------------------------------------
-      file.open("Configuration_Files/2D_Gates/ID_ZvsAoQ_mhtdc.txt");
-
-    for (i = 0; i < MAX_FRS_GATE; i++){
-        for(int j=0; j<MAX_FRS_PolyPoints; j++){
-       if(IsData(file)) file >> X_ZAoQ_mhtdc[i][j]>> Y_ZAoQ_mhtdc[i][j] ;
-
-      //cout<<"X_ZAoQ_mhtdc[i][j] " <<X_ZAoQ_mhtdc[i][j] <<" Y_ZAoQ_mhtdc[i][j] " <<Y_ZAoQ_mhtdc[i][j] << " i " << i << endl;
+    file.open("Configuration_Files/2D_Gates/ID_ZvsAoQ_mhtdc.txt");
+      
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+      if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> X_ZAoQ_mhtdc[j][i] >> Y_ZAoQ_mhtdc[j][i];
         }
+        else cout << "Warning: problem with ID_ZvsAoQ_mhtdc.txt." << endl;
+        i++;
+     }
     }
-  file.close();
+    num_ID_Z_AoQ_mhtdc = j;
+    file.close();      
+
   
   ///--------------------------------------------------------------------------------
       file.open("Configuration_Files/2D_Gates/ID_dEdegZ1_mhtdc.txt");
-
-    for (i = 0; i < MAX_FRS_GATE; i++){
-        for(int j=0; j<MAX_FRS_PolyPoints; j++){
-       if(IsData(file)) file >> X_dEdeg_mhtdc[i][j]>> Y_dEdeg_mhtdc[i][j] ;
+      
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+      if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> X_dEdeg_mhtdc[j][i] >> Y_dEdeg_mhtdc[j][i];
         }
+        else cout << "Warning: problem with ID_dEdegZ1_mhtdc.txt." << endl;
+        i++;
+     }
     }
-  file.close();
-  
+    num_ID_dEdegZ1_mhtdc = j;
+    file.close();      
+      
+      
 
   ///--------------------------------------------------------------------------------
       file.open("Configuration_Files/2D_Gates/ID_dEdegZ1.txt");
+      
+    first = 0;
+    i=0;
+    j=0; // j is number of gates in the file
+    ss.clear();
+    while (getline (file,line)){
+      if(line.empty()) break;
+       if(line.rfind("#",0) == 0){
+         i = 0; if(first>0)j++;
+     }
+     if(line.rfind("#",0) != 0){
+        first = 1;
+        ss.clear();
+        ss << line;
+        if(j<MAX_FRS_GATE && i<MAX_FRS_PolyPoints){
+           ss >> X_dEdeg[j][i] >> Y_dEdeg[j][i];
+        }
+        else cout << "Warning: problem with ID_dEdegZ1.txt." << endl;
+        i++;
+     }
+    }
+    num_ID_dEdegZ1 = j;
+    file.close();  
 
-    for (i = 0; i < MAX_FRS_GATE; i++){
-        for(int j=0; j<MAX_FRS_PolyPoints; j++){
-       if(IsData(file)) file >> X_dEdeg[i][j]>> Y_dEdeg[i][j] ;
-    }
-    }
-  file.close();
 }
 ///-------------------------------------------------------------------------------------------------------
  int EventAnlProc::IsData(ifstream &f) {

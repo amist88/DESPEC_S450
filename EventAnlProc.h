@@ -195,7 +195,16 @@ class EventAnlProc : public TGo4EventProcessor {
       bool FRS_spill;
       Long64_t FRS_time_mins;
       Float_t  FRS_AoQ_mhtdc[10], FRS_AoQ_corr_mhtdc[10] , FRS_z_mhtdc[10], FRS_z2_mhtdc[10];
-
+      int num_ID_Z_AoQ = 0;
+      int num_ID_x2AoQ = 0;
+      int num_ID_x4AoQ = 0;
+      int num_ID_Z_Z2 = 0;
+      int num_ID_dEdegZ1 = 0;
+      int num_ID_x4AoQ_mhtdc = 0;
+      int num_ID_x2AoQ_mhtdc = 0;
+      int num_ID_Z_Z2_mhtdc = 0;
+      int num_ID_Z_AoQ_mhtdc = 0;
+      int num_ID_dEdegZ1_mhtdc = 0;
       //Float_t  FRS_z_shifted, FRS_z2_shifted;
       int Z_Shift_array;
       Float_t FRS_WR_a[200];
