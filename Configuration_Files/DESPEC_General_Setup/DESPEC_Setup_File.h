@@ -22,6 +22,9 @@
 ///Use High charge state gate for Correlations
 //#define USE_dEdeg_Z1_GATE 0
 
+// number of multi hits to loop through
+#define MAX_MHTDC_HITS 10
+
 ///Define number of FRS gates and Polygon Points
 #define MAX_FRS_GATE 8
 ///Fix this

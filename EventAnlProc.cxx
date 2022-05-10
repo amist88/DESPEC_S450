@@ -1434,9 +1434,9 @@ for (int i=0; i<10 ; i++) {
         ///MHTDC PID gates
         for(int g=0; g<MAX_FRS_GATE; g++){
              ///GATE: AoQ vs Z
-               for (int i=0; i<10; i++){
+               for (int i=0; i<MAX_MHTDC_HITS; i++){
             if(cID_Z_AoQ_mhtdc[g]->Test(FRS_AoQ_mhtdc[i], FRS_z_mhtdc[i])==true){
-                pOutput->pFRS_ZAoQ_pass_mhtdc[g] =true;
+                pOutput->pFRS_ZAoQ_pass_mhtdc[i][g] =true;
 
                 hID_x2AoQ_Z1AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x2);
                 hID_x4AoQ_Z1AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x4);
@@ -1449,22 +1449,20 @@ for (int i=0; i<10 ; i++) {
         }
         
           ///GATE: Z1 vs Z2
-     
-
                 if(cID_Z_Z2gate_mhtdc[g]->Test(FRS_z_mhtdc[i], FRS_z2_mhtdc[i])==true)
                 {
-                 pOutput->pFRS_Z_Z2_pass_mhtdc[g] = true;
+                 pOutput->pFRS_Z_Z2_pass_mhtdc[i][g] = true;
              
                  hID_dEdegZ1_Z1Z2gate_mhtdc[g]->Fill(FRS_z_mhtdc[i],FRS_dEdeg_mhtdc[i]);
                  hID_dEdegoQ_Z1_Z1Z2gate_mhtdc[g]->Fill(FRS_z_mhtdc[i],FRS_dEdegoQ_mhtdc[i]);
                  hID_Z1_Z2gate_mhtdc[g]->Fill(FRS_z_mhtdc[i],FRS_z2_mhtdc[i]);
-               if(FRS_ID_a2!=0) hID_a2_Z1Z2gate_mhtdc[g] ->Fill(FRS_ID_a2);
-               if(FRS_ID_a4!=0) hID_a4_Z1Z2gate_mhtdc[g] ->Fill(FRS_ID_a4);
+                    if(FRS_ID_a2!=0) hID_a2_Z1Z2gate_mhtdc[g] ->Fill(FRS_ID_a2);
+                    if(FRS_ID_a4!=0) hID_a4_Z1Z2gate_mhtdc[g] ->Fill(FRS_ID_a4);
                
                 //X2 AoQ gated on Z1 Z2
                  if(FRS_ID_x2 > -100 && FRS_ID_x2<100){
 
-                hID_x2AoQ_Z1Z2gate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x2);
+                    hID_x2AoQ_Z1Z2gate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x2);
 
                 }
                   
@@ -1479,7 +1477,7 @@ for (int i=0; i<10 ; i++) {
                 
                    /// ID x2 vs AoQ
                 if(cID_x2AoQ_mhtdc[g]->Test(FRS_AoQ_mhtdc[i], FRS_ID_x2)==true){
-                     pOutput->pFRS_x2AoQ_pass_mhtdc[g] = true;
+                     pOutput->pFRS_x2AoQ_pass_mhtdc[i][g] = true;
                      hID_x2AoQ_x2AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x2);
                      hID_Z1Z2_x2AoQgate[g]->Fill(FRS_z_mhtdc[i], FRS_z2_mhtdc[i]);
                         ///The selected Z1 Z2 gate for this part can be found in the Correlations_config.dat file
@@ -1501,7 +1499,7 @@ for (int i=0; i<10 ; i++) {
 
               /// ID x4 vs AoQ
                 if(cID_x4AoQ_mhtdc[g]->Test(FRS_AoQ_mhtdc[i], FRS_ID_x4)==true){
-                     pOutput->pFRS_x4AoQ_pass_mhtdc[g] = true;
+                     pOutput->pFRS_x4AoQ_pass_mhtdc[i][g] = true;
                      hID_x4AoQ_x4AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x4);
                      hID_Z1Z2_x4AoQgate[g]->Fill(FRS_z_mhtdc[i], FRS_z2_mhtdc[i]);
                       ///The selected Z1 Z2 gate for this part can be found in the Correlations_config.dat file
@@ -1523,7 +1521,7 @@ for (int i=0; i<10 ; i++) {
         
                     ///GATE: Energy loss S2 vs Z (Charge states)
       if(cID_dEdegZ1_mhtdc[g]->Test(FRS_z_mhtdc[i],FRS_dEdeg)==true){ // dEdeg_vs_Z check
-          pOutput->pFRS_dEdegZ1_pass_mhtdc[g]=true;
+          pOutput->pFRS_dEdegZ1_pass_mhtdc[i][g]=true;
           hID_dEdegZ1_dEdegZ1Gated_mhtdc[g]->Fill(FRS_z_mhtdc[i],FRS_dEdeg);
           hID_Z1AoQ_dEdegZgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_z_mhtdc[i]);
           hID_Z1Z2_dEdegZgate_mhtdc[g]->Fill(FRS_z_mhtdc[i], FRS_z2_mhtdc[i]);

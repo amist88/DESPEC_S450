@@ -189,12 +189,12 @@ class EventAnlProc : public TGo4EventProcessor {
       Float_t  FRS_dEdeg, FRS_dEdegoQ;
 //    Float_t  FRS_AoQ_mhtdc, FRS_AoQ_corr_mhtdc;
 //      Float_t  FRS_z_mhtdc, FRS_z2_mhtdc;
-      Float_t  FRS_dEdeg_mhtdc[10], FRS_dEdegoQ_mhtdc[10];
-      Float_t  FRS_beta_mhtdc[10];
+      Float_t  FRS_dEdeg_mhtdc[MAX_MHTDC_HITS], FRS_dEdegoQ_mhtdc[MAX_MHTDC_HITS];
+      Float_t  FRS_beta_mhtdc[MAX_MHTDC_HITS];
       Float_t  FRS_timestamp, FRS_ts, FRS_ts2;
       bool FRS_spill;
       Long64_t FRS_time_mins;
-      Float_t  FRS_AoQ_mhtdc[10], FRS_AoQ_corr_mhtdc[10] , FRS_z_mhtdc[10], FRS_z2_mhtdc[10];
+      Float_t  FRS_AoQ_mhtdc[MAX_MHTDC_HITS], FRS_AoQ_corr_mhtdc[MAX_MHTDC_HITS] , FRS_z_mhtdc[MAX_MHTDC_HITS], FRS_z2_mhtdc[MAX_MHTDC_HITS];
       int num_ID_Z_AoQ = 0;
       int num_ID_x2AoQ = 0;
       int num_ID_x4AoQ = 0;

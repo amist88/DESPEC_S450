@@ -58,12 +58,12 @@ class EventAnlStore : public TGo4EventElement {
       Float_t pFRS_beta;
       Float_t pFRS_Music_dE[2];
 
-      Float_t pFRS_AoQ_mhtdc[10];
-      Float_t pFRS_z_mhtdc[10];      
-      Float_t pFRS_z2_mhtdc[10];
-      Float_t pFRS_beta_mhtdc[10];
-      Float_t pFRS_dEdeg_mhtdc[10];
-      Float_t pFRS_dEdegoQ_mhtdc[10];
+      Float_t pFRS_AoQ_mhtdc[MAX_MHTDC_HITS];
+      Float_t pFRS_z_mhtdc[MAX_MHTDC_HITS];      
+      Float_t pFRS_z2_mhtdc[MAX_MHTDC_HITS];
+      Float_t pFRS_beta_mhtdc[MAX_MHTDC_HITS];
+      Float_t pFRS_dEdeg_mhtdc[MAX_MHTDC_HITS];
+      Float_t pFRS_dEdegoQ_mhtdc[MAX_MHTDC_HITS];
 
       Float_t pFRS_sci_l[12];
       Float_t pFRS_sci_r[12];
@@ -89,15 +89,16 @@ class EventAnlStore : public TGo4EventElement {
       Float_t pbeta_vftx_2241[VFTX_MAX_HITS] , pgamma_vftx_2241[VFTX_MAX_HITS] , paoq_vftx_2241[VFTX_MAX_HITS] , paoq_corr_vftx_2241[VFTX_MAX_HITS], pz1_vftx_2241[VFTX_MAX_HITS],pz2_vftx_2241[VFTX_MAX_HITS] , pvcor_vftx_2241[VFTX_MAX_HITS];
 
       Bool_t pFRS_ZAoQ_pass[MAX_FRS_GATE];
-      Bool_t pFRS_ZAoQ_pass_mhtdc[MAX_FRS_GATE];
+      Bool_t pFRS_ZAoQ_pass_mhtdc[MAX_MHTDC_HITS][MAX_FRS_GATE];
       Bool_t pFRS_x2AoQ_pass[MAX_FRS_GATE];
-      Bool_t pFRS_x2AoQ_pass_mhtdc[MAX_FRS_GATE];
+      Bool_t pFRS_x2AoQ_pass_mhtdc[MAX_MHTDC_HITS][MAX_FRS_GATE];
       Bool_t pFRS_x4AoQ_pass[MAX_FRS_GATE];
-      Bool_t pFRS_x4AoQ_pass_mhtdc[MAX_FRS_GATE];
+      Bool_t pFRS_x4AoQ_pass_mhtdc[MAX_MHTDC_HITS][MAX_FRS_GATE];
       Bool_t pFRS_Z_Z2_pass[MAX_FRS_GATE];
+      Bool_t pFRS_Z_Z2_pass_mhtdc[MAX_MHTDC_HITS][MAX_FRS_GATE];
       Bool_t pFRS_dEdegZ1_pass[MAX_FRS_GATE];
-      Bool_t pFRS_dEdegZ1_pass_mhtdc[MAX_FRS_GATE];
-      Bool_t pFRS_Z_Z2_pass_mhtdc[MAX_FRS_GATE];
+      Bool_t pFRS_dEdegZ1_pass_mhtdc[MAX_MHTDC_HITS][MAX_FRS_GATE];
+     
 
       //Helena
       Long64_t pt_lastSC41 = 0;

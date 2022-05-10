@@ -501,7 +501,7 @@ Bool_t EventUnpackProc::BuildEvent(TGo4EventElement* dest)
         fOutput->fFRS_dEdeg = RAW->get_FRS_dEdeg();
         fOutput->fFRS_dEdegoQ = RAW->get_FRS_dEdegoQ();
         ///Using MHTDC
-for (int i=0; i<10; i++){
+for (int i=0; i<MAX_MHTDC_HITS; i++){
   
 	
 	if(RAW->get_FRS_id_mhtdc_aoq(i)>0)   fOutput->fFRS_AoQ_mhtdc[i] = RAW->get_FRS_id_mhtdc_aoq(i);
@@ -2639,7 +2639,7 @@ void EventUnpackProc::Fill_FRS_Histos(int PrcID, int Type, int SubType){
 
      
 
-    for(int i=0; i<10;i++){
+    for(int i=0; i<MAX_MHTDC_HITS;i++){
       if(AoQ_mhtdc[i]!=0){
 
 	if(ID_tof4121_mhtdc[i]!=0) hMultiHitTDC_TOF_41_21->Fill(ID_tof4121_mhtdc[i]);
