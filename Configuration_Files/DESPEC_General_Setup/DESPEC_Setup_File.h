@@ -75,18 +75,18 @@
 ///bPlast Additional signals Module Num
 #define bPLASTIC_ADDITIONAL_CH_MOD 3
 ///bPlast Additional signals Channel Num
-#define bPLASTIC_FATTAMEX 5
-#define bPLASTIC_FATVME 6
-#define SC41L_bPLASTIC 3
-#define SC41R_bPLASTIC 4
+#define bPLASTIC_FATTAMEX 9
+#define bPLASTIC_FATVME 8
+#define SC41L_bPLASTIC 7
+#define SC41R_bPLASTIC 6
 #define bPLASTIC_OR_UP_DOWN 13
-#define bPLASTIC_UP_COIN 12
-#define bPLASTIC_DOWN_COIN 11
-#define bPLASTIC_Ge_TRIGGER 11
+#define bPLASTIC_UP_COIN 1
+#define bPLASTIC_DOWN_COIN 3
+#define bPLASTIC_Ge_TRIGGER 11 //accepted trigger for S450
 //Add ge trigger
 
 ///bPlast Time Machine Channels
-#define bPlastTimeMachineCh1 7
+#define bPlastTimeMachineCh1 9
 #define bPlastTimeMachineCh2 8
 ///bPlastic reference channels
 #define bPlastRefCh_Det1 0
@@ -106,15 +106,15 @@
 #define Germanium_FEBEX_MODULES 4
 #define Germanium_MAX_CHANNELS 64
 ///Define here where SC41 is plugged into FEBEX ("Detector" and "crystal" for mapping purposes) Use the germanium allocation file for mapping of this
-#define Germanium_SC41_Det 15
+#define Germanium_SC41_Det 11
 #define Germanium_SC41L_Crystal 0
 #define Germanium_SC41R_Crystal 1
 #define Germanium_SC41_Det_Digi 15
 #define Germanium_SC41L_Crystal_Digi 2
 #define Germanium_SC41R_Crystal_Digi 2
-#define Germanium_TimeMachine_Det 15
-#define Germanium_TimeMachineCh1 0
-#define Germanium_TimeMachineCh2 1
+#define Germanium_TimeMachine_Det 11
+#define Germanium_TimeMachineCh1 1
+#define Germanium_TimeMachineCh2 2
 
 #define AIDA_MAX_HITS 13000
 ///Max hits for the beam monitor

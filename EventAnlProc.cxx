@@ -2543,6 +2543,8 @@ AidaHit EventAnlProc::ClusterPairToHit(std::pair<AidaCluster, AidaCluster> const
            
                        if(ToT_bplas_Slow[a][b][j]>0) {
                         hbPlas_ToT_det_Slow[a][b] ->Fill(ToT_bplas_Slow[a][b][j]);   
+                    //    cout<<"ToT_bplas_Slow[a][b][j] " <<ToT_bplas_Slow[a][b][j] << endl;
+                        
                         hbPlas_ToT_Sum_Slow[a]->Fill(ToT_bplas_Slow[a][b][j]);   
             if(pOutput-> pbPlas_Fast_ToTCalib[1][24][j]>0 && a==1 && b==24)hbPlas_ToT_Slow_vs_Fast_Det1->Fill(ToT_bplas_Slow[1][24][j],pOutput-> pbPlas_Fast_ToTCalib[1][24][j]);
             
