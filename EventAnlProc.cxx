@@ -571,6 +571,7 @@ if(Fatmult > 0){
           int id = GeDet[i] * Germanium_CRYSTALS + GeCrys[i];
 	  if(id<Germanium_MAX_CHANNELS){
           GeE_Cal[i] = (fCal->AGe[id]* pow( GeE[i],2) + fCal->BGe[id]*  GeE[i] + fCal->CGe[id]);
+        //  printf("detIDGe %02d  %lE %lE %lE   calculated Energy %lf\n", id, fCal->AGe[id], fCal->BGe[id], fCal->CGe[id], GeE_Cal[i]  );
 
        }
             // int id_Ge = det * Germanium_CRYSTALS +  crys;
@@ -3189,7 +3190,7 @@ if(Fatmult > 0){
             if(Ge_time_mins>0 && GeE_Cal[i]>0)  hGe_Energy_GainMonitor->Fill(Ge_time_mins,GeE_Cal[i]);
 
 
-
+          // printf("   it is det%02d %lf\n", det, GeE_Cal[i]);
            hGe_Chan_E[det][crys]->Fill(GeE_Cal[i]);
            hGe_Chan_E_halfkev[det][crys]->Fill(GeE_Cal[i]);
 
