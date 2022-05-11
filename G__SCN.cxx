@@ -34,65 +34,65 @@
 
 #include "TDataMember.h"
 
+// The generated code does not explicitly qualifies STL entities
+namespace std {} using namespace std;
+
 // Header files passed as explicit arguments
-#include "./QDC_751.h"
 #include "./AIDA_Headers.h"
 #include "./FEBEX.h"
-#include "./FATIMA_TAMEX_Calibrator.h"
+#include "./FATIMA_tofCorr.h"
+#include "./libGo4UserAnalysisa822772aa1_dictContent.h"
 #include "./TAMEX.h"
+#include "./FRS_Detector_System.h"
+#include "./AIDA_Decay_Event_Store.h"
 #include "./DESPECAnalysis.h"
-#include "./AIDA_Processor.h"
-#include "./libGo4UserAnalysis1aac8ecd09_dictUmbrella.h"
 #include "./FATIMA_Energy_Calibration.h"
-#include "./TFRSParameter.h"
-#include "./libGo4UserAnalysiscb0f1bdd18_dictContent.h"
-#include "./libGo4UserAnalysisf7b5a996fe_dictUmbrella.h"
+#include "./libGo4UserAnalysis1aac8ecd09_dictUmbrella.h"
 #include "./WR_Structure.h"
+#include "./EventCorrelStore.h"
+#include "./libGo4UserAnalysiscb0f1bdd18_dictContent.h"
+#include "./Raw_Event.h"
+#include "./CorrelParameter.h"
 #include "./Germanium_Detector_System.h"
 #include "./libGo4UserAnalysis9012ded992_dictContent.h"
 #include "./TFRSVftxSetting.h"
-#include "./CalibParameter.h"
-#include "./EventCorrelProc.h"
+#include "./TimingCube.h"
 #include "./Beam_Monitor_Detector_System.h"
-#include "./FRS_Detector_System.h"
 #include "./libGo4UserAnalysisef14fc77f0_dictUmbrella.h"
-#include "./libGo4UserAnalysis5c2b3aa4a5_dictUmbrella.h"
 #include "./FINGER_Calibrator.h"
 #include "./White_Rabbit.h"
-#include "./FATIMA_Time_Calibration.h"
-#include "./EventCorrelStore.h"
+#include "./EventUnpackStore.h"
+#include "./EventAnlStore.h"
 #include "./FINGER_Detector_System.h"
 #include "./AIDA_Detector_System.h"
-#include "./AIDA_Decay_Event_Store.h"
-#include "./FATIMA_Detector_System.h"
-#include "./AIDA_Event.h"
-#include "./libGo4UserAnalysisa822772aa1_dictContent.h"
 #include "./EventAnlProc.h"
-#include "./EventAnlStore.h"
 #include "./PLASTIC_TAMEX_Detector_System.h"
+#include "./CalibParameter.h"
 #include "./Timestamp.h"
-#include "./EventUnpackProc.h"
+#include "./QDC_751.h"
+#include "./PLASTIC_TAMEX_Calibrator.h"
 #include "./TDC_1290.h"
-#include "./libGo4UserAnalysis61644ec842_dictContent.h"
-#include "./CorrelParameter.h"
-#include "./EventUnpackStore.h"
-#include "./Germanium_Time_Calibration.h"
+#include "./TFRSParameter.h"
+#include "./libGo4UserAnalysisf7b5a996fe_dictUmbrella.h"
+#include "./FATIMA_TAMEX_Calibrator.h"
+#include "./AIDA_Event.h"
+#include "./FATIMA_Detector_System.h"
+#include "./EventCorrelProc.h"
+#include "./FATIMA_Time_Calibration.h"
 #include "./PLASTIC_TWINPEAKS_Detector_System.h"
+#include "./AIDA_Data_Types.h"
 #include "./Germanium_Energy_Calibration.h"
 #include "./QDC.h"
+#include "./AIDA_Processor.h"
 #include "./FATIMA_TAMEX_Detector_System.h"
-#include "./TimingCube.h"
-#include "./PLASTIC_TAMEX_Calibrator.h"
+#include "./Germanium_Time_Calibration.h"
 #include "./TAidaConfiguration.h"
+#include "./libGo4UserAnalysis61644ec842_dictContent.h"
 #include "./EventUnpackFact.h"
-#include "./Raw_Event.h"
-#include "./FATIMA_tofCorr.h"
-#include "./AIDA_Data_Types.h"
+#include "./libGo4UserAnalysis5c2b3aa4a5_dictUmbrella.h"
+#include "./EventUnpackProc.h"
 
 // Header files passed via #pragma extra_include
-
-// The generated code does not explicitly qualify STL entities
-namespace std {} using namespace std;
 
 namespace ROOT {
    static void *new_AidaEvent(void *p = 0);
@@ -716,51 +716,6 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
-   static TClass *FRS_Detector_System_Dictionary();
-   static void FRS_Detector_System_TClassManip(TClass*);
-   static void *new_FRS_Detector_System(void *p = 0);
-   static void *newArray_FRS_Detector_System(Long_t size, void *p);
-   static void delete_FRS_Detector_System(void *p);
-   static void deleteArray_FRS_Detector_System(void *p);
-   static void destruct_FRS_Detector_System(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::FRS_Detector_System*)
-   {
-      ::FRS_Detector_System *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::FRS_Detector_System));
-      static ::ROOT::TGenericClassInfo 
-         instance("FRS_Detector_System", "FRS_Detector_System.h", 93,
-                  typeid(::FRS_Detector_System), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &FRS_Detector_System_Dictionary, isa_proxy, 4,
-                  sizeof(::FRS_Detector_System) );
-      instance.SetNew(&new_FRS_Detector_System);
-      instance.SetNewArray(&newArray_FRS_Detector_System);
-      instance.SetDelete(&delete_FRS_Detector_System);
-      instance.SetDeleteArray(&deleteArray_FRS_Detector_System);
-      instance.SetDestructor(&destruct_FRS_Detector_System);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::FRS_Detector_System*)
-   {
-      return GenerateInitInstanceLocal((::FRS_Detector_System*)0);
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::FRS_Detector_System*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
-
-   // Dictionary for non-ClassDef classes
-   static TClass *FRS_Detector_System_Dictionary() {
-      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::FRS_Detector_System*)0x0)->GetClass();
-      FRS_Detector_System_TClassManip(theClass);
-   return theClass;
-   }
-
-   static void FRS_Detector_System_TClassManip(TClass* ){
-   }
-
-} // end of namespace ROOT
-
-namespace ROOT {
    static void *new_EventUnpackProc(void *p = 0);
    static void *newArray_EventUnpackProc(Long_t size, void *p);
    static void delete_EventUnpackProc(void *p);
@@ -857,6 +812,51 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
+   static TClass *FRS_Detector_System_Dictionary();
+   static void FRS_Detector_System_TClassManip(TClass*);
+   static void *new_FRS_Detector_System(void *p = 0);
+   static void *newArray_FRS_Detector_System(Long_t size, void *p);
+   static void delete_FRS_Detector_System(void *p);
+   static void deleteArray_FRS_Detector_System(void *p);
+   static void destruct_FRS_Detector_System(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::FRS_Detector_System*)
+   {
+      ::FRS_Detector_System *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::FRS_Detector_System));
+      static ::ROOT::TGenericClassInfo 
+         instance("FRS_Detector_System", "FRS_Detector_System.h", 93,
+                  typeid(::FRS_Detector_System), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &FRS_Detector_System_Dictionary, isa_proxy, 4,
+                  sizeof(::FRS_Detector_System) );
+      instance.SetNew(&new_FRS_Detector_System);
+      instance.SetNewArray(&newArray_FRS_Detector_System);
+      instance.SetDelete(&delete_FRS_Detector_System);
+      instance.SetDeleteArray(&deleteArray_FRS_Detector_System);
+      instance.SetDestructor(&destruct_FRS_Detector_System);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::FRS_Detector_System*)
+   {
+      return GenerateInitInstanceLocal((::FRS_Detector_System*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::FRS_Detector_System*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *FRS_Detector_System_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::FRS_Detector_System*)0x0)->GetClass();
+      FRS_Detector_System_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void FRS_Detector_System_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
    static TClass *AidaAnlData_Dictionary();
    static void AidaAnlData_TClassManip(TClass*);
    static void *new_AidaAnlData(void *p = 0);
@@ -934,70 +934,6 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
-   static void *new_AidaHitPID(void *p = 0);
-   static void *newArray_AidaHitPID(Long_t size, void *p);
-   static void delete_AidaHitPID(void *p);
-   static void deleteArray_AidaHitPID(void *p);
-   static void destruct_AidaHitPID(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::AidaHitPID*)
-   {
-      ::AidaHitPID *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::AidaHitPID >(0);
-      static ::ROOT::TGenericClassInfo 
-         instance("AidaHitPID", ::AidaHitPID::Class_Version(), "EventCorrelProc.h", 45,
-                  typeid(::AidaHitPID), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::AidaHitPID::Dictionary, isa_proxy, 4,
-                  sizeof(::AidaHitPID) );
-      instance.SetNew(&new_AidaHitPID);
-      instance.SetNewArray(&newArray_AidaHitPID);
-      instance.SetDelete(&delete_AidaHitPID);
-      instance.SetDeleteArray(&deleteArray_AidaHitPID);
-      instance.SetDestructor(&destruct_AidaHitPID);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::AidaHitPID*)
-   {
-      return GenerateInitInstanceLocal((::AidaHitPID*)0);
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::AidaHitPID*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
-   static void *new_EventCorrelProc(void *p = 0);
-   static void *newArray_EventCorrelProc(Long_t size, void *p);
-   static void delete_EventCorrelProc(void *p);
-   static void deleteArray_EventCorrelProc(void *p);
-   static void destruct_EventCorrelProc(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::EventCorrelProc*)
-   {
-      ::EventCorrelProc *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::EventCorrelProc >(0);
-      static ::ROOT::TGenericClassInfo 
-         instance("EventCorrelProc", ::EventCorrelProc::Class_Version(), "EventCorrelProc.h", 94,
-                  typeid(::EventCorrelProc), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::EventCorrelProc::Dictionary, isa_proxy, 4,
-                  sizeof(::EventCorrelProc) );
-      instance.SetNew(&new_EventCorrelProc);
-      instance.SetNewArray(&newArray_EventCorrelProc);
-      instance.SetDelete(&delete_EventCorrelProc);
-      instance.SetDeleteArray(&deleteArray_EventCorrelProc);
-      instance.SetDestructor(&destruct_EventCorrelProc);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::EventCorrelProc*)
-   {
-      return GenerateInitInstanceLocal((::EventCorrelProc*)0);
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
    static void *new_EventCorrelStore(void *p = 0);
    static void *newArray_EventCorrelStore(Long_t size, void *p);
    static void delete_EventCorrelStore(void *p);
@@ -1059,6 +995,70 @@ namespace ROOT {
    }
    // Static variable to force the class initialization
    static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::EventAnlProc*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void *new_AidaHitPID(void *p = 0);
+   static void *newArray_AidaHitPID(Long_t size, void *p);
+   static void delete_AidaHitPID(void *p);
+   static void deleteArray_AidaHitPID(void *p);
+   static void destruct_AidaHitPID(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::AidaHitPID*)
+   {
+      ::AidaHitPID *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::AidaHitPID >(0);
+      static ::ROOT::TGenericClassInfo 
+         instance("AidaHitPID", ::AidaHitPID::Class_Version(), "EventCorrelProc.h", 45,
+                  typeid(::AidaHitPID), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::AidaHitPID::Dictionary, isa_proxy, 4,
+                  sizeof(::AidaHitPID) );
+      instance.SetNew(&new_AidaHitPID);
+      instance.SetNewArray(&newArray_AidaHitPID);
+      instance.SetDelete(&delete_AidaHitPID);
+      instance.SetDeleteArray(&deleteArray_AidaHitPID);
+      instance.SetDestructor(&destruct_AidaHitPID);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::AidaHitPID*)
+   {
+      return GenerateInitInstanceLocal((::AidaHitPID*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::AidaHitPID*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void *new_EventCorrelProc(void *p = 0);
+   static void *newArray_EventCorrelProc(Long_t size, void *p);
+   static void delete_EventCorrelProc(void *p);
+   static void deleteArray_EventCorrelProc(void *p);
+   static void destruct_EventCorrelProc(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::EventCorrelProc*)
+   {
+      ::EventCorrelProc *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::EventCorrelProc >(0);
+      static ::ROOT::TGenericClassInfo 
+         instance("EventCorrelProc", ::EventCorrelProc::Class_Version(), "EventCorrelProc.h", 94,
+                  typeid(::EventCorrelProc), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::EventCorrelProc::Dictionary, isa_proxy, 4,
+                  sizeof(::EventCorrelProc) );
+      instance.SetNew(&new_EventCorrelProc);
+      instance.SetNewArray(&newArray_EventCorrelProc);
+      instance.SetDelete(&delete_EventCorrelProc);
+      instance.SetDeleteArray(&deleteArray_EventCorrelProc);
+      instance.SetDestructor(&destruct_EventCorrelProc);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::EventCorrelProc*)
+   {
+      return GenerateInitInstanceLocal((::EventCorrelProc*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
 } // end of namespace ROOT
 
 //______________________________________________________________________________
@@ -1832,76 +1832,6 @@ TClass *EventAnlStore::Class()
 }
 
 //______________________________________________________________________________
-atomic_TClass_ptr AidaHitPID::fgIsA(0);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *AidaHitPID::Class_Name()
-{
-   return "AidaHitPID";
-}
-
-//______________________________________________________________________________
-const char *AidaHitPID::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int AidaHitPID::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *AidaHitPID::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *AidaHitPID::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr EventCorrelProc::fgIsA(0);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *EventCorrelProc::Class_Name()
-{
-   return "EventCorrelProc";
-}
-
-//______________________________________________________________________________
-const char *EventCorrelProc::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int EventCorrelProc::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *EventCorrelProc::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *EventCorrelProc::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
 atomic_TClass_ptr EventCorrelStore::fgIsA(0);  // static to hold class pointer
 
 //______________________________________________________________________________
@@ -1968,6 +1898,76 @@ TClass *EventAnlProc::Dictionary()
 TClass *EventAnlProc::Class()
 {
    if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::EventAnlProc*)0x0)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr AidaHitPID::fgIsA(0);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *AidaHitPID::Class_Name()
+{
+   return "AidaHitPID";
+}
+
+//______________________________________________________________________________
+const char *AidaHitPID::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int AidaHitPID::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *AidaHitPID::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *AidaHitPID::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::AidaHitPID*)0x0)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr EventCorrelProc::fgIsA(0);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *EventCorrelProc::Class_Name()
+{
+   return "EventCorrelProc";
+}
+
+//______________________________________________________________________________
+const char *EventCorrelProc::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int EventCorrelProc::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *EventCorrelProc::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *EventCorrelProc::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::EventCorrelProc*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -2586,27 +2586,6 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::TRangeParameter
 
-namespace ROOT {
-   // Wrappers around operator new
-   static void *new_FRS_Detector_System(void *p) {
-      return  p ? new(p) ::FRS_Detector_System : new ::FRS_Detector_System;
-   }
-   static void *newArray_FRS_Detector_System(Long_t nElements, void *p) {
-      return p ? new(p) ::FRS_Detector_System[nElements] : new ::FRS_Detector_System[nElements];
-   }
-   // Wrapper around operator delete
-   static void delete_FRS_Detector_System(void *p) {
-      delete ((::FRS_Detector_System*)p);
-   }
-   static void deleteArray_FRS_Detector_System(void *p) {
-      delete [] ((::FRS_Detector_System*)p);
-   }
-   static void destruct_FRS_Detector_System(void *p) {
-      typedef ::FRS_Detector_System current_t;
-      ((current_t*)p)->~current_t();
-   }
-} // end of namespace ROOT for class ::FRS_Detector_System
-
 //______________________________________________________________________________
 void EventUnpackProc::Streamer(TBuffer &R__b)
 {
@@ -2708,6 +2687,27 @@ namespace ROOT {
 
 namespace ROOT {
    // Wrappers around operator new
+   static void *new_FRS_Detector_System(void *p) {
+      return  p ? new(p) ::FRS_Detector_System : new ::FRS_Detector_System;
+   }
+   static void *newArray_FRS_Detector_System(Long_t nElements, void *p) {
+      return p ? new(p) ::FRS_Detector_System[nElements] : new ::FRS_Detector_System[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_FRS_Detector_System(void *p) {
+      delete ((::FRS_Detector_System*)p);
+   }
+   static void deleteArray_FRS_Detector_System(void *p) {
+      delete [] ((::FRS_Detector_System*)p);
+   }
+   static void destruct_FRS_Detector_System(void *p) {
+      typedef ::FRS_Detector_System current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::FRS_Detector_System
+
+namespace ROOT {
+   // Wrappers around operator new
    static void *new_AidaAnlData(void *p) {
       return  p ? new(p) ::AidaAnlData : new ::AidaAnlData;
    }
@@ -2759,72 +2759,6 @@ namespace ROOT {
       ((current_t*)p)->~current_t();
    }
 } // end of namespace ROOT for class ::EventAnlStore
-
-//______________________________________________________________________________
-void AidaHitPID::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class AidaHitPID.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(AidaHitPID::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(AidaHitPID::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrappers around operator new
-   static void *new_AidaHitPID(void *p) {
-      return  p ? new(p) ::AidaHitPID : new ::AidaHitPID;
-   }
-   static void *newArray_AidaHitPID(Long_t nElements, void *p) {
-      return p ? new(p) ::AidaHitPID[nElements] : new ::AidaHitPID[nElements];
-   }
-   // Wrapper around operator delete
-   static void delete_AidaHitPID(void *p) {
-      delete ((::AidaHitPID*)p);
-   }
-   static void deleteArray_AidaHitPID(void *p) {
-      delete [] ((::AidaHitPID*)p);
-   }
-   static void destruct_AidaHitPID(void *p) {
-      typedef ::AidaHitPID current_t;
-      ((current_t*)p)->~current_t();
-   }
-} // end of namespace ROOT for class ::AidaHitPID
-
-//______________________________________________________________________________
-void EventCorrelProc::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class EventCorrelProc.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(EventCorrelProc::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(EventCorrelProc::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrappers around operator new
-   static void *new_EventCorrelProc(void *p) {
-      return  p ? new(p) ::EventCorrelProc : new ::EventCorrelProc;
-   }
-   static void *newArray_EventCorrelProc(Long_t nElements, void *p) {
-      return p ? new(p) ::EventCorrelProc[nElements] : new ::EventCorrelProc[nElements];
-   }
-   // Wrapper around operator delete
-   static void delete_EventCorrelProc(void *p) {
-      delete ((::EventCorrelProc*)p);
-   }
-   static void deleteArray_EventCorrelProc(void *p) {
-      delete [] ((::EventCorrelProc*)p);
-   }
-   static void destruct_EventCorrelProc(void *p) {
-      typedef ::EventCorrelProc current_t;
-      ((current_t*)p)->~current_t();
-   }
-} // end of namespace ROOT for class ::EventCorrelProc
 
 //______________________________________________________________________________
 void EventCorrelStore::Streamer(TBuffer &R__b)
@@ -2892,6 +2826,72 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::EventAnlProc
 
+//______________________________________________________________________________
+void AidaHitPID::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class AidaHitPID.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(AidaHitPID::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(AidaHitPID::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_AidaHitPID(void *p) {
+      return  p ? new(p) ::AidaHitPID : new ::AidaHitPID;
+   }
+   static void *newArray_AidaHitPID(Long_t nElements, void *p) {
+      return p ? new(p) ::AidaHitPID[nElements] : new ::AidaHitPID[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_AidaHitPID(void *p) {
+      delete ((::AidaHitPID*)p);
+   }
+   static void deleteArray_AidaHitPID(void *p) {
+      delete [] ((::AidaHitPID*)p);
+   }
+   static void destruct_AidaHitPID(void *p) {
+      typedef ::AidaHitPID current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::AidaHitPID
+
+//______________________________________________________________________________
+void EventCorrelProc::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class EventCorrelProc.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(EventCorrelProc::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(EventCorrelProc::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_EventCorrelProc(void *p) {
+      return  p ? new(p) ::EventCorrelProc : new ::EventCorrelProc;
+   }
+   static void *newArray_EventCorrelProc(Long_t nElements, void *p) {
+      return p ? new(p) ::EventCorrelProc[nElements] : new ::EventCorrelProc[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_EventCorrelProc(void *p) {
+      delete ((::EventCorrelProc*)p);
+   }
+   static void deleteArray_EventCorrelProc(void *p) {
+      delete [] ((::EventCorrelProc*)p);
+   }
+   static void destruct_EventCorrelProc(void *p) {
+      typedef ::EventCorrelProc current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::EventCorrelProc
+
 namespace ROOT {
    static TClass *vectorlEvectorlEdoublegRsPgR_Dictionary();
    static void vectorlEvectorlEdoublegRsPgR_TClassManip(TClass*);
@@ -2907,7 +2907,7 @@ namespace ROOT {
       vector<vector<double> > *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<vector<double> >));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<vector<double> >", -2, "vector", 339,
+         instance("vector<vector<double> >", -2, "vector", 214,
                   typeid(vector<vector<double> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEvectorlEdoublegRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<vector<double> >) );
@@ -2972,7 +2972,7 @@ namespace ROOT {
       vector<unsigned long> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<unsigned long>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<unsigned long>", -2, "vector", 339,
+         instance("vector<unsigned long>", -2, "vector", 214,
                   typeid(vector<unsigned long>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEunsignedsPlonggR_Dictionary, isa_proxy, 0,
                   sizeof(vector<unsigned long>) );
@@ -3037,7 +3037,7 @@ namespace ROOT {
       vector<long> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<long>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<long>", -2, "vector", 339,
+         instance("vector<long>", -2, "vector", 214,
                   typeid(vector<long>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlElonggR_Dictionary, isa_proxy, 0,
                   sizeof(vector<long>) );
@@ -3102,7 +3102,7 @@ namespace ROOT {
       vector<float> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<float>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<float>", -2, "vector", 339,
+         instance("vector<float>", -2, "vector", 214,
                   typeid(vector<float>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEfloatgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<float>) );
@@ -3167,7 +3167,7 @@ namespace ROOT {
       vector<double> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<double>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<double>", -2, "vector", 339,
+         instance("vector<double>", -2, "vector", 214,
                   typeid(vector<double>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEdoublegR_Dictionary, isa_proxy, 0,
                   sizeof(vector<double>) );
@@ -3232,7 +3232,7 @@ namespace ROOT {
       vector<bool> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<bool>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<bool>", -2, "vector", 588,
+         instance("vector<bool>", -2, "vector", 526,
                   typeid(vector<bool>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEboolgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<bool>) );
@@ -3297,7 +3297,7 @@ namespace ROOT {
       vector<array<unsigned long,4> > *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<array<unsigned long,4> >));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<array<unsigned long,4> >", -2, "vector", 339,
+         instance("vector<array<unsigned long,4> >", -2, "vector", 214,
                   typeid(vector<array<unsigned long,4> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEarraylEunsignedsPlongcO4gRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<array<unsigned long,4> >) );
@@ -3362,7 +3362,7 @@ namespace ROOT {
       vector<array<int,4> > *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<array<int,4> >));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<array<int,4> >", -2, "vector", 339,
+         instance("vector<array<int,4> >", -2, "vector", 214,
                   typeid(vector<array<int,4> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEarraylEintcO4gRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<array<int,4> >) );
@@ -3427,7 +3427,7 @@ namespace ROOT {
       vector<array<array<TH1*,2>,64> > *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<array<array<TH1*,2>,64> >));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<array<array<TH1*,2>,64> >", -2, "vector", 339,
+         instance("vector<array<array<TH1*,2>,64> >", -2, "vector", 214,
                   typeid(vector<array<array<TH1*,2>,64> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEarraylEarraylETH1mUcO2gRcO64gRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<array<array<TH1*,2>,64> >) );
@@ -3492,7 +3492,7 @@ namespace ROOT {
       vector<TH2*> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<TH2*>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<TH2*>", -2, "vector", 339,
+         instance("vector<TH2*>", -2, "vector", 214,
                   typeid(vector<TH2*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlETH2mUgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<TH2*>) );
@@ -3557,7 +3557,7 @@ namespace ROOT {
       vector<TH1*> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<TH1*>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<TH1*>", -2, "vector", 339,
+         instance("vector<TH1*>", -2, "vector", 214,
                   typeid(vector<TH1*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlETH1mUgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<TH1*>) );
@@ -3622,7 +3622,7 @@ namespace ROOT {
       vector<Long64_t> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<Long64_t>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<Long64_t>", -2, "vector", 339,
+         instance("vector<Long64_t>", -2, "vector", 214,
                   typeid(vector<Long64_t>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlELong64_tgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<Long64_t>) );
@@ -3687,7 +3687,7 @@ namespace ROOT {
       vector<AidaUnpackData> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<AidaUnpackData>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<AidaUnpackData>", -2, "vector", 339,
+         instance("vector<AidaUnpackData>", -2, "vector", 214,
                   typeid(vector<AidaUnpackData>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEAidaUnpackDatagR_Dictionary, isa_proxy, 0,
                   sizeof(vector<AidaUnpackData>) );
@@ -3752,7 +3752,7 @@ namespace ROOT {
       vector<AidaScaler> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<AidaScaler>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<AidaScaler>", -2, "vector", 339,
+         instance("vector<AidaScaler>", -2, "vector", 214,
                   typeid(vector<AidaScaler>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEAidaScalergR_Dictionary, isa_proxy, 4,
                   sizeof(vector<AidaScaler>) );
@@ -3817,7 +3817,7 @@ namespace ROOT {
       vector<AidaPauseResume> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<AidaPauseResume>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<AidaPauseResume>", -2, "vector", 339,
+         instance("vector<AidaPauseResume>", -2, "vector", 214,
                   typeid(vector<AidaPauseResume>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEAidaPauseResumegR_Dictionary, isa_proxy, 4,
                   sizeof(vector<AidaPauseResume>) );
@@ -3882,7 +3882,7 @@ namespace ROOT {
       vector<AidaHit> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<AidaHit>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<AidaHit>", -2, "vector", 339,
+         instance("vector<AidaHit>", -2, "vector", 214,
                   typeid(vector<AidaHit>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEAidaHitgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<AidaHit>) );
@@ -3947,7 +3947,7 @@ namespace ROOT {
       vector<AidaEvent> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<AidaEvent>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<AidaEvent>", -2, "vector", 339,
+         instance("vector<AidaEvent>", -2, "vector", 214,
                   typeid(vector<AidaEvent>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEAidaEventgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<AidaEvent>) );
@@ -4012,7 +4012,7 @@ namespace ROOT {
       vector<AidaAnlData> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<AidaAnlData>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<AidaAnlData>", -2, "vector", 339,
+         instance("vector<AidaAnlData>", -2, "vector", 214,
                   typeid(vector<AidaAnlData>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEAidaAnlDatagR_Dictionary, isa_proxy, 4,
                   sizeof(vector<AidaAnlData>) );
@@ -4077,7 +4077,7 @@ namespace ROOT {
       multimap<long,AidaHitPID> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(multimap<long,AidaHitPID>));
       static ::ROOT::TGenericClassInfo 
-         instance("multimap<long,AidaHitPID>", -2, "map", 99,
+         instance("multimap<long,AidaHitPID>", -2, "map", 95,
                   typeid(multimap<long,AidaHitPID>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &multimaplElongcOAidaHitPIDgR_Dictionary, isa_proxy, 0,
                   sizeof(multimap<long,AidaHitPID>) );
@@ -4142,7 +4142,7 @@ namespace ROOT {
       map<int,int> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(map<int,int>));
       static ::ROOT::TGenericClassInfo 
-         instance("map<int,int>", -2, "map", 100,
+         instance("map<int,int>", -2, "map", 96,
                   typeid(map<int,int>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &maplEintcOintgR_Dictionary, isa_proxy, 0,
                   sizeof(map<int,int>) );
@@ -4207,7 +4207,7 @@ namespace ROOT {
       map<int,deque<int> > *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(map<int,deque<int> >));
       static ::ROOT::TGenericClassInfo 
-         instance("map<int,deque<int> >", -2, "map", 100,
+         instance("map<int,deque<int> >", -2, "map", 96,
                   typeid(map<int,deque<int> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &maplEintcOdequelEintgRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(map<int,deque<int> >) );
@@ -4272,7 +4272,7 @@ namespace ROOT {
       map<int,TH1*> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(map<int,TH1*>));
       static ::ROOT::TGenericClassInfo 
-         instance("map<int,TH1*>", -2, "map", 100,
+         instance("map<int,TH1*>", -2, "map", 96,
                   typeid(map<int,TH1*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &maplEintcOTH1mUgR_Dictionary, isa_proxy, 0,
                   sizeof(map<int,TH1*>) );
@@ -4337,7 +4337,7 @@ namespace ROOT {
       deque<int> *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(deque<int>));
       static ::ROOT::TGenericClassInfo 
-         instance("deque<int>", -2, "deque", 832,
+         instance("deque<int>", -2, "deque", 735,
                   typeid(deque<int>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &dequelEintgR_Dictionary, isa_proxy, 0,
                   sizeof(deque<int>) );
@@ -4390,66 +4390,66 @@ namespace ROOT {
 namespace {
   void TriggerDictionaryInitialization_libGo4UserAnalysis_Impl() {
     static const char* headers[] = {
-"./QDC_751.h",
 "./AIDA_Headers.h",
 "./FEBEX.h",
-"./FATIMA_TAMEX_Calibrator.h",
+"./FATIMA_tofCorr.h",
+"./libGo4UserAnalysisa822772aa1_dictContent.h",
 "./TAMEX.h",
+"./FRS_Detector_System.h",
+"./AIDA_Decay_Event_Store.h",
 "./DESPECAnalysis.h",
-"./AIDA_Processor.h",
-"./libGo4UserAnalysis1aac8ecd09_dictUmbrella.h",
 "./FATIMA_Energy_Calibration.h",
-"./TFRSParameter.h",
-"./libGo4UserAnalysiscb0f1bdd18_dictContent.h",
-"./libGo4UserAnalysisf7b5a996fe_dictUmbrella.h",
+"./libGo4UserAnalysis1aac8ecd09_dictUmbrella.h",
 "./WR_Structure.h",
+"./EventCorrelStore.h",
+"./libGo4UserAnalysiscb0f1bdd18_dictContent.h",
+"./Raw_Event.h",
+"./CorrelParameter.h",
 "./Germanium_Detector_System.h",
 "./libGo4UserAnalysis9012ded992_dictContent.h",
 "./TFRSVftxSetting.h",
-"./CalibParameter.h",
-"./EventCorrelProc.h",
+"./TimingCube.h",
 "./Beam_Monitor_Detector_System.h",
-"./FRS_Detector_System.h",
 "./libGo4UserAnalysisef14fc77f0_dictUmbrella.h",
-"./libGo4UserAnalysis5c2b3aa4a5_dictUmbrella.h",
 "./FINGER_Calibrator.h",
 "./White_Rabbit.h",
-"./FATIMA_Time_Calibration.h",
-"./EventCorrelStore.h",
+"./EventUnpackStore.h",
+"./EventAnlStore.h",
 "./FINGER_Detector_System.h",
 "./AIDA_Detector_System.h",
-"./AIDA_Decay_Event_Store.h",
-"./FATIMA_Detector_System.h",
-"./AIDA_Event.h",
-"./libGo4UserAnalysisa822772aa1_dictContent.h",
 "./EventAnlProc.h",
-"./EventAnlStore.h",
 "./PLASTIC_TAMEX_Detector_System.h",
+"./CalibParameter.h",
 "./Timestamp.h",
-"./EventUnpackProc.h",
+"./QDC_751.h",
+"./PLASTIC_TAMEX_Calibrator.h",
 "./TDC_1290.h",
-"./libGo4UserAnalysis61644ec842_dictContent.h",
-"./CorrelParameter.h",
-"./EventUnpackStore.h",
-"./Germanium_Time_Calibration.h",
+"./TFRSParameter.h",
+"./libGo4UserAnalysisf7b5a996fe_dictUmbrella.h",
+"./FATIMA_TAMEX_Calibrator.h",
+"./AIDA_Event.h",
+"./FATIMA_Detector_System.h",
+"./EventCorrelProc.h",
+"./FATIMA_Time_Calibration.h",
 "./PLASTIC_TWINPEAKS_Detector_System.h",
+"./AIDA_Data_Types.h",
 "./Germanium_Energy_Calibration.h",
 "./QDC.h",
+"./AIDA_Processor.h",
 "./FATIMA_TAMEX_Detector_System.h",
-"./TimingCube.h",
-"./PLASTIC_TAMEX_Calibrator.h",
+"./Germanium_Time_Calibration.h",
 "./TAidaConfiguration.h",
+"./libGo4UserAnalysis61644ec842_dictContent.h",
 "./EventUnpackFact.h",
-"./Raw_Event.h",
-"./FATIMA_tofCorr.h",
-"./AIDA_Data_Types.h",
+"./libGo4UserAnalysis5c2b3aa4a5_dictUmbrella.h",
+"./EventUnpackProc.h",
 0
     };
     static const char* includePaths[] = {
-"/cvmfs/eel.gsi.de/debian10-x86_64/go4/602-00/include",
-"/cvmfs/eel.gsi.de/debian10-x86_64/go4/602-00",
-"/cvmfs/eel.gsi.de/debian10-x86_64/root/624-04/include/",
-"/u/kwimmer/lustre/gamma/wimmer/progs/DESPEC_S450/",
+"/cvmfs/eel.gsi.de/debian8-x86_64/go4/602-00/include",
+"/cvmfs/eel.gsi.de/debian8-x86_64/go4/602-00",
+"/cvmfs/eel.gsi.de/debian8-x86_64/root/622-08/include/",
+"/u/despec/DESPEC_S450_MAIN/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(
@@ -4458,37 +4458,37 @@ namespace {
 #pragma clang diagnostic ignored "-Wignored-attributes"
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 extern int __Cling_AutoLoading_Map;
-class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  AidaScaler;
+class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  AidaScaler;
 namespace std{template <typename _Tp> class __attribute__((annotate("$clingAutoload$bits/allocator.h")))  __attribute__((annotate("$clingAutoload$string")))  allocator;
 }
-class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  AidaPauseResume;
-struct __attribute__((annotate("$clingAutoload$EventAnlStore.h")))  __attribute__((annotate("$clingAutoload$./EventCorrelProc.h")))  AidaAnlData;
-class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  AidaEvent;
-class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  AidaHit;
-class __attribute__((annotate("$clingAutoload$AIDA_Event.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  AIDA_Event;
-struct __attribute__((annotate("$clingAutoload$EventUnpackStore.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  AidaUnpackData;
-class __attribute__((annotate("$clingAutoload$EventUnpackStore.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  EventUnpackStore;
-class __attribute__((annotate("$clingAutoload$CalibParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  CalibParameter;
-class __attribute__((annotate("$clingAutoload$CorrelParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  CorrelParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TFRSParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  Map1;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TMWParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TTPCParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TMUSICParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TSCIParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TIDParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TSIParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TMRTOFMSParameter;
-class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  TRangeParameter;
-class __attribute__((annotate("$clingAutoload$FRS_Detector_System.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  FRS_Detector_System;
-class __attribute__((annotate("$clingAutoload$EventUnpackProc.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  EventUnpackProc;
-class __attribute__((annotate("$clingAutoload$EventUnpackFact.h")))  __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  EventUnpackFact;
-class __attribute__((annotate("$clingAutoload$./DESPECAnalysis.h")))  DESPECAnalysis;
-class __attribute__((annotate("$clingAutoload$EventAnlStore.h")))  __attribute__((annotate("$clingAutoload$./EventCorrelProc.h")))  EventAnlStore;
-class __attribute__((annotate("$clingAutoload$./EventCorrelProc.h")))  AidaHitPID;
-class __attribute__((annotate("$clingAutoload$./EventCorrelProc.h")))  EventCorrelProc;
+class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  AidaPauseResume;
+struct __attribute__((annotate("$clingAutoload$EventAnlStore.h")))  __attribute__((annotate("$clingAutoload$./EventCorrelStore.h")))  AidaAnlData;
+class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  AidaEvent;
+class __attribute__((annotate("$clingAutoload$AIDA_Decay_Event_Store.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  AidaHit;
+class __attribute__((annotate("$clingAutoload$AIDA_Event.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  AIDA_Event;
+struct __attribute__((annotate("$clingAutoload$EventUnpackStore.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  AidaUnpackData;
+class __attribute__((annotate("$clingAutoload$EventUnpackStore.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  EventUnpackStore;
+class __attribute__((annotate("$clingAutoload$CalibParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  CalibParameter;
+class __attribute__((annotate("$clingAutoload$CorrelParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  CorrelParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TFRSParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  Map1;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TMWParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TTPCParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TMUSICParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TSCIParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TIDParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TSIParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TMRTOFMSParameter;
+class __attribute__((annotate("$clingAutoload$TFRSParameter.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  TRangeParameter;
+class __attribute__((annotate("$clingAutoload$EventUnpackProc.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  EventUnpackProc;
+class __attribute__((annotate("$clingAutoload$EventUnpackFact.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  EventUnpackFact;
+class __attribute__((annotate("$clingAutoload$DESPECAnalysis.h")))  __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  DESPECAnalysis;
+class __attribute__((annotate("$clingAutoload$./FRS_Detector_System.h")))  FRS_Detector_System;
+class __attribute__((annotate("$clingAutoload$EventAnlStore.h")))  __attribute__((annotate("$clingAutoload$./EventCorrelStore.h")))  EventAnlStore;
 class __attribute__((annotate("$clingAutoload$./EventCorrelStore.h")))  EventCorrelStore;
 class __attribute__((annotate("$clingAutoload$./EventAnlProc.h")))  EventAnlProc;
+class __attribute__((annotate("$clingAutoload$./EventCorrelProc.h")))  AidaHitPID;
+class __attribute__((annotate("$clingAutoload$./EventCorrelProc.h")))  EventCorrelProc;
 )DICTFWDDCLS";
     static const char* payloadCode = R"DICTPAYLOAD(
 #line 1 "libGo4UserAnalysis dictionary payload"
@@ -4499,59 +4499,59 @@ class __attribute__((annotate("$clingAutoload$./EventAnlProc.h")))  EventAnlProc
 
 #define _BACKWARD_BACKWARD_WARNING_H
 // Inline headers
-#include "./QDC_751.h"
 #include "./AIDA_Headers.h"
 #include "./FEBEX.h"
-#include "./FATIMA_TAMEX_Calibrator.h"
+#include "./FATIMA_tofCorr.h"
+#include "./libGo4UserAnalysisa822772aa1_dictContent.h"
 #include "./TAMEX.h"
+#include "./FRS_Detector_System.h"
+#include "./AIDA_Decay_Event_Store.h"
 #include "./DESPECAnalysis.h"
-#include "./AIDA_Processor.h"
-#include "./libGo4UserAnalysis1aac8ecd09_dictUmbrella.h"
 #include "./FATIMA_Energy_Calibration.h"
-#include "./TFRSParameter.h"
-#include "./libGo4UserAnalysiscb0f1bdd18_dictContent.h"
-#include "./libGo4UserAnalysisf7b5a996fe_dictUmbrella.h"
+#include "./libGo4UserAnalysis1aac8ecd09_dictUmbrella.h"
 #include "./WR_Structure.h"
+#include "./EventCorrelStore.h"
+#include "./libGo4UserAnalysiscb0f1bdd18_dictContent.h"
+#include "./Raw_Event.h"
+#include "./CorrelParameter.h"
 #include "./Germanium_Detector_System.h"
 #include "./libGo4UserAnalysis9012ded992_dictContent.h"
 #include "./TFRSVftxSetting.h"
-#include "./CalibParameter.h"
-#include "./EventCorrelProc.h"
+#include "./TimingCube.h"
 #include "./Beam_Monitor_Detector_System.h"
-#include "./FRS_Detector_System.h"
 #include "./libGo4UserAnalysisef14fc77f0_dictUmbrella.h"
-#include "./libGo4UserAnalysis5c2b3aa4a5_dictUmbrella.h"
 #include "./FINGER_Calibrator.h"
 #include "./White_Rabbit.h"
-#include "./FATIMA_Time_Calibration.h"
-#include "./EventCorrelStore.h"
+#include "./EventUnpackStore.h"
+#include "./EventAnlStore.h"
 #include "./FINGER_Detector_System.h"
 #include "./AIDA_Detector_System.h"
-#include "./AIDA_Decay_Event_Store.h"
-#include "./FATIMA_Detector_System.h"
-#include "./AIDA_Event.h"
-#include "./libGo4UserAnalysisa822772aa1_dictContent.h"
 #include "./EventAnlProc.h"
-#include "./EventAnlStore.h"
 #include "./PLASTIC_TAMEX_Detector_System.h"
+#include "./CalibParameter.h"
 #include "./Timestamp.h"
-#include "./EventUnpackProc.h"
+#include "./QDC_751.h"
+#include "./PLASTIC_TAMEX_Calibrator.h"
 #include "./TDC_1290.h"
-#include "./libGo4UserAnalysis61644ec842_dictContent.h"
-#include "./CorrelParameter.h"
-#include "./EventUnpackStore.h"
-#include "./Germanium_Time_Calibration.h"
+#include "./TFRSParameter.h"
+#include "./libGo4UserAnalysisf7b5a996fe_dictUmbrella.h"
+#include "./FATIMA_TAMEX_Calibrator.h"
+#include "./AIDA_Event.h"
+#include "./FATIMA_Detector_System.h"
+#include "./EventCorrelProc.h"
+#include "./FATIMA_Time_Calibration.h"
 #include "./PLASTIC_TWINPEAKS_Detector_System.h"
+#include "./AIDA_Data_Types.h"
 #include "./Germanium_Energy_Calibration.h"
 #include "./QDC.h"
+#include "./AIDA_Processor.h"
 #include "./FATIMA_TAMEX_Detector_System.h"
-#include "./TimingCube.h"
-#include "./PLASTIC_TAMEX_Calibrator.h"
+#include "./Germanium_Time_Calibration.h"
 #include "./TAidaConfiguration.h"
+#include "./libGo4UserAnalysis61644ec842_dictContent.h"
 #include "./EventUnpackFact.h"
-#include "./Raw_Event.h"
-#include "./FATIMA_tofCorr.h"
-#include "./AIDA_Data_Types.h"
+#include "./libGo4UserAnalysis5c2b3aa4a5_dictUmbrella.h"
+#include "./EventUnpackProc.h"
 
 #undef  _BACKWARD_BACKWARD_WARNING_H
 )DICTPAYLOAD";

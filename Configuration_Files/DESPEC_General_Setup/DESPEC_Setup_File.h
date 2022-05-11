@@ -104,7 +104,7 @@
 #define Germanium_MAX_HITS (Germanium_MAX_DETS * Germanium_CRYSTALS)
 ///Important for FEBEX
 #define Germanium_FEBEX_MODULES 4
-#define Germanium_MAX_CHANNELS 64
+#define Germanium_MAX_CHANNELS 69
 ///Define here where SC41 is plugged into FEBEX ("Detector" and "crystal" for mapping purposes) Use the germanium allocation file for mapping of this
 #define Germanium_SC41_Det 11
 #define Germanium_SC41L_Crystal 0
