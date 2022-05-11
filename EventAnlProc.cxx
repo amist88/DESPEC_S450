@@ -898,23 +898,23 @@ void EventAnlProc::Make_FRS_Histos(){
       sprintf(name,"cID_Z1_AoQ%d",i);
       cID_Z_AoQ[i] = MakePolyCond("FRS_Z1_AoQ_Gates", name, num_ID_Z_AoQ, init_ID_Z_AoQ[i], hID_Z_AoQ->GetName());
 
-      hID_ZAoQ_ZAoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1AoQGated/ID_ZAoQ_ZAoQgate%d",i), Form("ID_ZAoQ_ZAoQgate%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Z s2-s4");
+      hID_ZAoQ_ZAoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1AoQGated/ID_ZAoQ_ZAoQgate%d",i), Form("ID_ZAoQ_ZAoQgate%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Z s2-s4");
       
-      hID_Z1Z2_ZAoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_Z1AoQGated/ID_Z1Z2_ZAoQgate%d",i), Form("ID_Z1Z2_ZAoQgate%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on Z1 vs AoQ: MUSIC Z2");
+      hID_Z1Z2_ZAoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_Z1AoQGated/ID_Z1Z2_ZAoQgate%d",i), Form("ID_Z1Z2_ZAoQgate%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on Z1 vs AoQ: MUSIC Z2");
       
-      hID_x2AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1AoQGated/ID_x2AoQ_Z1AoQgate%d",i), Form("ID_x2AoQ_Z1AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1 vs AoQ: X at S2 [mm]");
+      hID_x2AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1AoQGated/ID_x2AoQ_Z1AoQgate%d",i), Form("ID_x2AoQ_Z1AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1 vs AoQ: X at S2 [mm]");
        
-      hID_x4AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_Z1AoQGated/ID_x4AoQ_Z1AoQgate%d",i), Form("ID_x4AoQ_Z1AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1 vs AoQ: X at S4 [mm]");
+      hID_x4AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_Z1AoQGated/ID_x4AoQ_Z1AoQgate%d",i), Form("ID_x4AoQ_Z1AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1 vs AoQ: X at S4 [mm]");
 
-      hID_dEdegoQ_Z1_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/dEdegoQZ1_Z1AoQGated/dEdegoQZ1_Z1AoQgate%d",i), Form("dEdegoQZ1_Z1AoQgate%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,50., "Z1 from MUSIC41", "gate on Z1 vs AoQ: dE(S2deg)/Q [a.u.]");
+      hID_dEdegoQ_Z1_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/dEdegoQZ1_Z1AoQGated/dEdegoQZ1_Z1AoQgate%d",i), Form("dEdegoQZ1_Z1AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,50., "Z1 from MUSIC41", "gate on Z1 vs AoQ: dE(S2deg)/Q [a.u.]");
 
-      hID_dEdegZ1_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/dEdegZ1_Z1AoQ/dEdegZ1_Z1AoQgate%d",i), Form("dEdegZ1_Z1AoQgate%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,50., "Z1 from MUSIC41", "gate on Z1 vs AoQ: dE(S2deg) [a.u.]");
+      hID_dEdegZ1_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/dEdegZ1_Z1AoQ/dEdegZ1_Z1AoQgate%d",i), Form("dEdegZ1_Z1AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,50., "Z1 from MUSIC41", "gate on Z1 vs AoQ: dE(S2deg) [a.u.]");
       
- //     hID_a2AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1AoQGated/ID_a2AoQ_Z1AoQgate%d",i), Form("ID_A2AoQ_Z1AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " gate on Z1 vs AoQ: Angle S2 (mrad)");
+ //     hID_a2AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1AoQGated/ID_a2AoQ_Z1AoQgate%d",i), Form("ID_A2AoQ_Z1AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " gate on Z1 vs AoQ: Angle S2 (mrad)");
       
       hID_a2_Z1AoQgate[i] = MakeTH1('F', Form("FRS/ID_Gated/a2/a2_Z1AoQGated/ID_a2_Z1AoQGated%d",i), Form("ID_a2_Z1AoQGate%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
       
-   //   hID_a4AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_Z1AoQGated/ID_a4AoQ_Z1AoQgate%d",i), Form("ID_A2AoQ_Z1AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " gate on Z1 vs AoQ: Angle S4 (mrad)");
+   //   hID_a4AoQ_Z1AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_Z1AoQGated/ID_a4AoQ_Z1AoQgate%d",i), Form("ID_A2AoQ_Z1AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " gate on Z1 vs AoQ: Angle S4 (mrad)");
       
       hID_a4_Z1AoQgate[i] = MakeTH1('F', Form("FRS/ID_Gated/a4/a4_Z1AoQGated/ID_a4_Z1AoQGated%d",i), Form("ID_a4_Z1AoQGate%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
       
@@ -922,45 +922,45 @@ void EventAnlProc::Make_FRS_Histos(){
       sprintf(name,"cID_Z1_Z2_Gate%d",i);
       cID_Z_Z2gate[i] = MakePolyCond("FRS_Z1_Z2_Gates",name,num_ID_Z_Z2,init_ID_Z_Z2[i], hID_Z_Z2 ->GetName());
       
-      hID_Z1_Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2Gated/ID_Z1_Z2gate%d",i), Form("ID_Z1_Z2gate%d",i),2000,frs_id->min_z_plot,frs_id->max_z_plot, 2000,frs_id->min_z_plot,frs_id->max_z_plot,"Z1 s2-s4", "Z2 s2-s4");
+      hID_Z1_Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2Gated/ID_Z1_Z2gate%d",i), Form("ID_Z1_Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z1 s2-s4", "Z2 s2-s4");
       
-      hID_x2AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1Z2Gated/ID_x2AoQ_Z1Z2gate%d",i), Form("ID_x2AoQ_Z1Z2gate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S2 [mm]");
+      hID_x2AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1Z2Gated/ID_x2AoQ_Z1Z2gate%d",i), Form("ID_x2AoQ_Z1Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S2 [mm]");
 
-      hID_x4AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_Z1Z2Gated/ID_x4AoQ_Z1Z2gate%d",i), Form("ID_x4AoQ_Z1Z2gate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S4 [mm]");
+      hID_x4AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_Z1Z2Gated/ID_x4AoQ_Z1Z2gate%d",i), Form("ID_x4AoQ_Z1Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S4 [mm]");
        
-      hID_ZAoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1Z2Gated/ID_Z1AoQ_Z1Z2gate%d",i), Form("ID_Z1AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music2");
+      hID_ZAoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1Z2Gated/ID_Z1AoQ_Z1Z2gate%d",i), Form("ID_Z1AoQ_Z1Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music2");
       
-     // hID_a2AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1Z2Gated/ID_a2AoQ_Z1Z2gate%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+     // hID_a2AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1Z2Gated/ID_a2AoQ_Z1Z2gate%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
       
        hID_a2_Z1Z2gate[i] = MakeTH1('F', Form("FRS/ID_Gated/a2/a2_Z1Z2gate/ID_a2_Z1Z2gate%d",i), Form("ID_a2_Z1Z2gate%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
 
-      //hID_a4AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_Z1Z2Gated/ID_a4AoQ_Z1Z2gate%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+      //hID_a4AoQ_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_Z1Z2Gated/ID_a4AoQ_Z1Z2gate%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
        
        hID_a4_Z1Z2gate[i] = MakeTH1('F', Form("FRS/ID_Gated/a4/a4_Z1Z2gate/ID_a4_Z1Z2gate%d",i), Form("ID_a4_Z1Z2gate%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
       
-      hID_dEdegZ1_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/Z1Z2/dEdegZ1_Z1Z2gated%d",i), Form("dEdegZ1_Z1Z2gated%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,100., "Z from MUSIC41", "dE(S2deg) [a.u.]");
+      hID_dEdegZ1_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/Z1Z2/dEdegZ1_Z1Z2gated%d",i), Form("dEdegZ1_Z1Z2gated%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,100., "Z from MUSIC41", "dE(S2deg) [a.u.]");
 
-      hID_dEdegoQ_Z1_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/dEdegoQZ1_Z1Z2gated/dEdegoQZ1_Z1Z2gated%d",i), Form("dEdegoQZ1_Z1Z2gated%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,100., "Z from MUSIC41", "dE(S2deg)/Q [a.u.]");
+      hID_dEdegoQ_Z1_Z1Z2gate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/dEdegoQZ1_Z1Z2gated/dEdegoQZ1_Z1Z2gated%d",i), Form("dEdegoQZ1_Z1Z2gated%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,100., "Z from MUSIC41", "dE(S2deg)/Q [a.u.]");
       
       ///X2 vs AoQ
       sprintf(name,"cID_x2AoQ%d",i);
       cID_x2AoQ[i] = MakePolyCond("FRS_X2_Gates",name,num_ID_x2AoQ,init_ID_x2AoQ[i], hID_x2AoQ->GetName());
       
-      hID_x2AoQ_x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_x2AoQGated/ID_x2AoQ_x2AoQgate%d",i), Form("ID_x2AoQ_x2AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X2 AoQ, ID X2: X at S2 [mm]");
+      hID_x2AoQ_x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_x2AoQGated/ID_x2AoQ_x2AoQgate%d",i), Form("ID_x2AoQ_x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X2 AoQ, ID X2: X at S2 [mm]");
       
-      hID_Z1Z2_x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_x2AoQGated/ID_Z1Z2_x2AoQgate%d",i), Form("ID_Z1Z2_x2AoQgate%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x2 vs AoQ: MUSIC Z2");
+      hID_Z1Z2_x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_x2AoQGated/ID_Z1Z2_x2AoQgate%d",i), Form("ID_Z1Z2_x2AoQgate%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x2 vs AoQ: MUSIC Z2");
 
-      hID_x2AoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_x2AoQGated/ID_x2AoQ_Z1Z2x2AoQgate%d",i), Form("ID_x2AoQ_Z1Z2x2AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1 Z2 X2 AoQ, ID X2: X at S2 [mm]");
+      hID_x2AoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_x2AoQGated/ID_x2AoQ_Z1Z2x2AoQgate%d",i), Form("ID_x2AoQ_Z1Z2x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1 Z2 X2 AoQ, ID X2: X at S2 [mm]");
 
-      hID_x4AoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_x2AoQGated/ID_x4AoQ_Z1Z2x2AoQgate%d",i), Form("ID_x4AoQ_Z1Z2x2AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on  Z1 Z2 X2 AoQ, ID X2: X at S4 [mm]");
+      hID_x4AoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_x2AoQGated/ID_x4AoQ_Z1Z2x2AoQgate%d",i), Form("ID_x4AoQ_Z1Z2x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on  Z1 Z2 X2 AoQ, ID X2: X at S4 [mm]");
 
-      hID_ZAoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_x2AoQGated/ID_Z1AoQ_Z1Z2x2AoQgate%d",i), Form("ID_Z1AoQ_Z1Z2x2AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1 Z2 X2 AoQ Z music");
+      hID_ZAoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_x2AoQGated/ID_Z1AoQ_Z1Z2x2AoQgate%d",i), Form("ID_Z1AoQ_Z1Z2x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1 Z2 X2 AoQ Z music");
 
-      hID_Z1Z2_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x2AoQgate%d",i), Form("ID_Z1Z2__Z1Z2x2AoQgate%d",i),1500,frs_id->min_z_plot,frs_id->max_z_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"Z1", "gate on Z1 Z2 X2 AoQ, ID X2: Z2");
+      hID_Z1Z2_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x2AoQgate%d",i), Form("ID_Z1Z2__Z1Z2x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z1", "gate on Z1 Z2 X2 AoQ, ID X2: Z2");
 
-      hID_dEdegZ1_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/Z1AoQ_x2AoQGated/ID_dEdegZ1_Z1Z2x2AoQgate%d",i), Form("ID_dEdegZ1_Z1Z2x2AoQgate%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,100., "Z1 from MUSIC41", "gate on Z1 Z2 X2 AoQ dE(S2deg) [a.u.]");
+      hID_dEdegZ1_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/Z1AoQ_x2AoQGated/ID_dEdegZ1_Z1Z2x2AoQgate%d",i), Form("ID_dEdegZ1_Z1Z2x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,100., "Z1 from MUSIC41", "gate on Z1 Z2 X2 AoQ dE(S2deg) [a.u.]");
 
-      hID_dEdegoQ_Z1_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/Z1AoQ_x2AoQGated/dEdegoQZ1_Z1Z2x2AoQgate%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x2AoQgate%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,100., "Z1 from MUSIC41", " gate on Z1 Z2 X2 AoQ dE(S2deg)/Q [a.u.]");
+      hID_dEdegoQ_Z1_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/Z1AoQ_x2AoQGated/dEdegoQZ1_Z1Z2x2AoQgate%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,100., "Z1 from MUSIC41", " gate on Z1 Z2 X2 AoQ dE(S2deg)/Q [a.u.]");
       
       //hID_a2AoQ_Z1Z2x2AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1Z2x2AoQGated/ID_a2AoQ_Z1Z2x2AoQgate%d",i), Form("ID_A2AoQ_Z1Z2x2AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", "gate on Z1 Z2 X2 AoQ Angle S2 (mrad)");
       
@@ -974,21 +974,21 @@ void EventAnlProc::Make_FRS_Histos(){
       sprintf(name,"cID_x4AoQ%d",i);
       cID_x4AoQ[i] = MakePolyCond("FRS_X4_Gates",name,num_ID_x4AoQ,init_ID_x4AoQ[i], hID_x4AoQ->GetName());
       
-      hID_x4AoQ_x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_x4AoQGated/ID_x4AoQ_x4AoQgate%d",i), Form("ID_x2AoQ_x2AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X4 AoQ, ID X4: X at S4 [mm]");
+      hID_x4AoQ_x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_x4AoQGated/ID_x4AoQ_x4AoQgate%d",i), Form("ID_x2AoQ_x2AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X4 AoQ, ID X4: X at S4 [mm]");
       
-      hID_Z1Z2_x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_x4AoQGated/ID_Z1Z2_x4AoQgate%d",i), Form("ID_Z1Z2_x4AoQgate%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x4 vs AoQ: MUSIC Z2");
+      hID_Z1Z2_x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_x4AoQGated/ID_Z1Z2_x4AoQgate%d",i), Form("ID_Z1Z2_x4AoQgate%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x4 vs AoQ: MUSIC Z2");
       
-      hID_x4AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_Z1Z2x4AoQGated/ID_x4AoQ_Z1Z2x4AoQgate%d",i), Form("ID_x4AoQ_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on FRS AoQ, ID X4: X at S4 [mm]");
+      hID_x4AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_Z1Z2x4AoQGated/ID_x4AoQ_Z1Z2x4AoQgate%d",i), Form("ID_x4AoQ_Z1Z2x4AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on FRS AoQ, ID X4: X at S4 [mm]");
       
-      hID_x2AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1Z2x4AoQGated/ID_x2AoQ_Z1Z2x4AoQgate%d",i), Form("ID_x2AoQ_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on FRS AoQ, ID X4: X at S2 [mm]");
+      hID_x2AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_Z1Z2x4AoQGated/ID_x2AoQ_Z1Z2x4AoQgate%d",i), Form("ID_x2AoQ_Z1Z2x4AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on FRS AoQ, ID X4: X at S2 [mm]");
       
-      hID_Z1Z2_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x4AoQgate%d",i), Form("ID_Z1Z2_Z1Z2x4AoQgate%d",i),750,frs_id->min_z_plot,frs_id->max_z_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on FRS AoQ, ID X4: Z music42");
+      hID_Z1Z2_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x4AoQgate%d",i), Form("ID_Z1Z2_Z1Z2x4AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on FRS AoQ, ID X4: Z music42");
        
-      hID_ZAoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1Z2x4AoQGated/ID_Z1AoQ_Z1Z2x4AoQgate%d",i), Form("ID_Z1AoQ_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_ZAoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_Z1Z2x4AoQGated/ID_Z1AoQ_Z1Z2x4AoQgate%d",i), Form("ID_Z1AoQ_Z1Z2x4AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
        
-      hID_dEdegZ1_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/dEdegZ1Z2x4AoQGated/ID_dEdegZ1_Z1Z2x4AoQgate%d",i), Form("ID_dEdegZ1_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_dEdegZ1_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdeg/dEdegZ1Z2x4AoQGated/ID_dEdegZ1_Z1Z2x4AoQgate%d",i), Form("ID_dEdegZ1_Z1Z2x4AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
 
-      hID_dEdegoQ_Z1_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/dEdegoQ_x4AoQGated/ID_dEdegoQ_Z1_Z1Z2x4AoQgate%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x4AoQgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_dEdegoQ_Z1_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/dEdegoQ/dEdegoQ_x4AoQGated/ID_dEdegoQ_Z1_Z1Z2x4AoQgate%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x4AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
       
      // hID_a2AoQ_Z1Z2x4AoQgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_Z1Z2x4AoQGated/ID_a2AoQ_Z1Z2x4AoQgate%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
       
@@ -1002,21 +1002,21 @@ void EventAnlProc::Make_FRS_Histos(){
       sprintf(name,"dEdegZ1_%d",i);
       cID_dEdegZ1[i] = MakePolyCond("FRS_dEdegZ1",name, num_ID_dEdegZ1,init_dEdegZ1[i], hdEdeg_Z->GetName());
 
-      hID_Z1AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_dEdegZ1Gated/ID_Z1_AoQ_dEdegZ1_%d",i), Form("ID_Z1_AoQ_dEdegZ1_%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_Z1AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_dEdegZ1Gated/ID_Z1_AoQ_dEdegZ1_%d",i), Form("ID_Z1_AoQ_dEdegZ1_%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
       
-      hID_Z1AoQ_zsame_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_dEdegated/ID_Z1AoQ_zsame_cdEdegZ%d",i), Form("ID_Z1_AoQ_zsame_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_Z1AoQ_zsame_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1AoQ/Z1AoQ_dEdegated/ID_Z1AoQ_zsame_cdEdegZ%d",i), Form("ID_Z1_AoQ_zsame_cdEdegZ%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
       
-      hID_Z1Z2_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_dEdegated/ID_Z1Z2_dEdegZ%d",i), Form("ID_Z1Z2_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", " Z music42");
+      hID_Z1Z2_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/Z1Z2/Z1Z2_dEdegated/ID_Z1Z2_dEdegZ%d",i), Form("ID_Z1Z2_cdEdegZ%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", " Z music42");
       
-      hID_x2AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_dEdegated/ID_x2AoQ_dEdegZ%d",i), Form("ID_x2AoQ_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "X at S2 [mm]");
+      hID_x2AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x2AoQ/x2AoQ_dEdegated/ID_x2AoQ_dEdegZ%d",i), Form("ID_x2AoQ_cdEdegZ%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "X at S2 [mm]");
       
-      hID_x4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_dEdegated/ID_x4AoQ_dEdegZ%d",i), Form("ID_x4AoQ_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "X at S4 [mm]");
+      hID_x4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/x4AoQ/x4AoQ_dEdegated/ID_x4AoQ_dEdegZ%d",i), Form("ID_x4AoQ_cdEdegZ%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "X at S4 [mm]");
       
       //hID_a2AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a2AoQ/a2AoQ_dEdegZGated/ID_a2AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),720,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
       
        hID_a2_dEdegZgate[i] = MakeTH1('F', Form("FRS/ID_Gated/a2/a2_dEdegZgated/ID_a2_dEdegZgate%d",i), Form("ID_a2_dEdegZgate%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
 
-     // hID_a4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_dEdegZGated/ID_a4AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),720,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+     // hID_a4AoQ_dEdegZgate[i] = MakeTH2('I', Form("FRS/ID_Gated/a4AoQ/a4AoQ_dEdegZGated/ID_a4AoQ_dEdegZgate%d",i), Form("ID_A2AoQ_dEdegZgate%d",i),720,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
       
       hID_a4_dEdegZgate[i] = MakeTH1('F', Form("FRS/ID_Gated/a4/a4_dEdegZgated/ID_a4_dEdegZgate%d",i), Form("ID_a4_dEdegZgate%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
       
@@ -1024,24 +1024,24 @@ void EventAnlProc::Make_FRS_Histos(){
       
       cID_Z_AoQ_mhtdc[i] = MakePolyCond("FRS_Z1_AoQ_Gates_mhtdc", name, num_ID_Z_AoQ, init_ID_Z_AoQ_mhtdc[i], hID_Z_AoQ_mhtdc->GetName());
         //Z vs AoQ
-        hID_ZAoQ_ZAoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQGated_mhtdc/ID_Z1_AoQ_mhtdc_gate%d",i), Form("ID_ZAoQ_ZAoQgate_mhtdc%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Z s2-s4");
+        hID_ZAoQ_ZAoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQGated_mhtdc/ID_Z1_AoQ_mhtdc_gate%d",i), Form("ID_ZAoQ_ZAoQgate_mhtdc%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Z s2-s4");
         
-        hID_Z1Z2_ZAoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_Z1AoQGated/ID_Z1Z2_ZAoQgate_mhtdc%d",i), Form("ID_Z1Z2_ZAoQgate_mhtdc%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on Z1 vs AoQ: MUSIC Z2");
+        hID_Z1Z2_ZAoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_Z1AoQGated/ID_Z1Z2_ZAoQgate_mhtdc%d",i), Form("ID_Z1Z2_ZAoQgate_mhtdc%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on Z1 vs AoQ: MUSIC Z2");
         
-        hID_x2AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1AoQGated_mhtdc/ID_x2AoQ_Z1AoQ_mhtdcgate%d",i), Form("ID_x2AoQ_Z1AoQ_mhtdcgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", " X at S2 [mm]");
+        hID_x2AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1AoQGated_mhtdc/ID_x2AoQ_Z1AoQ_mhtdcgate%d",i), Form("ID_x2AoQ_Z1AoQ_mhtdcgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", " X at S2 [mm]");
          
-        hID_x4AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1AoQGated_mhtdc/ID_x4AoQ_Z1AoQ_mhtdcgate%d",i), Form("ID_x4AoQ_Z1AoQ_mhtdcgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", " gate on Z X at S4 [mm]");
+        hID_x4AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1AoQGated_mhtdc/ID_x4AoQ_Z1AoQ_mhtdcgate%d",i), Form("ID_x4AoQ_Z1AoQ_mhtdcgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", " gate on Z X at S4 [mm]");
 
-        hID_dEdegoQ_Z1_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQZ1_Z1AoQGated_mhtdc/dEdegoQZ1_Z1AoQ_mhtdcgate%d",i), Form("dEdegoQZ1_Z1AoQgate%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,50., "Z1 from MUSIC41", "dE(S2deg)/Q [a.u.]");
+        hID_dEdegoQ_Z1_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQZ1_Z1AoQGated_mhtdc/dEdegoQZ1_Z1AoQ_mhtdcgate%d",i), Form("dEdegoQZ1_Z1AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,50., "Z1 from MUSIC41", "dE(S2deg)/Q [a.u.]");
 
-        hID_dEdegZ1_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1_Z1AoQ_mhtdc/dEdegZ1_Z1AoQ_mhtdcgate%d",i), Form("dEdegZ1_Z1AoQgate%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,50., "Z1 from MUSIC41", "dE(S2deg) [a.u.]");
+        hID_dEdegZ1_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1_Z1AoQ_mhtdc/dEdegZ1_Z1AoQ_mhtdcgate%d",i), Form("dEdegZ1_Z1AoQgate%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,50., "Z1 from MUSIC41", "dE(S2deg) [a.u.]");
         
-        //hID_a2AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1AoQx4AoQGated/ID_a2AoQ_Z1AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+        //hID_a2AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1AoQx4AoQGated/ID_a2AoQ_Z1AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
         
         hID_a2_Z1AoQgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a2/a2_Z1AoQGated/ID_a2_Z1AoQGated_mhtdc%d",i), Form("ID_a2_Z1AoQGate_mhtdc%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
        
 
-        //hID_a4AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_Z1AoQx4AoQGated/ID_a4AoQ_Z1AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+        //hID_a4AoQ_Z1AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_Z1AoQx4AoQGated/ID_a4AoQ_Z1AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
         
          hID_a4_Z1AoQgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a4/a4_Z1AoQGated/ID_a4_Z1AoQGated_mhtdc%d",i), Form("ID_a4_Z1AoQGate_mhtdc%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
 
@@ -1051,49 +1051,49 @@ void EventAnlProc::Make_FRS_Histos(){
         
         hID_Z1_Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2Gated/ID_Z1_Z2_mhtdcgate%d",i), Form("ID_Z1_Z2_mhtdcgate%d",i),2000,frs_id->min_z_plot,frs_id->max_z_plot, 2000,frs_id->min_z_plot,frs_id->max_z_plot,"Z1 s2-s4", "Z2 s2-s4");
         
-        hID_x2AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1Z2Gated/ID_x2AoQ_Z1Z2_mhtdcgate%d",i), Form("ID_x2AoQ_Z1Z2_mhtdcgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S2 [mm]");
+        hID_x2AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1Z2Gated/ID_x2AoQ_Z1Z2_mhtdcgate%d",i), Form("ID_x2AoQ_Z1Z2_mhtdcgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S2 [mm]");
 
-        hID_x4AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1Z2Gated/ID_x4AoQ_Z1Z2_mhtdcgate%d",i), Form("ID_x4AoQ_Z1Z2_mhtdcgate%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S4 [mm]");
+        hID_x4AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1Z2Gated/ID_x4AoQ_Z1Z2_mhtdcgate%d",i), Form("ID_x4AoQ_Z1Z2_mhtdcgate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z X at S4 [mm]");
 
-        hID_ZAoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2Gated/ID_Z1AoQ_Z1Z2gate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2gate%d",i),300,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music2");
+        hID_ZAoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2Gated/ID_Z1AoQ_Z1Z2gate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2gate%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music2");
 
-        //hID_a2AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1Z2Gated/ID_a2AoQ_Z1Z2gate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+        //hID_a2AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1Z2Gated/ID_a2AoQ_Z1Z2gate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
         
         hID_a2_Z1Z2gate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a2/a2_Z1Z2Gated/ID_a2_Z1Z2gate_mhtdc%d",i), Form("ID_a2_Z1Z2gate_mhtdc%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
 
-      //  hID_a4AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_Z1Z2Gated/ID_a4AoQ_Z1Z2gate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+      //  hID_a4AoQ_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_Z1Z2Gated/ID_a4AoQ_Z1Z2gate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2gate%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
         
         hID_a4_Z1Z2gate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a4/a4_Z1Z2Gated/ID_a4_Z1Z2gate_mhtdc%d",i), Form("ID_a4_Z1Z2gate_mhtdc%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
 
-        hID_dEdegZ1_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/Z1Z2/dEdegZ1_Z1Z2gated_mhtdc%d",i), Form("dEdegZ1_Z1Z2_mhtdcgated%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,100., "Z from MUSIC41", "dE(S2deg) [a.u.]");
+        hID_dEdegZ1_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/Z1Z2/dEdegZ1_Z1Z2gated_mhtdc%d",i), Form("dEdegZ1_Z1Z2_mhtdcgated%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,100., "Z from MUSIC41", "dE(S2deg) [a.u.]");
 
-        hID_dEdegoQ_Z1_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQZ1_Z1Z2gated/dEdegoQZ1_Z1Z2_mhtdcgated%d",i), Form("dEdegoQZ1_Z1Z2gated%d",i),1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,100., "Z from MUSIC41", "dE(S2deg)/Q [a.u.]");
+        hID_dEdegoQ_Z1_Z1Z2gate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQZ1_Z1Z2gated/dEdegoQZ1_Z1Z2_mhtdcgated%d",i), Form("dEdegoQZ1_Z1Z2gated%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,100., "Z from MUSIC41", "dE(S2deg)/Q [a.u.]");
 
 
-//        hID_Z1Z2_X4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2_X4AoQGated/ID_Z1AoQ_Z1Z2_X4AoQgate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2_X4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music2");
+//        hID_Z1Z2_X4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2_X4AoQGated/ID_Z1AoQ_Z1Z2_X4AoQgate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2_X4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music2");
 
     
       ///X2 AoQ
       sprintf(name,"cID_x2AoQ_mhtdc%d",i);
       cID_x2AoQ_mhtdc[i] = MakePolyCond("FRS_X2_Gates_mhtdc",name,num_ID_x2AoQ,init_ID_x2AoQ_mhtdc[i], hID_x2AoQ_mhtdc->GetName());
       
-      hID_x2AoQ_x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_x2AoQGated/ID_x2AoQ_x2AoQgate_mhtdc%d",i), Form("ID_x2AoQ_x2AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X2 AoQ, ID X2: X at S2 [mm]");
+      hID_x2AoQ_x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_x2AoQGated/ID_x2AoQ_x2AoQgate_mhtdc%d",i), Form("ID_x2AoQ_x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X2 AoQ, ID X2: X at S2 [mm]");
       
-      hID_Z1Z2_x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_x2AoQGated/ID_Z1Z2_x2AoQgate_mhtdc%d",i), Form("ID_Z1Z2_x2AoQgate_mhtdc%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x2 vs AoQ: MUSIC Z2");
+      hID_Z1Z2_x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_x2AoQGated/ID_Z1Z2_x2AoQgate_mhtdc%d",i), Form("ID_Z1Z2_x2AoQgate_mhtdc%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x2 vs AoQ: MUSIC Z2");
       
-      hID_x2AoQ_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1Z2x2AoQGated/ID_x2AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_x2AoQ_Z1Z2x2AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X2AoQ, ID X2: X at S4 [mm]");
+      hID_x2AoQ_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1Z2x2AoQGated/ID_x2AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_x2AoQ_Z1Z2x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X2AoQ, ID X2: X at S4 [mm]");
       
-      hID_x4AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1Z2x4AoQGated/ID_x4AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_x4AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X2AoQ, ID X2: X at S4 [mm]");
+      hID_x4AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1Z2x4AoQGated/ID_x4AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_x4AoQ_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X2AoQ, ID X2: X at S4 [mm]");
 
-      hID_Z1Z2_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_Z1Z2_Z1Z2x2AoQgate_mhtdc%d",i),1500,frs_id->min_z_plot,frs_id->max_z_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on Z1Z2 X2AoQ, ID X2: Z music41");
+      hID_Z1Z2_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/Z1Z2_Z1Z2x2AoQGated/ID_Z1Z2_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_Z1Z2_Z1Z2x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on Z1Z2 X2AoQ, ID X2: Z music41");
        
-      hID_ZAoQ_x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2x2AoQGated/ID_Z1AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2x2AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X2AoQ Z music41");
+      hID_ZAoQ_x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2x2AoQGated/ID_Z1AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X2AoQ Z music41");
 
-      hID_dEdegZ1_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1Z2x2AoQGated/ID_dEdegZ1_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_dEdegZ1_Z1Z2x2AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X2AoQ Z music41");
+      hID_dEdegZ1_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1Z2x2AoQGated/ID_dEdegZ1_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_dEdegZ1_Z1Z2x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X2AoQ Z music41");
 
-      hID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQ_x2AoQGated/ID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "gate on Z1Z2 X2AoQ Z music41");
+      hID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQ_x2AoQGated/ID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "gate on Z1Z2 X2AoQ Z music41");
 
-      //hID_a2AoQ_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1Z2x2AoQGated/ID_a2AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2x2AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+      //hID_a2AoQ_Z1Z2x2AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1Z2x2AoQGated/ID_a2AoQ_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2x2AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
       
        hID_a2_Z1Z2x2AoQgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a2/a2_Z1Z2x2AoQGated/ID_a2_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_a2_Z1Z2x2AoQgate_mhtdc%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
 
@@ -1101,33 +1101,33 @@ void EventAnlProc::Make_FRS_Histos(){
        
         hID_a4_Z1Z2x2AoQgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a4/a4_Z1Z2x2AoQGated/ID_a4_Z1Z2x2AoQgate_mhtdc%d",i), Form("ID_a4_Z1Z2x2AoQgate_mhtdc%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
 
-//       hID_dEdegoQ_Z1_x2AoQgate[i] = MakeTH2('D',"FRS/ID_Gated_MHTDC/ID_dEdegoQ_Z1/dEdegoQ_Z1_X2AoQgated%d",i,  1000,frs_id->min_z_plot,frs_id->max_z_plot, 1000, 10.,50., "Z1 from MUSIC41", "dE(S2deg)/Q [a.u.]");
+//       hID_dEdegoQ_Z1_x2AoQgate[i] = MakeTH2('D',"FRS/ID_Gated_MHTDC/ID_dEdegoQ_Z1/dEdegoQ_Z1_X2AoQgated%d",i,  FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN, 10.,50., "Z1 from MUSIC41", "dE(S2deg)/Q [a.u.]");
 
       ///X4 vs AoQ
       sprintf(name,"cID_x4AoQ_mhtdc%d",i);
       cID_x4AoQ_mhtdc[i] = MakePolyCond("FRS_X4_Gates",name,num_ID_x4AoQ,init_ID_x4AoQ[i], hID_x4AoQ_mhtdc->GetName());
       
-      hID_x4AoQ_x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_x4AoQGated/ID_x4AoQ_x4AoQgate_mhtdc%d",i), Form("ID_x2AoQ_x2AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X4 AoQ, ID X4: X at S4 [mm]");
+      hID_x4AoQ_x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_x4AoQGated/ID_x4AoQ_x4AoQgate_mhtdc%d",i), Form("ID_x2AoQ_x2AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on X4 AoQ, ID X4: X at S4 [mm]");
       
-      hID_Z1Z2_x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_x4AoQGated/ID_Z1Z2_x4AoQgate_mhtdc%d",i), Form("ID_Z1Z2_x4AoQgate_mhtdc%d", i), 1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x4 vs AoQ: MUSIC Z2");
+      hID_Z1Z2_x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_x4AoQGated/ID_Z1Z2_x4AoQgate_mhtdc%d",i), Form("ID_Z1Z2_x4AoQgate_mhtdc%d", i), FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"MUSIC Z1", "gate on x4 vs AoQ: MUSIC Z2");
 
-      hID_x4AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1Z2x4AoQGated/ID_x4AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_x4AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X4AoQ, ID X4: X at S4 [mm]");
+      hID_x4AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_Z1Z2x4AoQGated/ID_x4AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_x4AoQ_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X4AoQ, ID X4: X at S4 [mm]");
       
-      hID_x2AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1Z2x4AoQGated/ID_x2AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_x2AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X4AoQ, ID X4: X at S2 [mm]");
+      hID_x2AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_Z1Z2x4AoQGated/ID_x2AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_x2AoQ_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q s2-s4", "gate on Z1Z2 X4AoQ, ID X4: X at S2 [mm]");
 
-      hID_Z1Z2_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/Z1Z2_Z1Z2x4AoQGated/ID_Z1Z2_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_Z1Z2_Z1Z2x4AoQgate_mhtdc%d",i),1500,frs_id->min_z_plot,frs_id->max_z_plot, 1500,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on Z1Z2 X4AoQ, ID X4: Z music41");
+      hID_Z1Z2_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/Z1Z2_Z1Z2x4AoQGated/ID_Z1Z2_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_Z1Z2_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", "gate on Z1Z2 X4AoQ, ID X4: Z music41");
        
-      hID_ZAoQ_x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2x4AoQGated/ID_Z1AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X4AoQ Z music41");
+      hID_ZAoQ_x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_Z1Z2x4AoQGated/ID_Z1AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_Z1AoQ_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X4AoQ Z music41");
 
-      hID_dEdegZ1_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1_Z1Z2x4AoQGated/ID_dEdegZ1_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_dEdegZ1_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X4AoQ Z music41");
+      hID_dEdegZ1_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1_Z1Z2x4AoQGated/ID_dEdegZ1_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_dEdegZ1_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " gate on Z1Z2 X4AoQ Z music41");
 
-      hID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQ_x4AoQGated/ID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "gate on Z1Z2 X4AoQ  Z music41");
+      hID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdegoQ/dEdegoQ_x4AoQGated/ID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_dEdegoQ_Z1_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "gate on Z1Z2 X4AoQ  Z music41");
       
-      //hID_a2AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1Z2x4AoQGated/ID_a2AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+      //hID_a2AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_Z1Z2x4AoQGated/ID_a2AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
       
        hID_a2_Z1Z2x4AoQgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a2/a2_Z1Z2x4AoQGated/ID_a2_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_a2_Z1Z2x4AoQgate_mhtdc%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
 
-    //  hID_a4AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_Z1Z2x4AoQGated/ID_a4AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+    //  hID_a4AoQ_Z1Z2x4AoQgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_Z1Z2x4AoQGated/ID_a4AoQ_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_A2AoQ_Z1Z2x4AoQgate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
       
        hID_a4_Z1Z2x4AoQgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a4/a4_Z1Z2x4AoQGated/ID_a4_Z1Z2x4AoQgate_mhtdc%d",i), Form("ID_a4_Z1Z2x4AoQgate_mhtdc%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
 
@@ -1135,23 +1135,23 @@ void EventAnlProc::Make_FRS_Histos(){
       sprintf(name,"cID_dEdegZ1_mhtdc%d",i);
       cID_dEdegZ1_mhtdc[i] = MakePolyCond("FRS_dEdegZ1_mhtdc",name, num_ID_dEdegZ1,init_dEdegZ1[i], hdEdeg_Z_mhtdc->GetName());
       
-      hID_dEdegZ1_dEdegZ1Gated_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1_dEdegZ1Gated/ID_dEdegZ1_dEdegZ1gate_mhtdc%d",i), Form("ID_dEdegZ1_Z1Z2x4AoQgate_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Gate on s4 dE vs Z1: Z1 music41");
+      hID_dEdegZ1_dEdegZ1Gated_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/dEdeg/dEdegZ1_dEdegZ1Gated/ID_dEdegZ1_dEdegZ1gate_mhtdc%d",i), Form("ID_dEdegZ1_Z1Z2x4AoQgate_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", "Gate on s4 dE vs Z1: Z1 music41");
 
-      hID_Z1AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_dEdegZ1Gated/ID_Z1_AoQ_dEdegZ1_mhtdc%d",i), Form("ID_Z1_AoQ_dEdegZ1__mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_Z1AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_dEdegZ1Gated/ID_Z1_AoQ_dEdegZ1_mhtdc%d",i), Form("ID_Z1_AoQ_dEdegZ1__mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
 
-      hID_Z1AoQ_zsame_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_zsame_dEdegZ1Gated/ID_Z1AoQ_zsame_cdEdegZ_mhtdc%d",i), Form("ID_Z1_AoQ_zsame_cdEdegZ_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
+      hID_Z1AoQ_zsame_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1AoQ/Z1AoQ_zsame_dEdegZ1Gated/ID_Z1AoQ_zsame_cdEdegZ_mhtdc%d",i), Form("ID_Z1_AoQ_zsame_cdEdegZ_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"A/Q s2-s4", " Z music41");
       
-      hID_Z1Z2_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_dEdegZ1Gated/ID_Z1Z2_dEdegZ_mhtdc%d",i), Form("ID_Z1Z2_cdEdegZ_mhtdc%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 400,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", " Z music42");
+      hID_Z1Z2_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/Z1Z2/Z1Z2_dEdegZ1Gated/ID_Z1Z2_dEdegZ_mhtdc%d",i), Form("ID_Z1Z2_cdEdegZ_mhtdc%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,frs_id->min_z_plot,frs_id->max_z_plot,"Z music41", " Z music42");
       
-      hID_x2AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_dEdegZ1Gated/ID_x2AoQ_dEdegZ_mhtdc%d",i), Form("ID_x2AoQ_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", "X at S2 [mm]");
+      hID_x2AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x2AoQ/x2AoQ_dEdegZ1Gated/ID_x2AoQ_dEdegZ_mhtdc%d",i), Form("ID_x2AoQ_cdEdegZ%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", "X at S2 [mm]");
       
-      hID_x4AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_dEdegZ1Gated/ID_x4AoQ_dEdegZ_mhtdc%d",i), Form("ID_x4AoQ_cdEdegZ%d",i),1000,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", "X at S4 [mm]");
+      hID_x4AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/x4AoQ/x4AoQ_dEdegZ1Gated/ID_x4AoQ_dEdegZ_mhtdc%d",i), Form("ID_x4AoQ_cdEdegZ%d",i),FRS_HISTO_BIN,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 200,-100.,100.,"A/Q mhtdc s2-s4", "X at S4 [mm]");
  
-      //hID_a2AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_dEdegZ1Gated/ID_a2AoQ_dEdegZgategate_mhtdc%d",i), Form("ID_A2AoQ_dEdegZgategate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
+      //hID_a2AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a2AoQ/a2AoQ_dEdegZ1Gated/ID_a2AoQ_dEdegZgategate_mhtdc%d",i), Form("ID_A2AoQ_dEdegZgategate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S2 (mrad)");
       
        hID_a2_dEdegZgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a2/a2_dEdegZGated/ID_a2_dEdegZgate_mhtdc%d",i), Form("ID_a2_dEdegZgate_mhtdc%d",i), 100, -1000, 1000, "Angle S2 (mrad)");
 
-     // hID_a4AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_dEdegZ1Gated/ID_a4AoQ_dEdegZgategate_mhtdc%d",i), Form("ID_A2AoQ_dEdegZgategate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, 1000,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
+     // hID_a4AoQ_dEdegZgate_mhtdc[i] = MakeTH2('I', Form("FRS/MHTDC/ID_Gated_MHTDC/a4AoQ/a4AoQ_dEdegZ1Gated/ID_a4AoQ_dEdegZgategate_mhtdc%d",i), Form("ID_A2AoQ_dEdegZgategate_mhtdc%d",i),1500,frs_id->min_aoq_plot,frs_id->max_aoq_plot, FRS_HISTO_BIN,-100,100,"A/Q s2-s4", " Angle S4 (mrad)");
       
        hID_a4_dEdegZgate_mhtdc[i] = MakeTH1('F', Form("FRS/MHTDC/ID_Gated_MHTDC/a4/a4_dEdegZGated/ID_a4_dEdegZgate_mhtdc%d",i), Form("ID_a4_dEdegZgate_mhtdc%d",i), 100, -1000, 1000, "Angle S4 (mrad)");
       
@@ -3143,6 +3143,10 @@ if(Fatmult > 0){
         dT_Addback=0;
         dT_Ge_cfd=0;
         // Process hits once
+	
+	RefTGe=0;
+	RefCFDGe=0;
+	
 
         for (int i = 0; i < GeFired; i++)
         {
@@ -3193,6 +3197,8 @@ if(Fatmult > 0){
           // printf("   it is det%02d %lf\n", det, GeE_Cal[i]);
            hGe_Chan_E[det][crys]->Fill(GeE_Cal[i]);
            hGe_Chan_E_halfkev[det][crys]->Fill(GeE_Cal[i]);
+	   
+	  
 
      //cout<<"2GeE_Cal[i] " << GeE_Cal[i] <<" det " << det << " crys " << crys <<endl;
 
@@ -3232,12 +3238,7 @@ if(Fatmult > 0){
               if(GeE_Cal[i]>0 && GeE_Cal[j]>0){
                   //dT Germanium raw
                   //dT_Ge= GeT[i]-GeT[j];
-                    dT_Align= Ge_Talign[i]-Ge_Talign[j];
-                  hGe_Chan_Time_Diff[det][crys]->Fill(dT_Align);
-
-                   dT_CFD_Align= Ge_cfd_Talign[i]-Ge_cfd_Talign[j];
-                   hGe_Chan_Time_Diff_CF[det][crys]->Fill(dT_CFD_Align);
-
+                 
 
               hGe_Mult->Fill(Gam_mult);
 
@@ -3256,6 +3257,31 @@ if(Fatmult > 0){
        }
     }
 
+
+	 for (int i = 0; i < GeFired; i++)
+        {
+	
+	 if(GeDet[i]==1 && GeCrys[i]==0){ 
+	 	if(GeE_Cal[i]>700){
+		RefTGe= Ge_Talign[i];
+	 	RefCFDGe= Ge_cfd_Talign[i];
+	 
+	 
+	 	for (int j = 0; j < GeFired; j++)
+        	{
+		if(j==i) continue;
+			if(GeE_Cal[j]>700){
+	  		dT_Align= Ge_Talign[j]-RefTGe;
+                 	hGe_Chan_Time_Diff[GeDet[j]][GeCrys[j]]->Fill(dT_Align);
+
+                   	dT_CFD_Align= Ge_cfd_Talign[j]-RefCFDGe;
+                   	hGe_Chan_Time_Diff_CF[GeDet[j]][GeCrys[j]]->Fill(dT_CFD_Align);
+			}
+		}
+		}
+	   }
+	   else continue;
+	   }
 
        ////ADDBACK
         static const long dT_addback = 100;

@@ -14,6 +14,8 @@
 #define X2_or_X4 1
 //Set the white rabbit offset time in minutes for the FRS (used only for gain matching of Z and A/Q over time): Defined in the EventUnpackProc and used in FRS_Detector_System
 #define FRS_WR_GAINOFFSET 26900000
+//Define Number of FRS Histogram bins for 2D plots
+#define FRS_HISTO_BIN 750
 
 //#define FRS_MIN_AoQ 2.0
 //#define FRS_MAX_AoQ 3.0
@@ -97,7 +99,7 @@
 #define FIBRE_BOARD 3
 
 ///Germanium (including additional channel detectors (e.g.SC41 det)
-#define Germanium_TRACES_ACTIVE 0
+#define Germanium_TRACES_ACTIVE 1
 #define Germanium_TRACE_LENGTH 2000
 #define Germanium_MAX_DETS 16
 #define Germanium_CRYSTALS 7
