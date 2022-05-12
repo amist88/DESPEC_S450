@@ -1326,7 +1326,7 @@ void EventAnlProc::Process_FRS_Histos(EventUnpackStore* pInput, EventAnlStore* p
           hID_Z1Z2_x2AoQgate[g]->Fill(FRS_z, FRS_z2);
             ///Z1 Z2 + x2AoQ
            ///The selected Z1 Z2 gate for this part can be found in the Correlations_config.dat file 
-            if(cID_Z_Z2gate[fCorrel->GZ1Z2_Gate]->Test(FRS_z, FRS_z2)==true){
+            if(cID_Z_Z2gate[1]->Test(FRS_z, FRS_z2)==true){
                 if(cID_x2AoQ[g]->Test(FRS_AoQ, FRS_ID_x2)==true){
                     hID_x2AoQ_Z1Z2x2AoQgate[g]->Fill(FRS_AoQ, FRS_ID_x2);
                     hID_x4AoQ_Z1Z2x2AoQgate[g]->Fill(FRS_AoQ, FRS_ID_x4);
@@ -1338,17 +1338,19 @@ void EventAnlProc::Process_FRS_Histos(EventUnpackStore* pInput, EventAnlStore* p
                 
             }   
         }
-     
+     }
         ///GATE: ID vs x4AoQ
       if(cID_x4AoQ[g]->Test(FRS_AoQ, FRS_ID_x4)==true)
         { 
+	
             pOutput->pFRS_x4AoQ_pass[g] = true;
              hID_x4AoQ_x4AoQgate[g]->Fill(FRS_AoQ, FRS_ID_x4);
               hID_Z1Z2_x4AoQgate[g]->Fill(FRS_z, FRS_z2);
             ///Z1 Z2 + x4AoQ
             ///The selected Z1 Z2 gate for this part can be found in the Correlations_config.dat file 
-            if(cID_Z_Z2gate[fCorrel->GZ1Z2_Gate]->Test(FRS_z, FRS_z2)==true)
+            if(cID_Z_Z2gate[1]->Test(FRS_z, FRS_z2)==true)
             {        
+	    	
                      hID_x2AoQ_Z1Z2x4AoQgate[g]->Fill(FRS_AoQ, FRS_ID_x2);
                      hID_x4AoQ_Z1Z2x4AoQgate[g]->Fill(FRS_AoQ, FRS_ID_x4);
                      hID_ZAoQ_Z1Z2x4AoQgate[g]->Fill(FRS_AoQ, FRS_z);
@@ -1376,7 +1378,7 @@ void EventAnlProc::Process_FRS_Histos(EventUnpackStore* pInput, EventAnlStore* p
           }
         }
       }
-    }
+    
         
    
 //-------------------------- FRS MHTDC Histograms and PID Gates ---------------------//
@@ -1485,7 +1487,7 @@ for (int i=0; i<10 ; i++) {
                      hID_Z1Z2_x2AoQgate[g]->Fill(FRS_z_mhtdc[i], FRS_z2_mhtdc[i]);
                         ///The selected Z1 Z2 gate for this part can be found in the Correlations_config.dat file
                        /// Z1 Z2 +X2 AoQ
-                     if(cID_Z_Z2gate_mhtdc[fCorrel->GZ1Z2_Gate]->Test(FRS_z_mhtdc[i], FRS_z2_mhtdc[i])==true)
+                     if(cID_Z_Z2gate_mhtdc[1]->Test(FRS_z_mhtdc[i], FRS_z2_mhtdc[i])==true)
                 {
                         hID_x2AoQ_Z1Z2x2AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x2);
                         hID_x4AoQ_Z1Z2x2AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x4);
@@ -1507,7 +1509,7 @@ for (int i=0; i<10 ; i++) {
                      hID_Z1Z2_x4AoQgate[g]->Fill(FRS_z_mhtdc[i], FRS_z2_mhtdc[i]);
                       ///The selected Z1 Z2 gate for this part can be found in the Correlations_config.dat file
                  /// Z1 Z2 +X4 AoQ
-                     if(cID_Z_Z2gate_mhtdc[fCorrel->GZ1Z2_Gate]->Test(FRS_z_mhtdc[i], FRS_z2_mhtdc[i])==true)
+                     if(cID_Z_Z2gate_mhtdc[1]->Test(FRS_z_mhtdc[i], FRS_z2_mhtdc[i])==true)
                 {
                         hID_x2AoQ_Z1Z2x4AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x2);
                         hID_x4AoQ_Z1Z2x4AoQgate_mhtdc[g]->Fill(FRS_AoQ_mhtdc[i], FRS_ID_x4);
