@@ -957,6 +957,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
      }///Detector
 }///Ge WR
                 ///Gamma-Gamma Z vs A/Q
+	 if(fCorrel->GSetup_corr_FRS_Gamma_Gamma==1){
                 for(int gate=0; gate< MAX_FRS_GATE; gate ++){
 
                 for(int m=0; m<Ge_mult_prompt; m++){
@@ -966,7 +967,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
 
     if(cGe_EdT_cut[gate]->Test(GeT_Prm[m] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi],GeE_Prm[m])==true && cGe_EdT_cut[gate]->Test(GeT_Prm[n] - cInputMain->pGe_T_Aligned[Germanium_SC41_Det][Germanium_SC41L_Crystal_Digi],GeE_Prm[n])==true) {
 
-                if(cInputMain->pFRS_ZAoQ_pass[gate]==true && fCorrel->GSetup_corr_FRS_Gamma_Gamma==1 )    hA_FRS_ZAoQ_GeE1_GeE2[gate]->Fill(GeE_Prm[m],GeE_Prm[n]);
+                if(cInputMain->pFRS_ZAoQ_pass[gate]==true  )    hA_FRS_ZAoQ_GeE1_GeE2[gate]->Fill(GeE_Prm[m],GeE_Prm[n]);
 
 
                 if(cInputMain->pFRS_Z_Z2_pass[1]==true ){
@@ -987,7 +988,7 @@ Bool_t EventCorrelProc::BuildEvent(TGo4EventElement* dest)
                     }///Ge 1
                 }///gate loop
         }
-
+ }
 
  /**----------------------------------------------------------------------------------------------**/
  /**--------------------------------  FRS-Germanium Long Isomers -------------**/
