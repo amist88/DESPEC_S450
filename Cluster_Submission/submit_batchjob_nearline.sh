@@ -1,7 +1,7 @@
 #!/bin/bash
 ##Read in list of files to run
 #LISTFILE="files_188.txt"
-LISTFILE="/lustre/gamma/DESPEC_S450_NEARLINE/Cluster_Submission/file_list.txt"
+LISTFILE="/lustre/gamma/DESPEC_S450_NEARLINE/Cluster_Submission/file_list_f0020.txt"
 declare -a size
 while IFS= read -r line
 do

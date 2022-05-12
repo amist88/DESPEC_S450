@@ -57,7 +57,7 @@ class EventCorrelStore : public TGo4EventElement {
       double cFatimaVME_TimeMachine_dT[10];
       Long64_t cGermanium_TimeMachine_dT;
       Long64_t cFatimaTAMEX_TimeMachine_dT[10];
-      Long64_t cbPlast_TimeMachine_dT[bPLASTIC_TAMEX_HITS];
+      Long64_t cbPlast_TimeMachine_dT[10];
       Double_t cAIDA_TimeMachine_dT;
       int64_t cAIDA_TM_WR;
       

@@ -11,7 +11,7 @@
 ///Use FRS angle corrected A/Q for Analysis (1) or none-corrected (0)
 #define FRS_CORR 1
 ///For Z1 Z2 AND X A/Q Gate: Use FRS X2 vs A/Q (1) OR X4 vs A/Q (0) 
-#define X2_or_X4 1
+#define X2_or_X4 0
 //Set the white rabbit offset time in minutes for the FRS (used only for gain matching of Z and A/Q over time): Defined in the EventUnpackProc and used in FRS_Detector_System
 #define FRS_WR_GAINOFFSET 26900000
 //Define Number of FRS Histogram bins for 2D plots
@@ -99,7 +99,7 @@
 #define FIBRE_BOARD 3
 
 ///Germanium (including additional channel detectors (e.g.SC41 det)
-#define Germanium_TRACES_ACTIVE 1
+#define Germanium_TRACES_ACTIVE 0
 #define Germanium_TRACE_LENGTH 2000
 #define Germanium_MAX_DETS 16
 #define Germanium_CRYSTALS 7
@@ -111,9 +111,9 @@
 #define Germanium_SC41_Det 11
 #define Germanium_SC41L_Crystal 0
 #define Germanium_SC41R_Crystal 1
-#define Germanium_SC41_Det_Digi 15
-#define Germanium_SC41L_Crystal_Digi 2
-#define Germanium_SC41R_Crystal_Digi 2
+#define Germanium_SC41_Det_Digi 11
+#define Germanium_SC41L_Crystal_Digi 0
+#define Germanium_SC41R_Crystal_Digi 15
 #define Germanium_TimeMachine_Det 11
 #define Germanium_TimeMachineCh1 1
 #define Germanium_TimeMachineCh2 2

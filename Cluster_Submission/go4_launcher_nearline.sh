@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##Setup environment
-source /cvmfs/csee.gsi.de/bin/go4login
+source /cvmfs/eel.gsi.de/bin/go4login
 export ROOT_INCLUDE_PATH=/lustre/gamma/DESPEC_S450_NEARLINE
 echo "DESPEC Kronos Started at `date`"
 
@@ -13,7 +13,7 @@ echo "DESPEC Kronos Started at `date`"
 
 #LISTFILE="/lustre/gamma/amistry/DESPEC_S452_NEARLINE_200421/Cluster_Submission/file_list_full_f74_f75.txt"
 
-LISTFILE="/lustre/gamma/DESPEC_S450_NEARLINE/Cluster_Submission/file_list.txt"
+LISTFILE="/lustre/gamma/DESPEC_S450_NEARLINE/Cluster_Submission/file_list_f0020.txt"
 
 ##Count number of files
 NFILES=$(cat ${LISTFILE} | wc -l)
@@ -30,7 +30,7 @@ echo "Array is $SLURM_ARRAY_TASK_ID"
 part=(  "${array[@]:$SLURM_ARRAY_TASK_ID:2}" ) # :5 number of files to put together -> Has to be the same in the 2 .sh scripts
 
 echo "Running Go4!"
-go4analysis -file ${part[*]} -enable-asf 1800 -asf /lustre/gamma/DESPEC_S450_NEARLINE/Cluster_Submission/Nearline_Histograms/Files_$SLURM_ARRAY_TASK_ID.root
+go4analysis -file ${part[*]} -enable-asf 1800 -asf /lustre/gamma/DESPEC_S450_NEARLINE/Cluster_Submission/Nearline_Histograms/Files_f0020_$SLURM_ARRAY_TASK_ID.root
 
 #go4analysis -file ${part[*]} -enable-asf 1800 -asf /lustre/gamma/amistry/DESPEC_S452_NEARLINE_200421/Cluster_Submission/Nearline_Histograms/ANALYf74f75_$SLURM_ARRAY_TASK_ID.root
 

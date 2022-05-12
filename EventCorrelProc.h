@@ -443,7 +443,7 @@ class EventCorrelProc : public TGo4EventProcessor {
        Double_t FatimaVME_TimeMachine_dT[10];
        Double_t FatimaTAMEX_TimeMachine_dT[10];
        Long64_t Germanium_TimeMachine_dT;
-       Double_t bPlast_TimeMachine_dT[bPLASTIC_TAMEX_HITS];
+       Double_t bPlast_TimeMachine_dT[10];
        Double_t AIDA_TimeMachine_dT;
 
       ClassDef(EventCorrelProc, 1)
