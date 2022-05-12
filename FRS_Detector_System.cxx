@@ -2153,6 +2153,9 @@ void FRS_Detector_System::FRS_Sort(){
 
         music_t1[i] =0;
         music_t2[i] =0;
+		     
+	id_z=0;
+        id_z2=0;
         
         
                 }
