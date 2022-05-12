@@ -3250,7 +3250,7 @@ void EventUnpackProc::Make_Germanium_Histos(){
                     sprintf(chis,"Germanium/Traces/Ge_Det: %2d Crystal: %2d", i,j);
                     sprintf(chead,"Trace");
                     h_trace[i][j] = MakeTH1('I', chis,chead,Germanium_TRACE_LENGTH,0,Germanium_TRACE_LENGTH);
-		    cout<<i<<"  "<<j<<"  "<<h_trace[i][j]->GetBinContent<<endl;
+		   // cout<<i<<"  "<<j<<"  "<<h_trace[i][j]->GetBinContent<<endl;
               }
                     hGe_Raw_E[i][j] = MakeTH1('D',Form("Germanium/Raw/Germanium_Energy_Spectra/Germanium_Raw_E_Det:%2d_Crystal:%2d",i,j),Form("Germanium Energy Raw Det%2d Crystal%2d",i,j),20000,0,2000000);
                     
