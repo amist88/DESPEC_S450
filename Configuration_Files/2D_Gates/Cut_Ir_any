@@ -1,0 +1,19 @@
+{
+//========= Macro generated from object: CUTG/Graph
+//========= by ROOT version6.22/08
+   
+   cutg = new TCutG("CUTG",8);
+   cutg->SetVarX("56:46  2022-05-12  localhost:5000/Histograms/FRS/ID/ID_Z1_AoQ_S2-S4corr");
+   cutg->SetVarY("  06");
+   cutg->SetTitle("Graph");
+   cutg->SetFillStyle(1000);
+   cutg->SetPoint(0,2.59126,78.2794);
+   cutg->SetPoint(1,2.59978,78.0181);
+   cutg->SetPoint(2,2.599,77.6033);
+   cutg->SetPoint(3,2.59126,77.3574);
+   cutg->SetPoint(4,2.58017,77.6647);
+   cutg->SetPoint(5,2.58197,78.095);
+   cutg->SetPoint(6,2.59126,78.264);
+   cutg->SetPoint(7,2.59126,78.2794);
+   cutg->Draw("");
+}
